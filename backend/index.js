@@ -17,7 +17,7 @@ app.use(cors());
 const PORT = process.env.PORT || 5000;
 
 app.get('/', function (_, res) {
-  res.send('Hello World');
+  res.send('CSES Web Dev Backend');
 });
 
 var server = app.listen(PORT, '127.0.0.1', function () {
