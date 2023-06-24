@@ -13,5 +13,5 @@
 9. Make a copy of the `.env.example` file and rename it `.env`.
 ## Development
 - Prior to any local development, you should pull the latest code from `main` and work on your separate feature branch.
-- Your branch name should be in the following format: `(feature/bug)/github_username/(FE/BE)-feature_name`.
+- Your branch name should be in the format: `(feature/bug)/github_username/(FE/BE)-feature_name`.
 - An example of a good branch name: `feature/Will-Hsu/FE-Buttons` or `bug/Will-Hsu/FE-ButtonsDebug`.
