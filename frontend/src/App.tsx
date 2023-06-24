@@ -1,11 +1,17 @@
 import React from 'react';
-import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Container } from '@mui/material';
+import Home from './components/Home/Home';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">CSES website</header>
-    </div>
+    <BrowserRouter>
+      <Container maxWidth="xl">
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </Container>
+    </BrowserRouter>
   );
 }
 
