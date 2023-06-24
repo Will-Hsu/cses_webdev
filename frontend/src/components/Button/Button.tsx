@@ -1,6 +1,6 @@
 import React from 'react';
 import MuiButton from '@mui/material/Button';
-import { buttonStyles } from './style';
+import { buttonStyles } from './styles';
 
 interface ButtonProps {
   color?: string;
