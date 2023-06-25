@@ -1,13 +1,12 @@
-export const buttonStyles = (color: string) => ({
-  borderColor: color,
-  color: color,
+export const buttonStyles = (isLogin: boolean) => ({
+  borderColor: 'white',
+  color: 'white',
   borderRadius: '10px',
   fontFamily: 'Chakra Petch, sans-serif',
   fontWeight: '500',
-  fontSize: '21px',
   textTransform: 'none',
   '&:hover': {
-    borderColor: color,
+    borderColor: 'white',
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
   },
 });
