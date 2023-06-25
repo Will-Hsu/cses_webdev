@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { AppBar, Button, Toolbar, Typography } from '@mui/material';
+import { AppBar, Button, Toolbar } from '@mui/material';
 import { Link } from 'react-router-dom';
 import csesLogo from '../../images/logo.svg';
 import MuiButton from '../Button/Button';
@@ -25,7 +25,7 @@ const NavBar = () => {
     >
       <Toolbar>
         <Link to="/">
-          <img src={csesLogo} alt="logo" style={{ margin: '20px', marginRight: '10px' }} />
+          <img src={csesLogo} alt="logo" style={{ margin: '20px' }} />
         </Link>
         <div style={{ flexGrow: 1 }} />
         <Button component={Link} to="/about" sx={styles.button}>
@@ -40,7 +40,7 @@ const NavBar = () => {
         <Button component={Link} to="/members" sx={styles.button}>
           Members
         </Button>
-        <MuiButton text="Login" size="small" />
+        <MuiButton text="Login" size="small" isLogin={true} />
       </Toolbar>
     </AppBar>
   );

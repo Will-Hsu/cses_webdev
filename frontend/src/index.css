@@ -1,11 +1,12 @@
-body {
+body,
+html {
   margin: 0;
-  font-family: 'Inter', 'Chakra Petch', sans-serif;
+  font-family: Inter, Chakra Petch, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: black;
 }
 
 code {
-  font-family: 'Inter', source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-family: Inter, source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }

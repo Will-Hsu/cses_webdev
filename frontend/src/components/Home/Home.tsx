@@ -1,15 +1,16 @@
 import React from 'react';
 import Button from '../Button/Button';
-import { Container, Grow } from '@mui/material';
+import { Container } from '@mui/material';
 import background from '../../images/home_bg.svg';
 const Home = () => {
   return (
-    <Grow in>
-      <Container maxWidth="xl">
-        <img src={background} alt="bg" style={{}} />
+    <div style={{ position: 'relative' }}>
+      <img src={background} alt="bg" style={{ width: '100%' }} />
+      <Container maxWidth="xl" style={{ position: 'absolute', top: '83px' }}>
+        <div style={{ color: 'white' }}>TODO</div>
         <Button size="medium" text="See All Events ->" onClick={() => console.log('click')} />
       </Container>
-    </Grow>
+    </div>
   );
 };
 
