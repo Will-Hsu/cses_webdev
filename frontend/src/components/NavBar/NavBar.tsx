@@ -47,7 +47,7 @@ const NavBar = () => {
   }, []);
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+    <div>
       <AppBar
         style={{ background: isScrolled ? 'black' : 'transparent', transition: 'background 0.3s' }}
       >
@@ -58,7 +58,7 @@ const NavBar = () => {
           <div style={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'block' } }}>
             {navItems.map(({ text, link }) => (
-              <Button component={Link} to={link} sx={styles.button}>
+              <Button key={text} component={Link} to={link} sx={styles.button}>
                 {text}
               </Button>
             ))}
@@ -66,7 +66,7 @@ const NavBar = () => {
           </Box>
           <Box sx={{ display: { xs: 'block', md: 'none' } }}>
             <IconButton onClick={() => setIsDrawerOpen(!isDrawerOpen)} color="inherit">
-              {!isDrawerOpen && <MenuIcon sx={{ fontSize: '35px', margin: '10px' }} />}
+              {!isDrawerOpen && <MenuIcon sx={styles.menuicon} />}
             </IconButton>
           </Box>
         </Toolbar>
@@ -78,19 +78,10 @@ const NavBar = () => {
             sx={{ justifyContent: 'flex-end' }}
             onClick={() => setIsDrawerOpen(!isDrawerOpen)}
           >
-            <CloseIcon sx={{ color: 'white', fontSize: '35px', margin: '10px 26px' }} />
+            <CloseIcon sx={styles.closeicon} />
           </ListItem>
           {navItems.map(({ text, link }) => (
-            <ListItem
-              button
-              key={text}
-              sx={{
-                '&:hover': {
-                  background: 'rgba(255, 255, 255, 0.1)',
-                },
-              }}
-              onClick={() => clickItem(link)}
-            >
+            <ListItem button key={text} sx={styles.listitem} onClick={() => clickItem(link)}>
               <ListItemText
                 primary={
                   <Typography align="center" sx={styles.button}>
@@ -100,16 +91,7 @@ const NavBar = () => {
               />
             </ListItem>
           ))}
-          <ListItem
-            key="Login"
-            sx={{
-              '&:hover': {
-                background: 'rgba(255, 255, 255, 0.1)',
-              },
-            }}
-            component={Link}
-            to={'/'}
-          >
+          <ListItem key="Login" sx={styles.listitem}>
             <ListItemText
               primary={
                 <Typography align="center" sx={styles.button}>
@@ -120,7 +102,7 @@ const NavBar = () => {
           </ListItem>
         </List>
       </Drawer>
-    </Box>
+    </div>
   );
 };
 
