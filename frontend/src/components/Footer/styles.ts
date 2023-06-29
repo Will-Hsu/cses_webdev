@@ -1,5 +1,10 @@
-export const footerStyles = () => ({
-  footer: { backgroundColor: '#1F3A7E', bottom: 0, padding: '30px' },
+import { Theme } from '@mui/material';
+export const footerStyles = (theme: Theme) => ({
+  footer: {
+    backgroundColor: '#1F3A7E',
+    bottom: 0,
+    padding: '40px 80px',
+  },
   text: {
     fontFamily: 'Inter, sans-serif',
     fontSize: '20px',

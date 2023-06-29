@@ -4,7 +4,7 @@ import { footerStyles } from './styles';
 
 const Forms = () => {
   const theme = useTheme();
-  const styles = footerStyles();
+  const styles = footerStyles(theme);
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [validEmail, setValidEmail] = useState(true);
   const [feedbackForm, setFeedbackForm] = useState({
@@ -17,7 +17,7 @@ const Forms = () => {
   const subscribeNewLetter = () => {};
 
   return (
-    <div style={{ maxWidth: '530px', marginRight: '50px' }}>
+    <div style={{ maxWidth: '530px' }}>
       <Typography sx={styles.title}>Subscribe to our newsletter!</Typography>
       <TextField
         sx={{
