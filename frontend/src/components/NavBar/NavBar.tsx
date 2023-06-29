@@ -53,7 +53,7 @@ const NavBar = () => {
       >
         <Toolbar>
           <Link to="/">
-            <img src={csesLogo} alt="logo" style={{ margin: '20px' }} />
+            <img src={csesLogo} alt="logo" style={{ margin: '25px' }} />
           </Link>
           <div style={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'block' } }}>
@@ -62,7 +62,7 @@ const NavBar = () => {
                 {text}
               </Button>
             ))}
-            <MuiButton text="Login" size="small" isLogin={true} />
+            <MuiButton text="Login" size="large" isLogin={true} />
           </Box>
           <Box sx={{ display: { xs: 'block', md: 'none' } }}>
             <IconButton onClick={() => setIsDrawerOpen(!isDrawerOpen)} color="inherit">

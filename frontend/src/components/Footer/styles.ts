@@ -16,7 +16,7 @@ export const footerStyles = () => ({
     color: 'white',
   },
   button: {
-    width: '190px',
+    width: '35%',
     backgroundColor: '#1F1F1F',
     margin: '6px 8px',
     borderColor: 'black',
@@ -32,7 +32,6 @@ export const footerStyles = () => ({
   textfield: {
     backgroundColor: 'white',
     borderRadius: '10px',
-    width: '310px',
     margin: '5px',
   },
   title: {

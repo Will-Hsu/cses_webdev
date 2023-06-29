@@ -44,7 +44,7 @@ const Footer = () => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item>
+        <Grid item sx={{ margin: '20px' }}>
           <Forms />
         </Grid>
       </Grid>
@@ -54,7 +54,7 @@ const Footer = () => {
           <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '10px' }}>
             <Typography sx={styles.footerNote}>© 2023 All Rights Reserved CSES at UCSD</Typography>
             <Typography sx={styles.footerNote}>
-              <Link href="/privacy-policy" sx={{ color: 'white' }}>
+              <Link href="/privacy-policy" sx={{ textDecorationColor: 'white', color: 'white' }}>
                 Privacy Policy
               </Link>
             </Typography>
