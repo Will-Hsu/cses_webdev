@@ -16,7 +16,7 @@ const Forms = () => {
   const subscribeNewLetter = () => {};
 
   return (
-    <div style={{ maxWidth: '520px' }}>
+    <div style={{ maxWidth: '530px', marginRight: '50px' }}>
       <Typography sx={styles.title}>Subscribe to our newsletter!</Typography>
       <TextField
         sx={styles.textfield}
@@ -33,27 +33,34 @@ const Forms = () => {
         size="small"
         sx={styles.textfield}
         placeholder={'Name'}
-        onChange={(e) => console.log(e)}
+        style={{ width: '250px' }}
+        onChange={(e) => setFeedbackForm({ ...feedbackForm, name: e.target.value })}
       />
       <TextField
-        error
         size="small"
         sx={styles.textfield}
         placeholder={'Email'}
-        onChange={(e) => console.log(e)}
+        style={{ width: '250px' }}
+        onChange={(e) => setFeedbackForm({ ...feedbackForm, email: e.target.value })}
       />
       <TextField
         sx={styles.textfield}
         size="small"
         placeholder={'Title'}
-        onChange={(e) => console.log(e)}
+        style={{ width: '510px' }}
+        onChange={(e) => setFeedbackForm({ ...feedbackForm, title: e.target.value })}
       />
-      <Button sx={styles.button}>Send</Button>
       <TextField
         sx={styles.textfield}
         placeholder={'Tell us what you think!'}
-        onChange={(e) => console.log(e)}
+        style={{ width: '510px' }}
+        rows={3}
+        multiline
+        onChange={(e) => setFeedbackForm({ ...feedbackForm, message: e.target.value })}
       />
+      <Button sx={styles.button} style={{ width: '510px' }}>
+        Send
+      </Button>
     </div>
   );
 };

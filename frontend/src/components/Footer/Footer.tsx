@@ -12,19 +12,19 @@ const links = [
   { text: 'YOUTUBE', link: 'dne' },
 ];
 
-const contact = ['UC San Diego', '9500 Gilman Dr.', 'La Jolla', 'CA 92093', '(862) 223-9756'];
+const contact = ['UC San Diego', '9500 Gilman Dr.', 'La Jolla', 'CA 92093'];
 
 const Footer = () => {
   const styles = footerStyles();
   return (
     <footer style={styles.footer}>
       <Grid container spacing={2} sx={{ margin: '10px' }}>
-        <Grid item>
+        <Grid item sx={{ marginRight: 'auto' }}>
           <img src={csesLogo} alt="logo" style={{ height: '80px', margin: '20px' }} />
           <Grid container spacing={2} sx={{ margin: '10px' }}>
             <Grid item sx={{ marginRight: '50px' }}>
               {links.map(({ text, link }) => (
-                <Typography sx={{ textAlign: 'center', marginBottom: '10px' }}>
+                <Typography sx={{ textAlign: 'center', marginBottom: '15px' }}>
                   <Link href={link} sx={styles.text}>
                     {text}
                   </Link>
@@ -35,13 +35,16 @@ const Footer = () => {
               {contact.map((text) => (
                 <Typography sx={styles.text}>{text}</Typography>
               ))}
+              <Typography sx={styles.text} style={{ marginTop: '30px' }}>
+                (862) 223-9756
+              </Typography>
               <Link sx={styles.text} href="mailto:cses@eng.ucsd.edu">
                 cses@eng.ucsd.edu
               </Link>
             </Grid>
           </Grid>
         </Grid>
-        <Grid item sx={{ marginLeft: 'auto' }}>
+        <Grid item>
           <Forms />
         </Grid>
       </Grid>

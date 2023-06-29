@@ -33,11 +33,13 @@ export const footerStyles = () => ({
     backgroundColor: 'white',
     borderRadius: '10px',
     width: '310px',
+    margin: '5px',
   },
   title: {
     fontWeight: 'bold',
     fontFamily: 'Chakra Petch, sans-serif',
     color: 'white',
     fontSize: '25px',
+    marginTop: '15px',
   },
 });
