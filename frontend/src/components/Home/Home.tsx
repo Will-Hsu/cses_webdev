@@ -27,27 +27,27 @@ const Home = () => {
 
         <div style={{ display: 'flex'}}>
           <div style={{ color: 'white', fontSize: '50px', fontFamily: 'Inter', marginLeft: '99px', marginTop: '150px', fontWeight: '600'}}>Join CSES today.</div>
-          <div style={{ height: '105px', width: '205px', backgroundColor: '#F3C969', borderRadius: '0 20px 0px 0px', marginTop: '150px', marginLeft: '42px'}}>
-            <div style={{ height: '93px', width: '194px', backgroundColor: '#FFF', float: 'right', borderRadius: '0 20px 0px 0px'}}>
+          <div style={{ height: '129px', width: '232px', backgroundColor: '#F3C969', borderRadius: '0 20px 0px 0px', marginTop: '150px', marginLeft: '42px'}}>
+            <div style={{ height: '113px', width: '224px', backgroundColor: '#FFF', float: 'right', borderRadius: '0 20px 0px 0px'}}>
               <div style={{ fontSize:'50px', fontFamily: 'Inter', fontWeight: '700', paddingLeft: '10px', paddingTop: '10px'}}>1000+</div>
-              <div style={{ fontSize:'15px', fontFamily: 'Inter', fontWeight: '500', paddingLeft: '10px'}}>Members & counting.</div>
+              <div style={{ fontSize:'20px', fontFamily: 'Inter', fontWeight: '500', paddingLeft: '10px', paddingTop: '8px'}}>Members & counting.</div>
             </div>
           </div>
-          <div style={{ height: '105px', width: '205px', backgroundColor: '#F3C969', borderRadius: '0 20px 0px 0px', marginTop: '150px', marginLeft: '32px'}}>
-            <div style={{ height: '93px', width: '194px', backgroundColor: '#FFF', float: 'right', borderRadius: '0 20px 0px 0px'}}>
+          <div style={{ height: '129px', width: '232px', backgroundColor: '#F3C969', borderRadius: '0 20px 0px 0px', marginTop: '150px', marginLeft: '32px'}}>
+            <div style={{ height: '113px', width: '224px', backgroundColor: '#FFF', float: 'right', borderRadius: '0 20px 0px 0px'}}>
               <div style={{ fontSize:'50px', fontFamily: 'Inter', fontWeight: '700', paddingLeft: '10px', paddingTop: '10px'}}>n +</div>
-              <div style={{ fontSize:'15px', fontFamily: 'Inter', fontWeight: '500', paddingLeft: '10px'}}>Another statistic!</div>
+              <div style={{ fontSize:'20px', fontFamily: 'Inter', fontWeight: '500', paddingLeft: '10px', paddingTop: '8px'}}>Another statistic!</div>
             </div>
           </div>
-          <div style={{ height: '105px', width: '205px', backgroundColor: '#F3C969', borderRadius: '0 20px 0px 0px', marginTop: '150px', marginLeft: '32px'}}>
-            <div style={{ height: '93px', width: '194px', backgroundColor: '#FFF', float: 'right', borderRadius: '0 20px 0px 0px'}}>
+          <div style={{ height: '129px', width: '232px', backgroundColor: '#F3C969', borderRadius: '0 20px 0px 0px', marginTop: '150px', marginLeft: '32px'}}>
+            <div style={{ height: '113px', width: '224px', backgroundColor: '#FFF', float: 'right', borderRadius: '0 20px 0px 0px'}}>
               <div style={{ fontSize:'50px', fontFamily: 'Inter', fontWeight: '700', paddingLeft: '10px', paddingTop: '10px'}}>1000+</div>
-              <div style={{ fontSize:'15px', fontFamily: 'Inter', fontWeight: '500', paddingLeft: '10px'}}>Members & counting.</div>
+              <div style={{ fontSize:'20px', fontFamily: 'Inter', fontWeight: '500', paddingLeft: '10px', paddingTop: '8px'}}>Opportunities.</div>
             </div>
           </div>
         </div>
-        <div style={{fontSize: '21px', marginLeft: '280px', marginTop: '0px', fontFamily: 'Chakra Petch', fontWeight: '500'}} >
-        <Button size="large" text="Become a Member ->" onClick={() => console.log('click')} />
+        <div style={{fontSize: '21px', marginLeft: '298px', marginTop: '-60px', fontFamily: 'Chakra Petch', fontWeight: '500'}} >
+          <Button size="large" text="Become a Member ->" onClick={() => console.log('click')} />
         </div>
         <div style={{ color: 'white' }}>TODO</div>
         <Button size="medium" text="See All Events ->" onClick={() => console.log('click')} />
