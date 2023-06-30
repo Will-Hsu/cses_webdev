@@ -7,7 +7,7 @@ import { homeStyles } from './styles';
 
 
 const Home = () => {
-  const styles = homeStyles();
+  /*const styles = homeStyles();*/
   
   return (
     <div style={{ position: 'relative' }}>
@@ -18,8 +18,9 @@ const Home = () => {
             <div style={{ color: 'white', fontSize: '100px', fontFamily: 'Chakra Petch', marginLeft: '99px', marginTop: '117px', fontWeight: '700'}}>Innovate.</div>
             <div style={{ color: 'white', fontSize: '100px', fontFamily: 'Chakra Petch', marginLeft: '99px', marginTop: '24px', fontWeight: '700'}}>Build.</div>
             <div style={{ color: 'white', fontSize: '100px', fontFamily: 'Chakra Petch', marginLeft: '99px', marginTop: '24px', fontWeight: '700'}}>Connect.</div>
-            {/* <Button size="medium" text="Learn About Us" onClick={() => console.log('click')} sx={styles.button}/> */}
-            
+            <div style={{fontSize: '25px', marginLeft: '99px', marginTop: '40px', fontFamily: 'Chakra Petch', fontWeight: '500' }}>
+            {<Button size="large" text="Learn About Us!" onClick={() => console.log('click')} /> }
+            </div>
           </div>
         <img src={desktop} alt="img" style={{ width: '50%', marginLeft: '150px', marginTop: '45px'}}/>
         </div>
@@ -45,7 +46,9 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <Button size="medium" text="Become a Member" onClick={() => console.log('click')} />
+        <div style={{fontSize: '21px', marginLeft: '280px', marginTop: '0px', fontFamily: 'Chakra Petch', fontWeight: '500'}} >
+        <Button size="large" text="Become a Member ->" onClick={() => console.log('click')} />
+        </div>
         <div style={{ color: 'white' }}>TODO</div>
         <Button size="medium" text="See All Events ->" onClick={() => console.log('click')} />
       </Container>
