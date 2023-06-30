@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Container } from '@mui/material';
 import Home from './components/Home/Home';
 import NavBar from './components/NavBar/NavBar';
+import EventBox from './components/Events/Event';
 
 function App() {
   return (
@@ -11,8 +12,9 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
-        </Routes>
-      </Container>
+              </Routes>
+          <EventBox/>
+          </Container>
     </BrowserRouter>
   );
 }
