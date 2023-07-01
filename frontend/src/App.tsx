@@ -12,9 +12,9 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
-              </Routes>
-          <EventBox/>
-          </Container>
+        </Routes>
+        <EventBox />
+      </Container>
     </BrowserRouter>
   );
 }
