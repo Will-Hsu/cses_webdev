@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Typography, Link, Divider, useTheme } from '@mui/material';
+import { Container, Grid, Typography, Link, Divider, useTheme } from '@mui/material';
 import csesLogo from '../../images/logo.svg';
 import { footerStyles } from './styles';
 import Forms from './Forms';
@@ -18,7 +18,7 @@ const Footer = () => {
   const theme = useTheme();
   const styles = footerStyles(theme);
   return (
-    <footer style={styles.footer}>
+    <Container disableGutters maxWidth={false} sx={styles.footer}>
       <Grid container spacing={2}>
         <Grid item sx={{ marginRight: 'auto' }}>
           <img src={csesLogo} alt="logo" style={{ height: '80px', margin: '20px' }} />
@@ -64,7 +64,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </footer>
+    </Container>
   );
 };
 

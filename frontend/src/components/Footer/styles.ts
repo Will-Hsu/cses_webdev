@@ -1,9 +1,13 @@
 import { Theme } from '@mui/material';
 export const footerStyles = (theme: Theme) => ({
   footer: {
+    margin: 0,
     backgroundColor: '#1F3A7E',
     bottom: 0,
     padding: '40px 80px',
+    [theme.breakpoints.down('sm')]: {
+      padding: '20px 40px',
+    },
   },
   text: {
     fontFamily: 'Inter, sans-serif',
@@ -35,6 +39,10 @@ export const footerStyles = (theme: Theme) => ({
     },
   },
   textfield: {
+    '& input::placeholder, & textarea::placeholder': {
+      opacity: 0.6,
+      color: 'black',
+    },
     backgroundColor: 'white',
     borderRadius: '10px',
     margin: '5px',
