@@ -4,8 +4,13 @@ import { event_style } from './styles';
 interface EventBoxProps {
   targetDate: Date;
   location: string;
+  style?: EventBoxStyles;
 }
-
+interface EventBoxStyles {
+  outerBox?: React.CSSProperties;
+  innerBox?: React.CSSProperties;
+  // Add more style properties if needed
+}
 const EventBox = ({ targetDate, location }: EventBoxProps) => {
   const styles = event_style();
 
@@ -51,6 +56,12 @@ const EventBox = ({ targetDate, location }: EventBoxProps) => {
     const day = date.getDate();
     const month = months[date.getMonth()];
     const year = date.getFullYear();
+
+    return `${dayOfWeek}, ${day} ${month}, ${year}`;
+  };
+
+  const cleanTime = () => {
+    const date = new Date(targetDate);
     const startTime = date.toLocaleTimeString('en-US', {
       hour: 'numeric',
       minute: 'numeric',
@@ -61,9 +72,8 @@ const EventBox = ({ targetDate, location }: EventBoxProps) => {
       minute: 'numeric',
     });
 
-    return `${dayOfWeek}, ${day} ${month}, ${year}\n${startTime} - ${endTime}`;
+    return `${startTime} - ${endTime}`;
   };
-
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(targetDate));
 
   useEffect(() => {
@@ -86,8 +96,8 @@ const EventBox = ({ targetDate, location }: EventBoxProps) => {
   const meetingLocation = location ? 'Virtual' : 'Place';
 
   return (
-    <div className="outerBox">
-      <div className="innerBox">
+    <div className="outerBox" style={styles?.outerBox}>
+      <div className="innerBox" style={styles?.innerBox}>
         <h4>Google ML SWE Alumnus Q&A</h4>
         <div className="countDown">
           {days > 0 && <span>{days}d </span>}
@@ -97,6 +107,7 @@ const EventBox = ({ targetDate, location }: EventBoxProps) => {
         </div>
         <div>
           <p>{cleanDate()}</p>
+          <p>{cleanTime()}</p>
           <p>{meetingLocation}</p>
         </div>
       </div>
