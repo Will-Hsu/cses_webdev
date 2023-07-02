@@ -22,7 +22,19 @@ export const eventList = asyncHandler(async (req, res) => {
 
 // Display detail for a specific Event.
 export const eventDetail = asyncHandler(async (req, res) => {
-  res.send(`NOT IMPLEMENTED: Event detail: ${req.params.id}`);
+  const eventId = req.params.id;
+
+  // Query database for event with given ID
+  try {
+    const event = await Event.findById(eventId);
+    if (event) {
+      res.json(event);
+    } else {
+      res.status(404).json({ message: 'Event not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Internal server error' });
+  }
 });
 
 // Handle Event create on POST.
