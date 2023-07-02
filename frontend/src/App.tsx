@@ -13,7 +13,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
         </Routes>
-        <EventBox />
+        <EventBox targetDate={new Date('2023-08-31T00:00:00')} location={String(true)} />
       </Container>
     </BrowserRouter>
   );
