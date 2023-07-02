@@ -2,7 +2,7 @@ import React from 'react';
 /*import Button from '../Button/Button';*/
 import { Button, Container } from '@mui/material';
 import background from '../../images/home_bg.svg';
-import desktop from './Images/desktop.png'
+import desktop from './Images/desktop.png';
 import { homeStyles } from './styles';
 
 
