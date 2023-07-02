@@ -1,13 +1,13 @@
 import React from 'react';
-import Button from '../Button/Button';
-import { Container } from '@mui/material';
+/*import Button from '../Button/Button';*/
+import { Button, Container } from '@mui/material';
 import background from '../../images/home_bg.svg';
 import desktop from './Images/desktop.png'
 import { homeStyles } from './styles';
 
 
 const Home = () => {
-  /*const styles = homeStyles();*/
+  const styles = homeStyles();
   
   return (
     <div style={{ position: 'relative' }}>
@@ -18,8 +18,10 @@ const Home = () => {
             <div style={{ color: 'white', fontSize: '100px', fontFamily: 'Chakra Petch', marginLeft: '99px', marginTop: '117px', fontWeight: '700'}}>Innovate.</div>
             <div style={{ color: 'white', fontSize: '100px', fontFamily: 'Chakra Petch', marginLeft: '99px', marginTop: '24px', fontWeight: '700'}}>Build.</div>
             <div style={{ color: 'white', fontSize: '100px', fontFamily: 'Chakra Petch', marginLeft: '99px', marginTop: '24px', fontWeight: '700'}}>Connect.</div>
-            <div style={{fontSize: '25px', marginLeft: '99px', marginTop: '40px', fontFamily: 'Chakra Petch', fontWeight: '500' }}>
-            {<Button size="large" text="Learn About Us!" onClick={() => console.log('click')} /> }
+            <div>
+              <Button sx={styles.firstButton} onClick={() => console.log('click')}>
+              Learn about us!
+              </Button>
             </div>
           </div>
         <img src={desktop} alt="img" style={{ width: '50%', marginLeft: '150px', marginTop: '45px'}}/>
@@ -46,11 +48,12 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div style={{fontSize: '21px', marginLeft: '298px', marginTop: '-60px', fontFamily: 'Chakra Petch', fontWeight: '500'}} >
-          <Button size="large" text="Become a Member ->" onClick={() => console.log('click')} />
+        <div>
+          <Button sx={styles.secondButton} onClick={() => console.log('click')}>
+            {'Become a Member ->'}
+          </Button>
         </div>
         <div style={{ color: 'white' }}>TODO</div>
-        <Button size="medium" text="See All Events ->" onClick={() => console.log('click')} />
       </Container>
     </div>
   );
