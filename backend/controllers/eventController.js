@@ -9,7 +9,7 @@ export const eventList = asyncHandler(async (req, res) => {
 
     // Extract attributes from each event 
     const eventAttributes = events.map((event) => {
-      const { title, status, start_time, end_time, location, description, calendar_link, instagram_link  } = event;
+      const { title, status, start_time, end_time, location, description, calendar_link, instagram_link } = event;
       return { title, status, start_time, end_time, location, description, calendar_link, instagram_link };
     });
 
