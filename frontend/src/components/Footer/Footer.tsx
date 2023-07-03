@@ -9,7 +9,7 @@ const links = [
   { text: 'FACEBOOK', link: 'https://www.facebook.com/csesucsd' },
   { text: 'LINKEDIN', link: 'https://www.linkedin.com/in/csesucsd/' },
   { text: 'LINKTREE', link: 'https://linktr.ee/csesucsd' },
-  { text: 'YOUTUBE', link: 'dne' },
+  { text: 'DISCORD', link: 'https://discord.gg/ury4n5sA' },
 ];
 
 const contact = ['UC San Diego', '9500 Gilman Dr.', 'La Jolla', 'CA 92093'];
