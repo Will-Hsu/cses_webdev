@@ -8,7 +8,7 @@ const links = [
   { text: 'INSTAGRAM', link: 'https://www.instagram.com/cses_ucsd/' },
   { text: 'FACEBOOK', link: 'https://www.facebook.com/csesucsd' },
   { text: 'LINKEDIN', link: 'https://www.linkedin.com/in/csesucsd/' },
-  { text: 'LINKTREE', link: 'dne' },
+  { text: 'LINKTREE', link: 'https://linktr.ee/csesucsd' },
   { text: 'YOUTUBE', link: 'dne' },
 ];
 
