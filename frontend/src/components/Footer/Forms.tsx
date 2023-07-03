@@ -1,12 +1,23 @@
 import React, { useState, useRef } from 'react';
-import { Alert, Button, Typography, TextField, useTheme } from '@mui/material';
+import {
+  Collapse,
+  Alert,
+  Button,
+  Typography,
+  TextField,
+  useTheme,
+  IconButton,
+} from '@mui/material';
 import { footerStyles } from './styles';
+import CloseIcon from '@mui/icons-material/Close';
+
 import emailjs from '@emailjs/browser';
 
 const Forms = () => {
   const form = useRef(null);
   const theme = useTheme();
   const styles = footerStyles(theme);
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [showError, setShowError] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -18,7 +29,6 @@ const Forms = () => {
     title: '',
     message: '',
   });
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const subscribeNewLetter = () => {
     setShowError(false);
@@ -35,6 +45,14 @@ const Forms = () => {
     }
   };
 
+  const alertCloseBtn = (func: any) => {
+    return (
+      <IconButton aria-label="close" size="small" onClick={() => func(false)}>
+        <CloseIcon fontSize="inherit" />
+      </IconButton>
+    );
+  };
+
   const sendEmail = (e: any) => {
     e.preventDefault();
 
@@ -47,20 +65,14 @@ const Forms = () => {
       return;
     }
 
-    console.log(form.current);
     emailjs.sendForm('service_agc83dv', 'template_ot1ic18', currentForm, 'bKHY__zvT5ujULEEk').then(
-      (result) => {
-        setFeedbackForm({
-          name: '',
-          email: '',
-          title: '',
-          message: '',
-        });
+      () => {
+        setFeedbackForm({ name: '', email: '', title: '', message: '' });
         setShowSuccessForm(true);
         setTimeout(function () {
           setShowSuccessForm(false);
         }, 5000);
-        console.log(result.text);
+        //console.log(result.text);
       },
       (error) => {
         console.log(error.text);
@@ -71,14 +83,19 @@ const Forms = () => {
   return (
     <div style={{ maxWidth: '530px' }}>
       <Typography sx={styles.title}>Subscribe to our newsletter!</Typography>
-      {showSuccess && (
-        <Alert severity="success">Thank you for subscribing to our newsletter!</Alert>
-      )}
-      {showError && (
-        <Alert severity="error">
+
+      <Collapse in={showSuccess}>
+        <Alert severity="success" action={alertCloseBtn(setShowSuccess)}>
+          Thank you for subscribing to our newsletter!
+        </Alert>
+      </Collapse>
+
+      <Collapse in={showError}>
+        <Alert severity="error" action={alertCloseBtn(setShowError)}>
           Invalid email — <strong>please re-enter a valid address!</strong>
         </Alert>
-      )}
+      </Collapse>
+
       <TextField
         sx={{
           ...styles.textfield,
@@ -99,17 +116,22 @@ const Forms = () => {
             width: '95%',
           },
         }}
+        disabled={newsletterEmail === ''}
         onClick={subscribeNewLetter}
       >
         Subscribe
       </Button>
       <Typography sx={styles.title}>Contact us</Typography>
-      {showSuccessForm && <Alert severity="success">Thank you for your feedback!</Alert>}
-      {showErrorForm && (
-        <Alert severity="error">
+      <Collapse in={showSuccessForm}>
+        <Alert severity="success" action={alertCloseBtn(setShowSuccessForm)}>
+          Thank you for your feedback!
+        </Alert>
+      </Collapse>
+      <Collapse in={showErrorForm}>
+        <Alert severity="error" action={alertCloseBtn(setShowErrorForm)}>
           Invalid email — <strong>please re-enter a valid address!</strong>
         </Alert>
-      )}
+      </Collapse>
       <form ref={form} onSubmit={sendEmail}>
         <TextField
           size="small"
@@ -156,7 +178,14 @@ const Forms = () => {
           name="message"
           onChange={(e) => setFeedbackForm({ ...feedbackForm, message: e.target.value })}
         />
-        <Button type="submit" value="Send" sx={styles.button} style={{ width: '95%' }}>
+        <Button
+          disabled={
+            feedbackForm.message === '' || feedbackForm.email === '' || feedbackForm.name === ''
+          }
+          type="submit"
+          sx={styles.button}
+          style={{ width: '95%' }}
+        >
           Send
         </Button>
       </form>
