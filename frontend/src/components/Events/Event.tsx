@@ -98,17 +98,54 @@ const EventBox = ({ targetDate, location }: EventBoxProps) => {
   return (
     <div className="outerBox" style={styles?.outerBox}>
       <div className="innerBox" style={styles?.innerBox}>
-        <h4>Google ML SWE Alumnus Q&A</h4>
-        <div className="countDown">
+        <h4 style={{ 
+            color: 'white',
+            fontSize: '40px', 
+            fontFamily: 'Chakra Petch',  
+            fontWeight: '600',
+            marginTop: '30px',
+            marginLeft: '30px',
+          }}>Google ML SWE Alumnus Q&A</h4>
+        <div className="countDown"
+          style={{ 
+            color: 'white',
+            fontSize: '20px', 
+            fontFamily: 'Chakra Petch',  
+            fontWeight: '500',
+            marginTop: '5px',
+            marginLeft: '30px',
+          }}>
           {days > 0 && <span>{days}d </span>}
           {hours > 0 && <span>{hours}h </span>}
           {minutes > 0 && <span>{minutes}m </span>}
           {seconds > 0 && <span>{seconds}s</span>}
         </div>
         <div>
-          <p>{cleanDate()}</p>
-          <p>{cleanTime()}</p>
-          <p>{meetingLocation}</p>
+          <p style={{ 
+            color: 'white',
+            fontSize: '20px', 
+            fontFamily: 'Chakra Petch',  
+            fontWeight: '500',
+            marginTop: '80px',
+            marginLeft: '30px',
+          }}>{cleanDate()}</p>
+          <p style={{ 
+            color: 'white',
+            fontSize: '20px', 
+            fontFamily: 'Chakra Petch',  
+            fontWeight: '500',
+            marginTop: '5px',
+            marginLeft: '30px',
+          }}>{cleanTime()}</p>
+
+          <p style={{ 
+            color: 'white',
+            fontSize: '20px', 
+            fontFamily: 'Chakra Petch',  
+            fontWeight: '500',
+            marginTop: '5px',
+            marginLeft: '30px',
+          }}>{meetingLocation}</p>
         </div>
       </div>
     </div>

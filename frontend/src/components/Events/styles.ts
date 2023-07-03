@@ -17,5 +17,7 @@ export const event_style = () => ({
     borderTopRightRadius: "40px",
     height: "429px",
     backgroundColor: "black",
+    color: 'white', 
   },
+
 });

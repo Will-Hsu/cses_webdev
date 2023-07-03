@@ -13,15 +13,14 @@ const Home = () => {
     <div style={{ position: 'relative' }}>
       <img src={background} alt="bg" style={{ width: '100%' }} />
       <Container maxWidth="xl" style={{ position: 'absolute', top: '83px' }}>
-        <div style={{ color: 'white' }}>TODO</div>
-        <Button size="medium" text="See All Events ->" onClick={() => console.log('click')} />
-
-        <div style={{ color: 'white' }}><h2>Upcoming Events.</h2></div>
-
+        <div style={{ color: 'white', fontSize: '40px', fontFamily: 'Chakra Petch', marginLeft: '39px', marginTop: '117px', fontWeight: '700'}}><h2>UPCOMING EVENTS.</h2></div>
+        
         <div 
           style={{ 
             color: 'white',
-            
+            fontSize: '20px', 
+            fontFamily: 'Chakra Petch',  
+            fontWeight: '700'
 
           }}>
           <EventBox 
@@ -32,6 +31,7 @@ const Home = () => {
         </div>
         
       </Container>
+      <Button size="medium" text="See All Events ->" onClick={() => console.log('click')}></Button>
     </div>
 
     
