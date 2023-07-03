@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Alert, Button, Typography, TextField, useTheme } from '@mui/material';
 import { footerStyles } from './styles';
+import emailjs from '@emailjs/browser';
 
 const Forms = () => {
+  const form = useRef(null);
   const theme = useTheme();
   const styles = footerStyles(theme);
   const [newsletterEmail, setNewsletterEmail] = useState('');
@@ -33,25 +35,37 @@ const Forms = () => {
     }
   };
 
-  const sendForm = () => {
+  const sendEmail = (e: any) => {
+    e.preventDefault();
+
     setShowErrorForm(false);
     setShowSuccessForm(false);
-    if (feedbackForm.name === '' || feedbackForm.email === '' || feedbackForm.message === '')
-      return;
-    if (emailRegex.test(feedbackForm.email)) {
-      setFeedbackForm({
-        name: '',
-        email: '',
-        title: '',
-        message: '',
-      });
-      setShowSuccessForm(true);
-      setTimeout(function () {
-        setShowSuccessForm(false);
-      }, 5000);
-    } else {
+
+    const currentForm = form.current;
+    if (!emailRegex.test(feedbackForm.email) || currentForm == null) {
       setShowErrorForm(true);
+      return;
     }
+
+    console.log(form.current);
+    emailjs.sendForm('service_agc83dv', 'template_ot1ic18', currentForm, 'bKHY__zvT5ujULEEk').then(
+      (result) => {
+        setFeedbackForm({
+          name: '',
+          email: '',
+          title: '',
+          message: '',
+        });
+        setShowSuccessForm(true);
+        setTimeout(function () {
+          setShowSuccessForm(false);
+        }, 5000);
+        console.log(result.text);
+      },
+      (error) => {
+        console.log(error.text);
+      },
+    );
   };
 
   return (
@@ -96,52 +110,56 @@ const Forms = () => {
           Invalid email — <strong>please re-enter a valid address!</strong>
         </Alert>
       )}
-      <TextField
-        size="small"
-        sx={{
-          ...styles.textfield,
-          width: '46%',
-          [theme.breakpoints.down('sm')]: {
-            width: '95%',
-          },
-        }}
-        value={feedbackForm.name}
-        placeholder={'Name*'}
-        onChange={(e) => setFeedbackForm({ ...feedbackForm, name: e.target.value })}
-      />
-      <TextField
-        size="small"
-        sx={{
-          ...styles.textfield,
-          width: '47%',
-          [theme.breakpoints.down('sm')]: {
-            width: '95%',
-          },
-        }}
-        placeholder={'Email*'}
-        value={feedbackForm.email}
-        onChange={(e) => setFeedbackForm({ ...feedbackForm, email: e.target.value })}
-      />
-      <TextField
-        sx={styles.textfield}
-        size="small"
-        placeholder={'Title'}
-        value={feedbackForm.title}
-        style={{ width: '95%' }}
-        onChange={(e) => setFeedbackForm({ ...feedbackForm, title: e.target.value })}
-      />
-      <TextField
-        sx={styles.textfield}
-        placeholder={'Tell us what you think!*'}
-        style={{ width: '95%' }}
-        rows={3}
-        multiline
-        value={feedbackForm.message}
-        onChange={(e) => setFeedbackForm({ ...feedbackForm, message: e.target.value })}
-      />
-      <Button onClick={sendForm} sx={styles.button} style={{ width: '95%' }}>
-        Send
-      </Button>
+      <form ref={form} onSubmit={sendEmail}>
+        <TextField
+          size="small"
+          sx={{
+            ...styles.textfield,
+            width: '46%',
+            [theme.breakpoints.down('sm')]: {
+              width: '95%',
+            },
+          }}
+          name="name"
+          value={feedbackForm.name}
+          placeholder={'Name*'}
+          onChange={(e) => setFeedbackForm({ ...feedbackForm, name: e.target.value })}
+        />
+        <TextField
+          size="small"
+          sx={{
+            ...styles.textfield,
+            width: '47%',
+            [theme.breakpoints.down('sm')]: {
+              width: '95%',
+            },
+          }}
+          name="email"
+          placeholder={'Email*'}
+          value={feedbackForm.email}
+          onChange={(e) => setFeedbackForm({ ...feedbackForm, email: e.target.value })}
+        />
+        <TextField
+          sx={{ ...styles.textfield, width: '95%' }}
+          size="small"
+          placeholder={'Title'}
+          name="title"
+          value={feedbackForm.title}
+          onChange={(e) => setFeedbackForm({ ...feedbackForm, title: e.target.value })}
+        />
+        <TextField
+          sx={{ ...styles.textfield, width: '95%' }}
+          placeholder={'Tell us what you think!*'}
+          rows={3}
+          multiline
+          value={feedbackForm.message}
+          name="message"
+          onChange={(e) => setFeedbackForm({ ...feedbackForm, message: e.target.value })}
+        />
+        <Button type="submit" value="Send" sx={styles.button} style={{ width: '95%' }}>
+          Send
+        </Button>
+      </form>
     </div>
   );
 };
