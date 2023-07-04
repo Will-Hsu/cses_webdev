@@ -15,10 +15,10 @@ router.get('/event/:id', eventController.eventDetail);
 // POST request for creating Event.
 router.post('/event/create', eventController.eventCreate);
 
-// POST request to delete Event.
+// DELETE request to delete Event.
 router.delete('/event/:id/delete', eventController.eventDelete);
 
-// POST request to update Event.
+// PUT request to update Event.
 router.put('/event/:id/update', eventController.eventUpdate);
 
 // Export router.
