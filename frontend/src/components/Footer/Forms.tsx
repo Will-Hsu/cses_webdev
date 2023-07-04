@@ -1,10 +1,23 @@
-import React, { useState } from 'react';
-import { Alert, Button, Typography, TextField, useTheme } from '@mui/material';
+import React, { useState, useRef } from 'react';
+import {
+  Collapse,
+  Alert,
+  Button,
+  Typography,
+  TextField,
+  useTheme,
+  IconButton,
+} from '@mui/material';
 import { footerStyles } from './styles';
+import CloseIcon from '@mui/icons-material/Close';
+
+import emailjs from '@emailjs/browser';
 
 const Forms = () => {
+  const form = useRef(null);
   const theme = useTheme();
   const styles = footerStyles(theme);
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [showError, setShowError] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -16,7 +29,6 @@ const Forms = () => {
     title: '',
     message: '',
   });
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const subscribeNewLetter = () => {
     setShowError(false);
@@ -33,38 +45,57 @@ const Forms = () => {
     }
   };
 
-  const sendForm = () => {
+  const alertCloseBtn = (func: any) => {
+    return (
+      <IconButton aria-label="close" size="small" onClick={() => func(false)}>
+        <CloseIcon fontSize="inherit" />
+      </IconButton>
+    );
+  };
+
+  const sendEmail = (e: any) => {
+    e.preventDefault();
+
     setShowErrorForm(false);
     setShowSuccessForm(false);
-    if (feedbackForm.name === '' || feedbackForm.email === '' || feedbackForm.message === '')
-      return;
-    if (emailRegex.test(feedbackForm.email)) {
-      setFeedbackForm({
-        name: '',
-        email: '',
-        title: '',
-        message: '',
-      });
-      setShowSuccessForm(true);
-      setTimeout(function () {
-        setShowSuccessForm(false);
-      }, 5000);
-    } else {
+
+    const currentForm = form.current;
+    if (!emailRegex.test(feedbackForm.email) || currentForm == null) {
       setShowErrorForm(true);
+      return;
     }
+
+    emailjs.sendForm('service_agc83dv', 'template_ot1ic18', currentForm, 'bKHY__zvT5ujULEEk').then(
+      () => {
+        setFeedbackForm({ name: '', email: '', title: '', message: '' });
+        setShowSuccessForm(true);
+        setTimeout(function () {
+          setShowSuccessForm(false);
+        }, 5000);
+        //console.log(result.text);
+      },
+      (error) => {
+        console.log(error.text);
+      },
+    );
   };
 
   return (
     <div style={{ maxWidth: '530px' }}>
       <Typography sx={styles.title}>Subscribe to our newsletter!</Typography>
-      {showSuccess && (
-        <Alert severity="success">Thank you for subscribing to our newsletter!</Alert>
-      )}
-      {showError && (
-        <Alert severity="error">
+
+      <Collapse in={showSuccess}>
+        <Alert severity="success" action={alertCloseBtn(setShowSuccess)}>
+          Thank you for subscribing to our newsletter!
+        </Alert>
+      </Collapse>
+
+      <Collapse in={showError}>
+        <Alert severity="error" action={alertCloseBtn(setShowError)}>
           Invalid email — <strong>please re-enter a valid address!</strong>
         </Alert>
-      )}
+      </Collapse>
+
       <TextField
         sx={{
           ...styles.textfield,
@@ -85,63 +116,79 @@ const Forms = () => {
             width: '95%',
           },
         }}
+        disabled={newsletterEmail === ''}
         onClick={subscribeNewLetter}
       >
         Subscribe
       </Button>
       <Typography sx={styles.title}>Contact us</Typography>
-      {showSuccessForm && <Alert severity="success">Thank you for your feedback!</Alert>}
-      {showErrorForm && (
-        <Alert severity="error">
+      <Collapse in={showSuccessForm}>
+        <Alert severity="success" action={alertCloseBtn(setShowSuccessForm)}>
+          Thank you for your feedback!
+        </Alert>
+      </Collapse>
+      <Collapse in={showErrorForm}>
+        <Alert severity="error" action={alertCloseBtn(setShowErrorForm)}>
           Invalid email — <strong>please re-enter a valid address!</strong>
         </Alert>
-      )}
-      <TextField
-        size="small"
-        sx={{
-          ...styles.textfield,
-          width: '46%',
-          [theme.breakpoints.down('sm')]: {
-            width: '95%',
-          },
-        }}
-        value={feedbackForm.name}
-        placeholder={'Name*'}
-        onChange={(e) => setFeedbackForm({ ...feedbackForm, name: e.target.value })}
-      />
-      <TextField
-        size="small"
-        sx={{
-          ...styles.textfield,
-          width: '47%',
-          [theme.breakpoints.down('sm')]: {
-            width: '95%',
-          },
-        }}
-        placeholder={'Email*'}
-        value={feedbackForm.email}
-        onChange={(e) => setFeedbackForm({ ...feedbackForm, email: e.target.value })}
-      />
-      <TextField
-        sx={styles.textfield}
-        size="small"
-        placeholder={'Title'}
-        value={feedbackForm.title}
-        style={{ width: '95%' }}
-        onChange={(e) => setFeedbackForm({ ...feedbackForm, title: e.target.value })}
-      />
-      <TextField
-        sx={styles.textfield}
-        placeholder={'Tell us what you think!*'}
-        style={{ width: '95%' }}
-        rows={3}
-        multiline
-        value={feedbackForm.message}
-        onChange={(e) => setFeedbackForm({ ...feedbackForm, message: e.target.value })}
-      />
-      <Button onClick={sendForm} sx={styles.button} style={{ width: '95%' }}>
-        Send
-      </Button>
+      </Collapse>
+      <form ref={form} onSubmit={sendEmail}>
+        <TextField
+          size="small"
+          sx={{
+            ...styles.textfield,
+            width: '46%',
+            [theme.breakpoints.down('sm')]: {
+              width: '95%',
+            },
+          }}
+          name="name"
+          value={feedbackForm.name}
+          placeholder={'Name*'}
+          onChange={(e) => setFeedbackForm({ ...feedbackForm, name: e.target.value })}
+        />
+        <TextField
+          size="small"
+          sx={{
+            ...styles.textfield,
+            width: '47%',
+            [theme.breakpoints.down('sm')]: {
+              width: '95%',
+            },
+          }}
+          name="email"
+          placeholder={'Email*'}
+          value={feedbackForm.email}
+          onChange={(e) => setFeedbackForm({ ...feedbackForm, email: e.target.value })}
+        />
+        <TextField
+          sx={{ ...styles.textfield, width: '95%' }}
+          size="small"
+          placeholder={'Title'}
+          name="title"
+          value={feedbackForm.title}
+          onChange={(e) => setFeedbackForm({ ...feedbackForm, title: e.target.value })}
+        />
+        <TextField
+          sx={{ ...styles.textfield, width: '95%' }}
+          placeholder={'Tell us what you think!*'}
+          rows={3}
+          multiline
+          value={feedbackForm.message}
+          name="message"
+          onChange={(e) => setFeedbackForm({ ...feedbackForm, message: e.target.value })}
+        />
+        <Button
+          disabled={
+            feedbackForm.message === '' || feedbackForm.email === '' || feedbackForm.name === ''
+          }
+          type="submit"
+          sx={styles.button}
+          style={{ width: '95%' }}
+        >
+          Send
+        </Button>
+      </form>
     </div>
   );
 };
