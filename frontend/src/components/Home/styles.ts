@@ -43,14 +43,14 @@ export const homeStyles = () => ({
     borderRadius: '0 20px 0px 0px',
   },
   statisticTitle: {
-    fontSize: 'clamp(20px, 5vw, 50px)',
+    fontSize: {xs: 'clamp(40px, 3vw, 100px)', sm: 'clamp(20px, 3vw, 30px)', md: 'clamp(15px, 3vw, 50px)'},
     fontFamily: 'Inter',
     fontWeight: 700,
     paddingLeft: '10px',
     paddingTop: '10px',
   },
   statisticSubtitle: {
-    fontSize: 'clamp(12px, 3vw, 15px)',
+    fontSize: {xs: 'clamp(15px, 3vw, 50px)', sm: 'clamp(10px, 3vw, 12px)', md: 'clamp(12px, 3vw, 17px)'},
     fontFamily: 'Inter',
     fontWeight: 500,
     paddingLeft: '10px',
