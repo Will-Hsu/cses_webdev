@@ -1,55 +1,63 @@
 import React from 'react';
 import Button from '../Button/Button';
-import { Container } from '@mui/material';
+import { Container, Box, Grid} from '@mui/material';
 import background from '../../images/home_bg.svg';
-import desktop from './Images/desktop.png'
+import desktop from './Images/desktop.png';
 import { homeStyles } from './styles';
-
 
 const Home = () => {
   const styles = homeStyles();
-  
-  return (
-    <div style={{ position: 'relative' }}>
-      <img src={background} alt="bg" style={{ width: '100%' }} />
-      <Container maxWidth="xl" style={{ position: 'absolute', top: '83px' }}>
-        <div style={{ display: 'flex'}}>
-          <div>
-            <div style={{ color: 'white', fontSize: '100px', fontFamily: 'Chakra Petch', marginLeft: '99px', marginTop: '117px', fontWeight: '700'}}>Innovate.</div>
-            <div style={{ color: 'white', fontSize: '100px', fontFamily: 'Chakra Petch', marginLeft: '99px', marginTop: '24px', fontWeight: '700'}}>Build.</div>
-            <div style={{ color: 'white', fontSize: '100px', fontFamily: 'Chakra Petch', marginLeft: '99px', marginTop: '24px', fontWeight: '700'}}>Connect.</div>
-            {/* <Button size="medium" text="Learn About Us" onClick={() => console.log('click')} sx={styles.button}/> */}
-            
-          </div>
-        <img src={desktop} alt="img" style={{ width: '50%', marginLeft: '150px', marginTop: '45px'}}/>
-        </div>
 
-        <div style={{ display: 'flex'}}>
-          <div style={{ color: 'white', fontSize: '50px', fontFamily: 'Inter', marginLeft: '99px', marginTop: '150px', fontWeight: '600'}}>Join CSES today.</div>
-          <div style={{ height: '105px', width: '205px', backgroundColor: '#F3C969', borderRadius: '0 20px 0px 0px', marginTop: '150px', marginLeft: '42px'}}>
-            <div style={{ height: '93px', width: '194px', backgroundColor: '#FFF', float: 'right', borderRadius: '0 20px 0px 0px'}}>
-              <div style={{ fontSize:'50px', fontFamily: 'Inter', fontWeight: '700', paddingLeft: '10px', paddingTop: '10px'}}>1000+</div>
-              <div style={{ fontSize:'15px', fontFamily: 'Inter', fontWeight: '500', paddingLeft: '10px'}}>Members & counting.</div>
-            </div>
-          </div>
-          <div style={{ height: '105px', width: '205px', backgroundColor: '#F3C969', borderRadius: '0 20px 0px 0px', marginTop: '150px', marginLeft: '32px'}}>
-            <div style={{ height: '93px', width: '194px', backgroundColor: '#FFF', float: 'right', borderRadius: '0 20px 0px 0px'}}>
-              <div style={{ fontSize:'50px', fontFamily: 'Inter', fontWeight: '700', paddingLeft: '10px', paddingTop: '10px'}}>n +</div>
-              <div style={{ fontSize:'15px', fontFamily: 'Inter', fontWeight: '500', paddingLeft: '10px'}}>Another statistic!</div>
-            </div>
-          </div>
-          <div style={{ height: '105px', width: '205px', backgroundColor: '#F3C969', borderRadius: '0 20px 0px 0px', marginTop: '150px', marginLeft: '32px'}}>
-            <div style={{ height: '93px', width: '194px', backgroundColor: '#FFF', float: 'right', borderRadius: '0 20px 0px 0px'}}>
-              <div style={{ fontSize:'50px', fontFamily: 'Inter', fontWeight: '700', paddingLeft: '10px', paddingTop: '10px'}}>1000+</div>
-              <div style={{ fontSize:'15px', fontFamily: 'Inter', fontWeight: '500', paddingLeft: '10px'}}>Members & counting.</div>
-            </div>
-          </div>
-        </div>
-        <Button size="medium" text="Become a Member" onClick={() => console.log('click')} />
-        <div style={{ color: 'white' }}>TODO</div>
-        <Button size="medium" text="See All Events ->" onClick={() => console.log('click')} />
+  return (
+    <Box sx={styles.root} >
+      <Box sx={styles.backgroundImage}><img src={background} alt="bg"/></Box>
+      <Container maxWidth="xl" sx={styles.container}>
+      <Grid container>
+        <Grid item xs={12} sm={5} md={5}>
+          <Box sx={{ textAlign: {xs: 'center', sm: 'left'}}}>
+            <Box sx={{ ...styles.title, marginTop: {xs: '8%', sm: '20%', md: '25%'}, marginLeft: {xs: '0%', sm: '0%', md: '12%'}}}>Innovate.</Box>
+            <Box sx={{...styles.title, marginLeft: {xs: '0%', sm: '0%', md: '12%'}}}>Build.</Box>
+            <Box sx={{...styles.title, marginLeft: {xs: '0%', sm: '0%', md: '12%'}}}>Connect.</Box>
+            <Box sx={{...styles.button, marginLeft: {xs: '0%', sm: '0%', md: '12%'}}}><Button size="large" text="Learn About Us" onClick={() => console.log('click')}/></Box>
+          </Box>
+        </Grid>
+          <Grid item xs={12} sm={7} md={6.5}>
+            <img src={desktop} alt="img" style={{ width: '100%', marginTop: '8%', height: 'auto'}} />
+          </Grid>
+      </Grid>
+      <Grid container spacing={0} sx={{marginTop: '17%'}}>
+        <Grid item xs={12} sm={5}>
+          <Box sx={{...styles.subtitle, marginTop: '1%', display: 'flex', justifyContent: {xs: 'center', sm: 'right'}}}>Join CSES today.</Box>
+          <Box sx={{...styles.button, marginTop: {xs: '3%', sm: '0%'}, display: 'flex', justifyContent: {xs: 'center', sm: 'right'}, marginLeft: '0%'}}><Button size="large" text="Become a Member ->" onClick={() => console.log('click')}/></Box>
+        </Grid>
+        <Grid item xs={12} sm={2} sx={{ display: {xs: 'flex', sm: "block"}, justifyContent: 'center', alignItems: 'center'}}>
+          <Box sx={{...styles.statisticContainer, width: {xs: '100%', sm: 'auto'}}}>
+            <Box sx={styles.statisticWrapper}>
+              <Box sx={styles.statisticTitle}>1000+</Box>
+              <Box sx={styles.statisticSubtitle}>Members & counting.</Box>
+            </Box>
+          </Box>
+        </Grid>
+        <Grid item xs={12} sm={2}>
+          <Box sx={styles.statisticContainer}>
+            <Box sx={styles.statisticWrapper}>
+              <Box sx={styles.statisticTitle}>n +</Box>
+              <Box sx={styles.statisticSubtitle}>Another statistic!</Box>
+            </Box>
+          </Box>
+        </Grid>
+          <Grid item xs={12} sm={2}>
+            <Box sx={styles.statisticContainer}>
+              <Box sx={styles.statisticWrapper}>
+                <Box sx={styles.statisticTitle}>1000+</Box>
+                <Box sx={styles.statisticSubtitle}>Members & counting.</Box>
+              </Box>
+            </Box>
+          </Grid>
+        </Grid>       
+        <Box sx={{ color: 'white', fontSize: 'clamp(20px, 5vw, 60px)', fontFamily: 'Chakra Petch', marginLeft: '5%', marginTop: '17%', fontWeight: 700,}}>UPCOMING EVENTS.</Box>
       </Container>
-    </div>
+    </Box>
   );
 };
 
