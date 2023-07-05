@@ -1,6 +1,6 @@
 import Event from '../models/event.js';
 import asyncHandler from 'express-async-handler';
-import { body, validationResult } from 'express-validator';
+import { body, param, validationResult } from 'express-validator';
 
 // Display list of all Events.
 export const eventList = asyncHandler(async (req, res) => {
@@ -117,9 +117,41 @@ export const eventCreate = [
 ];
 
 // Handle Event delete on DELETE.
-export const eventDelete = asyncHandler(async (req, res) => {
-  res.send('NOT IMPLEMENTED: Event delete DELETE');
-});
+export const eventDelete = [
+  // Validate and sanitize fields.
+  param('id', 'ID must not be empty.')
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage('ID must be specified.')
+    .isMongoId()
+    .withMessage('ID must be a valid ID.'),
+
+  asyncHandler(async (req, res) => {
+    // Extract the validation errors from a request.
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      // There are errors.
+      res.status(400).json({ message: 'Failed', errors: errors.array() });
+    } else {
+      // Data from param is valid.
+
+      // Query database for event with given ID
+      const event = await Event.findById(req.params.id).exec();
+
+      if (!event) {
+        // Event not found.
+        res.status(404).json({ message: 'Event not found' });
+      } else {
+        // Event found, delete it.
+        event
+          .deleteOne()
+          .then(() => res.json({ message: 'Successful' }))
+          .catch(() => res.status(500).json({ message: 'Internal server error' }));
+      }
+    }
+  }),
+];
 
 // Handle Event update on PUT.
 export const eventUpdate = asyncHandler(async (req, res) => {
