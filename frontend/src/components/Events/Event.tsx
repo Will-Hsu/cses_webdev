@@ -95,57 +95,142 @@ const EventBox = ({ targetDate, location }: EventBoxProps) => {
 
   const meetingLocation = location ? 'Virtual' : 'Place';
 
+  /**
+   * If the current the current function is just one character add a 0 beofore it.
+   * @param time includes, days, hours, min, sec.
+   * @returns Returns the modified number
+   */
+  const formatTime = (time: number): string => {
+    return time < 10 ? `0${time}` : `${time}`;
+  };
+
+  const countdownCharacters = `${formatTime(days)}:${formatTime(hours)}:${formatTime(
+    minutes,
+  )}:${formatTime(seconds)}`.split('');
+
+  /*
+
+    <div>
+        <div>{formatTime(days)}</div>:<div>{formaTime(hours)}</div>:<div>{formatTime(seconds)}</div>
+    </div>
+
+    */
+
+  {
+    /* {countdownCharacters.map((character, index) => (
+            <div
+              key={index}
+              style={{
+                backgroundColor: character === ':' ? 'transparent' : 'white',
+                padding: '10px',
+                marginLeft: character === ':' ? '0px' : '4px',
+                fontSize: '20px',
+                fontFamily: 'Chakra Petch',
+                fontWeight: '500',
+                color: character === ':' ? 'white' : 'black',
+                borderRadius: '4px',
+              }}
+            >
+              {character}
+            </div>
+          ))} */
+  }
+
+  const numStyle = { backgroundColor: 'white' };
+
   return (
     <div className="outerBox" style={styles?.outerBox}>
       <div className="innerBox" style={styles?.innerBox}>
-        <h4 style={{ 
+        <h4
+          style={{
             color: 'white',
-            fontSize: '40px', 
-            fontFamily: 'Chakra Petch',  
+            fontSize: '40px',
+            fontFamily: 'Chakra Petch',
             fontWeight: '600',
             marginTop: '30px',
             marginLeft: '30px',
-          }}>Google ML SWE Alumnus Q&A</h4>
-        <div className="countDown"
-          style={{ 
-            color: 'white',
-            fontSize: '20px', 
-            fontFamily: 'Chakra Petch',  
-            fontWeight: '500',
-            marginTop: '5px',
+          }}
+        >
+          Google ML SWE Alumnus Q&A
+        </h4>
+        <div
+          className="countDown"
+          style={{
+            marginTop: '2px',
             marginLeft: '30px',
-          }}>
-          {days > 0 && <span>{days}d </span>}
-          {hours > 0 && <span>{hours}h </span>}
-          {minutes > 0 && <span>{minutes}m </span>}
-          {seconds > 0 && <span>{seconds}s</span>}
+            display: 'flex',
+          }}
+        >
+          <div>
+            {formatTime(days)}
+            <span>
+              <br />
+              days
+            </span>
+          </div>
+          :
+          <div>
+            {formatTime(hours)}
+            <span>
+              <br />
+              hours
+            </span>
+          </div>
+          :
+          <div>
+            {formatTime(minutes)}
+            <span>
+              <br />
+              minutes
+            </span>
+          </div>
+          :
+          <div>
+            {formatTime(seconds)}
+            <span>
+              <br />
+              seconds
+            </span>
+          </div>
         </div>
         <div>
-          <p style={{ 
-            color: 'white',
-            fontSize: '20px', 
-            fontFamily: 'Chakra Petch',  
-            fontWeight: '500',
-            marginTop: '80px',
-            marginLeft: '30px',
-          }}>{cleanDate()}</p>
-          <p style={{ 
-            color: 'white',
-            fontSize: '20px', 
-            fontFamily: 'Chakra Petch',  
-            fontWeight: '500',
-            marginTop: '5px',
-            marginLeft: '30px',
-          }}>{cleanTime()}</p>
+          <p
+            style={{
+              color: 'white',
+              fontSize: '20px',
+              fontFamily: 'Chakra Petch',
+              fontWeight: '500',
+              marginTop: '50px',
+              marginLeft: '30px',
+            }}
+          >
+            {cleanDate()}
+          </p>
+          <p
+            style={{
+              color: 'white',
+              fontSize: '20px',
+              fontFamily: 'Chakra Petch',
+              fontWeight: '500',
+              marginTop: '5px',
+              marginLeft: '30px',
+            }}
+          >
+            {cleanTime()}
+          </p>
 
-          <p style={{ 
-            color: 'white',
-            fontSize: '20px', 
-            fontFamily: 'Chakra Petch',  
-            fontWeight: '500',
-            marginTop: '5px',
-            marginLeft: '30px',
-          }}>{meetingLocation}</p>
+          <p
+            style={{
+              color: 'white',
+              fontSize: '20px',
+              fontFamily: 'Chakra Petch',
+              fontWeight: '500',
+              marginTop: '5px',
+              marginLeft: '30px',
+            }}
+          >
+            {meetingLocation}
+          </p>
         </div>
       </div>
     </div>
