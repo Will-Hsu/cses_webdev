@@ -154,9 +154,75 @@ export const eventDelete = [
 ];
 
 // Handle Event update on PUT.
-export const eventUpdate = asyncHandler(async (req, res) => {
-  res.send('NOT IMPLEMENTED: Event update PUT');
-});
+export const eventUpdate = [
+  // Validate and sanitize fields.
+  param('id')
+    .trim()
+    .notEmpty()
+    .withMessage('ID must not be empty.')
+    .isLength({ min: 1 })
+    .withMessage('ID must be specified.')
+    .isMongoId()
+    .withMessage('ID must be a valid ID.'),
+
+  body().notEmpty().withMessage('Request body cannot be empty.'),
+
+  body('title').optional().trim(),
+  body('status')
+    .optional()
+    .trim()
+    .isIn(['upcoming', 'past'])
+    .withMessage('Status must be either upcoming or past.'),
+  body('start_time')
+    .optional()
+    .trim()
+    .isISO8601()
+    .toDate()
+    .withMessage('Start time must be a valid date.'),
+  body('end_time')
+    .optional()
+    .trim()
+    .isISO8601()
+    .toDate()
+    .withMessage('End time must be a valid date.'),
+  body('location').optional().trim(),
+  body('description').optional().trim(),
+  body('calendar_link')
+    .optional()
+    .trim()
+    .isURL({ require_protocol: true })
+    .withMessage('Calendar link must be a valid URL.'),
+  body('instagram_link')
+    .optional()
+    .trim()
+    .isURL({ require_protocol: true })
+    .withMessage('Instagram link must be a valid URL.'),
+
+  asyncHandler(async (req, res) => {
+    // Extract the validation errors from a request.
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      // There are errors.
+      res.status(400).json({ message: 'Failed', errors: errors.array() });
+    } else {
+      // Data from param and body is valid.
+
+      // Query database for event with given ID
+      const event = await Event.findById(req.params.id).exec();
+
+      if (!event) {
+        // Event not found.
+        res.status(404).json({ message: 'Event not found' });
+      } else {
+        // Update the record.
+        Event.updateOne({ _id: req.params.id }, req.body)
+          .then(() => res.json({ message: 'Successful' }))
+          .catch(() => res.status(500).json({ message: 'Internal server error' }));
+      }
+    }
+  }),
+];
 
 // Export default controller methods
 export default {
