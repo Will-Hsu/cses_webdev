@@ -7,7 +7,6 @@ import { homeStyles } from './styles';
 
 const Home = () => {
   const styles = homeStyles();
-
   return (
     <Box sx={styles.root} >
       <Box sx={styles.backgroundImage}><img src={background} alt="bg"/></Box>
