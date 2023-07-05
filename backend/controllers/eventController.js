@@ -83,13 +83,15 @@ export const eventCreate = [
     .isISO8601()
     .withMessage('End time must be a valid date.')
     .toDate(),
-  body('location').trim(),
-  body('description').trim(),
+  body('location').optional().trim(),
+  body('description').optional().trim(),
   body('calendar_link')
+    .optional()
     .trim()
     .isURL({ require_protocol: true })
     .withMessage('Calendar link must be a valid URL.'),
   body('instagram_link')
+    .optional()
     .trim()
     .isURL({ require_protocol: true })
     .withMessage('Instagram link must be a valid URL.'),
