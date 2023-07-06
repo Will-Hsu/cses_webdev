@@ -116,8 +116,8 @@ const EventBox = ({ targetDate, location }: EventBoxProps) => {
 
     */
 
-  {
-    /* {countdownCharacters.map((character, index) => (
+  {/*
+     {countdownCharacters.map((character, index) => (
             <div
               key={index}
               style={{
@@ -161,47 +161,46 @@ const EventBox = ({ targetDate, location }: EventBoxProps) => {
             display: 'flex',
           }}
         >
-          <div>
-            {formatTime(days)}
-            <span>
-              <br />
-              days
-            </span>
-          </div>
-          :
-          <div>
-            {formatTime(hours)}
-            <span>
-              <br />
-              hours
-            </span>
-          </div>
-          :
-          <div>
-            {formatTime(minutes)}
-            <span>
-              <br />
-              minutes
-            </span>
-          </div>
-          :
-          <div>
-            {formatTime(seconds)}
-            <span>
-              <br />
-              seconds
-            </span>
-          </div>
+          {countdownCharacters.map((character, index) => (
+            <div
+              key={index}
+              style={{
+                backgroundColor: character === ':' ? 'transparent' : 'white',
+                padding: '10px',
+                marginLeft: character === ':' ? '0px' : '4px',
+                fontSize: '20px',
+                fontFamily: 'Chakra Petch',
+                fontWeight: '500',
+                color: character === ':' ? 'white' : 'black',
+                borderRadius: '4px',
+              }}
+            >
+              {character}
+            </div>
+          ))}
+
+          
+          
         </div>
-        <div>
+        <div style={{ marginTop: '-10px' ,marginLeft: '35px',display: 'flex', flexDirection: 'row' }}>
+          <p style={{ color: 'white', fontSize: '16px', fontFamily: 'Chakra Petch', fontWeight: '600' }}>days</p>
+          <p style={{ color: 'white', fontSize: '20px', fontFamily: 'Chakra Petch', fontWeight: '500' }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+          <p style={{ color: 'white', fontSize: '16px', fontFamily: 'Chakra Petch', fontWeight: '600' }}>hours</p>
+          <p style={{ color: 'white', fontSize: '20px', fontFamily: 'Chakra Petch', fontWeight: '500' }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+          <p style={{ color: 'white', fontSize: '16px', fontFamily: 'Chakra Petch', fontWeight: '600' }}>minutes</p>
+          <p style={{ color: 'white', fontSize: '20px', fontFamily: 'Chakra Petch', fontWeight: '500' }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+          <p style={{ color: 'white', fontSize: '16px', fontFamily: 'Chakra Petch', fontWeight: '600' }}>seconds</p>
+        </div>
+        <div style={{marginTop: '30px', display: 'flex', flexDirection: 'column'}} >
           <p
             style={{
               color: 'white',
               fontSize: '20px',
               fontFamily: 'Chakra Petch',
               fontWeight: '500',
-              marginTop: '50px',
+              marginTop: '5px',
               marginLeft: '30px',
+              lineHeight: '0px',
             }}
           >
             {cleanDate()}
@@ -214,6 +213,7 @@ const EventBox = ({ targetDate, location }: EventBoxProps) => {
               fontWeight: '500',
               marginTop: '5px',
               marginLeft: '30px',
+              lineHeight: '0px',
             }}
           >
             {cleanTime()}
@@ -227,6 +227,7 @@ const EventBox = ({ targetDate, location }: EventBoxProps) => {
               fontWeight: '500',
               marginTop: '5px',
               marginLeft: '30px',
+              lineHeight: '0px',
             }}
           >
             {meetingLocation}
