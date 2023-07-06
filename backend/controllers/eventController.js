@@ -11,6 +11,7 @@ export const eventList = asyncHandler(async (req, res) => {
     // Extract attributes from each event
     const eventAttributes = events.map((event) => {
       const {
+        _id,
         title,
         status,
         start_time,
@@ -21,6 +22,7 @@ export const eventList = asyncHandler(async (req, res) => {
         instagram_link,
       } = event;
       return {
+        _id,
         title,
         status,
         start_time,

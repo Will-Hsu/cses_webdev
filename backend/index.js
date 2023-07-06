@@ -25,9 +25,6 @@ const baseApi = '/api/v1';
 // Connect to MongoDB
 connectDB();
 
-// For testing database connection
-// testDatabaseConnection();
-
 app.get('/', function (_, res) {
   res.send('CSES Web Dev Backend');
 });
