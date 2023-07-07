@@ -62,7 +62,12 @@ const NavBar = () => {
                 {text}
               </Button>
             ))}
-            <MuiButton text="Login" size="large" isLogin={true} />
+            <MuiButton
+              onClick={() => navigate('/login')}
+              text="Login"
+              size="large"
+              isLogin={true}
+            />
           </Box>
           <Box sx={{ display: { xs: 'block', md: 'none' } }}>
             <IconButton onClick={() => setIsDrawerOpen(!isDrawerOpen)} color="inherit">
