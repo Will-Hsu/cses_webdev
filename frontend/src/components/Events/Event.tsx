@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { event_style } from './styles';
+import calendarIcon from '../../images/calendarIcon.png';
 
 interface EventBoxProps {
   targetDate: Date;
@@ -116,7 +117,7 @@ const EventBox = ({ targetDate, location }: EventBoxProps) => {
 
     */
 
-  {/*
+  /*
      {countdownCharacters.map((character, index) => (
             <div
               key={index}
@@ -134,11 +135,12 @@ const EventBox = ({ targetDate, location }: EventBoxProps) => {
               {character}
             </div>
           ))} */
-  }
-
+  
+{}
   const numStyle = { backgroundColor: 'white' };
 
   return (
+    <div style={{ display: 'flex' }}>
     <div className="outerBox" style={styles?.outerBox}>
       <div className="innerBox" style={styles?.innerBox}>
         <h4
@@ -218,7 +220,9 @@ const EventBox = ({ targetDate, location }: EventBoxProps) => {
           >
             {cleanTime()}
           </p>
-
+          <a href="https://example.com">
+            <img src={calendarIcon} alt="Calendar Icon" style={{ width: '1000px', height: '100px' }} />
+          </a>
           <p
             style={{
               color: 'white',
@@ -232,9 +236,14 @@ const EventBox = ({ targetDate, location }: EventBoxProps) => {
           >
             {meetingLocation}
           </p>
+          
+
         </div>
       </div>
     </div>
+    </div>
+
+  
   );
 };
 

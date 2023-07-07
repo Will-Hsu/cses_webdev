@@ -6,8 +6,6 @@ import EventBox from '../Events/Event';
 import { event_style } from '../Events/styles';
 // Use EventBox component in your Home component
 
-
-
 const Home = () => {
   return (
     <div style={{ position: 'relative' }}>
@@ -20,9 +18,24 @@ const Home = () => {
             color: 'white',
             fontSize: '20px', 
             fontFamily: 'Chakra Petch',  
-            fontWeight: '700'
+            fontWeight: '700',
+            display: 'flex', 
+            flexDirection: 'row',
+            marginLeft: '39px',
 
           }}>
+          <EventBox 
+            targetDate={new Date('2023-08-31T00:00:00')} 
+            location={String(true)} 
+            style={event_style()}
+          />
+          <p style={{ color: 'white', fontSize: '20px', fontFamily: 'Chakra Petch', fontWeight: '500' }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+          <EventBox 
+            targetDate={new Date('2023-08-31T00:00:00')} 
+            location={String(true)} 
+            style={event_style()}
+          />
+          <p style={{ color: 'white', fontSize: '20px', fontFamily: 'Chakra Petch', fontWeight: '500' }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
           <EventBox 
             targetDate={new Date('2023-08-31T00:00:00')} 
             location={String(true)} 
@@ -31,12 +44,10 @@ const Home = () => {
         </div>
         
       </Container>
+      <div style={{ position: 'relative', top: '83px', marginLeft: '50px', right: '39px', color: 'white', fontSize: '40px', fontFamily: 'Chakra Petch', fontWeight: '700'}}>
       <Button size="medium" text="See All Events ->" onClick={() => console.log('click')}></Button>
+      </div>
     </div>
-
-    
-
-
   );
 };
 
