@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { event_style } from './styles';
 import calendarIcon from '../../images/calendarIcon.png';
-
+import instagramIcon from '../../images/instagramIcon.png';
 interface EventBoxProps {
   targetDate: Date;
   location: string;
@@ -220,9 +220,7 @@ const EventBox = ({ targetDate, location }: EventBoxProps) => {
           >
             {cleanTime()}
           </p>
-          <a href="https://example.com">
-            <img src={calendarIcon} alt="Calendar Icon" style={{ width: '1000px', height: '100px' }} />
-          </a>
+          
           <p
             style={{
               color: 'white',
@@ -236,6 +234,13 @@ const EventBox = ({ targetDate, location }: EventBoxProps) => {
           >
             {meetingLocation}
           </p>
+
+          <a href="https://google.com" style={{ marginLeft: '305px', marginTop: '-50px' }}>
+            <img src={calendarIcon} alt="Calendar Icon" style={{ width: '30px', height: '30px' }} />
+          </a>
+          <a href="https://google.com" style={{ marginLeft: '350px', marginTop: '-36px' }}>
+            <img src={instagramIcon} alt="Instagram Icon" style={{ width: '30px', height: '30px' }} />
+          </a>
           
 
         </div>

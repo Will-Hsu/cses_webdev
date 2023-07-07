@@ -44,9 +44,9 @@ const Home = () => {
         </div>
         
       </Container>
-      <div style={{ position: 'relative', top: '83px', marginLeft: '50px', right: '39px', color: 'white', fontSize: '40px', fontFamily: 'Chakra Petch', fontWeight: '700'}}>
+      
       <Button size="medium" text="See All Events ->" onClick={() => console.log('click')}></Button>
-      </div>
+      
     </div>
   );
 };
