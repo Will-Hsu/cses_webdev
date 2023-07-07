@@ -117,8 +117,6 @@ const EventBox = ({ title, targetDate, location }: EventBoxProps) => {
 
   const { days, hours, minutes, seconds }: TimeFuns = timeLeft;
 
-  const meetingLocation = location ? 'Virtual' : 'Place';
-
   /**
    * If the current the current function is just one character add a 0 beofore it.
    * @param time includes, days, hours, min, sec.
@@ -292,7 +290,7 @@ const EventBox = ({ title, targetDate, location }: EventBoxProps) => {
                 lineHeight: '0px',
               }}
             >
-              {meetingLocation}
+              {location}
             </p>
 
             <a href="https://google.com" style={{ marginLeft: '305px', marginTop: '-50px' }}>

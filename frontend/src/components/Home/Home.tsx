@@ -38,7 +38,7 @@ const Home = () => {
           <EventBox
             title={'Student Summit'}
             targetDate={new Date('2023-08-31T00:00:00')}
-            location={String(true)}
+            location={'Somewhere on campus'}
             style={event_style()}
           />
           <p
@@ -53,8 +53,8 @@ const Home = () => {
           </p>
           <EventBox
             title={'Some othe event'}
-            targetDate={new Date('2023-08-23T00:00:00')}
-            location={String(true)}
+            targetDate={new Date('2023-08-23T04:00:00')}
+            location={'Somewhere on campus'}
             style={event_style()}
           />
           <p
@@ -70,13 +70,16 @@ const Home = () => {
           <EventBox
             title={'Another event'}
             targetDate={new Date('2023-07-31T00:00:00')}
-            location={String(true)}
+            location={'Somewhere on campus'}
             style={event_style()}
           />
         </div>
+        <Button
+          size="medium"
+          text="See All Events ->"
+          onClick={() => console.log('click')}
+        ></Button>
       </Container>
-
-      <Button size="medium" text="See All Events ->" onClick={() => console.log('click')}></Button>
     </div>
   );
 };
