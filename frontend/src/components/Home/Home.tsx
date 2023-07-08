@@ -4,6 +4,7 @@ import { Container } from '@mui/material';
 import background from '../../images/home_bg.svg';
 import EventBox from '../Events/Event';
 import { event_style } from '../Events/styles';
+import EventSection from '../Events/EventSection';
 // Use EventBox component in your Home component
 
 const Home = () => {
@@ -24,6 +25,7 @@ const Home = () => {
           <h2>UPCOMING EVENTS.</h2>
         </div>
 
+        {/* <EventSection></EventSection> */}
         <div
           style={{
             color: 'white',
@@ -32,7 +34,10 @@ const Home = () => {
             fontWeight: '700',
             display: 'flex',
             flexDirection: 'row',
-            marginLeft: '39px',
+
+            marginLeft: '10rem',
+            margin: 'auto',
+            width: '50%',
           }}
         >
           <EventBox
