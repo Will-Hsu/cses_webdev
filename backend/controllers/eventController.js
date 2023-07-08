@@ -13,7 +13,6 @@ export const eventList = asyncHandler(async (req, res) => {
       const {
         _id,
         title,
-        status,
         start_time,
         end_time,
         location,
@@ -24,7 +23,6 @@ export const eventList = asyncHandler(async (req, res) => {
       return {
         _id,
         title,
-        status,
         start_time,
         end_time,
         location,
@@ -65,12 +63,6 @@ export const eventCreate = [
     .trim()
     .isLength({ min: 1 })
     .withMessage('Title must be specified.'),
-  body('status', 'Status must not be empty.')
-    .trim()
-    .isLength({ min: 1 })
-    .withMessage('Status must be specified.')
-    .isIn(['upcoming', 'past'])
-    .withMessage('Status must be either upcoming or past.'),
   body('start_time', 'Start time must not be empty.')
     .trim()
     .isLength({ min: 1 })
@@ -85,11 +77,12 @@ export const eventCreate = [
     .isISO8601()
     .withMessage('End time must be a valid date.')
     .toDate(),
-  body('location').optional().trim(),
+  body('location').trim().isLength({ min: 1 }).withMessage('Location must be specified.'),
   body('description').optional().trim(),
   body('calendar_link')
-    .optional()
     .trim()
+    .isLength({ min: 1 })
+    .withMessage('Calendar link must be specified.')
     .isURL({ require_protocol: true })
     .withMessage('Calendar link must be a valid URL.'),
   body('instagram_link')
@@ -163,8 +156,6 @@ export const eventUpdate = [
   param('id')
     .trim()
     .notEmpty()
-    .withMessage('ID must not be empty.')
-    .isLength({ min: 1 })
     .withMessage('ID must be specified.')
     .isMongoId()
     .withMessage('ID must be a valid ID.'),
@@ -172,11 +163,6 @@ export const eventUpdate = [
   body().notEmpty().withMessage('Request body cannot be empty.'),
 
   body('title').optional().trim(),
-  body('status')
-    .optional()
-    .trim()
-    .isIn(['upcoming', 'past'])
-    .withMessage('Status must be either upcoming or past.'),
   body('start_time')
     .optional()
     .trim()

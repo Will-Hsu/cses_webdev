@@ -2,12 +2,11 @@ import { Schema, model } from 'mongoose';
 
 const eventSchema = new Schema({
   title: { type: String, required: true },
-  status: { type: String, required: true, enum: ['upcoming', 'past'], default: 'upcoming' },
   start_time: { type: Date, required: true },
   end_time: { type: Date, required: true },
-  location: String,
+  location: { type: String, required: true },
   description: String,
-  calendar_link: String,
+  calendar_link: { type: String, required: true },
   instagram_link: String,
 });
 
