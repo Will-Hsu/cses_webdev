@@ -2,10 +2,10 @@ import React from 'react';
 import { Container } from '@mui/material';
 import bgTop from '../../images/shape.svg';
 import bgBtm from '../../images/shape.svg';
-import { eventsStyles } from './styles';
+import { event_style } from './styles';
 
 const Events = () => {
-  const styles = eventsStyles();
+  const styles = event_style();
   return (
     <div style={{ position: 'relative', overflow: 'hidden' }}>
       <img src={bgTop} alt="bg1" style={styles.bg1} />

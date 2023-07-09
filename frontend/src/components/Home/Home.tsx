@@ -2,6 +2,10 @@ import React from 'react';
 import Button from '../Button/Button';
 import { Container, Box, Grid } from '@mui/material';
 import background from '../../images/home_bg.svg';
+import EventBox from '../Events/Event';
+import { event_style } from '../Events/styles';
+import EventSection from '../Events/EventSection';
+// Use EventBox component in your Home component
 import desktop from './Images/desktop.png';
 import { homeStyles } from './styles';
 
@@ -107,19 +111,76 @@ const Home = () => {
               </Box>
             </Grid>
           </Grid>
-          <Box
-            sx={{
-              color: 'white',
-              fontSize: 'clamp(25px, 5vw, 60px)',
-              fontFamily: 'Chakra Petch',
-              marginLeft: { sx: '5%', sm: '2%', md: '5%' },
-              marginTop: '17%',
-              fontWeight: 700,
-              textAlign: { xs: 'center', sm: 'left', md: 'left' },
-            }}
-          >
-            UPCOMING EVENTS.
-          </Box>
+          <Container maxWidth="xl">
+            <div
+              style={{
+                color: 'white',
+                fontSize: '40px',
+                fontFamily: 'Chakra Petch',
+                marginLeft: '39px',
+                marginTop: '117px',
+                fontWeight: '700',
+              }}
+            >
+              <h2>UPCOMING EVENTS.</h2>
+            </div>
+
+            <div
+              style={{
+                color: 'white',
+                fontSize: '20px',
+                fontFamily: 'Chakra Petch',
+                fontWeight: '700',
+                display: 'flex',
+                flexDirection: 'row',
+                marginLeft: '39px',
+              }}
+            >
+              <EventBox
+                title={'Student Summit'}
+                targetDate={new Date('2023-08-31T00:00:00')}
+                location={'Somewhere on campus'}
+                style={event_style()}
+              />
+              <p
+                style={{
+                  color: 'white',
+                  fontSize: '20px',
+                  fontFamily: 'Chakra Petch',
+                  fontWeight: '500',
+                }}
+              >
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </p>
+              <EventBox
+                title={'Some othe event'}
+                targetDate={new Date('2023-08-23T04:00:00')}
+                location={'Somewhere on campus'}
+                style={event_style()}
+              />
+              <p
+                style={{
+                  color: 'white',
+                  fontSize: '20px',
+                  fontFamily: 'Chakra Petch',
+                  fontWeight: '500',
+                }}
+              >
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </p>
+              <EventBox
+                title={'Another event'}
+                targetDate={new Date('2023-07-31T00:00:00')}
+                location={'Somewhere on campus'}
+                style={event_style()}
+              />
+            </div>
+            <Button
+              size="medium"
+              text="See All Events ->"
+              onClick={() => console.log('click')}
+            ></Button>
+          </Container>
         </Container>
       </Box>
     </div>
