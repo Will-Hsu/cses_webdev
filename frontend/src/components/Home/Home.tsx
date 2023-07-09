@@ -4,6 +4,7 @@ import { Container, Box, Grid } from '@mui/material';
 import background from '../../images/home_bg.svg';
 import EventBox from '../Events/Event';
 import { event_style } from '../Events/styles';
+import EventSection from '../Events/EventSection';
 // Use EventBox component in your Home component
 import desktop from './Images/desktop.png';
 import { homeStyles } from './styles';
@@ -12,8 +13,6 @@ const Home = () => {
   const styles = homeStyles();
   return (
     <div style={{ position: 'relative' }}>
-      <img src={background} alt="bg" style={{ width: '100%' }} />
-
       <Box sx={styles.root}>
         <Box sx={styles.backgroundImage}>
           <img src={background} alt="bg" />

@@ -293,14 +293,20 @@ const EventBox = ({ title, targetDate, location }: EventBoxProps) => {
               {location}
             </p>
 
-            <a href="https://google.com" style={{ marginLeft: '305px', marginTop: '-50px' }}>
+            <a
+              href="https://calendar.google.com/calendar/"
+              style={{ marginLeft: '305px', marginTop: '-50px' }}
+            >
               <img
                 src={calendarIcon}
                 alt="Calendar Icon"
                 style={{ width: '30px', height: '30px' }}
               />
             </a>
-            <a href="https://google.com" style={{ marginLeft: '350px', marginTop: '-36px' }}>
+            <a
+              href="https://www.instagram.com/cses_ucsd/"
+              style={{ marginLeft: '350px', marginTop: '-36px' }}
+            >
               <img
                 src={instagramIcon}
                 alt="Instagram Icon"
