@@ -80,5 +80,6 @@ export const homeStyles = () => ({
     fontWeight: 500,
     fontFamily: 'Chakra Petch',
     marginLeft: '11%',
+    marginTop: '5%',
   },
 });
