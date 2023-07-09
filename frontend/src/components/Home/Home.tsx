@@ -1,11 +1,9 @@
 import React from 'react';
 import Button from '../Button/Button';
 import { Container, Box, Grid } from '@mui/material';
-import background from '../../images/home_bg.svg';
+import background from '../../images/shape.svg';
 import EventBox from '../Events/Event';
 import { event_style } from '../Events/styles';
-import EventSection from '../Events/EventSection';
-// Use EventBox component in your Home component
 import desktop from './Images/desktop.png';
 import { homeStyles } from './styles';
 
@@ -15,7 +13,7 @@ const Home = () => {
     <div style={{ position: 'relative' }}>
       <Box sx={styles.root}>
         <Box sx={styles.backgroundImage}>
-          <img src={background} alt="bg" />
+          <img src={background} alt="bg" style={styles.bg} />
         </Box>
         <Container maxWidth="xl" sx={styles.container}>
           <Grid container>
@@ -111,7 +109,7 @@ const Home = () => {
               </Box>
             </Grid>
           </Grid>
-          <Container maxWidth="xl">
+          <div>
             <div
               style={{
                 color: 'white',
@@ -180,7 +178,7 @@ const Home = () => {
               text="See All Events ->"
               onClick={() => console.log('click')}
             ></Button>
-          </Container>
+          </div>
         </Container>
       </Box>
     </div>
