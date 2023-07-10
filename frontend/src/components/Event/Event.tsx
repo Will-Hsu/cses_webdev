@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { event_style } from './styles';
-import calendarIcon from '../../images/calendarIcon.png';
-import instagramIcon from '../../images/instagramIcon.png';
+import calendarIcon from '../../images/calendarIcon.svg';
+import instagramIcon from '../../images/instagramIcon.svg';
 
 interface EventBoxProps {
   title: string;

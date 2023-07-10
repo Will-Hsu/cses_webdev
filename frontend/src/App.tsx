@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Container } from '@mui/material';
 import Home from './components/Home/Home';
 import NavBar from './components/NavBar/NavBar';
-import EventBox from './components/Events/Event';
 import Footer from './components/Footer/Footer';
 import About from './components/About/About';
 import Events from './components/Events/Events';

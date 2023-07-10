@@ -1,6 +1,6 @@
 import React from 'react';
 import EventBox from './Event';
-import { event_style } from '../Events/styles';
+import { event_style } from './styles';
 
 const EventSection = () => {
   return (

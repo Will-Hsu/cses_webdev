@@ -2,9 +2,8 @@ import React from 'react';
 import Button from '../Button/Button';
 import { Container, Box, Grid } from '@mui/material';
 import background from '../../images/shape.svg';
-import EventBox from '../Events/Event';
-import { event_style } from '../Events/styles';
-import desktop from './Images/desktop.png';
+import EventBox from '../Event/Event';
+import desktop from '../../images/desktop.png';
 import { homeStyles } from './styles';
 
 const Home = () => {
@@ -138,7 +137,6 @@ const Home = () => {
                 title={'Student Summit'}
                 targetDate={new Date('2023-08-31T00:00:00')}
                 location={'Somewhere on campus'}
-                style={event_style()}
               />
               <p
                 style={{
@@ -154,7 +152,6 @@ const Home = () => {
                 title={'Some othe event'}
                 targetDate={new Date('2023-08-23T04:00:00')}
                 location={'Somewhere on campus'}
-                style={event_style()}
               />
               <p
                 style={{
@@ -170,7 +167,6 @@ const Home = () => {
                 title={'Another event'}
                 targetDate={new Date('2023-07-31T00:00:00')}
                 location={'Somewhere on campus'}
-                style={event_style()}
               />
             </div>
             <Button
