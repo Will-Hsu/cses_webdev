@@ -14,7 +14,7 @@ const About = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
+  //const endIndex = startIndex + itemsPerPage;
 
   const handlePreviousChange = () => {
     setCurrentPage((prevPage) => prevPage - 1);
@@ -199,7 +199,7 @@ const About = () => {
             </div>
             <h3 style={{ color: 'white', textAlign: 'center' }}>Goldie Chu</h3>
             <h5 style={{ color: 'white', textAlign: 'center' }}>Design Team, 2023</h5>
-          </Grid>
+          </Grid>   
         </Grid>
       </Container>
     </div>
