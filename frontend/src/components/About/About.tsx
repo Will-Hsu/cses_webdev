@@ -65,7 +65,7 @@ const About = () => {
           <Box
             sx={{
               ...styles.mainTitleMiddle,
-              display: 'flex',
+              textAlign: 'center',
             }}>
             WHAT DO WE DO?
           </Box>
@@ -177,7 +177,15 @@ const About = () => {
 
         
 
-        <h1 style={{ color: 'white', textAlign: 'center', marginTop: '8%' }}>MEET THE TEAM!</h1>
+        <Grid item xs={12} sm={4.5} md={5}>
+          <Box
+            sx={{
+              ...styles.mainTitleBottom,
+              textAlign: 'center'
+            }}>
+            MEET THE TEAM!
+          </Box>
+        </Grid>
         <Grid container sx={{ marginTop: '8%', display: 'flex', justifyContent: 'center' }}>
           <Grid item md={1.5}>
             <Button size="large" text="Category 1" onClick={() => console.log('click')} />
