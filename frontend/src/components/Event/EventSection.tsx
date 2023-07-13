@@ -1,11 +1,16 @@
 import React from 'react';
 import EventBox from './Event';
 import { event_style } from './styles';
+import Button from '../Button/Button';
 
 const EventSection = () => {
   return (
     <div className="container" style={event_style().container}>
       <div className="centered_element" style={event_style().centered_element}>
+        <div>
+          <Button text="Hello" />
+          <Button text="eoubowf" />
+        </div>
         <EventBox
           title={'Student Summit'}
           targetDate={new Date('2023-08-31T00:00:00')}
