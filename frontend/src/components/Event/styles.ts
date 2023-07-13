@@ -39,5 +39,7 @@ export const event_style = () => ({
   buttons: {
     position: 'absolute',
     zIndex: 10,
-  },
+    },
+  
+  
 });
