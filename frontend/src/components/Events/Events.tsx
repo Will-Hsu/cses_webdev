@@ -31,7 +31,7 @@ const Events = () => {
           <Button size="medium" text="This Month" onClick={() => console.log('click')}></Button>
         </div>
         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-        
+
         <div
           style={{
             color: 'white',
@@ -101,6 +101,15 @@ const Events = () => {
         >
           <h2> PAST EVENTS</h2>
         </div>
+
+        <div style={{ display: 'flex', justifyContent: 'flex-start', marginLeft: '30px', marginTop: '-20px' }}>
+        <Button
+          size="medium"
+          text="2023"
+          onClick={() => console.log('click')}
+        ></Button>
+        </div>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 
         <div
           style={{
