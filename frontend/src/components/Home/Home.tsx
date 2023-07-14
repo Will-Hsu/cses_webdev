@@ -12,7 +12,7 @@ const Home = () => {
     <div style={{ position: 'relative' }}>
       <Box sx={styles.root}>
         <Box sx={styles.backgroundImage}>
-          <img src={background} alt="bg" style={styles.bg} />
+          <img src={background} alt="bg" style={{ ...styles.bg, position: 'absolute' }} />
         </Box>
         <Container maxWidth="xl" sx={styles.container}>
           <Grid container>
