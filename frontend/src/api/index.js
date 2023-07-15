@@ -14,3 +14,7 @@ export const createSubscriberAPI = (newEmail) => {
       });
   });
 };
+
+export const createUserAPI = (newUser) => {
+  // TODO: implement createUserAPI
+};
