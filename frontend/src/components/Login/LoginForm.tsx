@@ -1,4 +1,5 @@
-import { Box, Button, Divider, Typography } from '@mui/material';
+import { Box, Divider, Typography } from '@mui/material';
+import GoogleButton from 'react-google-button'
 
 interface LoginFormProps {
     login: () => void;
@@ -17,7 +18,15 @@ const LoginForm = ({ login }: LoginFormProps) => {
         borderRadius: '10px',
       }}
     >
-      <Typography variant="h4" sx={{ marginLeft: '5%', marginTop: '10%', marginBottom: '5%' }}>
+      <Typography 
+        variant="h4" 
+        sx={{ display: 'flex', 
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: '10%',
+        marginBottom: '5%' 
+        }}
+      >
         Login
       </Typography>
       <Divider variant="middle" />
@@ -29,9 +38,7 @@ const LoginForm = ({ login }: LoginFormProps) => {
           alignItems: 'center',
         }}
       >
-        <Button variant="contained" size="large" onClick={() => login()}>
-          Sign in with Google
-        </Button>
+        <GoogleButton onClick={() => login()}/>
       </Box>
     </Box>
   );
