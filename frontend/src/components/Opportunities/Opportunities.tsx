@@ -20,24 +20,28 @@ const Opportunities = () => {
               For <span style={{ fontStyle: 'italic' }}>members</span>.
             </Typography>
             <Typography sx={styles.test}>
+              <br />
               Our LinkedIn network has opportunities for members from companies, alumni, and
               professors in our network. This is an opportunity for only members. To join the
               LinkedIn network, please email{' '}
               <Link href="mailto:cses@ucsd.edu" color="inherit">
                 cses@ucsd.edu
               </Link>{' '}
-              with your UCSD email. To become a member, please press on the membership tab on this
-              website and participate in our events.
+              with your UCSD email. <br />
+              <br />
+              To become a member, please press on the membership tab on this website and participate
+              in our events.
             </Typography>
           </Grid>
-          <Grid item sx={{ width: '40%', margin: '3% 5% 0 0%' }}>
+          <Grid item sx={{ width: '40%', margin: '5% 5% 0 0%' }}>
             <div style={{ width: '400px', height: '450px', backgroundColor: 'grey' }}></div>
           </Grid>
-          <Grid item sx={{ width: '55%', marginTop: '3%' }}>
+          <Grid item sx={{ width: '55%', marginTop: '5%' }}>
             <Typography sx={styles.subtitle}>
               For <span style={{ fontStyle: 'italic' }}>sponsors</span>.
             </Typography>
-            <Typography sx={{ ...styles.test, marginBottom: '10px' }}>
+            <Typography sx={{ ...styles.test, marginBottom: '15px' }}>
+              <br />
               We have various sponsor packages that include participating in our CSE Society career
               fair, individual recruiting events, and promotion of your company. To inquire about
               sponsoring the CSE Society, please contact{' '}
