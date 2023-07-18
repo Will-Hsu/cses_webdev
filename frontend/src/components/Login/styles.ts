@@ -2,9 +2,8 @@ export const loginStyles = () => ({
   loginForm: {
     width: 300,
     height: 250,
-    padding: '2%',
-    marginTop: '20%',
-    marginBottom: '20%',
+    padding: '20px',
+    marginY: '150px',
     backgroundColor: 'white',
     borderRadius: '10px',
   },
@@ -12,9 +11,8 @@ export const loginStyles = () => ({
   signupForm: {
     width: 300,
     height: 400,
-    padding: '2%',
-    marginTop: '20%',
-    marginBottom: '20%',
+    padding: '20px',
+    marginY: '150px',
     backgroundColor: 'white',
     borderRadius: '10px',
   },
