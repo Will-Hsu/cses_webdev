@@ -42,12 +42,18 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
       errors.name = true;
       hasErrors = true;
     }
+    // TODO: add more validation - inappropriate names?
 
     // TODO: add more validation
     if (formData.major.trim() === '') {
       errors.major = true;
       hasErrors = true;
+    } else if (!/^[A-Za-z\s-]+$/.test(formData.major)) {
+      errors.major = true;
+      hasErrors = true;
     }
+    // Additional possibilities: whitelist of majors, min length, max length
+    // TODO: Unique error messages
 
     // TODO: add more validation
     if (
@@ -58,12 +64,20 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
       errors.expectedGraduateYear = true;
       hasErrors = true;
     }
+    // Additional possibilities: ensure input is numeric
+    // TODO: Unique error messages
 
     if (hasErrors) {
       setShowError(true);
       setErrors(errors);
     } else {
-      // TODO: send data to backend
+      createUserAPI(formData)
+        .then(() => {
+          navigate('/membership');
+        })
+        .catch((error) => {
+          console.error(error)
+        });
     }
   };
 
@@ -128,7 +142,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
         sx={styles.inputField}
         error={showError && errors.expectedGraduateYear}
       >
-        <InputLabel htmlFor="expected-graduate-year">Expected Graduate Year</InputLabel>
+        <InputLabel htmlFor="expected-graduate-year">Expected Graduation Year</InputLabel>
         <Input
           type="number"
           id="expected-graduate-year"
@@ -137,7 +151,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
           onChange={onInputChange}
         />
         <FormHelperText id="expected-graduate-year-error-text">
-          Please enter your expected gradudate year
+          Please enter your expected gradution year
         </FormHelperText>
       </FormControl>
       <Box sx={{ textAlign: 'center' }}>

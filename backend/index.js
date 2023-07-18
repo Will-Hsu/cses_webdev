@@ -9,6 +9,7 @@ import connectDB from './database/connect-db.js';
 // import routes
 import eventRoutes from './routes/event.js';
 import subscriptionRoutes from './routes/emailSubscription.js';
+import userRoutes from './routes/user.js';
 
 // initialize the application
 const app = express();
@@ -32,6 +33,7 @@ app.get('/', function (_, res) {
 
 app.use(`${baseApi}`, eventRoutes);
 app.use(`${baseApi}/subscribers`, subscriptionRoutes);
+app.use(`${baseApi}/users`, userRoutes);
 
 var server = app.listen(PORT, '127.0.0.1', function () {
   var port = server.address().port;

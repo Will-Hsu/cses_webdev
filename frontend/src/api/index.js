@@ -16,5 +16,13 @@ export const createSubscriberAPI = (newEmail) => {
 };
 
 export const createUserAPI = (newUser) => {
-  // TODO: implement createUserAPI
+  return new Promise((resolve, reject) => {
+    API.post('/users/create', newUser)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        resolve(error);
+      });
+  });
 };
