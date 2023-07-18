@@ -8,6 +8,7 @@ import Button from '../Button/Button';
 
 const Events = () => {
   const styles = event_style();
+
   return (
     <div style={{ position: 'relative', overflow: 'hidden' }}>
       <img src={bgTop} alt="bg1" style={styles.bg1} />
@@ -26,7 +27,14 @@ const Events = () => {
           <h2>EVENTS</h2>
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'flex-start', marginLeft: '38px', marginTop: '-20px' }}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'flex-start',
+            marginLeft: '38px',
+            marginTop: '-20px',
+          }}
+        >
           <Button size="medium" text="This Week" onClick={() => console.log('click')}></Button>
           <Button size="medium" text="This Month" onClick={() => console.log('click')}></Button>
         </div>
@@ -80,12 +88,19 @@ const Events = () => {
           />
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'flex-start', marginLeft: '30px', marginTop: '20px' }}>
-        <Button
-          size="medium"
-          text="See All Events ->"
-          onClick={() => console.log('click')}
-        ></Button>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'flex-start',
+            marginLeft: '30px',
+            marginTop: '20px',
+          }}
+        >
+          <Button
+            size="medium"
+            text="See All Events ->"
+            onClick={() => console.log('click')}
+          ></Button>
         </div>
 
         {/* Past Event Section */}
@@ -102,12 +117,15 @@ const Events = () => {
           <h2> PAST EVENTS</h2>
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'flex-start', marginLeft: '30px', marginTop: '-20px' }}>
-        <Button
-          size="medium"
-          text="2023"
-          onClick={() => console.log('click')}
-        ></Button>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'flex-start',
+            marginLeft: '30px',
+            marginTop: '-20px',
+          }}
+        >
+          <Button size="medium" text="2023" onClick={() => console.log('click')}></Button>
         </div>
         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 

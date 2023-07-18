@@ -24,6 +24,14 @@ interface EventBoxStyles {
  */
 const EventBox = ({ title, targetDate, location }: EventBoxProps) => {
   const styles = event_style();
+  const mediaQuery = window.matchMedia('(max-width: 1000px)');
+
+  if (mediaQuery.matches) {
+    styles.outerBox.width = '300px';
+    styles.outerBox.height = '312px';
+    styles.innerBox.width = '288px';
+    styles.innerBox.height = '296px';
+  }
 
   /**
    * Calculates the time in days, hours, mins, and secs by subtracting the target date, minus the curent date.
