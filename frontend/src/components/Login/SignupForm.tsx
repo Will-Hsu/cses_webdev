@@ -71,6 +71,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
       setShowError(true);
       setErrors(errors);
     } else {
+      setShowError(false);
       createUserAPI(formData)
         .then(() => {
           navigate('/membership');
@@ -84,15 +85,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
   return (
     <Box
       component="form"
-      sx={{
-        width: 300,
-        height: 400,
-        padding: '2%',
-        marginTop: '20%',
-        marginBottom: '20%',
-        backgroundColor: 'white',
-        borderRadius: '10px',
-      }}
+      sx={styles.signupForm}
       noValidate
       autoComplete="off"
       onSubmit={onFormSubmit}

@@ -1,22 +1,17 @@
 import { Box, Divider, Typography } from '@mui/material';
 import GoogleButton from 'react-google-button'
+import { loginStyles } from './styles';
 
 interface LoginFormProps {
     login: () => void;
 }
 
 const LoginForm = ({ login }: LoginFormProps) => {
+  const styles = loginStyles();
+
   return (
     <Box
-      sx={{
-        width: 300,
-        height: 250,
-        padding: '2%',
-        marginTop: '20%',
-        marginBottom: '20%',
-        backgroundColor: 'white',
-        borderRadius: '10px',
-      }}
+      sx={styles.loginForm}
     >
       <Typography 
         variant="h4" 
@@ -38,7 +33,7 @@ const LoginForm = ({ login }: LoginFormProps) => {
           alignItems: 'center',
         }}
       >
-        <GoogleButton onClick={() => login()}/>
+        <GoogleButton onClick={login}/>
       </Box>
     </Box>
   );
