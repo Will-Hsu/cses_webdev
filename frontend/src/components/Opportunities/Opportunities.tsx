@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Typography, Grid, Link, Box } from '@mui/material';
 import bg from '../../images/shape2.svg';
+import Button from '../Button/Button';
 import { opportunitiesStyles } from './styles';
 
 const Opportunities = () => {
@@ -36,7 +37,7 @@ const Opportunities = () => {
             <Typography sx={styles.subtitle}>
               For <span style={{ fontStyle: 'italic' }}>sponsors</span>.
             </Typography>
-            <Typography sx={styles.test}>
+            <Typography sx={{ ...styles.test, marginBottom: '10px' }}>
               We have various sponsor packages that include participating in our CSE Society career
               fair, individual recruiting events, and promotion of your company. To inquire about
               sponsoring the CSE Society, please contact{' '}
@@ -45,6 +46,11 @@ const Opportunities = () => {
               </Link>
               .
             </Typography>
+            <Button
+              size="medium"
+              text="See Opportunities ->"
+              onClick={() => console.log('click')}
+            ></Button>
           </Grid>
         </Grid>
         <Typography align="center" sx={{ ...styles.subtitle, margin: '6% 0% 4% 0%' }}>
