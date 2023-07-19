@@ -3,6 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { FormControl, Box, Input, InputLabel, Button, FormHelperText } from '@mui/material';
 import { createUserAPI } from '../../api';
 import { loginStyles } from './styles';
+import { Profanity, ProfanityOptions } from '@2toad/profanity';
+
+// Set up profanity checker
+const options = new ProfanityOptions();
+options.wholeWord = false;
+const profanity = new Profanity(options);
 
 interface SignupFormProps {
   name: string;
@@ -13,12 +19,14 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
   const styles = loginStyles();
   const navigate = useNavigate();
   const [showError, setShowError] = useState(false);
-  const [errors, setErrors] = useState({
-    name: false,
-    email: false,
-    major: false,
-    expectedGraduateYear: false,
-  });
+
+  const [nameEmptyError, setNameEmptyError] = useState(false);
+  const [nameLengthError, setNameLengthError] = useState(false);
+  const [nameProfanityError, setNameProfanityError] = useState(false);
+  const [majorEmptyError, setMajorEmptyError] = useState(false);
+  const [majorBadCharError, setMajorBadCharError] = useState(false);
+  const [gradYearBadError, setGradYearBadError] = useState(false);
+
   const [formData, setFormData] = useState({
     name: name,
     email: email,
@@ -34,42 +42,50 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
   const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const errors = { name: false, email: false, major: false, expectedGraduateYear: false };
+    // Reset error states
+    setNameEmptyError(false);
+    setNameLengthError(false);
+    setNameProfanityError(false);
+    setMajorEmptyError(false);
+    setMajorBadCharError(false);
+    setGradYearBadError(false);
+
     let hasErrors = false;
 
     // Validate name
     if (formData.name.trim() === '') {
-      errors.name = true;
+      setNameEmptyError(true);
+      hasErrors = true;
+    } else if (formData.name.length < 5 || formData.name.length > 20) {
+      setNameLengthError(true);
       hasErrors = true;
     }
-    // TODO: add more validation - inappropriate names?
+    if (profanity.exists(formData.name)) {
+      setNameProfanityError(true);
+      hasErrors = true;
+    }
 
-    // TODO: add more validation
+    // Validate major
     if (formData.major.trim() === '') {
-      errors.major = true;
+      setMajorEmptyError(true);
       hasErrors = true;
     } else if (!/^[A-Za-z\s-]+$/.test(formData.major)) {
-      errors.major = true;
+      setMajorBadCharError(true);
       hasErrors = true;
     }
-    // Additional possibilities: whitelist of majors, min length, max length
-    // TODO: Unique error messages
 
-    // TODO: add more validation
+    // Validate graduation year
     if (
       formData.expectedGraduateYear === -1 ||
       formData.expectedGraduateYear < 2021 ||
       formData.expectedGraduateYear > 2028
     ) {
-      errors.expectedGraduateYear = true;
+      setGradYearBadError(true);
       hasErrors = true;
     }
-    // Additional possibilities: ensure input is numeric
-    // TODO: Unique error messages
 
     if (hasErrors) {
       setShowError(true);
-      setErrors(errors);
     } else {
       createUserAPI(formData)
         .then(() => {
@@ -102,7 +118,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
         required
         variant="standard"
         sx={styles.inputField}
-        error={showError && errors.name}
+        error={showError && (nameEmptyError || nameLengthError || nameProfanityError)}
       >
         <InputLabel htmlFor="name">Name</InputLabel>
         <Input
@@ -112,7 +128,30 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
           defaultValue={formData.name}
           onChange={onInputChange}
         />
-        <FormHelperText id="major-error-text">Please enter your display name</FormHelperText>
+        {!showError && (
+          <FormHelperText id='name-error-text'>
+            Please enter your display name
+          </FormHelperText>
+        )}
+        {showError && (
+          <>
+            {nameEmptyError && (
+              <FormHelperText id="name-empty-error-text">
+                Please enter a display name.
+              </FormHelperText>
+            )}
+            {nameLengthError && (
+              <FormHelperText id="name-length-error-text">
+                Name should be between 5 and 20 characters.
+              </FormHelperText>
+            )}
+            {nameProfanityError && (
+              <FormHelperText id="name-profanity-error-text">
+                Please choose a different name without profanity.
+              </FormHelperText>
+            )}
+          </>
+        )}
       </FormControl>
       <FormControl fullWidth disabled variant="standard" sx={styles.inputField}>
         <InputLabel htmlFor="email">Email address</InputLabel>
@@ -129,18 +168,36 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
         required
         variant="standard"
         sx={styles.inputField}
-        error={showError && errors.major}
+        error={showError && (majorEmptyError || majorBadCharError)}
       >
         <InputLabel htmlFor="major">Major</InputLabel>
         <Input id="major" name="major" aria-describedby="my-helper-text" onChange={onInputChange} />
-        <FormHelperText id="major-error-text">Please enter your major</FormHelperText>
+        {!showError && (
+          <FormHelperText id='major-error-text'>
+            Please enter your major
+          </FormHelperText>
+        )}
+        {showError && (
+          <>
+            {majorEmptyError && (
+              <FormHelperText id="major-empty-error-text">
+                Please enter a major.
+              </FormHelperText>
+            )}
+            {majorBadCharError && (
+              <FormHelperText id="major-length-error-text">
+                Major can only contain alphabetic characters, spaces, and '-'.
+              </FormHelperText>
+            )}
+          </>
+        )}
       </FormControl>
       <FormControl
         fullWidth
         required
         variant="standard"
         sx={styles.inputField}
-        error={showError && errors.expectedGraduateYear}
+        error={showError && (gradYearBadError)}
       >
         <InputLabel htmlFor="expected-graduate-year">Expected Graduation Year</InputLabel>
         <Input
@@ -150,9 +207,20 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
           aria-describedby="my-helper-text"
           onChange={onInputChange}
         />
-        <FormHelperText id="expected-graduate-year-error-text">
-          Please enter your expected gradution year
-        </FormHelperText>
+        {!showError && (
+          <FormHelperText id='grad-year-error-text'>
+            Please enter your expected graduation year
+          </FormHelperText>
+        )}
+        {showError && (
+          <>
+            {gradYearBadError && (
+              <FormHelperText id="grad-year-bad-error-text">
+                Please enter a valid graduation year.
+              </FormHelperText>
+            )}
+          </>
+        )}
       </FormControl>
       <Box sx={{ textAlign: 'center' }}>
         <Button variant="contained" type="submit" sx={styles.inputField}>

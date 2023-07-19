@@ -22,7 +22,10 @@ export const createUserAPI = (newUser) => {
         resolve(response.data);
       })
       .catch((error) => {
-        resolve(error);
+        if (error.response.status === 409) {
+          console.log('User already exists with this email')
+        }
+        reject(error);
       });
   });
 };
