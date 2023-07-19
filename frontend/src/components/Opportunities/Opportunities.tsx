@@ -1,22 +1,25 @@
 import React from 'react';
-import { Container, Typography, Grid, Link, Box } from '@mui/material';
+import { Container, Typography, Grid, Link, Box, useTheme } from '@mui/material';
 import bg from '../../images/shape2.svg';
 import Button from '../Button/Button';
 import sponsor from '../../images/cseLogo.gif';
 import { opportunitiesStyles } from './styles';
 
 const Opportunities = () => {
-  const styles = opportunitiesStyles();
+  const theme = useTheme();
+  const styles = opportunitiesStyles(theme);
   return (
-    <div style={{ position: 'relative', overflow: 'hidden' }}>
-      <img src={bg} alt="bg1" style={styles.bg} />
+    <div>
+      <Box>
+        <img src={bg} alt="bg" style={{ ...styles.bg, position: 'absolute' }} />
+      </Box>
       <Container maxWidth="xl" sx={styles.body}>
         <Typography sx={styles.title}>OPPORTUNITIES</Typography>
-        <Grid container spacing={2}>
-          <Grid item sx={{ width: '40%', margin: '3% 5% 0 0%' }}>
+        <Grid container spacing={2} sx={{ justifyContent: 'center', alignItems: 'center' }}>
+          <Grid item sx={{ margin: '3% 10% 0 0%' }}>
             <div style={{ width: '400px', height: '450px', backgroundColor: 'grey' }}></div>
           </Grid>
-          <Grid item sx={{ width: '55%', marginTop: '3%' }}>
+          <Grid item sx={{ width: '550px', marginTop: '3%' }}>
             <Typography sx={styles.subtitle}>
               For <span style={{ fontStyle: 'italic' }}>members</span>.
             </Typography>
@@ -34,10 +37,10 @@ const Opportunities = () => {
               in our events.
             </Typography>
           </Grid>
-          <Grid item sx={{ width: '40%', margin: '5% 5% 0 0%' }}>
+          <Grid item sx={{ margin: '5% 10% 0 0%' }}>
             <div style={{ width: '400px', height: '450px', backgroundColor: 'grey' }}></div>
           </Grid>
-          <Grid item sx={{ width: '55%', marginTop: '5%' }}>
+          <Grid item sx={{ width: '550px' }}>
             <Typography sx={styles.subtitle}>
               For <span style={{ fontStyle: 'italic' }}>sponsors</span>.
             </Typography>
@@ -58,7 +61,7 @@ const Opportunities = () => {
             ></Button>
           </Grid>
         </Grid>
-        <Typography align="center" sx={{ ...styles.subtitle, margin: '6% 0% 4% 0%' }}>
+        <Typography align="center" sx={{ ...styles.subtitle, margin: '60px 0% 50px 0%' }}>
           Thank you to our current sponsors!
         </Typography>
 
