@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '../Button/Button';
 import { Container, Box, Grid } from '@mui/material';
 import bgTop from '../../images/shape2.svg';
@@ -12,20 +13,81 @@ import previous from '../../images/previous.png';
 import next from '../../images/next.png';
 import { aboutStyles } from './styles';
 
+const categories = [
+  {
+    id: 1,
+    name: 'Category 1',
+    members: [
+      { name: 'Member 1.1', title: 'Title 1', photo: shape },
+      { name: 'Member 1.2', title: 'Title 2', photo: shape },
+      { name: 'Member 1.3', title: 'Title 3', photo: shape },
+      { name: 'Member 1.4', title: 'Title 4', photo: shape },
+      { name: 'Member 1.5', title: 'Title 5', photo: shape },
+      { name: 'Member 1.6', title: 'Title 6', photo: shape },
+    ],
+  },
+  {
+    id: 2,
+    name: 'Category 2',
+    members: [
+      { name: 'Member 2.1', title: 'Title 1', photo: shape },
+      { name: 'Member 2.2', title: 'Title 2', photo: shape },
+      { name: 'Member 2.3', title: 'Title 3', photo: shape },
+      { name: 'Member 2.4', title: 'Title 4', photo: shape },
+      { name: 'Member 2.5', title: 'Title 5', photo: shape },
+      { name: 'Member 2.6', title: 'Title 6', photo: shape },
+    ],
+  },
+  {
+    id: 3,
+    name: 'Category 3',
+    members: [
+      { name: 'Member 3.1', title: 'Title 1', photo: shape },
+      { name: 'Member 3.2', title: 'Title 2', photo: shape },
+      { name: 'Member 3.3', title: 'Title 3', photo: shape },
+      { name: 'Member 3.4', title: 'Title 4', photo: shape },
+      { name: 'Member 3.5', title: 'Title 5', photo: shape },
+      { name: 'Member 3.6', title: 'Title 6', photo: shape },
+    ],
+  },
+  {
+    id: 4,
+    name: 'Category 4',
+    members: [
+      { name: 'Member 4.1', title: 'Title 1', photo: shape },
+      { name: 'Member 4.2', title: 'Title 2', photo: shape },
+      { name: 'Member 4.3', title: 'Title 3', photo: shape },
+      { name: 'Member 4.4', title: 'Title 4', photo: shape },
+      { name: 'Member 4.5', title: 'Title 5', photo: shape },
+      { name: 'Member 4.6', title: 'Title 6', photo: shape },
+    ],
+  },
+  {
+    id: 5,
+    name: 'Category 5',
+    members: [
+      { name: 'Member 5.1', title: 'Title 1', photo: shape },
+      { name: 'Member 5.2', title: 'Title 2', photo: shape },
+      { name: 'Member 5.3', title: 'Title 3', photo: shape },
+      { name: 'Member 5.4', title: 'Title 4', photo: shape },
+      { name: 'Member 5.5', title: 'Title 5', photo: shape },
+      { name: 'Member 5.6', title: 'Title 6', photo: shape },
+    ],
+  },
+];
+
 const About = () => {
   const styles = aboutStyles();
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
+  const navigate = useNavigate();
 
   const handlePreviousChange = () => {
-    setCurrentPage((prevPage) => prevPage - 1);
-  };
+    setCurrentPage((prevPage) => (prevPage === 1 ? categories.length : prevPage - 1));
+  };  
 
   const handleNextChange = () => {
-    setCurrentPage((prevPage) => prevPage + 1);
-  };
+    setCurrentPage((prevPage) => (prevPage === categories.length ? 1 : prevPage + 1));
+  };  
 
   return (
     <div style={{position: 'relative'}}>
@@ -35,15 +97,15 @@ const About = () => {
           <img src={bgBtm} alt="bg2" style={styles.bg2} />
         </Box>
       <Container maxWidth="xl" sx={styles.body}>
-        <Grid container>
-          <Grid item >
+        <Grid container xs={10} sm={12} md={12} >
+          <Grid item xs={6.5} sm={3.5} md={3} >
             <img 
               src={blankPhoto} 
               alt="img"
-              style={{ width: '50%', marginLeft: '310px', marginTop: '222px', height: 'auto' }}
+              style={{ width: '95%', marginLeft: '58%', marginTop: '45%', height: 'auto' }}
             />
           </Grid>
-          <Grid item xs={12} sm={5} md={5}>
+          <Grid item xs={12} sm={6} md={12}>
             <Box
               sx={{
                 ...styles.titleTop,
@@ -72,14 +134,14 @@ const About = () => {
         </Grid>
         
         <Grid container >
-          <Grid item >
+          <Grid item xs={12} sm={7} md={6}>
             <img 
               src={books} 
               alt="img"
-              style={{ width: '60%', marginLeft: '280px', marginTop: '100px', height: 'auto' }}
+              style={{ width: '53%', marginLeft: '23%', marginTop: '20%', height: 'auto' }}
             />
           </Grid>
-          <Grid item xs={12} sm={5} md={5}>
+          <Grid item xs={12} sm={5} md={3}>
             <Box
               sx={{
                 ...styles.titleBottom1,
@@ -96,7 +158,7 @@ const About = () => {
               </Box>
           </Grid>
 
-          <Grid item>
+          <Grid item xs={12} sm={7} md={7}>
           <Box
               sx={{
                 ...styles.titleBottom2,
@@ -112,19 +174,19 @@ const About = () => {
               Our mission statement is to help our members get professional opportunities while fostering a network of individuals. We do this through quarterly career fairs, programs for career development, and project opportunities to gain experience. 
               </Box>
           </Grid>
-          <Grid item >
+          <Grid item xs={8} sm={4.5} md={3.2} >
             <img 
               src={lightBulb} 
               alt="img"
-              style={{ width: '50%', marginLeft: '350px', marginTop: '70px', height: 'auto' }}
+              style={{ width: '60%', marginLeft: '20%', marginTop: '45%', height: 'auto'}}
             />
           </Grid>
 
-          <Grid item >
+          <Grid item xs={11} sm={5} md={6}>
             <img 
               src={blankSquare} 
               alt="img"
-              style={{ width: '55%', marginLeft: '280px', marginTop: '100px', height: 'auto' }}
+              style={{ width: '60%', marginLeft: '23%', marginTop: '35%', height: 'auto' }}
             />
           </Grid>
           <Grid item xs={12} sm={5} md={6}>
@@ -143,7 +205,7 @@ const About = () => {
               Check out amazing events we have planned as well as the opportunities we have for members. 
             </Box>
             <Box sx={{ ...styles.button1}}>
-              <Button size="large" text="See opportunities ->" onClick={() => console.log('click')} />
+              <Button size="large" text="See opportunities ->" onClick={() => navigate('/opportunities')} />
             </Box>
           </Grid>
 
@@ -163,19 +225,18 @@ const About = () => {
               Check out amazing events we have planned as well as the opportunities we have for members. 
               </Box>
           </Grid>
-          <Grid item >
+          <Grid item xs={11} sm={7} md={6}>
             <img 
               src={blankSquare} 
               alt="img"
-              style={{ width: '70%', marginLeft: '180px', marginTop: '100px', height: 'auto' }}
+              style={{ width: '55%', marginLeft: '18%', marginTop: '28%', height: 'auto' }}
             />
           </Grid>
           <Box sx={{ ...styles.button2}}>
-              <Button size="large" text="Become a member ->" onClick={() => console.log('click')} />
+              <Button size="large" text="Become a member ->" onClick={() => navigate('/membership')} />
           </Box>
         </Grid>
 
-        
 
         <Grid item xs={12} sm={4.5} md={5}>
           <Box
@@ -186,110 +247,60 @@ const About = () => {
             MEET THE TEAM!
           </Box>
         </Grid>
-        <Grid container sx={{ marginTop: '8%', display: 'flex', justifyContent: 'center' }}>
-          <Grid item md={1.5}>
-            <Button size="large" text="Category 1" onClick={() => console.log('click')} />
-          </Grid>
-          <Grid item md={1.5}>
-            <Button size="large" text="Category 2" onClick={() => console.log('click')} />
-          </Grid>
-          <Grid item md={1.5}>
-            <Button size="large" text="Category 3" onClick={() => console.log('click')} />
-          </Grid>
-          <Grid item md={1.5}>
-            <Button size="large" text="Category 4" onClick={() => console.log('click')} />
-          </Grid>
-          <Grid item md={1.5}>
-            <Button size="large" text="Category 5" onClick={() => console.log('click')} />
-          </Grid>
+
+        <Grid container sx={{ marginTop: '5%', display: 'flex', justifyContent: 'center' }}>
+          {categories.map((category) => (
+            <Grid item md={1.5} key={category.id}>
+              <Button size="large" text={category.name} onClick={() => setCurrentPage(category.id)} />
+            </Grid>
+          ))}
         </Grid>
-        <Grid
-          container
-          sx={{ marginTop: '8%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-        >
-          <Grid item md={3}>
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-              <img src={shape} alt="img" style={{ width: 200, height: 300 }} />
-            </div>
-            <h3 style={{ color: 'white', textAlign: 'center' }}>Goldie Chu</h3>
-            <h5 style={{ color: 'white', textAlign: 'center' }}>Design Team, 2023</h5>
+
+      
+        <Grid container sx={{ marginTop: '1%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Grid container item xs={12} justifyContent="center">
+            {categories[currentPage - 1].members.slice(0, 3).map((member, index) => (
+              <Grid item md={3} key={index}>
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                  <img src={member.photo} alt="img" style={{ width: 200, height: 300 }} />
+                </div>
+                <h3 style={{ color: 'white', textAlign: 'center' }}>{member.name}</h3>
+                <h5 style={{ color: 'white', textAlign: 'center' }}>{member.title}</h5>
+              </Grid>
+            ))}
           </Grid>
-          <Grid item md={3}>
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-              <img src={shape} alt="img" style={{ width: 200, height: 300 }} />
-            </div>
-            <h3 style={{ color: 'white', textAlign: 'center' }}>Goldie Chu</h3>
-            <h5 style={{ color: 'white', textAlign: 'center' }}>Design Team, 2023</h5>
+          <Grid container item xs={12} justifyContent="center">
+            {categories[currentPage - 1].members.slice(3, 6).map((member, index) => (
+              <Grid item md={3} key={index}>
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                  <img src={member.photo} alt="img" style={{ width: 200, height: 300 }} />
+                </div>
+                <h3 style={{ color: 'white', textAlign: 'center' }}>{member.name}</h3>
+                <h5 style={{ color: 'white', textAlign: 'center' }}>{member.title}</h5>
+              </Grid>
+            ))}
           </Grid>
-          <Grid item md={3}>
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-              <img src={shape} alt="img" style={{ width: 200, height: 300 }} />
-            </div>
-            <h3 style={{ color: 'white', textAlign: 'center' }}>Goldie Chu</h3>
-            <h5 style={{ color: 'white', textAlign: 'center' }}>Design Team, 2023</h5>
+          <Grid container item xs={12} sm={11} md={12} justifyContent="center" sx={{ marginTop: { xs: '8%', sm: '-100%', md: '-50%' }}}>
+            <Grid container item xs = {5} sm={20} md={10} justifyContent="space-between" sx={{ alignItems: 'center' }}>
+              <Grid item>
+                <button
+                  style={{ border: 'none', background: 'none', cursor: 'pointer' }}
+                  onClick={handlePreviousChange}>
+                  <img src={previous} alt="img" style={{ width: 30, height: 30 }} />
+                </button>
+              </Grid>
+              <Grid item>
+                <button
+                  style={{ border: 'none', background: 'none', cursor: 'pointer' }}
+                  onClick={handleNextChange}>
+                  <img src={next} alt="img" style={{ width: 30, height: 30 }} />
+                </button>
+              </Grid>
+            </Grid>
           </Grid>
+
         </Grid>
-        <Grid
-          container
-          sx={{ marginTop: '-1%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-        >
-          <Grid item md={4.5}>
-            <div style={{ display: 'flex', justifyContent: 'start', alignItems: 'center' }}>
-              <button
-                style={{ border: 'none', background: 'none', cursor: 'pointer' }}
-                onClick={handlePreviousChange}
-              >
-                <img
-                  src={previous}
-                  alt="img"
-                  style={{ width: 30, height: 30 }}
-                />
-              </button>
-            </div>
-          </Grid>
-          <Grid item md={4.5}>
-            <div style={{ display: 'flex', justifyContent: 'end', alignItems: 'center'}}>
-                <img
-                  src={next}
-                  alt="img"
-                  style={{ width: 30, height: 30, cursor: 'pointer' }}
-                  onClick={handleNextChange}
-                />
-            </div>
-          </Grid>
-        </Grid>
-        <Grid
-          container
-          sx={{
-            marginTop: '-5%',
-            marginBottom: '5%',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <Grid item md={3}>
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-              <img src={shape} alt="img" style={{ width: 200, height: 300 }} />
-            </div>
-            <h3 style={{ color: 'white', textAlign: 'center' }}>Goldie Chu</h3>
-            <h5 style={{ color: 'white', textAlign: 'center' }}>Design Team, 2023</h5>
-          </Grid>
-          <Grid item md={3}>
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-              <img src={shape} alt="img" style={{ width: 200, height: 300 }} />
-            </div>
-            <h3 style={{ color: 'white', textAlign: 'center' }}>Goldie Chu</h3>
-            <h5 style={{ color: 'white', textAlign: 'center' }}>Design Team, 2023</h5>
-          </Grid>
-          <Grid item md={3}>
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-              <img src={shape} alt="img" style={{ width: 200, height: 300 }} />
-            </div>
-            <h3 style={{ color: 'white', textAlign: 'center' }}>Goldie Chu</h3>
-            <h5 style={{ color: 'white', textAlign: 'center' }}>Design Team, 2023</h5>
-          </Grid>
-        </Grid>
+
 
       </Container>
       </Box>
