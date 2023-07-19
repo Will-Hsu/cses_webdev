@@ -1,6 +1,5 @@
 export const opportunitiesStyles = (theme: any) => ({
   bg: {
-    //width: '100%',
     transform: 'rotate(-140deg)',
     marginTop: '70%',
     marginLeft: '-20%',

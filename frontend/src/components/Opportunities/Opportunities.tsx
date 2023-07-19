@@ -9,7 +9,7 @@ const Opportunities = () => {
   const theme = useTheme();
   const styles = opportunitiesStyles(theme);
   return (
-    <div>
+    <div style={{ position: 'relative', overflow: 'hidden' }}>
       <Box>
         <img src={bg} alt="bg" style={{ ...styles.bg, position: 'absolute' }} />
       </Box>
