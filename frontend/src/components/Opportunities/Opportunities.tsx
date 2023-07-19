@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Typography, Grid, Link, Box } from '@mui/material';
 import bg from '../../images/shape2.svg';
 import Button from '../Button/Button';
+import sponsor from '../../images/cseLogo.gif';
 import { opportunitiesStyles } from './styles';
 
 const Opportunities = () => {
@@ -61,12 +62,10 @@ const Opportunities = () => {
           Thank you to our current sponsors!
         </Typography>
 
-        <Box display="flex" justifyContent="center" alignItems="center">
-          <Box display="flex" justifyContent="center">
-            <div style={styles.greyBox}></div>
-            <div style={styles.greyBox}></div>
-            <div style={styles.greyBox}></div>
-          </Box>
+        <Box display="flex" justifyContent="center">
+          <a href="https://cse.ucsd.edu/" style={styles.link}>
+            <img src={sponsor} alt="sponsor" style={styles.sponsor} />
+          </a>
         </Box>
       </Container>
     </div>

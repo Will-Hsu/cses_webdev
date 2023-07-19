@@ -33,4 +33,6 @@ export const opportunitiesStyles = () => ({
     fontSize: '48px',
   },
   greyBox: { width: '300px', height: '150px', backgroundColor: 'grey', margin: '1%' },
+  sponsor: { width: '35%' },
+  link: { display: 'flex', justifyContent: 'center' },
 });
