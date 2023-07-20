@@ -1,14 +1,10 @@
-import { useState } from 'react';
-import { Container } from '@mui/material';
-import { useGoogleLogin } from '@react-oauth/google';
+import { useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import SignupForm from './SignupForm';
 import LoginForm from './LoginForm';
-
-interface User {
-  name: string;
-  email: string;
-}
+import { AuthContext } from '../../context/AuthContext';
+import { Container } from '@mui/material';
 
 interface RenderContentProps {
   name: string;
@@ -17,35 +13,49 @@ interface RenderContentProps {
 }
 
 const Login = () => {
-  const [user, setUser] = useState({} as User);
-  const [isUcsdEmail, setIsUcsdEmail] = useState(false);
-  const [isNewUser, setIsNewUser] = useState(false);
+  const navigate = useNavigate();
+  const {
+    login,
+    isNewUser,
+    isUcsdEmail,
+    setIsUcsdEmail,
+    isLoggedIn,
+    setIsLoggedIn,
+    user,
+    setUser,
+  } = useContext(AuthContext);
 
-  const login = useGoogleLogin({
-    flow: 'implicit',
-    onSuccess: async (res) => {
-      const userInfo = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
-        headers: { Authorization: `Bearer ${res.access_token}` },
-      });
+  useEffect(() => {
+    const verifyToken = async () => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        const res = await axios.get('https://www.googleapis.com/oauth2/v3/tokeninfo', {
+          params: { access_token: token },
+        });
 
-      if (userInfo.data.email.endsWith('@ucsd.edu')) {
-        console.log('Login Success');
-        setUser(userInfo.data);
-        setIsUcsdEmail(true);
-        setIsNewUser(true); // TODO: Handle new vs. old users
-      } else {
-        console.log('Login Failed');
-        setIsUcsdEmail(false);
+        if (res.status === 200 && res.data.aud === process.env.REACT_APP_GOOGLE_CLIENT_ID) {
+          const userInfo = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          setUser(userInfo.data);
+          setIsLoggedIn(true);
+          setIsUcsdEmail(true);
+          navigate('/membership');
+        }
       }
-    },
-    onError: () => console.log('Login Failed'),
-  });
+    };
+
+    verifyToken();
+  }, [isLoggedIn, isUcsdEmail, isNewUser, navigate, setUser, setIsLoggedIn, setIsUcsdEmail]);
 
   const renderContent = ({ name, email, login }: RenderContentProps) => {
-    if (isUcsdEmail && isNewUser) {
+    if (isLoggedIn && isUcsdEmail && isNewUser) {
       return <SignupForm name={name} email={email} />;
     } else {
-      return <LoginForm login={login} />;
+      return <LoginForm showEmailError={!isUcsdEmail} login={login} />;
     }
   };
 
