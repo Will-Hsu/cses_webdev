@@ -32,7 +32,7 @@ const Login = () => {
         console.log('Login Success');
         setUser(userInfo.data);
         setIsUcsdEmail(true);
-        setIsNewUser(true);
+        setIsNewUser(true); // TODO: Handle new vs. old users
       } else {
         console.log('Login Failed');
         setIsUcsdEmail(false);
