@@ -7,5 +7,5 @@ export const aboutStyles = () => ({
     marginRight: '-1%',
     scale: '103%',
   },
-  body: { position: 'absolute', top: '93px'}
+  body: { position: 'absolute', top: '93px' },
 });
