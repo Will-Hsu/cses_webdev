@@ -115,6 +115,17 @@ const About = () => {
   }; 
   
 
+// Calculate the number of members displayed on the current page
+const membersDisplayed = currentCategory.members.slice((currentPage - 1) * 6, currentPage * 6);
+
+// Define the threshold for different margin values
+const marginThreshold = 3;
+
+// Check if there are fewer than 3 members displayed
+const areFewMembers = membersDisplayed.length < marginThreshold;
+
+// Define the margin values based on the number of members displayed
+const marginTopValue = areFewMembers ? '3%' : '-50%';
 
   return (
     <div style={{position: 'relative'}}>
@@ -339,7 +350,7 @@ const About = () => {
 
 
        </Grid>
-       <Grid container item xs={12} sm={11} md={12} justifyContent="center" sx={{ marginTop: { xs: '8%', sm: '-100%', md: '-50%' } }}>
+       <Grid container item xs={12} sm={11} md={12} justifyContent="center" sx={{ marginTop: { xs: '8%', sm: areFewMembers ? marginTopValue : '-100%', md: marginTopValue }, marginBottom: {xs: areFewMembers ? '10%' : '0%', sm: areFewMembers ? '10%' : '0%', md: areFewMembers ? '10%' : '0%'}}}>
          <Grid container item xs={5} sm={20} md={10} justifyContent="space-between" sx={{ alignItems: 'center' }}>
            <Grid item>
              <button
