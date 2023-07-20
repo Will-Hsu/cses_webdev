@@ -28,7 +28,7 @@ const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState({} as User);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isUcsdEmail, setIsUcsdEmail] = useState(false);
+  const [isUcsdEmail, setIsUcsdEmail] = useState(true);
   const [isNewUser, setIsNewUser] = useState(false);
 
   const login = useGoogleLogin({
