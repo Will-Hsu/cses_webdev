@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Box, Container, Grid, createTheme, useMediaQuery } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import Button from '../Button/Button';
+import { Container, Box, Grid, createTheme, useMediaQuery } from '@mui/material';
 import bgTop from '../../images/shape2.svg';
 import bgBtm from '../../images/shape2.svg';
 import shape from '../../images/shape.svg';
@@ -13,6 +13,69 @@ import books from '../../images/aboutbooks.png';
 import lightBulb from '../../images/aboutlightbulb.png';
 
 
+
+const categories = [
+  {
+    id: 1,
+    name: 'Category 1',
+    members: [
+      { name: 'Member 1.1', title: 'Title 1', photo: shape },
+      { name: 'Member 1.2', title: 'Title 2', photo: shape },
+      { name: 'Member 1.3', title: 'Title 3', photo: shape },
+      { name: 'Member 1.4', title: 'Title 4', photo: shape },
+      { name: 'Member 1.5', title: 'Title 5', photo: shape },
+      { name: 'Member 1.6', title: 'Title 6', photo: shape },
+    ],
+  },
+  {
+    id: 2,
+    name: 'Category 2',
+    members: [
+      { name: 'Member 2.1', title: 'Title 1', photo: shape },
+      { name: 'Member 2.2', title: 'Title 2', photo: shape },
+      { name: 'Member 2.3', title: 'Title 3', photo: shape },
+      { name: 'Member 2.4', title: 'Title 4', photo: shape },
+      { name: 'Member 2.5', title: 'Title 5', photo: shape },
+      { name: 'Member 2.6', title: 'Title 6', photo: shape },
+    ],
+  },
+  {
+    id: 3,
+    name: 'Category 3',
+    members: [
+      { name: 'Member 3.1', title: 'Title 1', photo: shape },
+      { name: 'Member 3.2', title: 'Title 2', photo: shape },
+      { name: 'Member 3.3', title: 'Title 3', photo: shape },
+      { name: 'Member 3.4', title: 'Title 4', photo: shape },
+      { name: 'Member 3.5', title: 'Title 5', photo: shape },
+      { name: 'Member 3.6', title: 'Title 6', photo: shape },
+    ],
+  },
+  {
+    id: 4,
+    name: 'Category 4',
+    members: [
+      { name: 'Member 4.1', title: 'Title 1', photo: shape },
+      { name: 'Member 4.2', title: 'Title 2', photo: shape },
+      { name: 'Member 4.3', title: 'Title 3', photo: shape },
+      { name: 'Member 4.4', title: 'Title 4', photo: shape },
+      { name: 'Member 4.5', title: 'Title 5', photo: shape },
+      { name: 'Member 4.6', title: 'Title 6', photo: shape },
+    ],
+  },
+  {
+    id: 5,
+    name: 'Category 5',
+    members: [
+      { name: 'Member 5.1', title: 'Title 1', photo: shape },
+      { name: 'Member 5.2', title: 'Title 2', photo: shape },
+      { name: 'Member 5.3', title: 'Title 3', photo: shape },
+      { name: 'Member 5.4', title: 'Title 4', photo: shape },
+      { name: 'Member 5.5', title: 'Title 5', photo: shape },
+      { name: 'Member 5.6', title: 'Title 6', photo: shape },
+    ],
+  },
+];
 
 const About = () => {
   const navigate = useNavigate();
@@ -27,13 +90,15 @@ const About = () => {
   const isSmallScreen = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
 
 
+
+
   const handlePreviousChange = () => {
-    setCurrentPage((prevPage) => prevPage - 1);
-  };
+    setCurrentPage((prevPage) => (prevPage === 1 ? categories.length : prevPage - 1));
+  };  
 
   const handleNextChange = () => {
-    setCurrentPage((prevPage) => prevPage + 1);
-  };
+    setCurrentPage((prevPage) => (prevPage === categories.length ? 1 : prevPage + 1));
+  };  
 
   const peopleData = [
     {
@@ -96,9 +161,12 @@ const About = () => {
   ));
 
   return (
-    <div style={{ position: 'relative', overflowX: 'hidden' }}>
-      <img src={bgTop} alt="bg1" style={styles.bg1} />
-      <img src={bgBtm} alt="bg2" style={styles.bg2} />
+    <div style={{position: 'relative'}}>
+      <Box sx={styles.root}>
+        <Box>
+          <img src={bgTop} alt="bg1" style={styles.bg1} />
+          <img src={bgBtm} alt="bg2" style={styles.bg2} />
+        </Box>
       <Container maxWidth="xl" sx={styles.body}>
         <Grid container sx={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
           <Grid item sm={4.5} md={2.5}>
@@ -267,24 +335,6 @@ const About = () => {
           </Grid>
         )}
 
-        <h1 style={{ color: 'white', textAlign: 'center', marginTop: '8%' }}>MEET THE TEAM!</h1>
-        <Grid container sx={{ marginTop: '8%', display: 'flex', justifyContent: 'center' }}>
-          <Grid item md={1.5}>
-            <Button size="large" text="Category 1" onClick={() => console.log('click')} />
-          </Grid>
-          <Grid item md={1.5}>
-            <Button size="large" text="Category 2" onClick={() => console.log('click')} />
-          </Grid>
-          <Grid item md={1.5}>
-            <Button size="large" text="Category 3" onClick={() => console.log('click')} />
-          </Grid>
-          <Grid item md={1.5}>
-            <Button size="large" text="Category 4" onClick={() => console.log('click')} />
-          </Grid>
-          <Grid item md={1.5}>
-            <Button size="large" text="Category 5" onClick={() => console.log('click')} />
-          </Grid>
-        </Grid>
         <Grid
           container
           sx={{ marginTop: '0%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
@@ -358,6 +408,7 @@ const About = () => {
           </div>
         </Box>}
       </Container>
+      </Box>
     </div>
   );
 };
