@@ -12,11 +12,12 @@ const Opportunities = () => {
     <div style={{ position: 'relative', overflow: 'hidden' }}>
       <Box>
         <img src={bg} alt="bg" style={{ ...styles.bg, position: 'absolute' }} />
+        <img src={bg} alt="bg" style={{ ...styles.bg2, position: 'absolute' }} />
       </Box>
       <Container maxWidth="xl" sx={styles.body}>
         <Typography sx={styles.title}>OPPORTUNITIES</Typography>
         <Grid container spacing={2} sx={{ justifyContent: 'center', alignItems: 'center' }}>
-          <Grid item sx={{ margin: '3% 10% 0 0%' }}>
+          <Grid item sx={{ width: '550px', marginTop: '3%' }}>
             <div style={{ width: '400px', height: '450px', backgroundColor: 'grey' }}></div>
           </Grid>
           <Grid item sx={{ width: '550px', marginTop: '3%' }}>
@@ -37,10 +38,10 @@ const Opportunities = () => {
               in our events.
             </Typography>
           </Grid>
-          <Grid item sx={{ margin: '5% 10% 0 0%' }}>
+          <Grid item sx={{ width: '550px', marginTop: '8%' }}>
             <div style={{ width: '400px', height: '450px', backgroundColor: 'grey' }}></div>
           </Grid>
-          <Grid item sx={{ width: '550px' }}>
+          <Grid item sx={{ width: '550px', marginTop: '3%' }}>
             <Typography sx={styles.subtitle}>
               For <span style={{ fontStyle: 'italic' }}>sponsors</span>.
             </Typography>

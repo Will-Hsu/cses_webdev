@@ -5,6 +5,12 @@ export const opportunitiesStyles = (theme: any) => ({
     marginLeft: '-20%',
     scale: '150%',
   },
+  bg2: {
+    transform: 'rotate(130deg)',
+    marginTop: '300%',
+    marginLeft: '-20%',
+    scale: '150%',
+  },
   body: {
     position: 'relative',
     top: '93px',
