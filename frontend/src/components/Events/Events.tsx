@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Container } from '@mui/material';
 import bgTop from '../../images/shape.svg';
 import bgBtm from '../../images/shape.svg';
@@ -28,27 +28,31 @@ const Events = () => {
     },
     // Add more EventBox data here if needed
   ];
-  const handleThisWeekClick = () => {
-    const thisWeekEventBoxes = eventBoxesData.filter(
-      eventBox => EventBox.targetDate >= new Date() - new Date('7 days')
-    );
-    const thisMonthEventBoxes = eventBoxesData.filter(
-      eventBox => EventBox.targetDate >= new Date() - new Date('30 days')
-    );
-    console.log(thisWeekEventBoxes);
-    console.log(thisMonthEventBoxes);
-  };
+  const [displayedEvents, setDisplayedEvents] = useState(eventBoxesData);
 
-  const handleThisMonthClick = () => {
-    const thisWeekEventBoxes = eventBoxesData.filter(
-      eventBox => EventBox.targetDate >= new Date() - new Date('7 days').getTime()
+  const handleThisWeekClick = () => {
+    const now = new Date().getTime();
+    const oneWeekAfter = now + 7 * 24 * 60 * 60 * 1000;
+
+    const thisWeekEvents = eventBoxesData.filter(
+      event => event.targetDate.getTime() >= now && event.targetDate.getTime() <= oneWeekAfter
     );
-    const thisMonthEventBoxes = eventBoxesData.filter(
-      eventBox => EventBox.targetDate >= new Date() - new Date('30 days').getTime()
+
+    setDisplayedEvents(thisWeekEvents);
+};
+
+const handleThisMonthClick = () => {
+    const now = new Date().getTime();
+    const oneMonthAfter = now + 30 * 24 * 60 * 60 * 1000;
+
+    const thisMonthEvents = eventBoxesData.filter(
+      event => event.targetDate.getTime() >= now && event.targetDate.getTime() <= oneMonthAfter
     );
-    console.log(thisWeekEventBoxes);
-    console.log(thisMonthEventBoxes);
-  };
+
+    setDisplayedEvents(thisMonthEvents);
+};
+
+
   return (
     <div style={{ position: 'relative', overflow: 'hidden' }}>
       <img src={bgTop} alt="bg1" style={styles.bg1} />
@@ -93,7 +97,7 @@ const Events = () => {
             marginLeft: '39px',
           }}
         >
-          {eventBoxesData.map((eventData, index) => (
+          {displayedEvents.map((eventData, index) => (
             <React.Fragment key={index}>
               <EventBox
                 title={eventData.title}
@@ -126,9 +130,9 @@ const Events = () => {
         >
           
         </div>
-
+        
         {/* Past Event Section */}
-        <div
+        <div 
           style={{
             color: 'white',
             fontSize: '40px',
@@ -187,6 +191,7 @@ const Events = () => {
             </React.Fragment>
           ))}
         </div>
+        
       </Container>
     </div>
   );
