@@ -12,6 +12,9 @@ router.post('/create', userController.userCreate);
 // GET request for getting a user's info.
 router.get('/:email/info', userController.getUserInfo);
 
+// GET request for checking if user exists.
+router.post('/check', userController.userCheck);
+
 // TODO: other CRUD methods
 
 // Export router.

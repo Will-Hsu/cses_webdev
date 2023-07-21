@@ -15,6 +15,7 @@ interface AuthContextType {
   isUcsdEmail: boolean;
   setIsUcsdEmail: (isUcsdEmail: boolean) => void;
   isNewUser: boolean;
+  setIsNewUser: (isNewUser: boolean) => void;
   isLoggedIn: boolean;
   setIsLoggedIn: (isLoggedIn: boolean) => void;
   login: () => void;
@@ -30,7 +31,7 @@ const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState({} as User);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isUcsdEmail, setIsUcsdEmail] = useState(false);
+  const [isUcsdEmail, setIsUcsdEmail] = useState(true);
   const [isNewUser, setIsNewUser] = useState(false);
 
   const login = useGoogleLogin({
@@ -70,6 +71,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         isUcsdEmail,
         setIsUcsdEmail,
         isNewUser,
+        setIsNewUser,
         login,
         logout,
       }}

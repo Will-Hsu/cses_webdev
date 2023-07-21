@@ -5,6 +5,7 @@ import SignupForm from './SignupForm';
 import LoginForm from './LoginForm';
 import { AuthContext } from '../../context/AuthContext';
 import { Container } from '@mui/material';
+import { checkUserAPI } from '../../api';
 
 interface RenderContentProps {
   name: string;
@@ -17,6 +18,7 @@ const Login = () => {
   const {
     login,
     isNewUser,
+    setIsNewUser,
     isUcsdEmail,
     setIsUcsdEmail,
     isLoggedIn,
@@ -27,31 +29,45 @@ const Login = () => {
 
   useEffect(() => {
     const verifyToken = async () => {
-      const token = localStorage.getItem('token');
-      if (token) {
-        const res = await axios.get('https://www.googleapis.com/oauth2/v3/tokeninfo', {
-          params: { access_token: token },
-        });
-
-        if (res.status === 200 && res.data.aud === process.env.REACT_APP_GOOGLE_CLIENT_ID) {
-          const userInfo = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+      try {
+        const token = localStorage.getItem('token');
+        if (token) {
+          const res = await axios.get('https://www.googleapis.com/oauth2/v3/tokeninfo', {
+            params: { access_token: token },
           });
 
-          setUser(userInfo.data);
-          setIsLoggedIn(true);
-          setIsUcsdEmail(true);
-          navigate('/membership');
+          if (res.status === 200 && res.data.aud === process.env.REACT_APP_GOOGLE_CLIENT_ID) {
+            const userInfo = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            });
+
+            setUser(userInfo.data);
+            setIsLoggedIn(true);
+            setIsUcsdEmail(true);
+            if (!isNewUser) {
+              navigate('/membership');
+            }
+          }
         }
+      } catch (err) {
+        console.error(err);
       }
     };
 
     verifyToken();
-  }, [isLoggedIn, isUcsdEmail, isNewUser, navigate, setUser, setIsLoggedIn, setIsUcsdEmail]);
+  }, [isLoggedIn]);
 
   const renderContent = ({ name, email, login }: RenderContentProps) => {
+    checkUserAPI({ email }).then((data) => {
+      if (data && data.exists === true) {
+        setIsNewUser(false);
+      } else {
+        setIsNewUser(true);
+      }
+    });
+
     if (isLoggedIn && isUcsdEmail && isNewUser) {
       return <SignupForm name={name} email={email} />;
     } else {
