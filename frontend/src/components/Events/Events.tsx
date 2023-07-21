@@ -10,10 +10,10 @@ const Events = () => {
   const styles = event_style();
 
   // Data array for EventBoxes
-  const eventBoxesData = [
+  const futureEventBoxesData = [
     {
       title: 'Student Summit',
-      targetDate: new Date('2023-08-31T00:00:00'),
+      targetDate: new Date('2023-07-26T00:00:00'),
       location: 'Somewhere on campus',
     },
     {
@@ -26,32 +26,81 @@ const Events = () => {
       targetDate: new Date('2023-07-31T00:00:00'),
       location: 'Somewhere on campus',
     },
-    // Add more EventBox data here if needed
+    // Add more Future EventBox data here if needed
   ];
-  const [displayedEvents, setDisplayedEvents] = useState(eventBoxesData);
+
+  const pastEventBoxesData = [
+    {
+      title: 'Student Summit',
+      targetDate: new Date('2023-03-31T00:00:00'),
+      location: 'Somewhere on campus',
+    },
+    {
+      title: 'Some other event',
+      targetDate: new Date('2023-05-23T04:00:00'),
+      location: 'Somewhere on campus',
+    },
+    {
+      title: 'Another event',
+      targetDate: new Date('2022-06-31T00:00:00'),
+      location: 'Somewhere on campus',
+    },
+    // Add past EventBox data here
+  ];
+
+  const [displayedFutureEvents, setDisplayedFutureEvents] = useState(futureEventBoxesData);
+  const [displayedPastEvents, setDisplayedPastEvents] = useState(pastEventBoxesData);
+  const [isThisWeekClicked, setIsThisWeekClicked] = useState(false);
+  const [isThisMonthClicked, setIsThisMonthClicked] = useState(false);
+  const [is2023Clicked, setIs2023Clicked] = useState(false);
 
   const handleThisWeekClick = () => {
-    const now = new Date().getTime();
-    const oneWeekAfter = now + 7 * 24 * 60 * 60 * 1000;
+    if (isThisWeekClicked) {
+      setDisplayedFutureEvents(futureEventBoxesData);
+      setIsThisWeekClicked(false);
+    } else {
+      const now = new Date().getTime();
+      const oneWeekAfter = now + 7 * 24 * 60 * 60 * 1000;
+  
+      const thisWeekEvents = futureEventBoxesData.filter(
+        event => event.targetDate.getTime() >= now && event.targetDate.getTime() <= oneWeekAfter
+      );
+  
+      setDisplayedFutureEvents(thisWeekEvents);
+      setIsThisWeekClicked(true);
+    }
+  };
 
-    const thisWeekEvents = eventBoxesData.filter(
-      event => event.targetDate.getTime() >= now && event.targetDate.getTime() <= oneWeekAfter
-    );
+  const handleThisMonthClick = () => {
+    if (isThisMonthClicked) {
+      setDisplayedFutureEvents(futureEventBoxesData);
+      setIsThisMonthClicked(false);
+    } else {
+      const now = new Date().getTime();
+      const oneMonthAfter = now + 30 * 24 * 60 * 60 * 1000;
 
-    setDisplayedEvents(thisWeekEvents);
-};
+      const thisMonthEvents = futureEventBoxesData.filter(
+        event => event.targetDate.getTime() >= now && event.targetDate.getTime() <= oneMonthAfter
+      );
 
-const handleThisMonthClick = () => {
-    const now = new Date().getTime();
-    const oneMonthAfter = now + 30 * 24 * 60 * 60 * 1000;
+      setDisplayedFutureEvents(thisMonthEvents);
+      setIsThisMonthClicked(true);
+    }
+  };
 
-    const thisMonthEvents = eventBoxesData.filter(
-      event => event.targetDate.getTime() >= now && event.targetDate.getTime() <= oneMonthAfter
-    );
+  const handle2023 = () => {
+    if (is2023Clicked) {
+      setDisplayedPastEvents(pastEventBoxesData);
+      setIs2023Clicked(false);
+    } else {
+      const year2023Events = pastEventBoxesData.filter(
+        event => event.targetDate.getFullYear() === 2023
+      );
 
-    setDisplayedEvents(thisMonthEvents);
-};
-
+      setDisplayedPastEvents(year2023Events);
+      setIs2023Clicked(true);
+    }
+  };
 
   return (
     <div style={{ position: 'relative', overflow: 'hidden' }}>
@@ -97,7 +146,7 @@ const handleThisMonthClick = () => {
             marginLeft: '39px',
           }}
         >
-          {displayedEvents.map((eventData, index) => (
+          {displayedFutureEvents.map((eventData, index) => (
             <React.Fragment key={index}>
               <EventBox
                 title={eventData.title}
@@ -119,7 +168,7 @@ const handleThisMonthClick = () => {
           ))}
         </div>
 
-        {/* Button for displaying all events */}
+        
         <div
           style={{
             display: 'flex',
@@ -154,7 +203,7 @@ const handleThisMonthClick = () => {
             marginTop: '-20px',
           }}
         >
-          <Button size="medium" text="2023" onClick={() => console.log('click')}></Button>
+          <Button size="medium" text="2023" onClick={handle2023}></Button>
         </div>
         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 
@@ -170,7 +219,7 @@ const handleThisMonthClick = () => {
             marginLeft: '39px',
           }}
         >
-          {eventBoxesData.map((eventData, index) => (
+          {displayedPastEvents.map((eventData, index) => (
             <React.Fragment key={index}>
               <EventBox
                 title={eventData.title}
