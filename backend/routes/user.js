@@ -9,6 +9,9 @@ import userController from '../controllers/userController.js';
 // POST request for creating new user.
 router.post('/create', userController.userCreate);
 
+// GET request for checking if user exists.
+router.post('/check', userController.userCheck);
+
 // TODO: other CRUD methods
 
 // Export router.

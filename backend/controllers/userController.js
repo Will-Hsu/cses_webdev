@@ -1,5 +1,19 @@
 import User from '../models/user.js';
+import { body } from 'express-validator';
 import asyncHandler from 'express-async-handler';
+
+export const userCheck = [
+  body('email').notEmpty().isEmail(),
+  asyncHandler(async (req, res) => {
+    const user = await User.findOne({ email: req.body.email });
+
+    if (user) {
+      res.json({ exists: true, user: user });
+    } else {
+      res.json({ exists: false });
+    }
+  }),
+];
 
 export const userCreate = asyncHandler(async (req, res) => {
   const { name, email, major, expectedGraduateYear } = req.body;
@@ -20,5 +34,6 @@ export const userCreate = asyncHandler(async (req, res) => {
 });
 
 export default {
+  userCheck,
   userCreate,
 };

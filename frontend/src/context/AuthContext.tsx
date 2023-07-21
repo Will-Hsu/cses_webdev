@@ -13,6 +13,7 @@ interface AuthContextType {
   isUcsdEmail: boolean;
   setIsUcsdEmail: (isUcsdEmail: boolean) => void;
   isNewUser: boolean;
+  setIsNewUser: (isNewUser: boolean) => void;
   isLoggedIn: boolean;
   setIsLoggedIn: (isLoggedIn: boolean) => void;
   login: () => void;
@@ -68,6 +69,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         isUcsdEmail,
         setIsUcsdEmail,
         isNewUser,
+        setIsNewUser,
         login,
         logout,
       }}

@@ -29,3 +29,15 @@ export const createUserAPI = (newUser) => {
       });
   });
 };
+
+export const checkUserAPI = (email) => {
+  return new Promise((resolve, reject) => {
+    API.post('/users/check', email)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
