@@ -28,7 +28,27 @@ const Events = () => {
     },
     // Add more EventBox data here if needed
   ];
+  const handleThisWeekClick = () => {
+    const thisWeekEventBoxes = eventBoxesData.filter(
+      eventBox => EventBox.targetDate >= new Date() - new Date('7 days')
+    );
+    const thisMonthEventBoxes = eventBoxesData.filter(
+      eventBox => EventBox.targetDate >= new Date() - new Date('30 days')
+    );
+    console.log(thisWeekEventBoxes);
+    console.log(thisMonthEventBoxes);
+  };
 
+  const handleThisMonthClick = () => {
+    const thisWeekEventBoxes = eventBoxesData.filter(
+      eventBox => EventBox.targetDate >= new Date() - new Date('7 days').getTime()
+    );
+    const thisMonthEventBoxes = eventBoxesData.filter(
+      eventBox => EventBox.targetDate >= new Date() - new Date('30 days').getTime()
+    );
+    console.log(thisWeekEventBoxes);
+    console.log(thisMonthEventBoxes);
+  };
   return (
     <div style={{ position: 'relative', overflow: 'hidden' }}>
       <img src={bgTop} alt="bg1" style={styles.bg1} />
@@ -56,8 +76,8 @@ const Events = () => {
             marginTop: '-20px',
           }}
         >
-          <Button size="medium" text="This Week" onClick={() => console.log('click')}></Button>
-          <Button size="medium" text="This Month" onClick={() => console.log('click')}></Button>
+          <Button size="medium" text="This Week" onClick={handleThisWeekClick}></Button>
+          <Button size="medium" text="This Month" onClick={handleThisMonthClick}></Button>
         </div>
         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 
@@ -104,11 +124,7 @@ const Events = () => {
             marginTop: '20px',
           }}
         >
-          <Button
-            size="medium"
-            text="See All Events ->"
-            onClick={() => console.log('click')}
-          ></Button>
+          
         </div>
 
         {/* Past Event Section */}
