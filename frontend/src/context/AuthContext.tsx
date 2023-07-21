@@ -5,6 +5,8 @@ import { useGoogleLogin } from '@react-oauth/google';
 interface User {
   name: string;
   email: string;
+  major: string;
+  expectedGraduationYear: number;
 }
 
 interface AuthContextType {
