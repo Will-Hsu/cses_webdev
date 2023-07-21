@@ -9,6 +9,26 @@ import Button from '../Button/Button';
 const Events = () => {
   const styles = event_style();
 
+  // Data array for EventBoxes
+  const eventBoxesData = [
+    {
+      title: 'Student Summit',
+      targetDate: new Date('2023-08-31T00:00:00'),
+      location: 'Somewhere on campus',
+    },
+    {
+      title: 'Some other event',
+      targetDate: new Date('2023-08-23T04:00:00'),
+      location: 'Somewhere on campus',
+    },
+    {
+      title: 'Another event',
+      targetDate: new Date('2023-07-31T00:00:00'),
+      location: 'Somewhere on campus',
+    },
+    // Add more EventBox data here if needed
+  ];
+
   return (
     <div style={{ position: 'relative', overflow: 'hidden' }}>
       <img src={bgTop} alt="bg1" style={styles.bg1} />
@@ -27,6 +47,7 @@ const Events = () => {
           <h2>EVENTS</h2>
         </div>
 
+        {/* Buttons for filtering events */}
         <div
           style={{
             display: 'flex',
@@ -40,6 +61,7 @@ const Events = () => {
         </div>
         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 
+        {/* Render EventBoxes using map */}
         <div
           style={{
             color: 'white',
@@ -51,43 +73,29 @@ const Events = () => {
             marginLeft: '39px',
           }}
         >
-          <EventBox
-            title={'Student Summit'}
-            targetDate={new Date('2023-08-31T00:00:00')}
-            location={'Somewhere on campus'}
-          />
-          <p
-            style={{
-              color: 'white',
-              fontSize: '20px',
-              fontFamily: 'Chakra Petch',
-              fontWeight: '500',
-            }}
-          >
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          </p>
-          <EventBox
-            title={'Some othe event'}
-            targetDate={new Date('2023-08-23T04:00:00')}
-            location={'Somewhere on campus'}
-          />
-          <p
-            style={{
-              color: 'white',
-              fontSize: '20px',
-              fontFamily: 'Chakra Petch',
-              fontWeight: '500',
-            }}
-          >
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          </p>
-          <EventBox
-            title={'Another event'}
-            targetDate={new Date('2023-07-31T00:00:00')}
-            location={'Somewhere on campus'}
-          />
+          {eventBoxesData.map((eventData, index) => (
+            <React.Fragment key={index}>
+              <EventBox
+                title={eventData.title}
+                targetDate={eventData.targetDate}
+                location={eventData.location}
+              />
+              {/* Add space between EventBoxes */}
+              <p
+                style={{
+                  color: 'white',
+                  fontSize: '20px',
+                  fontFamily: 'Chakra Petch',
+                  fontWeight: '500',
+                }}
+              >
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </p>
+            </React.Fragment>
+          ))}
         </div>
 
+        {/* Button for displaying all events */}
         <div
           style={{
             display: 'flex',
@@ -117,6 +125,7 @@ const Events = () => {
           <h2> PAST EVENTS</h2>
         </div>
 
+        {/* Buttons for filtering past events */}
         <div
           style={{
             display: 'flex',
@@ -129,6 +138,7 @@ const Events = () => {
         </div>
         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 
+        {/* Render Past EventBoxes using map */}
         <div
           style={{
             color: 'white',
@@ -140,98 +150,26 @@ const Events = () => {
             marginLeft: '39px',
           }}
         >
-          <EventBox
-            title={'Student Summit'}
-            targetDate={new Date('2023-08-31T00:00:00')}
-            location={'Somewhere on campus'}
-          />
-          <p
-            style={{
-              color: 'white',
-              fontSize: '20px',
-              fontFamily: 'Chakra Petch',
-              fontWeight: '500',
-            }}
-          >
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          </p>
-          <EventBox
-            title={'Some othe event'}
-            targetDate={new Date('2023-08-23T04:00:00')}
-            location={'Somewhere on campus'}
-          />
-          <p
-            style={{
-              color: 'white',
-              fontSize: '20px',
-              fontFamily: 'Chakra Petch',
-              fontWeight: '500',
-            }}
-          >
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          </p>
-          <EventBox
-            title={'Another event'}
-            targetDate={new Date('2023-07-31T00:00:00')}
-            location={'Somewhere on campus'}
-          />
-        </div>
-        <p
-          style={{
-            color: 'white',
-            fontSize: '20px',
-            fontFamily: 'Chakra Petch',
-            fontWeight: '500',
-          }}
-        >
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        </p>
-        <div
-          style={{
-            color: 'white',
-            fontSize: '20px',
-            fontFamily: 'Chakra Petch',
-            fontWeight: '700',
-            display: 'flex',
-            flexDirection: 'row',
-            marginLeft: '39px',
-          }}
-        >
-          <EventBox
-            title={'Student Summit'}
-            targetDate={new Date('2023-08-31T00:00:00')}
-            location={'Somewhere on campus'}
-          />
-          <p
-            style={{
-              color: 'white',
-              fontSize: '20px',
-              fontFamily: 'Chakra Petch',
-              fontWeight: '500',
-            }}
-          >
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          </p>
-          <EventBox
-            title={'Some othe event'}
-            targetDate={new Date('2023-08-23T04:00:00')}
-            location={'Somewhere on campus'}
-          />
-          <p
-            style={{
-              color: 'white',
-              fontSize: '20px',
-              fontFamily: 'Chakra Petch',
-              fontWeight: '500',
-            }}
-          >
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          </p>
-          <EventBox
-            title={'Another event'}
-            targetDate={new Date('2023-07-31T00:00:00')}
-            location={'Somewhere on campus'}
-          />
+          {eventBoxesData.map((eventData, index) => (
+            <React.Fragment key={index}>
+              <EventBox
+                title={eventData.title}
+                targetDate={eventData.targetDate}
+                location={eventData.location}
+              />
+              {/* Add space between EventBoxes */}
+              <p
+                style={{
+                  color: 'white',
+                  fontSize: '20px',
+                  fontFamily: 'Chakra Petch',
+                  fontWeight: '500',
+                }}
+              >
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </p>
+            </React.Fragment>
+          ))}
         </div>
       </Container>
     </div>
