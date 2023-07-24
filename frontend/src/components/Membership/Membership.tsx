@@ -16,14 +16,15 @@ const Membership = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        if (isLoggedIn) {
+        if (isLoggedIn === true) {
           const response = await axios.get(`http://localhost:5000/api/v1/users/${user.email}/info`);
           setUserData(response.data);
         } else {
           navigate('/login')
         }
       } catch (error) {
-        console.error('Error fetching user data: ', error);
+        console.log('Error fetching user data: ', error);
+        navigate('/login')
       }
     };
 

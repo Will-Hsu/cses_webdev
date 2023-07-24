@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FormControl, Box, Input, InputLabel, Button, FormHelperText } from '@mui/material';
+import { FormControl, Box, Input, InputLabel, Button, Autocomplete, TextField, FormHelperText, Select, SelectChangeEvent, MenuItem } from '@mui/material';
 import { createUserAPI } from '../../api';
 import { loginStyles } from './styles';
 import { Profanity, ProfanityOptions } from '@2toad/profanity';
+import MajorsContext from './MajorsContext';
+import GradYearsContext from './GradYearsContext';
 
 // Set up profanity checker
 const options = new ProfanityOptions();
@@ -18,14 +20,18 @@ interface SignupFormProps {
 const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
   const styles = loginStyles();
   const navigate = useNavigate();
-  const [showError, setShowError] = useState(false);
 
+  const availableMajors = useContext(MajorsContext);
+  const availableGradYears = useContext(GradYearsContext);
+  const [selectedMajor, setSelectedMajor] = useState<string | null>(null);
+  const [selectedGradYear, setSelectedGradYear] = useState<string | null>(null);
+
+  const [showError, setShowError] = useState(false);
   const [nameEmptyError, setNameEmptyError] = useState(false);
   const [nameLengthError, setNameLengthError] = useState(false);
   const [nameProfanityError, setNameProfanityError] = useState(false);
   const [majorEmptyError, setMajorEmptyError] = useState(false);
-  const [majorBadCharError, setMajorBadCharError] = useState(false);
-  const [gradYearBadError, setGradYearBadError] = useState(false);
+  const [gradYearEmptyError, setGradYearEmptyError] = useState(false);
 
   const [formData, setFormData] = useState({
     name: name,
@@ -39,6 +45,17 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
     setFormData({ ...formData, [name]: value });
   };
 
+  const onMajorChange = (e: React.ChangeEvent<{}>, value: string | null) => {
+    setSelectedMajor(value);
+    setFormData({ ...formData, major: value || ''})
+  };
+
+  const onGradYearChange = (e: React.ChangeEvent<{}>, value: string | null) => {
+    const numValue = Number(value)
+    setSelectedGradYear(value);
+    setFormData({ ...formData, expectedGraduateYear: numValue })
+  };
+
   const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -47,8 +64,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
     setNameLengthError(false);
     setNameProfanityError(false);
     setMajorEmptyError(false);
-    setMajorBadCharError(false);
-    setGradYearBadError(false);
+    setGradYearEmptyError(false);
 
     let hasErrors = false;
 
@@ -66,21 +82,14 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
     }
 
     // Validate major
-    if (formData.major.trim() === '') {
+    if (!selectedMajor) {
       setMajorEmptyError(true);
-      hasErrors = true;
-    } else if (!/^[A-Za-z\s-]+$/.test(formData.major)) {
-      setMajorBadCharError(true);
       hasErrors = true;
     }
 
     // Validate graduation year
-    if (
-      formData.expectedGraduateYear === -1 ||
-      formData.expectedGraduateYear < 2021 ||
-      formData.expectedGraduateYear > 2028
-    ) {
-      setGradYearBadError(true);
+    if (!selectedGradYear) {
+      setGradYearEmptyError(true);
       hasErrors = true;
     }
 
@@ -161,60 +170,61 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
         required
         variant="standard"
         sx={styles.inputField}
-        error={showError && (majorEmptyError || majorBadCharError)}
+        error={showError && (majorEmptyError)}
       >
-        <InputLabel htmlFor="major">Major</InputLabel>
-        <Input id="major" name="major" aria-describedby="my-helper-text" onChange={onInputChange} />
+        <Autocomplete
+          id="major"
+          options={availableMajors}
+          value={selectedMajor}
+          onChange={onMajorChange}
+          renderInput={(params) => <TextField {...params} label="Major *" />}
+        />
         {!showError && (
           <FormHelperText id='major-error-text'>
-            Please enter your major
+            Please select your major
           </FormHelperText>
         )}
         {showError && (
           <>
             {majorEmptyError && (
               <FormHelperText id="major-empty-error-text">
-                Please enter a major.
-              </FormHelperText>
-            )}
-            {majorBadCharError && (
-              <FormHelperText id="major-length-error-text">
-                Major can only contain alphabetic characters, spaces, and '-'.
+                Please select your major.
               </FormHelperText>
             )}
           </>
         )}
       </FormControl>
+
       <FormControl
         fullWidth
         required
         variant="standard"
         sx={styles.inputField}
-        error={showError && (gradYearBadError)}
+        error={showError && (gradYearEmptyError)}
       >
-        <InputLabel htmlFor="expected-graduate-year">Expected Graduation Year</InputLabel>
-        <Input
-          type="number"
+        <Autocomplete
           id="expected-graduate-year"
-          name="expectedGraduateYear"
-          aria-describedby="my-helper-text"
-          onChange={onInputChange}
+          options={availableGradYears}
+          value={selectedGradYear}
+          onChange={onGradYearChange}
+          renderInput={(params) => <TextField {...params} label="Expected Graduation Year *" />}
         />
         {!showError && (
-          <FormHelperText id='grad-year-error-text'>
-            Please enter your expected graduation year
+          <FormHelperText id='expected-graduate-year-error-text'>
+            Please select your expected graduation year
           </FormHelperText>
         )}
         {showError && (
           <>
-            {gradYearBadError && (
-              <FormHelperText id="grad-year-bad-error-text">
-                Please enter a valid graduation year.
+            {gradYearEmptyError && (
+              <FormHelperText id="expected-graduate-year-empty-error-text">
+                Please select an expected graduation year.
               </FormHelperText>
             )}
           </>
         )}
       </FormControl>
+      
       <Box sx={{ textAlign: 'center' }}>
         <Button variant="contained" type="submit" sx={styles.inputField}>
           Sign up
