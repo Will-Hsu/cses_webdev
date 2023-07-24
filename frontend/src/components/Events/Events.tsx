@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container } from '@mui/material';
 import bgTop from '../../images/shape.svg';
 import bgBtm from '../../images/shape.svg';
@@ -8,6 +8,48 @@ import Button from '../Button/Button';
 
 const Events = () => {
   const styles = event_style();
+  const [upcomingEvents, setUpcomingEvents] = useState([]);
+  const [pastEvents, setPastEvents] = useState([]);
+  const [selectedYear, setSelectedYear] = useState(null);
+  const [selectedMonth, setSelectedMonth] = useState(null);
+
+  useEffect(() => {
+    // Make the API call to fetch upcoming events
+    let upcomingEventsEndpoint = 'http://127.0.0.1:5000/api/v1/events?type=upcoming';
+    if (selectedYear) {
+      upcomingEventsEndpoint += `&year=${selectedYear}`;
+    }
+    if (selectedMonth) {
+      upcomingEventsEndpoint += `&month=${selectedMonth}`;
+    }
+
+    fetch(upcomingEventsEndpoint)
+      .then((response) => response.json())
+      .then((data) => {
+        setUpcomingEvents(data);
+      })
+      .catch((error) => {
+        console.error('Error fetching upcoming events:', error);
+      });
+
+    // Make the API call to fetch past events
+    let pastEventsEndpoint = 'http://127.0.0.1:5000/api/v1/events?type=past';
+    if (selectedYear) {
+      pastEventsEndpoint += `&year=${selectedYear}`;
+    }
+    if (selectedMonth) {
+      pastEventsEndpoint += `&month=${selectedMonth}`;
+    }
+
+    fetch(pastEventsEndpoint)
+      .then((response) => response.json())
+      .then((data) => {
+        setPastEvents(data);
+      })
+      .catch((error) => {
+        console.error('Error fetching past events:', error);
+      });
+  }, [selectedYear, selectedMonth]);
 
   // Data array for EventBoxes
   const futureEventBoxesData = [
@@ -61,11 +103,11 @@ const Events = () => {
     } else {
       const now = new Date().getTime();
       const oneWeekAfter = now + 7 * 24 * 60 * 60 * 1000;
-  
+
       const thisWeekEvents = futureEventBoxesData.filter(
-        event => event.targetDate.getTime() >= now && event.targetDate.getTime() <= oneWeekAfter
+        (event) => event.targetDate.getTime() >= now && event.targetDate.getTime() <= oneWeekAfter,
       );
-  
+
       setDisplayedFutureEvents(thisWeekEvents);
       setIsThisWeekClicked(true);
     }
@@ -80,7 +122,7 @@ const Events = () => {
       const oneMonthAfter = now + 30 * 24 * 60 * 60 * 1000;
 
       const thisMonthEvents = futureEventBoxesData.filter(
-        event => event.targetDate.getTime() >= now && event.targetDate.getTime() <= oneMonthAfter
+        (event) => event.targetDate.getTime() >= now && event.targetDate.getTime() <= oneMonthAfter,
       );
 
       setDisplayedFutureEvents(thisMonthEvents);
@@ -94,7 +136,7 @@ const Events = () => {
       setIs2023Clicked(false);
     } else {
       const year2023Events = pastEventBoxesData.filter(
-        event => event.targetDate.getFullYear() === 2023
+        (event) => event.targetDate.getFullYear() === 2023,
       );
 
       setDisplayedPastEvents(year2023Events);
@@ -168,7 +210,6 @@ const Events = () => {
           ))}
         </div>
 
-        
         <div
           style={{
             display: 'flex',
@@ -176,12 +217,10 @@ const Events = () => {
             marginLeft: '30px',
             marginTop: '20px',
           }}
-        >
-          
-        </div>
-        
+        ></div>
+
         {/* Past Event Section */}
-        <div 
+        <div
           style={{
             color: 'white',
             fontSize: '40px',
@@ -240,7 +279,6 @@ const Events = () => {
             </React.Fragment>
           ))}
         </div>
-        
       </Container>
     </div>
   );
