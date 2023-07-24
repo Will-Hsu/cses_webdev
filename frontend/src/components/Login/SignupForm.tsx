@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FormControl, Box, Input, InputLabel, Button, Autocomplete, TextField, FormHelperText, Select, SelectChangeEvent, MenuItem } from '@mui/material';
+import { FormControl, Box, Input, InputLabel, Button, Autocomplete, TextField, FormHelperText } from '@mui/material';
 import { createUserAPI } from '../../api';
 import { loginStyles } from './styles';
 import { Profanity, ProfanityOptions } from '@2toad/profanity';
