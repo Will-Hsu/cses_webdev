@@ -53,5 +53,5 @@ export const getUserInfo = asyncHandler(async (req, res) => {
 export default {
   userCheck,
   userCreate,
-  getUserInfo
-}
+  getUserInfo,
+};

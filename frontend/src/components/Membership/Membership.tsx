@@ -3,13 +3,13 @@ import { AuthContext } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { User } from '../../utils/types';
-import { Box, Divider, Typography } from '@mui/material';
+import { Box, Button, Divider, Typography } from '@mui/material';
 import { membershipStyles } from './styles';
 
 const styles = membershipStyles();
 
 const Membership = () => {
-  const { user, isLoggedIn } = useContext(AuthContext);
+  const { user, isLoggedIn, logout } = useContext(AuthContext);
   const [userData, setUserData] = useState<User | null>(null);
   const navigate = useNavigate();
 
@@ -17,14 +17,14 @@ const Membership = () => {
     const fetchUserData = async () => {
       try {
         if (isLoggedIn === true) {
-          const response = await axios.get(`http://localhost:5000/api/v1/users/${user.email}/info`);
+          const response = await axios.get(`http://127.0.0.1:5000/api/v1/users/${user.email}/info`);
           setUserData(response.data);
         } else {
-          navigate('/login')
+          navigate('/login');
         }
       } catch (error) {
         console.log('Error fetching user data: ', error);
-        navigate('/login')
+        navigate('/login');
       }
     };
 
@@ -32,31 +32,31 @@ const Membership = () => {
   }, [isLoggedIn, user.email, navigate]);
 
   return (
-    <div 
-      style={{ 
-        height: '1000px', 
-        display: 'flex', 
-        justifyContent: 'center', 
-        alignItems: 'center' 
+    <div
+      style={{
+        height: '1000px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
       }}
     >
       {isLoggedIn && userData && (
-          <Box sx={styles.name}>
+        <Box sx={styles.name}>
           <Typography
             variant="h4"
             sx={{
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
-              marginTop: '10%',
-              marginBottom: '5%',
+              marginTop: '10px',
+              marginBottom: '10px',
             }}
           >
             Welcome, {userData.name}!
           </Typography>
-          <Divider variant="middle" sx={{ marginBottom: '7%' }}/>
+          <Divider variant="middle" sx={{ marginBottom: '7%' }} />
           <Box sx={styles.attribute}>
-            <Typography 
+            <Typography
               sx={{
                 display: 'flex',
                 justifyContent: 'center',
@@ -67,7 +67,7 @@ const Membership = () => {
             </Typography>
           </Box>
           <Box sx={styles.attribute}>
-            <Typography 
+            <Typography
               sx={{
                 display: 'flex',
                 justifyContent: 'center',
@@ -78,7 +78,7 @@ const Membership = () => {
             </Typography>
           </Box>
           <Box sx={styles.attribute}>
-            <Typography 
+            <Typography
               sx={{
                 display: 'flex',
                 justifyContent: 'center',
@@ -88,9 +88,11 @@ const Membership = () => {
               Your expected graduation year: {userData.expectedGraduationYear}
             </Typography>
           </Box>
-          </Box>
-        )
-      }
+          <Button variant="outlined" onClick={logout}>
+            Logout
+          </Button>
+        </Box>
+      )}
     </div>
   );
 };

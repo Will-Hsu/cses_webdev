@@ -1,7 +1,7 @@
 export const membershipStyles = () => ({
     name: {
         width: 300,
-        height: 275,
+        height: 300,
         padding: '20px',
         marginY: '150px',
         backgroundColor: 'white',

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   AppBar,
   IconButton,
@@ -17,14 +17,12 @@ import csesLogo from '../../images/logo.svg';
 import MuiButton from '../Button/Button';
 import { navBarStyles } from './styles';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../context/AuthContext';
 
 const NavBar = () => {
   const styles = navBarStyles();
   const navigate = useNavigate();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const { isLoggedIn, setIsLoggedIn, logout } = useContext(AuthContext);
 
   const navItems = [
     { text: 'About', link: '/about' },
@@ -64,25 +62,12 @@ const NavBar = () => {
                 {text}
               </Button>
             ))}
-            {isLoggedIn ? (
-              <MuiButton
-                onClick={() => {
-                  logout();
-                  localStorage.removeItem('token');
-                  setIsLoggedIn(false);
-                }}
-                text="Logout"
-                size="large"
-                isLogin={true}
-              />
-            ) : (
-              <MuiButton
-                onClick={() => navigate('/login')}
-                text="Login"
-                size="large"
-                isLogin={true}
-              />
-            )}
+            <MuiButton
+              onClick={() => navigate('/login')}
+              text="Login"
+              size="large"
+              isLogin={true}
+            />
           </Box>
           <Box sx={{ display: { xs: 'block', md: 'none' } }}>
             <IconButton onClick={() => setIsDrawerOpen(!isDrawerOpen)} color="inherit">

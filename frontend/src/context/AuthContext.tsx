@@ -97,6 +97,8 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const logout = () => {
     setIsLoggedIn(false);
+    setUser({} as User);
+    localStorage.removeItem('token');
   };
 
   return (
