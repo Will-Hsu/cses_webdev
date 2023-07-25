@@ -18,6 +18,7 @@ import MuiButton from '../Button/Button';
 import { navBarStyles } from './styles';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
+import ProfileDropdown from './ProfileDropdown';
 
 const NavBar = () => {
   const styles = navBarStyles();
@@ -66,11 +67,11 @@ const NavBar = () => {
             ))}
             {!isLoggedIn && (
               <MuiButton
-              onClick={() => navigate('/login')}
-              text="Login"
-              size="large"
-              isLogin={true}
-            />
+                onClick={() => navigate('/login')}
+                text="Login"
+                size="large"
+                isLogin={true}
+              />
             )}
           </Box>
           <Box sx={{ display: { xs: 'block', md: 'none' } }}>
@@ -100,15 +101,17 @@ const NavBar = () => {
               />
             </ListItem>
           ))}
-          <ListItem key="Login" sx={styles.listitem}>
-            <ListItemText
-              primary={
-                <Typography align="center" sx={styles.button}>
-                  Login
-                </Typography>
-              }
-            />
+          {!isLoggedIn && (
+            <ListItem button key="Login" sx={styles.listitem} onClick = {() => clickItem('/login')}>
+              <ListItemText
+                primary={
+                  <Typography align="center" sx={styles.button}>
+                    Login
+                  </Typography>
+                }
+              />
           </ListItem>
+          )}
         </List>
       </Drawer>
     </div>
