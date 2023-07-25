@@ -5,6 +5,7 @@ import background from '../../images/shape.svg';
 import EventBox from '../Event/Event';
 import desktop from '../../images/desktop.png';
 import { homeStyles } from './styles';
+import SlideShow from './SlideShow/SlideShow';
 
 const Home = () => {
   const styles = homeStyles();
@@ -44,6 +45,7 @@ const Home = () => {
                 alt="img"
                 style={{ width: '100%', marginTop: '8%', height: 'auto' }}
               />
+              <SlideShow />
             </Grid>
           </Grid>
           <Grid container spacing={0} sx={{ marginTop: '17%' }}>
