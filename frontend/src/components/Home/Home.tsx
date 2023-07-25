@@ -40,11 +40,6 @@ const Home = () => {
               </Box>
             </Grid>
             <Grid item xs={12} sm={7} md={6.5}>
-              <img
-                src={desktop}
-                alt="img"
-                style={{ width: '100%', marginTop: '8%', height: 'auto' }}
-              />
               <SlideShow />
             </Grid>
           </Grid>

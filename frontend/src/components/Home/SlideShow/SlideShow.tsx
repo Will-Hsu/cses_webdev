@@ -26,7 +26,6 @@ const SlideShow = () => {
         <div
           style={{
             whiteSpace: 'nowrap',
-            //, // Adjust the negative margin to control the overlap
             //transition: 'ease 1000ms',
             transform: `translate3d(${-index * 100}%, 0, 0)`,
           }}
