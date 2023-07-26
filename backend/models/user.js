@@ -5,6 +5,9 @@ const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
   major: { type: String, required: true },
   expectedGraduationYear: { type: Number, required: true },
+  points: { type: Number, required: true },
+  eventsAttended: [{ type: mongoose.Schema.Types.ObjectId, required: true }],
+  profilePicture: { type: Buffer, required: true },
 });
 
 export default mongoose.model('User', userSchema);
