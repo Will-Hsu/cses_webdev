@@ -4,20 +4,22 @@ import desktop from '../../../images/desktop.png';
 
 const images = require.context('../../../images/slideshowImages', true);
 const styles = slideShowStyles();
-const delay = 100000;
+const delay = 10000;
 
 const SlideShow = () => {
   const imageList = images.keys().map((image) => images(image));
   const [index, setIndex] = React.useState(0);
 
   React.useEffect(() => {
-    setTimeout(
-      () => setIndex((prevIndex) => (prevIndex === imageList.length - 1 ? 0 : prevIndex + 1)),
-      delay,
-    );
+    setTimeout(() => {
+      setIndex((prevIndex) => (prevIndex === imageList.length - 1 ? 0 : prevIndex + 1));
+      console.log(index);
+      console.time();
+      console.timeLog();
+    }, delay);
 
     return () => {};
-  }, [imageList]);
+  }, [imageList, index]);
 
   return (
     <div>
@@ -26,12 +28,17 @@ const SlideShow = () => {
         <div
           style={{
             whiteSpace: 'nowrap',
-            //transition: 'ease 1000ms',
             transform: `translate3d(${-index * 100}%, 0, 0)`,
           }}
         >
           {imageList.map((img, idx) => (
-            <img src={img} key={idx} alt="img" style={styles.slide} />
+            <div
+              key={idx}
+              style={{
+                ...styles.slide,
+                backgroundImage: `url(${img})`,
+              }}
+            />
           ))}
         </div>
       </div>
