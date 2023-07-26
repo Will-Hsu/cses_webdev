@@ -16,5 +16,8 @@ export const buttonStyles = (isLogin: boolean) => {
       borderColor: 'white',
       backgroundColor: 'rgba(255, 255, 255, 0.1)',
     },
+    '&:focus': { 
+      backgroundColor: 'rgba(255, 255, 255, 0.3)',
+    },
   };
 };
