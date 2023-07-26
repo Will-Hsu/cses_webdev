@@ -4,9 +4,39 @@ import { body, param, validationResult } from 'express-validator';
 
 // Display list of all Events.
 export const eventList = asyncHandler(async (req, res) => {
+  const { type, year, month } = req.query;
   try {
-    // Retrieve events from database
-    const events = await Event.find();
+    const query = {};
+    const currentDate = new Date();
+
+    // specify to retrieve past or upcoming events
+    if (type == 'past') {
+      query.end_time = { $lt: currentDate };
+    }
+
+    if (type == 'upcoming') {
+      query.end_time = { $gte: currentDate };
+    }
+
+    // specify to retrieve events between a given timeframe (year & month)
+    if (month !== undefined && year !== undefined) {
+      // If both month and year are provided, filter based on the specific month and year
+      const startDate = new Date(parseInt(year), parseInt(month) - 1, 1);
+      const endDate = new Date(parseInt(year), parseInt(month), 1);
+      query.start_time = { $gte: startDate, $lt: endDate };
+    } else if (year !== undefined) {
+      const startDate = new Date(parseInt(year), 0, 1);
+      const endDate = new Date(parseInt(year) + 1, 0, 1);
+      query.start_time = { $gte: startDate, $lt: endDate };
+    } else if (month !== undefined) {
+      // query events of this current year if only month is specified
+      const startDate = new Date(currentDate.getFullYear(), parseInt(month) - 1, 1);
+      const endDate = new Date(currentDate.getFullYear(), parseInt(month), 1);
+      query.start_time = { $gte: startDate, $lt: endDate };
+    }
+
+    // Retrieve events from database (sorted by start time)
+    const events = await Event.find(query).sort({ start_time: 1 });
 
     // Extract attributes from each event
     const eventAttributes = events.map((event) => {
