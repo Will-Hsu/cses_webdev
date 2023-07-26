@@ -9,7 +9,6 @@ export const aboutStyles = () => ({
   },
   body: { position: 'absolute', top: '93px'},
  
- 
   root: {
     position: 'relative',
     overflow: 'auto',

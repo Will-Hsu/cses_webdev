@@ -11,27 +11,48 @@ import { aboutStyles } from './styles';
 import blankPhoto from '../../images/aboutpagephoto.png';
 import books from '../../images/aboutbooks.png';
 import lightBulb from '../../images/aboutlightbulb.png';
-
-
+import Anuj from '../../images/Anuj_Jain_CSES_VP-Finance.jpg';
+import Cassandra from '../../images/Cassandra_PonceMaldonado_CSES_EventChair.png';
+import Nabil from '../../images/Nabil_Khoury_CSES_Co-President.jpg';
+import Rahul from '../../images/Rahul_Mistry_CSES_VP Internal.jpg';
+import Samvrith from '../../images/Samvrit_Srinath_CSES_Co-President.jpeg';
+import Sithu from '../../images/Sithu_Soe_CSES_VP External.jpg';
+import Christopher from '../../images/christopher_tams_marketing_chair.png'
+import Yashil from '../../images/Yashil_Vora_CSES_Projects_Chair.jpg';
+import Rachel from '../../images/Rachel_Paner_CSES_Design_Chair.jpg';
+import Nishant from '../../images/Nishant_Begani_CSES_MarketingChair.jpg';
+import Ishika from '../../images/Ishika_Agrawal_CSES_DEIChair.jpg'
+import Sidhant from '../../images/SidhantRohatgi CSES EventChair.jpg'
+import Brian from '../../images/brian_liu_cses_webdev_backend_developer.jpg.jpg';
+import Delvin from '../../images/Delvin_Bajoua_CSES_ProductManager.jpg';
+import Eddie from '../../images/Eddie_Ho_CSES_WebDev_Backend-Developer.jpeg';
+import Joyce from '../../images/Joyce_Lu_CSES_WebDeveloper.jpg';
+import Kaung from '../../images/Kaung Min_Khant_CSES WebDev_Frontend Developer.png';
+import Sadrac from '../../images/Sadrac_Santacruz_Ibarra_Web_Developer.jpg';
+import Will from '../../images/Will_Hsu_CSES_WebDev_EngineeringManager.jpg'
 
 const categories = [
   {
     id: 1,
-    name: 'Category 1',
+    name: 'CSES Board',
     members: [
-      { name: 'Member 1.1', title: 'Title 1', photo: shape },
-      { name: 'Member 1.2', title: 'Title 2', photo: shape },
-      { name: 'Member 1.3', title: 'Title 3', photo: shape },
-      { name: 'Member 1.4', title: 'Title 4', photo: shape },
-      { name: 'Member 1.5', title: 'Title 5', photo: shape },
-      { name: 'Member 1.6', title: 'Title 6', photo: shape },
-      { name: 'Member 1.7', title: 'Title 6', photo: shape },
-      { name: 'Member 1.8', title: 'Title 6', photo: shape },
+      { name: 'Nabil Khoury', title: 'Co-President', photo: Nabil },
+      { name: 'Samvrith Srinath', title: 'Co-President', photo: Samvrith },
+      { name: 'Rahul Mistry', title: 'VP Internal', photo: Rahul },
+      { name: 'Sithu Soe', title: 'VP External', photo: Sithu },
+      { name: 'Anuj Jain', title: 'VP Finance', photo: Anuj },
+      { name: 'Cassandra Pounce Maldonado', title: 'Events Chair', photo: Cassandra },
+      { name: 'Sidhant Rohatgi', title: 'Events Chair', photo: Sidhant },
+      { name: 'Christopher Tams', title: 'Marketing Chair', photo: Christopher },
+      { name: 'Nishant Begani', title: 'Marketing Chair', photo: Nishant },
+      { name: 'Rachel Paner', title: 'Design Chair', photo: Rachel },
+      { name: 'Ishika Agrawal', title: 'DEI Chair', photo: Ishika },
+      { name: 'Yashil Vora', title: 'Projects Chair', photo: Yashil },
     ],
   },
   {
     id: 2,
-    name: 'Category 2',
+    name: 'CSES Officers',
     members: [
       { name: 'Member 2.1', title: 'Title 1', photo: shape },
       { name: 'Member 2.2', title: 'Title 2', photo: shape },
@@ -47,18 +68,22 @@ const categories = [
   },
   {
     id: 3,
-    name: 'Category 3',
+    name: 'CSES WebDev Internal',
     members: [
-      { name: 'Member 3.1', title: 'Title 1', photo: shape },
-      { name: 'Member 3.2', title: 'Title 2', photo: shape },
-      { name: 'Member 3.3', title: 'Title 3', photo: shape },
-      { name: 'Member 3.4', title: 'Title 4', photo: shape },
-      { name: 'Member 3.5', title: 'Title 5', photo: shape },
+      { name: 'Will Hsu', title: 'Engineering Manager', photo: Will },
+      { name: 'Delvin Bajoua', title: 'Product Manager', photo: Delvin },
+      { name: 'Kaung Min Khant', title: 'Frondend Developer', photo: Kaung },
+      { name: 'Sadra Santacruz Ibarra', title: 'Frontend Developer', photo: Sadrac },
+      { name: 'Sithu Soe', title: 'Frontend Developer', photo: Sithu },
+      { name: 'Joyce', title: 'Frontend Developer', photo: Joyce },
+      { name: 'Eddie Ho', title: 'Backend Developer', photo: Eddie },
+      { name: 'Yashil Vora', title: 'Backend Developer', photo: Yashil },
+      { name: 'Brian Li', title: 'Backend Developer', photo: Brian },
     ],
   },
   {
     id: 4,
-    name: 'Category 4',
+    name: 'CSES WebDev External',
     members: [
       { name: 'Member 4.1', title: 'Title 1', photo: shape },
       { name: 'Member 4.2', title: 'Title 2', photo: shape },
@@ -136,18 +161,18 @@ const marginTopValue = areFewMembers ? '3%' : '-50%';
        </Box>
      <Container maxWidth="xl" sx={styles.body}>
        <Grid container sx={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
-         <Grid item sm={4.5} md={2.5}>
+         <Grid item sm={4.5} lg={2.5}>
            <img src={blankPhoto} alt="img" />
          </Grid>
-         <Grid item sm={6} md={4}>
+         <Grid item sm={6} lg={4}>
            <Box
              sx={{
                color: 'white',
-               textAlign: { md: 'left', sm: 'left', xs: 'center' },
+               textAlign: { lg: 'left', sm: 'left', xs: 'center' },
                fontSize: '1em',
              }}
            >
-             <h1>WHAT IS CSES?</h1>
+             <h1 style={{fontFamily: 'Chakra Petch'}}>WHAT IS CSES?</h1>
            </Box>
            <p style={{ color: 'white' }}>
              CSES is the Computer Science and Engineering Society at UCSD that focuses on the
@@ -156,13 +181,13 @@ const marginTopValue = areFewMembers ? '3%' : '-50%';
            </p>
          </Grid>
        </Grid>
-       <h1 style={{ color: 'white', marginTop: '10%', textAlign: 'center' }}>WHAT DO WE DO?</h1>
+       <h1 style={{ color: 'white', marginTop: '10%', textAlign: 'center', fontFamily: 'Chakra Petch'}}>WHAT DO WE DO?</h1>
        <Grid container sx={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
-         <Grid item sm={5} md={3}>
+         <Grid item sm={5} lg={3}>
            <img src={books} alt="img" />
          </Grid>
-         <Grid item sm={6} md={5}>
-           <Box sx={{ color: 'white', textAlign: { md: 'left', sm: 'left', xs: 'center' } }}>
+         <Grid item sm={6} lg={5}>
+           <Box sx={{ color: 'white', textAlign: { lg: 'left', sm: 'left', xs: 'center' } }}>
              <h1>Our History</h1>
            </Box>
            <p style={{ color: 'white' }}>
@@ -175,8 +200,8 @@ const marginTopValue = areFewMembers ? '3%' : '-50%';
        </Grid>
        {!isSmallScreen && (
          <Grid container sx={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
-           <Grid item sm={6.5} md={5}>
-             <Box sx={{ color: 'white', textAlign: { md: 'left', sm: 'left', xs: 'center' } }}>
+           <Grid item sm={6.5} lg={5}>
+             <Box sx={{ color: 'white', textAlign: { lg: 'left', sm: 'left', xs: 'center' } }}>
                <h1>Our Future</h1>
              </Box>
              <p style={{ color: 'white' }}>
@@ -185,18 +210,18 @@ const marginTopValue = areFewMembers ? '3%' : '-50%';
                programs for career development, and project opportunities to gain experience.
              </p>
            </Grid>
-           <Grid item sm={4.5} md={3}>
+           <Grid item sm={4.5} lg={3}>
              <img src={lightBulb} alt="img" style={{ marginLeft: '10%' }} />
            </Grid>
          </Grid>
        )}
        {isSmallScreen && (
          <Grid container sx={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
-           <Grid item sm={5} md={3}>
+           <Grid item sm={5} lg={3}>
              <img src={lightBulb} alt="img" />
            </Grid>
-           <Grid item sm={6} md={5}>
-             <Box sx={{ color: 'white', textAlign: { md: 'left', sm: 'center', xs: 'center' } }}>
+           <Grid item sm={6} lg={5}>
+             <Box sx={{ color: 'white', textAlign: { lg: 'left', sm: 'center', xs: 'center' } }}>
                <h1>Our Future</h1>
              </Box>
              <p style={{ color: 'white' }}>
@@ -208,15 +233,15 @@ const marginTopValue = areFewMembers ? '3%' : '-50%';
          </Grid>
        )}
        <Grid container sx={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
-         <Grid item sm={5} md={3}>
+         <Grid item sm={5} lg={3}>
            <img src={books} alt="img" />
          </Grid>
-         <Grid item sm={6} md={5}>
+         <Grid item sm={6} lg={5}>
            <Box
              sx={{
                color: 'white',
-               textAlign: { md: 'left', sm: 'center', xs: 'center' },
-               fontSize: { xs: '0.9em', sm: '1em', md: '1em' },
+               textAlign: { lg: 'left', sm: 'center', xs: 'center' },
+               fontSize: { xs: '0.9em', sm: '1em', lg: '1em' },
              }}
            >
              <h1>What's in store for me?</h1>
@@ -229,24 +254,28 @@ const marginTopValue = areFewMembers ? '3%' : '-50%';
              sx={{
                marginLeft: '-2%',
                display: 'flex',
-               justifyContent: { xs: 'center', sm: 'left', md: 'left' },
+               justifyContent: { xs: 'center', sm: 'left', lg: 'left' },
              }}
            >
-             <Button
-               size="large"
-               text="See Opportunities ->"
-               onClick={() => navigate('/opportunities')}
-             />
+            <div style={{fontFamily: 'Chakra Petch'}}>
+            <Button
+
+size="large"
+text="See Opportunities ->"
+onClick={() => navigate('/opportunities')}
+/>
+            </div>
+             
            </Box>
          </Grid>
        </Grid>
        {!isSmallScreen && (
          <Grid container sx={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
-           <Grid item sm={6.5} md={5}>
-             <Box sx={{ color: 'white', textAlign: { md: 'left', sm: 'center', xs: 'center' } }}>
+           <Grid item sm={6.5} lg={5}>
+             <Box sx={{ color: 'white', textAlign: { lg: 'left', sm: 'center', xs: 'center' } }}>
                <h1>How do I join?</h1>
              </Box>
-             <Box sx={{ color: 'white', textAlign: { md: 'left', sm: 'left', xs: 'center' } }}>
+             <Box sx={{ color: 'white', textAlign: { lg: 'left', sm: 'left', xs: 'center' } }}>
                <p style={{ color: 'white' }}>
                  Check out amazing events we have planned as well as the opportunities we have for
                  members.
@@ -255,7 +284,7 @@ const marginTopValue = areFewMembers ? '3%' : '-50%';
                  sx={{
                    marginLeft: '-2%',
                    display: 'flex',
-                   justifyContent: { xs: 'center', sm: 'left', md: 'left' },
+                   justifyContent: { xs: 'center', sm: 'left', lg: 'left' },
                  }}
                >
                  <Button
@@ -266,7 +295,7 @@ const marginTopValue = areFewMembers ? '3%' : '-50%';
                </Box>
              </Box>
            </Grid>
-           <Grid item sm={4.5} md={3}>
+           <Grid item sm={4.5} lg={3}>
              <img src={books} alt="img" style={{ marginLeft: '10%' }} />
            </Grid>
          </Grid>
@@ -275,11 +304,11 @@ const marginTopValue = areFewMembers ? '3%' : '-50%';
 
        {isSmallScreen && (
          <Grid container sx={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
-           <Grid item sm={5} md={3}>
+           <Grid item sm={5} lg={3}>
              <img src={lightBulb} alt="img" />
            </Grid>
-           <Grid item sm={6} md={5}>
-             <Box sx={{ color: 'white', textAlign: { md: 'left', sm: 'center', xs: 'center' } }}>
+           <Grid item sm={6} lg={5}>
+             <Box sx={{ color: 'white', textAlign: { lg: 'left', sm: 'center', xs: 'center' } }}>
                <h1>How do I join?</h1>
              </Box>
              <p style={{ color: 'white' }}>
@@ -290,7 +319,7 @@ const marginTopValue = areFewMembers ? '3%' : '-50%';
                sx={{
                  marginLeft: '-2%',
                  display: 'flex',
-                 justifyContent: { xs: 'center', sm: 'left', md: 'left' },
+                 justifyContent: { xs: 'center', sm: 'left', lg: 'left' },
                }}
              >
                <Button
@@ -306,7 +335,7 @@ const marginTopValue = areFewMembers ? '3%' : '-50%';
 
 
 
-       <Grid item xs={12} sm={4.5} md={5}>
+       <Grid item xs={12} sm={4.5} lg={5}>
          <Box
            sx={{
              ...styles.mainTitleBottom,
@@ -319,7 +348,7 @@ const marginTopValue = areFewMembers ? '3%' : '-50%';
 
        <Grid container sx={{ marginTop: '5%', display: 'flex', justifyContent: 'center' }}>
        {categories.map((category) => (
-         <Grid item md={1.5} key={category.id}>
+         <Grid item lg={1.5} key={category.id}>
            <Button size="large" text={category.name} onClick={() => handleCategoryChange(category)} />
          </Grid>
        ))}
@@ -332,9 +361,9 @@ const marginTopValue = areFewMembers ? '3%' : '-50%';
          {currentCategory.members
            .slice((currentPage - 1) * 6, currentPage * 6)
            .map((member, index) => (
-             <Grid item xs={12} sm={3.5} md={3.1} key={index}>
+             <Grid item xs={12} sm={3.5} lg={3.1} key={index}>
                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                 <img src={member.photo} alt="img" style={{ width: 200, height: 300 }} />
+                 <img src={member.photo} alt="img" style={{ width: 300, height: 300 }} />
                </div>
                <h3 style={{ color: 'white', textAlign: 'center' }}>{member.name}</h3>
                <h5 style={{ color: 'white', textAlign: 'center' }}>{member.title}</h5>
@@ -343,15 +372,15 @@ const marginTopValue = areFewMembers ? '3%' : '-50%';
 
 
          {emptyMembers.map((member, index) => (
-           <Grid item xs={12} sm={3.5} md={3.1} key={index + currentCategory.members.length}>
+           <Grid item xs={12} sm={3.5} lg={3.1} key={index + currentCategory.members.length}>
              {/* Empty placeholder, no visible content */}
            </Grid>
          ))}
 
 
        </Grid>
-       <Grid container item xs={12} sm={11} md={12} justifyContent="center" sx={{ marginTop: { xs: '8%', sm: areFewMembers ? marginTopValue : '-100%', md: marginTopValue }, marginBottom: {xs: areFewMembers ? '10%' : '0%', sm: areFewMembers ? '10%' : '0%', md: areFewMembers ? '10%' : '0%'}}}>
-         <Grid container item xs={5} sm={20} md={10} justifyContent="space-between" sx={{ alignItems: 'center' }}>
+       <Grid container item xs={12} sm={11} lg={12} justifyContent="center" sx={{ marginTop: { xs: '8%', sm: areFewMembers ? marginTopValue : '-100%', lg: marginTopValue }, marginBottom: {xs: areFewMembers ? '10%' : '0%', sm: areFewMembers ? '10%' : '0%', lg: areFewMembers ? '10%' : '0%'}}}>
+         <Grid container item xs={5} sm={20} lg={10} justifyContent="space-between" sx={{ alignItems: 'center' }}>
            <Grid item>
              <button
                style={{ border: 'none', background: 'none', cursor: 'pointer' }}
