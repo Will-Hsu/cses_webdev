@@ -398,8 +398,8 @@ return (
                    }}
                  />
                </div>
-               <h3 style={{ color: 'white', textAlign: 'center' }}>{member.name}</h3>
-               <h5 style={{ color: 'white', textAlign: 'center', marginTop: '-2%' }}>{member.title}</h5>
+               <h3 style={{ color: 'white', textAlign: 'center', fontFamily: 'Inter', fontWeight: '700', fontSize: '18px' }}>{member.name}</h3>
+               <h5 style={{ color: 'white', textAlign: 'center', fontFamily: 'Inter', fontWeight: '500', fontSize: '14px', marginTop: '-2%' }}>{member.title}</h5>
              </Grid>
            ))}
 
