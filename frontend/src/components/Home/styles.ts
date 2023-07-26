@@ -4,18 +4,19 @@ export const homeStyles = () => ({
     marginLeft: '-2%',
     scale: '105%',
     marginBottom: '20%',
-    height: '100%',
+    opacity: '0.6',
   },
   root: {
     position: 'relative',
-    overflowX: 'hidden',
+    background: 'linear-gradient(to bottom,black 0%, #2F56BC 20%, black 55%)',
   },
   backgroundImage: {
     width: '100%',
   },
   container: {
-    position: 'absolute',
+    position: 'relative',
     top: '83px',
+    marginBottom: '100px',
   },
   title: {
     color: 'white',

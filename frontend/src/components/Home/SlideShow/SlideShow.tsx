@@ -9,17 +9,20 @@ const delay = 10000;
 const SlideShow = () => {
   const imageList = images.keys().map((image) => images(image));
   const [index, setIndex] = React.useState(0);
+  const indexRef = React.useRef(index);
 
+  // Update the ref whenever the index changes (without triggering re-renders)
   React.useEffect(() => {
-    setTimeout(() => {
-      setIndex((prevIndex) => (prevIndex === imageList.length - 1 ? 0 : prevIndex + 1));
-      console.log(index);
-      console.time();
-      console.timeLog();
-    }, delay);
+    indexRef.current = index;
+  }, [index]);
 
-    return () => {};
-  }, [imageList, index]);
+  // Use setInterval to handle periodic updates
+  React.useEffect(() => {
+    const intervalId = setInterval(() => {
+      setIndex((prevIndex) => (prevIndex === imageList.length - 1 ? 0 : prevIndex + 1));
+    }, delay);
+    return () => clearInterval(intervalId);
+  }, [imageList]);
 
   return (
     <div>
