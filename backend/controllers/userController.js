@@ -50,8 +50,26 @@ export const getUserInfo = asyncHandler(async (req, res) => {
   }
 });
 
+// TODO: implement this
+export const userRead = asyncHandler(async (req, res) => {
+  res.send('TODO: read user');
+});
+
+// TODO: implement this
+export const userUpdate = asyncHandler(async (req, res) => {
+  res.send('TODO: update user');
+});
+
+// TODO: implement this
+export const userDelete = asyncHandler(async (req, res) => {
+  res.send('TODO: delete user');
+});
+
 export default {
   userCheck,
   userCreate,
   getUserInfo,
+  userRead,
+  userUpdate,
+  userDelete,
 };
