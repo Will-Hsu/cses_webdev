@@ -45,7 +45,7 @@ import Nishant from '../../images/nishant.jpg';
 const categories = [
  {
    id: 1,
-   name: 'Board members',
+   name: 'CSES Board',
    members: [
      { name: 'Nabil Khoury', title: 'Co-President', photo: Nabil },
      { name: 'Samvrit Srinath', title: 'Co-President', photo: Samvrit },
@@ -360,7 +360,7 @@ return (
 
       <Grid container sx={{ marginTop: '5%', display: 'flex', justifyContent: 'center' }}>
       {categories.map((category) => (
-        <Grid item md={1.5} key={category.id}>
+        <Grid item md={1.6} key={category.id}>
           <Button size="large" text={category.name} onClick={() => handleCategoryChange(category)} />
         </Grid>
       ))}
