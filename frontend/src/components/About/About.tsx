@@ -177,7 +177,7 @@ return (
             fontSize: '1em',
           }}
         >
-          <h1 style={{fontFamily: 'Chakra Petch'}}>WHAT IS CSES?</h1>
+          <h1 style={{fontFamily: 'Chakra Petch', fontSize: '50px', fontWeight: '700'}}>WHAT IS CSES?</h1>
         </Box>
         <p style={{ color: 'white' }}>
           CSES is the Computer Science and Engineering Society at UCSD that focuses on the
@@ -186,7 +186,7 @@ return (
         </p>
       </Grid>
     </Grid>
-    <h1 style={{ color: 'white', marginTop: '10%', textAlign: 'center', fontFamily: 'Chakra Petch'}}>WHAT DO WE DO?</h1>
+    <h1 style={{ color: 'white', marginTop: '10%', textAlign: 'center', fontFamily: 'Chakra Petch', fontSize: '50px', fontWeight: '700'}}>WHAT DO WE DO?</h1>
     <Grid container sx={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
       <Grid item sm={5} lg={3}>
         <img src={books} alt="img" />
@@ -343,8 +343,6 @@ return (
 
 
 
-
-
       <Grid item xs={12} sm={4.5} md={5}>
         <Box
           sx={{
@@ -379,8 +377,8 @@ return (
              <Grid item xs={12} sm={3.5} md={3.1} key={index} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                <div
                  style={{
-                   width: '200px',
-                   height: '200px',
+                   width: '190px',
+                   height: '190px',
                    overflow: 'hidden',
                    display: 'flex',
                    justifyContent: 'center',

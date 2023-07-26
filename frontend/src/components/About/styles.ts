@@ -170,7 +170,7 @@ export const aboutStyles = () => ({
     color: 'white',
     fontSize: 'clamp(20px, 8vw, 65px)',
     fontFamily: 'Chakra Petch',
-    marginTop: { xs: '28%', sm: '20%', md: '15%' },
+    marginTop: { xs: '28%', sm: '20%', md: '12%' },
     fontWeight: 700,
   },
  
