@@ -6,49 +6,63 @@ import { event_style } from './styles';
 import EventBox from '../Event/Event';
 import Button from '../Button/Button';
 
+interface EventData {
+  calendar_link: string;
+  description: string;
+  end_time: string;
+  instagram_link: string;
+  location: string;
+  start_time: string;
+  title: string;
+  _id: string;
+}
 const Events = () => {
   const styles = event_style();
-  const [upcomingEvents, setUpcomingEvents] = useState([]);
-  const [pastEvents, setPastEvents] = useState([]);
-  const [selectedYear, setSelectedYear] = useState(null);
-  const [selectedMonth, setSelectedMonth] = useState(null);
+
+  const [upcomingEvents, setUpcomingEvents] = useState<EventData[]>([]);
+  const [pastEvents, setPastEvents] = useState<EventData[]>([]);
+  const [selectedYear, setSelectedYear] = useState<number | null>(null);
+  const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
 
   useEffect(() => {
-    // Make the API call to fetch upcoming events
-    let upcomingEventsEndpoint = 'http://127.0.0.1:5000/api/v1/events?type=upcoming';
-    if (selectedYear) {
-      upcomingEventsEndpoint += `&year=${selectedYear}`;
-    }
-    if (selectedMonth) {
-      upcomingEventsEndpoint += `&month=${selectedMonth}`;
-    }
+    const fetchUpcomingEvents = async () => {
+      try {
+        let upcomingEventsEndpoint = 'http://127.0.0.1:5000/api/v1/events?type=upcoming';
+        if (selectedYear) {
+          upcomingEventsEndpoint += `&year=${selectedYear}`;
+        }
+        if (selectedMonth) {
+          upcomingEventsEndpoint += `&month=${selectedMonth}`;
+        }
 
-    fetch(upcomingEventsEndpoint)
-      .then((response) => response.json())
-      .then((data) => {
+        const response = await fetch(upcomingEventsEndpoint);
+        const data = await response.json();
         setUpcomingEvents(data);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error('Error fetching upcoming events:', error);
-      });
+      }
+    };
 
-    // Make the API call to fetch past events
-    let pastEventsEndpoint = 'http://127.0.0.1:5000/api/v1/events?type=past';
-    if (selectedYear) {
-      pastEventsEndpoint += `&year=${selectedYear}`;
-    }
-    if (selectedMonth) {
-      pastEventsEndpoint += `&month=${selectedMonth}`;
-    }
+    const fetchPastEvents = async () => {
+      try {
+        let pastEventsEndpoint = 'http://127.0.0.1:5000/api/v1/events?type=past';
+        if (selectedYear) {
+          pastEventsEndpoint += `&year=${selectedYear}`;
+        }
+        if (selectedMonth) {
+          pastEventsEndpoint += `&month=${selectedMonth}`;
+        }
 
-    fetch(pastEventsEndpoint)
-      .then((response) => response.json())
-      .then((data) => {
+        const response = await fetch(pastEventsEndpoint);
+        const data = await response.json();
         setPastEvents(data);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error('Error fetching past events:', error);
-      });
+      }
+    };
+
+    fetchUpcomingEvents();
+    fetchPastEvents();
   }, [selectedYear, selectedMonth]);
 
   // Data array for EventBoxes

@@ -1,0 +1,43 @@
+  const [upcomingEvents, setUpcomingEvents] = useState([]);
+  const [pastEvents, setPastEvents] = useState([]);
+  const [selectedYear, setSelectedYear] = useState(null);
+  const [selectedMonth, setSelectedMonth] = useState(null);
+
+ 
+  useEffect(() => {
+    // Make the API call to fetch upcoming events
+    let upcomingEventsEndpoint = 'http://127.0.0.1:5000/api/v1/events?type=upcoming';
+    if (selectedYear) {
+      upcomingEventsEndpoint += `&year=${selectedYear}`;
+    }
+    if (selectedMonth) {
+      upcomingEventsEndpoint += `&month=${selectedMonth}`;
+    }
+
+    fetch(upcomingEventsEndpoint)
+      .then((response) => response.json())
+      .then((data) => {
+        setUpcomingEvents(data);
+      })
+      .catch((error) => {
+        console.error('Error fetching upcoming events:', error);
+      });
+
+    // Make the API call to fetch past events
+    let pastEventsEndpoint = 'http://127.0.0.1:5000/api/v1/events?type=past';
+    if (selectedYear) {
+      pastEventsEndpoint += `&year=${selectedYear}`;
+    }
+    if (selectedMonth) {
+      pastEventsEndpoint += `&month=${selectedMonth}`;
+    }
+
+    fetch(pastEventsEndpoint)
+      .then((response) => response.json())
+      .then((data) => {
+        setPastEvents(data);
+      })
+      .catch((error) => {
+        console.error('Error fetching past events:', error);
+      });
+  }, [selectedYear, selectedMonth]);
