@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '../Button/Button';
 import { Container, Box, Grid } from '@mui/material';
 import background from '../../images/shape.svg';
@@ -6,8 +6,42 @@ import EventBox from '../Event/Event';
 import desktop from '../../images/desktop.png';
 import { homeStyles } from './styles';
 
+interface EventData {
+  calendar_link: string;
+  description: string;
+  end_time: string;
+  instagram_link: string;
+  location: string;
+  start_time: string;
+  title: string;
+  _id: string;
+}
+
 const Home = () => {
   const styles = homeStyles();
+
+  const [displayedFutureEvents, setDisplayedFutureEvents] = useState<EventData[]>([]);
+  useEffect(() => {
+    const fetchRecentEvents = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:5000/api/v1/events?type=upcoming');
+        const data = await response.json();
+        // Sort events based on the end_time in descending order to get the most recent events first
+        const sortedEvents = data.sort(
+          (a: EventData, b: EventData) =>
+            new Date(b.end_time).getTime() - new Date(a.end_time).getTime(),
+        );
+        // Take the first three events (most recent)
+        const mostRecentEvents = sortedEvents.slice(0, 3);
+        setDisplayedFutureEvents(mostRecentEvents);
+      } catch (error) {
+        console.error('Error fetching upcoming events:', error);
+      }
+    };
+
+    fetchRecentEvents();
+  }, []);
+
   return (
     <div style={{ position: 'relative' }}>
       <Box sx={styles.root}>
@@ -133,41 +167,32 @@ const Home = () => {
                 marginLeft: '39px',
               }}
             >
-              <EventBox
-                title={'Student Summit'}
-                targetDate={new Date('2023-08-31T00:00:00')}
-                location={'Somewhere on campus'}
-              />
-              <p
-                style={{
-                  color: 'white',
-                  fontSize: '20px',
-                  fontFamily: 'Chakra Petch',
-                  fontWeight: '500',
-                }}
-              >
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              </p>
-              <EventBox
-                title={'Some othe event'}
-                targetDate={new Date('2023-08-23T04:00:00')}
-                location={'Somewhere on campus'}
-              />
-              <p
-                style={{
-                  color: 'white',
-                  fontSize: '20px',
-                  fontFamily: 'Chakra Petch',
-                  fontWeight: '500',
-                }}
-              >
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              </p>
-              <EventBox
-                title={'Another event'}
-                targetDate={new Date('2023-07-31T00:00:00')}
-                location={'Somewhere on campus'}
-              />
+              {displayedFutureEvents.map((eventData) => (
+                <React.Fragment key={eventData._id}>
+                  <EventBox
+                    title={eventData.title}
+                    targetDate={new Date(eventData.end_time)}
+                    location={eventData.location}
+                    calendar_link={eventData.calendar_link}
+                    description={eventData.description}
+                    end_time={eventData.end_time}
+                    instagram_link={eventData.instagram_link}
+                    start_time={eventData.start_time}
+                    _id={eventData._id}
+                  />
+                  {/* Add space between EventBoxes */}
+                  <p
+                    style={{
+                      color: 'white',
+                      fontSize: '20px',
+                      fontFamily: 'Chakra Petch',
+                      fontWeight: '500',
+                    }}
+                  >
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  </p>
+                </React.Fragment>
+              ))}
             </div>
             <Button
               size="medium"

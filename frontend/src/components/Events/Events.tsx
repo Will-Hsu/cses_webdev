@@ -25,9 +25,11 @@ const Events = () => {
   const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
 
   useEffect(() => {
+    let upcomingEventsEndpoint = 'http://127.0.0.1:5000/api/v1/events?type=upcoming';
+    let pastEventsEndpoint = 'http://127.0.0.1:5000/api/v1/events?type=past';
+
     const fetchUpcomingEvents = async () => {
       try {
-        let upcomingEventsEndpoint = 'http://127.0.0.1:5000/api/v1/events?type=upcoming';
         if (selectedYear) {
           upcomingEventsEndpoint += `&year=${selectedYear}`;
         }
@@ -45,7 +47,6 @@ const Events = () => {
 
     const fetchPastEvents = async () => {
       try {
-        let pastEventsEndpoint = 'http://127.0.0.1:5000/api/v1/events?type=past';
         if (selectedYear) {
           pastEventsEndpoint += `&year=${selectedYear}`;
         }
@@ -65,61 +66,24 @@ const Events = () => {
     fetchPastEvents();
   }, [selectedYear, selectedMonth]);
 
-  // Data array for EventBoxes
-  const futureEventBoxesData = [
-    {
-      title: 'Student Summit',
-      targetDate: new Date('2023-07-26T00:00:00'),
-      location: 'Somewhere on campus',
-    },
-    {
-      title: 'Some other event',
-      targetDate: new Date('2023-08-23T04:00:00'),
-      location: 'Somewhere on campus',
-    },
-    {
-      title: 'Another event',
-      targetDate: new Date('2023-07-31T00:00:00'),
-      location: 'Somewhere on campus',
-    },
-    // Add more Future EventBox data here if needed
-  ];
-
-  const pastEventBoxesData = [
-    {
-      title: 'Student Summit',
-      targetDate: new Date('2023-03-31T00:00:00'),
-      location: 'Somewhere on campus',
-    },
-    {
-      title: 'Some other event',
-      targetDate: new Date('2023-05-23T04:00:00'),
-      location: 'Somewhere on campus',
-    },
-    {
-      title: 'Another event',
-      targetDate: new Date('2022-06-31T00:00:00'),
-      location: 'Somewhere on campus',
-    },
-    // Add past EventBox data here
-  ];
-
-  const [displayedFutureEvents, setDisplayedFutureEvents] = useState(futureEventBoxesData);
-  const [displayedPastEvents, setDisplayedPastEvents] = useState(pastEventBoxesData);
+  const [displayedFutureEvents, setDisplayedFutureEvents] = useState(upcomingEvents);
+  const [displayedPastEvents, setDisplayedPastEvents] = useState(pastEvents);
   const [isThisWeekClicked, setIsThisWeekClicked] = useState(false);
   const [isThisMonthClicked, setIsThisMonthClicked] = useState(false);
   const [is2023Clicked, setIs2023Clicked] = useState(false);
 
   const handleThisWeekClick = () => {
     if (isThisWeekClicked) {
-      setDisplayedFutureEvents(futureEventBoxesData);
+      setDisplayedFutureEvents(upcomingEvents);
       setIsThisWeekClicked(false);
     } else {
       const now = new Date().getTime();
       const oneWeekAfter = now + 7 * 24 * 60 * 60 * 1000;
 
-      const thisWeekEvents = futureEventBoxesData.filter(
-        (event) => event.targetDate.getTime() >= now && event.targetDate.getTime() <= oneWeekAfter,
+      const thisWeekEvents = upcomingEvents.filter(
+        (event) =>
+          new Date(event.start_time).getTime() >= now &&
+          new Date(event.start_time).getTime() <= oneWeekAfter,
       );
 
       setDisplayedFutureEvents(thisWeekEvents);
@@ -129,14 +93,16 @@ const Events = () => {
 
   const handleThisMonthClick = () => {
     if (isThisMonthClicked) {
-      setDisplayedFutureEvents(futureEventBoxesData);
+      setDisplayedFutureEvents(upcomingEvents);
       setIsThisMonthClicked(false);
     } else {
       const now = new Date().getTime();
       const oneMonthAfter = now + 30 * 24 * 60 * 60 * 1000;
 
-      const thisMonthEvents = futureEventBoxesData.filter(
-        (event) => event.targetDate.getTime() >= now && event.targetDate.getTime() <= oneMonthAfter,
+      const thisMonthEvents = upcomingEvents.filter(
+        (event) =>
+          new Date(event.start_time).getTime() >= now &&
+          new Date(event.start_time).getTime() <= oneMonthAfter,
       );
 
       setDisplayedFutureEvents(thisMonthEvents);
@@ -146,16 +112,47 @@ const Events = () => {
 
   const handle2023 = () => {
     if (is2023Clicked) {
-      setDisplayedPastEvents(pastEventBoxesData);
+      setDisplayedPastEvents(pastEvents);
       setIs2023Clicked(false);
     } else {
-      const year2023Events = pastEventBoxesData.filter(
-        (event) => event.targetDate.getFullYear() === 2023,
-      );
+      const year2023Events = pastEvents.filter((event) => {
+        const endDate = new Date(event.end_time);
+        return endDate.getFullYear() === 2023;
+      });
 
       setDisplayedPastEvents(year2023Events);
       setIs2023Clicked(true);
     }
+  };
+
+  // Render EventBoxes using map
+  const renderEventBoxes = (events: EventData[]) => {
+    return events.map((eventData) => (
+      <React.Fragment key={eventData._id}>
+        <EventBox
+          title={eventData.title}
+          targetDate={new Date(eventData.end_time)}
+          location={eventData.location}
+          calendar_link={eventData.calendar_link}
+          description={eventData.description}
+          end_time={eventData.end_time}
+          instagram_link={eventData.instagram_link}
+          start_time={eventData.start_time}
+          _id={eventData._id}
+        />
+        {/* Add space between EventBoxes */}
+        <p
+          style={{
+            color: 'white',
+            fontSize: '20px',
+            fontFamily: 'Chakra Petch',
+            fontWeight: '500',
+          }}
+        >
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </p>
+      </React.Fragment>
+    ));
   };
 
   return (
@@ -190,7 +187,7 @@ const Events = () => {
         </div>
         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 
-        {/* Render EventBoxes using map */}
+        {/* Render EventBoxes for future events */}
         <div
           style={{
             color: 'white',
@@ -202,38 +199,12 @@ const Events = () => {
             marginLeft: '39px',
           }}
         >
-          {displayedFutureEvents.map((eventData, index) => (
-            <React.Fragment key={index}>
-              <EventBox
-                title={eventData.title}
-                targetDate={eventData.targetDate}
-                location={eventData.location}
-              />
-              {/* Add space between EventBoxes */}
-              <p
-                style={{
-                  color: 'white',
-                  fontSize: '20px',
-                  fontFamily: 'Chakra Petch',
-                  fontWeight: '500',
-                }}
-              >
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              </p>
-            </React.Fragment>
-          ))}
+          {renderEventBoxes(upcomingEvents)}
         </div>
 
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'flex-start',
-            marginLeft: '30px',
-            marginTop: '20px',
-          }}
-        ></div>
+        {/* ... (previous code) */}
 
-        {/* Past Event Section */}
+        {/* Render EventBoxes for past events */}
         <div
           style={{
             color: 'white',
@@ -246,7 +217,6 @@ const Events = () => {
         >
           <h2> PAST EVENTS</h2>
         </div>
-
         {/* Buttons for filtering past events */}
         <div
           style={{
@@ -260,7 +230,6 @@ const Events = () => {
         </div>
         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 
-        {/* Render Past EventBoxes using map */}
         <div
           style={{
             color: 'white',
@@ -272,26 +241,7 @@ const Events = () => {
             marginLeft: '39px',
           }}
         >
-          {displayedPastEvents.map((eventData, index) => (
-            <React.Fragment key={index}>
-              <EventBox
-                title={eventData.title}
-                targetDate={eventData.targetDate}
-                location={eventData.location}
-              />
-              {/* Add space between EventBoxes */}
-              <p
-                style={{
-                  color: 'white',
-                  fontSize: '20px',
-                  fontFamily: 'Chakra Petch',
-                  fontWeight: '500',
-                }}
-              >
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              </p>
-            </React.Fragment>
-          ))}
+          {renderEventBoxes(pastEvents)}
         </div>
       </Container>
     </div>

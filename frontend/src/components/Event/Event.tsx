@@ -8,6 +8,13 @@ interface EventBoxProps {
   targetDate: Date;
   location: string;
   style?: EventBoxStyles;
+  // new stuff
+  calendar_link: string;
+  description: string;
+  end_time: string;
+  instagram_link: string;
+  start_time: string;
+  _id: string;
 }
 interface EventBoxStyles {
   outerBox?: React.CSSProperties;
@@ -22,7 +29,19 @@ interface EventBoxStyles {
  * @param location of the event
  * @returns the an eventBox
  */
-const EventBox = ({ title, targetDate, location }: EventBoxProps) => {
+
+// title, targetDate, location
+const EventBox = ({
+  targetDate,
+  calendar_link,
+  description,
+  end_time,
+  instagram_link,
+  location,
+  start_time,
+  title,
+  _id,
+}: EventBoxProps) => {
   const styles = event_style();
   const mediaQuery = window.matchMedia('(max-width: 1000px)');
 
@@ -89,17 +108,19 @@ const EventBox = ({ title, targetDate, location }: EventBoxProps) => {
   };
 
   /**
-   * This function takes a not clean string representing the time and returs the clean time.
-   * @returns
+   * This function takes a not clean string representing the time and returns the clean time.
+   * @returns Returns the clean time
    */
   const cleanTime = () => {
-    const date = new Date(targetDate);
-    const startTime = date.toLocaleTimeString('en-US', {
+    const startDate = new Date(start_time);
+    const endDate = new Date(end_time);
+
+    const startTime = startDate.toLocaleTimeString('en-US', {
       hour: 'numeric',
       minute: 'numeric',
     });
-    date.setHours(date.getHours() + 1);
-    const endTime = date.toLocaleTimeString('en-US', {
+
+    const endTime = endDate.toLocaleTimeString('en-US', {
       hour: 'numeric',
       minute: 'numeric',
     });
@@ -325,7 +346,7 @@ const EventBox = ({ title, targetDate, location }: EventBoxProps) => {
             </p>
 
             <a
-              href="https://calendar.google.com/calendar/"
+              href={calendar_link}
               style={{ marginLeft: '305px', marginTop: shouldReduceSize ? '-30px' : '-50px' }}
             >
               <img
@@ -338,7 +359,7 @@ const EventBox = ({ title, targetDate, location }: EventBoxProps) => {
               />
             </a>
             <a
-              href="https://www.instagram.com/cses_ucsd/"
+              href={instagram_link}
               style={{ marginLeft: '350px', marginTop: shouldReduceSize ? '-20px' : '-36px' }}
             >
               <img
