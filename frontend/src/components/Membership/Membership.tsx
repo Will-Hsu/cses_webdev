@@ -17,7 +17,7 @@ const Membership = () => {
     const fetchUserData = async () => {
       try {
         if (isLoggedIn === true) {
-          const response = await axios.get(`http://127.0.0.1:5000/api/v1/users/${user.email}/info`);
+          const response = await axios.get(`http://localhost:5000/api/v1/users/${user.email}/info`);
           setUserData(response.data);
         } else {
           navigate('/login');

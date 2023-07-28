@@ -10,14 +10,12 @@ import userController from '../controllers/userController.js';
 router.post('/create', userController.userCreate);
 
 // GET request for getting a user's info.
-router.get('/:email/info', userController.getUserInfo);
+router.get('/:email', userController.getUserInfo);
 
 // GET request for checking if user exists.
 router.post('/check', userController.userCheck);
 
 // TODO: other CRUD methods
-// GET request for getting a user's info.
-router.get('/:email', userController.userRead);
 
 // PUT request for updating a user's info.
 router.put('/:email', userController.userUpdate);
