@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   AppBar,
   IconButton,
@@ -17,12 +17,15 @@ import csesLogo from '../../images/logo.svg';
 import MuiButton from '../Button/Button';
 import { navBarStyles } from './styles';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
+import ProfileDropdown from './ProfileDropdown';
 
 const NavBar = () => {
   const styles = navBarStyles();
   const navigate = useNavigate();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { isLoggedIn } = useContext(AuthContext);
 
   const navItems = [
     { text: 'About', link: '/about' },
@@ -62,12 +65,14 @@ const NavBar = () => {
                 {text}
               </Button>
             ))}
-            <MuiButton
-              onClick={() => navigate('/login')}
-              text="Login"
-              size="large"
-              isLogin={true}
-            />
+            {!isLoggedIn && (
+              <MuiButton
+                onClick={() => navigate('/login')}
+                text="Login"
+                size="large"
+                isLogin={true}
+              />
+            )}
           </Box>
           <Box sx={{ display: { xs: 'block', md: 'none' } }}>
             <IconButton onClick={() => setIsDrawerOpen(!isDrawerOpen)} color="inherit">
@@ -96,15 +101,17 @@ const NavBar = () => {
               />
             </ListItem>
           ))}
-          <ListItem key="Login" sx={styles.listitem}>
-            <ListItemText
-              primary={
-                <Typography align="center" sx={styles.button}>
-                  Login
-                </Typography>
-              }
-            />
+          {!isLoggedIn && (
+            <ListItem button key="Login" sx={styles.listitem} onClick = {() => clickItem('/login')}>
+              <ListItemText
+                primary={
+                  <Typography align="center" sx={styles.button}>
+                    Login
+                  </Typography>
+                }
+              />
           </ListItem>
+          )}
         </List>
       </Drawer>
     </div>
