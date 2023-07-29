@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import { footerStyles } from './styles';
 import CloseIcon from '@mui/icons-material/Close';
-
+import { createSubscriberAPI } from '../../api';
 import emailjs from '@emailjs/browser';
 
 const Forms = () => {
@@ -21,6 +21,7 @@ const Forms = () => {
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [showError, setShowError] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [showDuplicate, setShowDuplicate] = useState(false);
   const [showErrorForm, setShowErrorForm] = useState(false);
   const [showSuccessForm, setShowSuccessForm] = useState(false);
   const [feedbackForm, setFeedbackForm] = useState({
@@ -30,16 +31,29 @@ const Forms = () => {
     message: '',
   });
 
-  const subscribeNewLetter = () => {
+  const subscribeNewLetter = async () => {
     setShowError(false);
     setShowSuccess(false);
+    setShowDuplicate(false);
     if (newsletterEmail === '') return;
     if (emailRegex.test(newsletterEmail)) {
-      setNewsletterEmail('');
-      setShowSuccess(true);
-      setTimeout(function () {
-        setShowSuccess(false);
-      }, 5000);
+      const requestBody = { email: newsletterEmail };
+
+      // call the end point
+      createSubscriberAPI(requestBody)
+        .then(() => {
+          setNewsletterEmail('');
+          setShowSuccess(true);
+          setTimeout(function () {
+            setShowSuccess(false);
+          }, 5000);
+        })
+        .catch(() => {
+          setShowDuplicate(true);
+          setTimeout(function () {
+            setShowDuplicate(false);
+          }, 5000);
+        });
     } else {
       setShowError(true);
     }
@@ -72,7 +86,6 @@ const Forms = () => {
         setTimeout(function () {
           setShowSuccessForm(false);
         }, 5000);
-        //console.log(result.text);
       },
       (error) => {
         console.log(error.text);
@@ -93,6 +106,12 @@ const Forms = () => {
       <Collapse in={showError}>
         <Alert severity="error" action={alertCloseBtn(setShowError)}>
           Invalid email — <strong>please re-enter a valid address!</strong>
+        </Alert>
+      </Collapse>
+
+      <Collapse in={showDuplicate}>
+        <Alert severity="info" action={alertCloseBtn(setShowDuplicate)}>
+          Email already subscribed!
         </Alert>
       </Collapse>
 
