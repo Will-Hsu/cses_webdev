@@ -7,7 +7,7 @@ const styles = slideShowStyles();
 const delay = 10000;
 
 const SlideShow = () => {
-  const imageList = images.keys().map((image) => images(image));
+  const imageList = images.keys().map((image: any) => images(image));
   const [index, setIndex] = React.useState(0);
   const indexRef = React.useRef(index);
 
@@ -26,7 +26,11 @@ const SlideShow = () => {
 
   return (
     <div style={{ margin: '10px 10%', width: '80%' }}>
-      <img src={desktop} alt="img" style={{ width: '100%', marginTop: '8%', height: 'auto' }} />
+      <img
+        src={desktop}
+        alt="img"
+        style={{ width: '100%', marginTop: '8%', marginBottom: '5%', height: 'auto' }}
+      />
       <div style={{ ...styles.slideshow, marginLeft: '5.3%', marginTop: '-81%' }}>
         <div
           style={{
@@ -34,7 +38,7 @@ const SlideShow = () => {
             transform: `translate3d(${-index * 100}%, 0, 0)`,
           }}
         >
-          {imageList.map((img, idx) => (
+          {imageList.map((img: any, idx: React.Key | null | undefined) => (
             <div
               key={idx}
               style={{
