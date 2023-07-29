@@ -18,7 +18,7 @@ import MuiButton from '../Button/Button';
 import { navBarStyles } from './styles';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-import ProfileDropdown from './ProfileDropdown';
+//import ProfileDropdown from './ProfileDropdown';
 
 const NavBar = () => {
   const styles = navBarStyles();
@@ -102,7 +102,7 @@ const NavBar = () => {
             </ListItem>
           ))}
           {!isLoggedIn && (
-            <ListItem button key="Login" sx={styles.listitem} onClick = {() => clickItem('/login')}>
+            <ListItem button key="Login" sx={styles.listitem} onClick={() => clickItem('/login')}>
               <ListItemText
                 primary={
                   <Typography align="center" sx={styles.button}>
@@ -110,7 +110,7 @@ const NavBar = () => {
                   </Typography>
                 }
               />
-          </ListItem>
+            </ListItem>
           )}
         </List>
       </Drawer>

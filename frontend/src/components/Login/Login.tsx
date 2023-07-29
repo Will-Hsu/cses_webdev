@@ -1,11 +1,11 @@
 import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+//import axios from 'axios';
 import SignupForm from './SignupForm';
 import LoginForm from './LoginForm';
 import { AuthContext } from '../../context/AuthContext';
 import { Container } from '@mui/material';
-import { checkUserAPI } from '../../api';
+//import { checkUserAPI } from '../../api';
 
 interface RenderContentProps {
   name: string;
@@ -15,14 +15,7 @@ interface RenderContentProps {
 
 const Login = () => {
   const navigate = useNavigate();
-  const {
-    login,
-    isNewUser,
-    setIsNewUser,
-    isUcsdEmail,
-    isLoggedIn,
-    user,
-  } = useContext(AuthContext);
+  const { login, isNewUser, isUcsdEmail, isLoggedIn, user } = useContext(AuthContext);
 
   useEffect(() => {
     if (isLoggedIn && !isNewUser) {
