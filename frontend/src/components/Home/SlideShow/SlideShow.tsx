@@ -26,11 +26,7 @@ const SlideShow = () => {
 
   return (
     <div style={{ margin: '10px 10%', width: '80%' }}>
-      <img
-        src={desktop}
-        alt="img"
-        style={{ width: '100%', marginTop: '8%', marginBottom: '5%', height: 'auto' }}
-      />
+      <img src={desktop} alt="img" style={{ width: '100%', marginTop: '8%', height: 'auto' }} />
       <div style={{ ...styles.slideshow, marginLeft: '5.3%', marginTop: '-81%' }}>
         <div
           style={{
