@@ -382,7 +382,7 @@ return (
                    overflow: 'hidden',
                    display: 'flex',
                    justifyContent: 'center',
-                   alignItems: 'center',
+                   alignItems: 'center', 
                   
                  }}
                >
