@@ -62,7 +62,6 @@ export const userUpdate = [
   body('expectedGraduationYear').optional().isNumeric(),
 
   asyncHandler(async (req, res) => {
-    console.log('its working');
     const error = validationResult(req);
 
     if (!error.isEmpty()) {
