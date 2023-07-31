@@ -8,6 +8,13 @@ interface EventBoxProps {
   targetDate: Date;
   location: string;
   style?: EventBoxStyles;
+  // new stuff
+  calendar_link: string;
+  description: string;
+  end_time: string;
+  instagram_link: string;
+  start_time: string;
+  _id: string;
 }
 interface EventBoxStyles {
   outerBox?: React.CSSProperties;
@@ -22,8 +29,28 @@ interface EventBoxStyles {
  * @param location of the event
  * @returns the an eventBox
  */
-const EventBox = ({ title, targetDate, location }: EventBoxProps) => {
+
+// title, targetDate, location
+const EventBox = ({
+  targetDate,
+  calendar_link,
+  description,
+  end_time,
+  instagram_link,
+  location,
+  start_time,
+  title,
+  _id,
+}: EventBoxProps) => {
   const styles = event_style();
+  const mediaQuery = window.matchMedia('(max-width: 1000px)');
+
+  if (mediaQuery.matches) {
+    styles.outerBox.width = '300px';
+    styles.outerBox.height = '312px';
+    styles.innerBox.width = '288px';
+    styles.innerBox.height = '296px';
+  }
 
   /**
    * Calculates the time in days, hours, mins, and secs by subtracting the target date, minus the curent date.
@@ -81,17 +108,19 @@ const EventBox = ({ title, targetDate, location }: EventBoxProps) => {
   };
 
   /**
-   * This function takes a not clean string representing the time and returs the clean time.
-   * @returns
+   * This function takes a not clean string representing the time and returns the clean time.
+   * @returns Returns the clean time
    */
   const cleanTime = () => {
-    const date = new Date(targetDate);
-    const startTime = date.toLocaleTimeString('en-US', {
+    const startDate = new Date(start_time);
+    const endDate = new Date(end_time);
+
+    const startTime = startDate.toLocaleTimeString('en-US', {
       hour: 'numeric',
       minute: 'numeric',
     });
-    date.setHours(date.getHours() + 1);
-    const endTime = date.toLocaleTimeString('en-US', {
+
+    const endTime = endDate.toLocaleTimeString('en-US', {
       hour: 'numeric',
       minute: 'numeric',
     });
@@ -125,23 +154,40 @@ const EventBox = ({ title, targetDate, location }: EventBoxProps) => {
   const formatTime = (time: number): string => {
     return time < 10 ? `0${time}` : `${time}`;
   };
-
   const countdownCharacters = `${formatTime(days)}:${formatTime(hours)}:${formatTime(
     minutes,
   )}:${formatTime(seconds)}`.split('');
 
+  // Apply style adjustments only for screens with width less than 1000px
+  //const mediaQuery = window.matchMedia('(max-width: 1000px)');
+  const shouldReduceSize = mediaQuery.matches;
+
   return (
     <div style={{ display: 'flex' }}>
-      <div className="outerBox" style={styles?.outerBox}>
-        <div className="innerBox" style={styles?.innerBox}>
+      <div
+        className="outerBox"
+        style={
+          shouldReduceSize
+            ? { ...styles?.outerBox, width: '300px', height: '312px' }
+            : styles?.outerBox
+        }
+      >
+        <div
+          className="innerBox"
+          style={
+            shouldReduceSize
+              ? { ...styles?.innerBox, width: '288px', height: '296px' }
+              : styles?.innerBox
+          }
+        >
           <h4
             style={{
               color: 'white',
-              fontSize: '40px',
+              fontSize: shouldReduceSize ? '26px' : '40px',
               fontFamily: 'Chakra Petch',
               fontWeight: '600',
-              marginTop: '30px',
-              marginLeft: '30px',
+              marginTop: shouldReduceSize ? '20px' : '30px',
+              marginLeft: shouldReduceSize ? '20px' : '30px',
             }}
           >
             {title}
@@ -150,7 +196,7 @@ const EventBox = ({ title, targetDate, location }: EventBoxProps) => {
             className="countDown"
             style={{
               marginTop: '2px',
-              marginLeft: '30px',
+              marginLeft: shouldReduceSize ? '20px' : '30px',
               display: 'flex',
             }}
           >
@@ -159,9 +205,9 @@ const EventBox = ({ title, targetDate, location }: EventBoxProps) => {
                 key={index}
                 style={{
                   backgroundColor: character === ':' ? 'transparent' : 'white',
-                  padding: '10px',
-                  marginLeft: character === ':' ? '0px' : '4px',
-                  fontSize: '20px',
+                  padding: shouldReduceSize ? '8px' : '10px',
+                  marginLeft: character === ':' ? '0px' : shouldReduceSize ? '2px' : '4px',
+                  fontSize: shouldReduceSize ? '16px' : '20px',
                   fontFamily: 'Chakra Petch',
                   fontWeight: '500',
                   color: character === ':' ? 'white' : 'black',
@@ -174,8 +220,8 @@ const EventBox = ({ title, targetDate, location }: EventBoxProps) => {
           </div>
           <div
             style={{
-              marginTop: '-10px',
-              marginLeft: '35px',
+              marginTop: shouldReduceSize ? '-10px' : '0',
+              marginLeft: shouldReduceSize ? '25px' : '35px',
               display: 'flex',
               flexDirection: 'row',
             }}
@@ -183,7 +229,7 @@ const EventBox = ({ title, targetDate, location }: EventBoxProps) => {
             <p
               style={{
                 color: 'white',
-                fontSize: '16px',
+                fontSize: shouldReduceSize ? '12px' : '16px',
                 fontFamily: 'Chakra Petch',
                 fontWeight: '600',
               }}
@@ -193,7 +239,7 @@ const EventBox = ({ title, targetDate, location }: EventBoxProps) => {
             <p
               style={{
                 color: 'white',
-                fontSize: '20px',
+                fontSize: shouldReduceSize ? '16px' : '20px',
                 fontFamily: 'Chakra Petch',
                 fontWeight: '500',
               }}
@@ -203,7 +249,7 @@ const EventBox = ({ title, targetDate, location }: EventBoxProps) => {
             <p
               style={{
                 color: 'white',
-                fontSize: '16px',
+                fontSize: shouldReduceSize ? '12px' : '16px',
                 fontFamily: 'Chakra Petch',
                 fontWeight: '600',
               }}
@@ -213,7 +259,7 @@ const EventBox = ({ title, targetDate, location }: EventBoxProps) => {
             <p
               style={{
                 color: 'white',
-                fontSize: '20px',
+                fontSize: shouldReduceSize ? '16px' : '20px',
                 fontFamily: 'Chakra Petch',
                 fontWeight: '500',
               }}
@@ -223,7 +269,7 @@ const EventBox = ({ title, targetDate, location }: EventBoxProps) => {
             <p
               style={{
                 color: 'white',
-                fontSize: '16px',
+                fontSize: shouldReduceSize ? '12px' : '16px',
                 fontFamily: 'Chakra Petch',
                 fontWeight: '600',
               }}
@@ -233,7 +279,7 @@ const EventBox = ({ title, targetDate, location }: EventBoxProps) => {
             <p
               style={{
                 color: 'white',
-                fontSize: '20px',
+                fontSize: shouldReduceSize ? '16px' : '20px',
                 fontFamily: 'Chakra Petch',
                 fontWeight: '500',
               }}
@@ -243,7 +289,7 @@ const EventBox = ({ title, targetDate, location }: EventBoxProps) => {
             <p
               style={{
                 color: 'white',
-                fontSize: '16px',
+                fontSize: shouldReduceSize ? '12px' : '16px',
                 fontFamily: 'Chakra Petch',
                 fontWeight: '600',
               }}
@@ -251,15 +297,21 @@ const EventBox = ({ title, targetDate, location }: EventBoxProps) => {
               seconds
             </p>
           </div>
-          <div style={{ marginTop: '30px', display: 'flex', flexDirection: 'column' }}>
+          <div
+            style={{
+              marginTop: shouldReduceSize ? '20px' : '30px',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
             <p
               style={{
                 color: 'white',
-                fontSize: '20px',
+                fontSize: shouldReduceSize ? '16px' : '20px',
                 fontFamily: 'Chakra Petch',
                 fontWeight: '500',
                 marginTop: '5px',
-                marginLeft: '30px',
+                marginLeft: shouldReduceSize ? '20px' : '30px',
                 lineHeight: '0px',
               }}
             >
@@ -268,11 +320,11 @@ const EventBox = ({ title, targetDate, location }: EventBoxProps) => {
             <p
               style={{
                 color: 'white',
-                fontSize: '20px',
+                fontSize: shouldReduceSize ? '16px' : '20px',
                 fontFamily: 'Chakra Petch',
                 fontWeight: '500',
                 marginTop: '5px',
-                marginLeft: '30px',
+                marginLeft: shouldReduceSize ? '20px' : '30px',
                 lineHeight: '0px',
               }}
             >
@@ -282,11 +334,11 @@ const EventBox = ({ title, targetDate, location }: EventBoxProps) => {
             <p
               style={{
                 color: 'white',
-                fontSize: '20px',
+                fontSize: shouldReduceSize ? '16px' : '20px',
                 fontFamily: 'Chakra Petch',
                 fontWeight: '500',
                 marginTop: '5px',
-                marginLeft: '30px',
+                marginLeft: shouldReduceSize ? '20px' : '30px',
                 lineHeight: '0px',
               }}
             >
@@ -294,23 +346,29 @@ const EventBox = ({ title, targetDate, location }: EventBoxProps) => {
             </p>
 
             <a
-              href="https://calendar.google.com/calendar/"
-              style={{ marginLeft: '305px', marginTop: '-50px' }}
+              href={calendar_link}
+              style={{ marginLeft: '305px', marginTop: shouldReduceSize ? '-30px' : '-50px' }}
             >
               <img
                 src={calendarIcon}
                 alt="Calendar Icon"
-                style={{ width: '30px', height: '30px' }}
+                style={{
+                  width: shouldReduceSize ? '25px' : '30px',
+                  height: shouldReduceSize ? '25px' : '30px',
+                }}
               />
             </a>
             <a
-              href="https://www.instagram.com/cses_ucsd/"
-              style={{ marginLeft: '350px', marginTop: '-36px' }}
+              href={instagram_link}
+              style={{ marginLeft: '350px', marginTop: shouldReduceSize ? '-20px' : '-36px' }}
             >
               <img
                 src={instagramIcon}
                 alt="Instagram Icon"
-                style={{ width: '30px', height: '30px' }}
+                style={{
+                  width: shouldReduceSize ? '25px' : '30px',
+                  height: shouldReduceSize ? '25px' : '30px',
+                }}
               />
             </a>
           </div>

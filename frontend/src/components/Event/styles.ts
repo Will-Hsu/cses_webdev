@@ -8,7 +8,7 @@ export const event_style = () => ({
     margin: '0 auto',
     width: '425px',
     height: '437px',
-    padding: '1px 0px 10px 10px' /* Add 1px padding here */,
+    padding: '1px 0px 10px 10px',
   },
   innerBox: {
     width: '416px',
@@ -27,13 +27,19 @@ export const event_style = () => ({
     width: '400px',
     height: '200px',
     display: 'flex',
-    justifyContent: 'center' /* Adjusted alignment to the right */,
+    justifyContent: 'center',
     alignItems: 'center',
-    marginRight: '-25rem' /* Added margin to the right */,
+    marginLeft: '0rem',
   },
   spacer: {
     width: '20px',
     height: '20px',
     margin: '30px',
   },
+  buttons: {
+    position: 'absolute',
+    zIndex: 10,
+    },
+  
+  
 });
