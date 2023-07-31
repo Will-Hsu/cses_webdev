@@ -3,8 +3,8 @@ import Button from '../Button/Button';
 import { Container, Box, Grid } from '@mui/material';
 import background from '../../images/shape.svg';
 import EventBox from '../Event/Event';
-import desktop from '../../images/desktop.png';
 import { homeStyles } from './styles';
+import SlideShow from './SlideShow/SlideShow';
 
 interface EventData {
   calendar_link: string;
@@ -50,12 +50,12 @@ const Home = () => {
         </Box>
         <Container maxWidth="xl" sx={styles.container}>
           <Grid container>
-            <Grid item xs={12} sm={5} md={5}>
+            <Grid item xs={12} sm={5} md={5.5}>
               <Box sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
                 <Box
                   sx={{
                     ...styles.title,
-                    marginTop: { xs: '8%', sm: '20%', md: '25%' },
+                    marginTop: { xs: '5%', sm: '8%', md: '10%' },
                     marginLeft: { xs: '0%', sm: '3%', md: '12%' },
                   }}
                 >
@@ -68,16 +68,16 @@ const Home = () => {
                   Connect.
                 </Box>
                 <Box sx={{ ...styles.button, marginLeft: { xs: '0%', sm: '2%', md: '12%' } }}>
-                  <Button size="large" text="Learn About Us" onClick={() => console.log('click')} />
+                  <Button
+                    size="large"
+                    text="Learn About Us!"
+                    onClick={() => console.log('click')}
+                  />
                 </Box>
               </Box>
             </Grid>
             <Grid item xs={12} sm={7} md={6.5}>
-              <img
-                src={desktop}
-                alt="img"
-                style={{ width: '100%', marginTop: '8%', height: 'auto' }}
-              />
+              <SlideShow />
             </Grid>
           </Grid>
           <Grid container spacing={0} sx={{ marginTop: '17%' }}>
