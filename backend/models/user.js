@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
     }],
     default: [],
   },
-  profilePicture: { type: Buffer },
+  profilePicture: { type: String },
 });
 
 export default mongoose.model('User', userSchema);

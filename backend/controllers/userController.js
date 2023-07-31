@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import User from '../models/user.js';
 import { body, param, validationResult } from 'express-validator';
 import asyncHandler from 'express-async-handler';
@@ -60,6 +61,13 @@ export const userUpdate = [
   body('name').optional(),
   body('major').optional(),
   body('expectedGraduationYear').optional().isNumeric(),
+  body('points').optional().isNumeric(),
+  body('eventsAttended')
+    .optional()
+    .isArray()
+    .custom(isValidEventId)
+    .withMessage('Contains invalid event ID.'),
+  body('profilePicture').optional().isURL().withMessage('Invalid URL.'),
 
   asyncHandler(async (req, res) => {
     const error = validationResult(req);
@@ -125,3 +133,9 @@ export default {
   userUpdate,
   userDelete,
 };
+
+function isValidEventId(eventIds) {
+  return (
+    Array.isArray(eventIds) && eventIds.every((eventId) => mongoose.Types.ObjectId.isValid(eventId))
+  );
+}
