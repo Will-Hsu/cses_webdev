@@ -8,14 +8,10 @@ export const aboutStyles = () => ({
     scale: '103%',
   },
   body: { position: 'absolute', top: '93px'},
- 
- 
   root: {
     position: 'relative',
     overflow: 'auto',
   },
- 
- 
   button1: {
     color: 'white',
     fontSize: '21px',
@@ -24,8 +20,6 @@ export const aboutStyles = () => ({
     marginLeft: { xs: '9%', sm: '1%', md: '-5%' },
     marginTop: { xs: '7%', sm: '5%', md: '3%' },
   },
- 
- 
   button2: {
     color: 'white',
     fontSize: '21px',
@@ -34,8 +28,6 @@ export const aboutStyles = () => ({
     marginLeft: { xs: '9%', sm: '8%', md: '12%' },
     marginTop: { xs: '-72%', sm: '-9%', md: '-12%' },
   },
- 
- 
   titleTop: {
     color: 'white',
     fontSize: {
@@ -49,8 +41,6 @@ export const aboutStyles = () => ({
     fontWeight: 700,
     width: { xs: '300px', sm: '500px', md: '500px' },
   },
- 
- 
   subtitleTop: {
     color: 'white',
     fontSize: {
@@ -64,8 +54,6 @@ export const aboutStyles = () => ({
     fontWeight: 400,
     width: { xs: '300px', sm: '350px', md: '430px' },
   },
- 
- 
   mainTitleMiddle: {
     color: 'white',
     fontSize: {
@@ -77,8 +65,6 @@ export const aboutStyles = () => ({
     marginTop: { xs: '25%', sm: '20%', md: '20%' },
     fontWeight: 700,
   },
- 
- 
   titleBottom1: {
     color: 'white',
     fontSize: {
@@ -91,8 +77,6 @@ export const aboutStyles = () => ({
     marginTop: { xs: '20%', sm: '25%', md: '50%' },
     fontWeight: 600,
   },
- 
- 
   subtitleBottom1: {
     color: 'white',
     fontSize: {
@@ -106,8 +90,6 @@ export const aboutStyles = () => ({
     fontWeight: 400,
     width: { xs: '300px', sm: '350px', md: '573px' },
   },
- 
- 
   titleBottom2: {
     color: 'white',
     fontSize: {
@@ -120,8 +102,6 @@ export const aboutStyles = () => ({
     marginTop: { xs: '20%', sm: '35%', md: '30%' },
     fontWeight: 600,
   },
- 
- 
   subtitleBottom2: {
     color: 'white',
     fontSize: {
@@ -135,8 +115,6 @@ export const aboutStyles = () => ({
     fontWeight: 400,
     width: { xs: '300px', sm: '350px', md: '573px' },
   },
- 
- 
   titleBottom3: {
     color: 'white',
     fontSize: {
@@ -150,8 +128,6 @@ export const aboutStyles = () => ({
     fontWeight: 600,
     width: { xs: '300px', sm: '500px', md: '573px' },
   },
- 
- 
   subtitleBottom3: {
     color: 'white',
     fontSize: {
@@ -165,8 +141,6 @@ export const aboutStyles = () => ({
     fontWeight: 400,
     width: { xs: '300px', sm: '350px', md: '573px' },
   },
- 
- 
   titleBottom4: {
     color: 'white',
     fontSize: {
@@ -179,8 +153,6 @@ export const aboutStyles = () => ({
     marginTop: { xs: '20%', sm: '40%', md: '35%' },
     width: { xs: '300px', sm: '350px', md: '573px' },
   },
- 
- 
   subtitleBottom4: {
     color: 'white',
     fontSize: {
@@ -194,13 +166,11 @@ export const aboutStyles = () => ({
     fontWeight: 400,
     width: { xs: '300px', sm: '300px', md: '573px' },
   },
- 
- 
   mainTitleBottom: {
     color: 'white',
     fontSize: 'clamp(20px, 8vw, 65px)',
     fontFamily: 'Chakra Petch',
-    marginTop: { xs: '28%', sm: '20%', md: '15%' },
+    marginTop: { xs: '28%', sm: '20%', md: '12%' },
     fontWeight: 700,
   },
  
