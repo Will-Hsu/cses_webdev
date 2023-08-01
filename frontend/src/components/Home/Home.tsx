@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../Button/Button';
 import { Container, Box, Grid } from '@mui/material';
 import background from '../../images/shape.svg';
+//import desktopTail from '../../images/desktop_tail.png';
 import EventBox from '../Event/Event';
 import { homeStyles } from './styles';
 import SlideShow from './SlideShow/SlideShow';
@@ -57,7 +58,7 @@ const Home = () => {
                 <Box
                   sx={{
                     ...styles.title,
-                    marginTop: { xs: '5%', sm: '8%', md: '10%' },
+                    marginTop: { xs: '5%', sm: '8%', md: '12%' },
                     marginLeft: { xs: '0%', sm: '3%', md: '12%' },
                   }}
                 >

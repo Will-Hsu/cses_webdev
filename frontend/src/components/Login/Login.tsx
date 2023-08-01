@@ -35,7 +35,13 @@ const Login = () => {
     <div>
       <Container
         maxWidth="xl"
-        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+        sx={{
+          background:
+            'linear-gradient(to bottom, black 0%, #2F56BC 30%, black 45%, black 55%, #FFFAA0 70%, black 85%)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
       >
         {renderContent({ name: user.name, email: user.email, login })}
       </Container>
