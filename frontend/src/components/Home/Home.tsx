@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '../Button/Button';
 import { Container, Box, Grid } from '@mui/material';
 import background from '../../images/shape.svg';
@@ -18,6 +19,7 @@ interface EventData {
 }
 
 const Home = () => {
+  const navigate = useNavigate();
   const styles = homeStyles();
 
   const [displayedFutureEvents, setDisplayedFutureEvents] = useState<EventData[]>([]);
@@ -68,11 +70,7 @@ const Home = () => {
                   Connect.
                 </Box>
                 <Box sx={{ ...styles.button, marginLeft: { xs: '0%', sm: '2%', md: '12%' } }}>
-                  <Button
-                    size="large"
-                    text="Learn About Us!"
-                    onClick={() => console.log('click')}
-                  />
+                  <Button size="large" text="Learn About Us!" onClick={() => navigate('/about')} />
                 </Box>
               </Box>
             </Grid>
@@ -103,7 +101,7 @@ const Home = () => {
                 <Button
                   size="large"
                   text="Become a Member ->"
-                  onClick={() => console.log('click')}
+                  onClick={() => navigate('/membership')}
                 />
               </Box>
             </Grid>
@@ -197,7 +195,7 @@ const Home = () => {
             <Button
               size="medium"
               text="See All Events ->"
-              onClick={() => console.log('click')}
+              onClick={() => navigate('/events')}
             ></Button>
           </div>
         </Container>

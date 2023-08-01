@@ -190,7 +190,7 @@ const About = () => {
           </h1>
           <Grid container sx={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
             <Grid item sm={5} lg={3}>
-              <img src={books} alt="img" />
+              <img src={books} alt="img" style={{ width: '70%' }} />
             </Grid>
             <Grid item sm={6} lg={5}>
               <Box sx={{ color: 'white', textAlign: { lg: 'left', sm: 'left', xs: 'center' } }}>
@@ -210,14 +210,14 @@ const About = () => {
                 <Box sx={{ color: 'white', textAlign: { lg: 'left', sm: 'left', xs: 'center' } }}>
                   <h1>Our Future</h1>
                 </Box>
-                <p style={{ color: 'white' }}>
+                <p style={{ color: 'white', width: '85%' }}>
                   Our mission statement is to help our members get professional opportunities while
                   fostering a network of individuals. We do this through quarterly career fairs,
                   programs for career development, and project opportunities to gain experience.
                 </p>
               </Grid>
               <Grid item sm={4.5} lg={3}>
-                <img src={lightBulb} alt="img" style={{ marginLeft: '10%' }} />
+                <img src={lightBulb} alt="img" style={{ marginLeft: '10%', width: '65%' }} />
               </Grid>
             </Grid>
           )}
@@ -240,7 +240,7 @@ const About = () => {
           )}
           <Grid container sx={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
             <Grid item sm={5} lg={3}>
-              <img src={books} alt="img" />
+              <div style={{ width: '250px', height: '250px', backgroundColor: 'grey' }}></div>
             </Grid>
             <Grid item sm={6} lg={5}>
               <Box
@@ -300,7 +300,7 @@ const About = () => {
                 </Box>
               </Grid>
               <Grid item sm={4.5} lg={3}>
-                <img src={books} alt="img" style={{ marginLeft: '10%' }} />
+                <div style={{ width: '250px', height: '250px', backgroundColor: 'grey' }}></div>
               </Grid>
             </Grid>
           )}
