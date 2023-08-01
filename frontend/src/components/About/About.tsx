@@ -435,7 +435,7 @@ const About = () => {
             )}
 
             {!isMiddleScreen && (
-              <Grid container item xs={12} justifyContent="center">
+              <Grid container item xs={9} justifyContent="center">
                 {currentCategory.members
                   .slice((currentPage - 1) * 6, currentPage * 6)
                   .map((member, index) => (
@@ -449,8 +449,8 @@ const About = () => {
                     >
                       <div
                         style={{
-                          width: '250px',
-                          height: '250px',
+                          width: '200px',
+                          height: '200px',
                           overflow: 'hidden',
                           display: 'flex',
                           justifyContent: 'center',
@@ -459,6 +459,7 @@ const About = () => {
                       >
                         <img
                           src={member.photo}
+                          key={member.photo}
                           alt="img"
                           style={{
                             width: '100%',
@@ -526,7 +527,7 @@ const About = () => {
                 item
                 xs={5}
                 sm={20}
-                md={10}
+                md={9}
                 justifyContent="space-between"
                 sx={{ alignItems: 'center' }}
               >
