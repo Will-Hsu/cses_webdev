@@ -1,16 +1,24 @@
 export const aboutStyles = () => ({
-  bg1: { width: '100%', marginBottom: '10%', marginLeft: '-1%', scale: '103%' },
+  backgroundImage: { width: '100%' },
+  bg1: {
+    width: '100%',
+    marginBottom: '10%',
+    marginLeft: '-1%',
+    scale: '103%',
+    marginTop: '-10%',
+  },
   bg2: {
     width: '100%',
-    transform: 'scaleX(-1)',
+    transform: 'scaleX(-1) rotate(10deg)',
     margin: '20% 0%',
     marginRight: '-1%',
-    scale: '103%',
+    marginTop: '120%',
+    scale: '110%',
   },
-  body: { position: 'absolute', top: '93px'},
+  body: { position: 'relative', top: '93px', marginBottom: '200px' },
   root: {
     position: 'relative',
-    overflow: 'auto',
+    //overflow: 'auto',
   },
   button1: {
     color: 'white',
@@ -173,7 +181,4 @@ export const aboutStyles = () => ({
     marginTop: { xs: '28%', sm: '20%', md: '12%' },
     fontWeight: 700,
   },
- 
- 
- });
- 
+});
