@@ -13,12 +13,12 @@ export const loginStyles = () => ({
   },
 
   signupForm: {
-    width: 300,
+    width: 350,
     height: 400,
     padding: '20px',
     marginY: '150px',
-    backgroundColor: 'white',
     borderRadius: '10px',
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
   },
 
   inputField: {

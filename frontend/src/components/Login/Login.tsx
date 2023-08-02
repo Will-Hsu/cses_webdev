@@ -37,7 +37,7 @@ const Login = () => {
         maxWidth="xl"
         sx={{
           background:
-            'linear-gradient(to bottom, black 0%, #2F56BC 30%, black 45%, black 55%, #FFFAA0 70%, black 85%)',
+            'linear-gradient(to bottom, black 0%, #2F56BC 30%, black 50%, #2F56BC 70%, black 100%)',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',

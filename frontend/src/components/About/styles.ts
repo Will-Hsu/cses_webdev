@@ -6,6 +6,7 @@ export const aboutStyles = () => ({
     marginLeft: '-1%',
     scale: '103%',
     marginTop: '-10%',
+    opacity: '0.8',
   },
   bg2: {
     width: '100%',
@@ -14,6 +15,7 @@ export const aboutStyles = () => ({
     marginRight: '-1%',
     marginTop: '120%',
     scale: '110%',
+    opacity: '0.8',
   },
   body: { position: 'relative', top: '93px', marginBottom: '200px' },
   root: {
