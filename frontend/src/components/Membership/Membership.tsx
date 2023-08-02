@@ -13,8 +13,7 @@ const Membership = () => {
   const [userData, setUserData] = useState<User | null>(null);
   const navigate = useNavigate();
 
-  // Note from Will -- I commented this out, so we can focus on coding up the UI for this milestone
-  /*useEffect(() => {
+  useEffect(() => {
     const fetchUserData = async () => {
       try {
         if (isLoggedIn === true) {
@@ -30,7 +29,7 @@ const Membership = () => {
     };
 
     fetchUserData();
-  }, [isLoggedIn, user.email, navigate]);*/
+  }, [isLoggedIn, user.email, navigate]);
 
   return (
     <>

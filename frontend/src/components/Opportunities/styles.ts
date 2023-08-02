@@ -4,12 +4,14 @@ export const opportunitiesStyles = (theme: any) => ({
     marginTop: '70%',
     marginLeft: '-20%',
     scale: '150%',
+    opacity: '0.8',
   },
   bg2: {
     transform: 'rotate(130deg)',
     marginTop: '300%',
     marginLeft: '-20%',
     scale: '150%',
+    opacity: '0.8',
   },
   body: {
     position: 'relative',
@@ -33,7 +35,7 @@ export const opportunitiesStyles = (theme: any) => ({
   test: {
     fontFamily: 'Inter, sans-serif',
     color: 'white',
-    fontSize: '24px',
+    fontSize: '20px',
     [theme.breakpoints.down('md')]: {
       fontSize: '20px',
     },
