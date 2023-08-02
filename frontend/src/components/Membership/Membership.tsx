@@ -5,6 +5,7 @@ import axios from 'axios';
 import { User } from '../../utils/types';
 import { Box, Button, Divider, Typography } from '@mui/material';
 import { membershipStyles } from './styles';
+import MemberProfile from './MemberProfile'
 
 const styles = membershipStyles();
 
@@ -35,10 +36,10 @@ const Membership = () => {
   return (
     <>
       <div style={{ color: 'white', position: 'relative', top: '93px' }}>
-        Add Member Profile here @Sithu & Joyce -- consider creating a separate component for the
-        profile
+        {/*userData && <MemberProfile memberName='{userData.name}' />*/}
+        {<MemberProfile memberName='Joyce Lu' />}
       </div>
-      <div style={{ color: 'white', position: 'relative', top: '93px' }}>
+      <div style={{ color: 'white', position: 'relative', top: '700px' }}>
         Add Events Attended + Leaderboard UI for the membership page @Brian & Eddie & Yashil --
         consider creating a separate component for this as well
       </div>
