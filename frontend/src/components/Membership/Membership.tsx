@@ -5,6 +5,7 @@ import axios from 'axios';
 import { User } from '../../utils/types';
 import { Box, Button, Divider, Typography } from '@mui/material';
 import { membershipStyles } from './styles';
+import MemberProfile from '../MemberProfile/MemberProfile'
 
 const styles = membershipStyles();
 
@@ -32,7 +33,8 @@ const Membership = () => {
   }, [isLoggedIn, user.email, navigate]);
 
   return (
-    <>
+    <div>
+    <MemberProfile/>
       <div style={{ color: 'white', position: 'relative', top: '93px' }}>
         Add Member Profile here @Sithu & Joyce -- consider creating a separate component for the
         profile
@@ -103,7 +105,7 @@ const Membership = () => {
           </Box>
         )}
       </div>
-    </>
+    </div>
   );
 };
 
