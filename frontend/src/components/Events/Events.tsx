@@ -156,7 +156,7 @@ const Events = () => {
   };
 
   return (
-    <div style={{ position: 'relative', overflow: 'hidden' }}>
+    <div className="event-box-container">
       <img src={bgTop} alt="bg1" style={styles.bg1} />
       <img src={bgBtm} alt="bg2" style={styles.bg2} />
       <Container maxWidth="xl" sx={styles.body}>
