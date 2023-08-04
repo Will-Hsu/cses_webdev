@@ -1,10 +1,10 @@
-import React, { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { User } from '../../utils/types';
 import { Box, Button, Divider, Typography } from '@mui/material';
 import { membershipStyles } from './styles';
+import EventsAttended from './EventsAttended';
 
 const styles = membershipStyles();
 
@@ -39,8 +39,10 @@ const Membership = () => {
         profile
       </div>
       <div style={{ color: 'white', position: 'relative', top: '93px' }}>
-        Add Events Attended + Leaderboard UI for the membership page @Brian & Eddie & Yashil --
-        consider creating a separate component for this as well
+        {/* Add Events Attended + Leaderboard UI for the membership page @Brian & Eddie & Yashil --
+        consider creating a separate component for this as well */}
+
+        <EventsAttended eventsAttended={[]} />
       </div>
       <div
         style={{
