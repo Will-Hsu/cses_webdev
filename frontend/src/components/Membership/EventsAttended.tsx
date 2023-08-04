@@ -1,5 +1,4 @@
-import { useContext } from 'react';
-import { Box, Container, Typography } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 import EventBox from '../Event/Event';
 import { membershipStyles } from './styles';
 import alertLogo from '../../images/events-attended-alert.svg';

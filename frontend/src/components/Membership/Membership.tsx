@@ -5,6 +5,7 @@ import { User } from '../../utils/types';
 import { Box, Button, Divider, Typography } from '@mui/material';
 import { membershipStyles } from './styles';
 import EventsAttended from './EventsAttended';
+import LeaderBoard from './LeaderBoard';
 
 const styles = membershipStyles();
 
@@ -43,6 +44,8 @@ const Membership = () => {
         consider creating a separate component for this as well */}
 
         <EventsAttended eventsAttended={[]} />
+
+        <LeaderBoard />
       </div>
       <div
         style={{
