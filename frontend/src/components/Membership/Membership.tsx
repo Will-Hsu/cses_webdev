@@ -94,7 +94,14 @@ const Membership = () => {
         Add Member Profile here @Sithu & Joyce -- consider creating a separate component for the
         profile
       </div>
-      <div style={{ color: 'white', position: 'relative', top: '93px' }}>
+      <div
+        style={{
+          color: 'white',
+          position: 'relative',
+          top: '93px',
+          overflow: 'hidden',
+        }}
+      >
         {/* Add Events Attended + Leaderboard UI for the membership page @Brian & Eddie & Yashil --
         consider creating a separate component for this as well */}
 
