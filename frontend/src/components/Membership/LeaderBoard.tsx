@@ -30,7 +30,7 @@ const Ranking = ({ rank, name, points, profilePic }: RankingProps) => {
     default:
       width = '230px';
       height = '230px';
-  };
+  }
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -67,7 +67,7 @@ const Ranking = ({ rank, name, points, profilePic }: RankingProps) => {
   );
 };
 
-const LeaderBoard = () => {
+const LeaderBoard = ({ rankings }: { rankings: Array<RankingProps> }) => {
   const styles = membershipStyles();
 
   return (
@@ -87,12 +87,35 @@ const LeaderBoard = () => {
         </Typography>
       </div>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', gap: '70px' }}>
-        <Ranking rank={2} name="Jake S." points={55} />
-        
-        <Ranking rank={1} name="Sarah M." points={70} />
-        
-        <Ranking rank={3} name="Ivan C." points={50} />
+      <div
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: '70px',
+        }}
+      >
+        <Ranking
+          rank={rankings[1].rank}
+          name={rankings[1].name}
+          points={rankings[1].points}
+          profilePic={rankings[1].profilePic}
+        />
+
+        <Ranking
+          rank={rankings[0].rank}
+          name={rankings[0].name}
+          points={rankings[0].points}
+          profilePic={rankings[0].profilePic}
+        />
+
+        <Ranking
+          rank={rankings[2].rank}
+          name={rankings[2].name}
+          points={rankings[2].points}
+          profilePic={rankings[2].profilePic}
+        />
       </div>
 
       {/* <Grid

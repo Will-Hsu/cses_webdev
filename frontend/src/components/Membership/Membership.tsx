@@ -14,6 +14,61 @@ const Membership = () => {
   const [userData, setUserData] = useState<User | null>(null);
   const navigate = useNavigate();
 
+  // For demo purposes, we are hardcoding the events attended and leaderboard data
+  const eventsAttended = [
+    {
+      title: 'Google ML SWE Alumnus Q&A',
+      targetDate: new Date('2023-09-02T21:00:00.000Z'),
+      location: 'Virtual',
+      calendar_link: 'https://example.com/calendar',
+      description: 'Event Description',
+      end_time: '2023-09-02T23:00:00.000Z',
+      instagram_link: 'https://www.instagram.com/event',
+      start_time: '2023-09-02T21:00:00.000Z',
+      _id: '64b81a1228022bc1461c5ea4',
+    },
+    {
+      title: 'Google ML SWE Alumnus Q&A',
+      targetDate: new Date('2023-09-02T21:00:00.000Z'),
+      location: 'Virtual',
+      calendar_link: 'https://example.com/calendar',
+      description: 'Event Description',
+      end_time: '2023-09-02T23:00:00.000Z',
+      instagram_link: 'https://www.instagram.com/event',
+      start_time: '2023-09-02T21:00:00.000Z',
+      _id: '64b81a1228022bc1461c5ea4',
+    },
+    {
+      title: 'Google ML SWE Alumnus Q&A',
+      targetDate: new Date('2023-09-02T21:00:00.000Z'),
+      location: 'Virtual',
+      calendar_link: 'https://example.com/calendar',
+      description: 'Event Description',
+      end_time: '2023-09-02T23:00:00.000Z',
+      instagram_link: 'https://www.instagram.com/event',
+      start_time: '2023-09-02T21:00:00.000Z',
+      _id: '64b81a1228022bc1461c5ea4',
+    },
+  ];
+
+  const leaderBoardData = [
+    {
+      rank: 1,
+      name: 'Sarah M.',
+      points: 70,
+    },
+    {
+      rank: 2,
+      name: 'Jake S.',
+      points: 55,
+    },
+    {
+      rank: 3,
+      name: 'Ivan C.',
+      points: 50,
+    },
+  ];
+
   // Note from Will -- I commented this out, so we can focus on coding up the UI for this milestone
   /*useEffect(() => {
     const fetchUserData = async () => {
@@ -43,9 +98,9 @@ const Membership = () => {
         {/* Add Events Attended + Leaderboard UI for the membership page @Brian & Eddie & Yashil --
         consider creating a separate component for this as well */}
 
-        <EventsAttended eventsAttended={[]} />
+        <EventsAttended eventsAttended={eventsAttended} />
 
-        <LeaderBoard />
+        <LeaderBoard rankings={leaderBoardData} />
       </div>
       <div
         style={{

@@ -4,10 +4,19 @@ import { membershipStyles } from './styles';
 import alertLogo from '../../images/events-attended-alert.svg';
 
 interface EventsAttendedProps {
-  eventsAttended: Array<String>;
+  eventsAttended: Array<{
+    _id: string;
+    title: string;
+    location: string;
+    description: string;
+    start_time: string;
+    end_time: string;
+    calendar_link: string;
+    instagram_link: string;
+  }>;
 }
 
-const EventsAttended: React.FC<EventsAttendedProps> = ({ eventsAttended }) => {
+const EventsAttended = ({ eventsAttended }: EventsAttendedProps) => {
   const styles = membershipStyles();
 
   return (
@@ -27,7 +36,21 @@ const EventsAttended: React.FC<EventsAttendedProps> = ({ eventsAttended }) => {
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'row', gap: '40px' }}>
-        <EventBox
+        {eventsAttended.map((event) => (
+          <EventBox
+            title={event.title}
+            targetDate={new Date(event.start_time)}
+            location={event.location}
+            calendar_link={event.calendar_link}
+            description={event.description}
+            end_time={event.end_time}
+            instagram_link={event.instagram_link}
+            start_time={event.start_time}
+            _id={event._id}
+          />
+        ))}
+
+        {/* <EventBox
           title="Google ML SWE Alumnus Q&A"
           targetDate={new Date('2023-09-02T21:00:00.000Z')}
           location={'Virtual'}
@@ -61,7 +84,7 @@ const EventsAttended: React.FC<EventsAttendedProps> = ({ eventsAttended }) => {
           instagram_link="https://www.instagram.com/event"
           start_time="2023-09-02T21:00:00.000Z"
           _id="64b81a1228022bc1461c5ea4"
-        />
+        /> */}
       </div>
     </Container>
   );
