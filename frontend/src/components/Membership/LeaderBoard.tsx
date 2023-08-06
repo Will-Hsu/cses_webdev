@@ -96,18 +96,19 @@ const LeaderBoard = ({ rankings }: { rankings: Array<RankingProps> }) => {
           gap: '70px',
         }}
       >
-        <Ranking
-          rank={rankings[1].rank}
-          name={rankings[1].name}
-          points={rankings[1].points}
-          profilePic={rankings[1].profilePic}
-        />
 
         <Ranking
           rank={rankings[0].rank}
           name={rankings[0].name}
           points={rankings[0].points}
           profilePic={rankings[0].profilePic}
+        />
+
+        <Ranking
+          rank={rankings[1].rank}
+          name={rankings[1].name}
+          points={rankings[1].points}
+          profilePic={rankings[1].profilePic}
         />
 
         <Ranking
