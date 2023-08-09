@@ -15,7 +15,7 @@ const Membership = () => {
   const navigate = useNavigate();
 
   // Note from Will -- I commented this out, so we can focus on coding up the UI for this milestone
-  /*useEffect(() => {
+  useEffect(() => {
     const fetchUserData = async () => {
       try {
         if (isLoggedIn === true) {
@@ -31,11 +31,11 @@ const Membership = () => {
     };
 
     fetchUserData();
-  }, [isLoggedIn, user.email, navigate]);*/
+  }, [isLoggedIn, user.email, navigate]);
 
   return (
     <div>
-    <MemberProfile/>
+    {userData && <MemberProfile memberName={userData.name}/>}
       <div style={{ color: 'white', position: 'relative', top: '93px' }}>
         Add Member Profile here @Sithu & Joyce -- consider creating a separate component for the
         profile

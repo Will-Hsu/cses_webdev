@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Box, IconButton } from '@mui/material';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { AccountCircle } from '@mui/icons-material';
 import ProfileMenu from './ProfileMenu';
 
@@ -17,7 +18,8 @@ const ProfileDropdown: React.FC = () => {
     return (
         <Box>
             <IconButton onClick={handleMenuOpen} color="inherit">
-                <AccountCircle/>
+            <ArrowDropDownIcon fontSize='large' sx={{color: '#F3C969'}}/>
+                {/* <AccountCircle/> */}
             </IconButton>
             <ProfileMenu anchorEl={anchorEl} onClose={handleMenuClose}/>
         </Box>

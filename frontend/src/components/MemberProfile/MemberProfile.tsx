@@ -9,7 +9,10 @@ import LinearProgress, { LinearProgressProps } from '@mui/material/LinearProgres
 
 const styles = memberProfile();
 
-const MemberProfile = () => {
+interface MemberProfileProps{
+  memberName: string;
+}
+const MemberProfile = ({memberName}: MemberProfileProps) => {
   const theme = createTheme();
   const isSmScreen = useMediaQuery(theme.breakpoints.between('sm', 'md'));
   const isXsScreen = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
@@ -54,7 +57,7 @@ const MemberProfile = () => {
         <div>
           <p style={{ fontWeight: 'bold', fontSize: 'clamp(1.2rem, 2.5vw, 2rem)', margin: '0', marginTop: '10%' }}>Welcome Back</p>
           <p style={{ fontWeight: 'bold', fontSize: 'clamp(1.2rem, 2.5vw, 2rem)', margin: '0', marginBottom: '5%' }}>
-            Last Name, First Name
+            {memberName}
           </p>
           <Box sx={{ width: '110%' }}>
             <LinearProgressWithLabel
