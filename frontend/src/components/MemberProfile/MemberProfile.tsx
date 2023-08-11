@@ -85,4 +85,6 @@ const MemberProfile = ({memberName}: MemberProfileProps) => {
   );
 };
 
+
 export default MemberProfile;
+
