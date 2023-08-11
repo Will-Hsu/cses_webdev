@@ -14,6 +14,7 @@ const Membership = () => {
   const [userData, setUserData] = useState<User | null>(null);
   const navigate = useNavigate();
 
+  // Note from Will -- I commented this out, so we can focus on coding up the UI for this milestone
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -34,7 +35,7 @@ const Membership = () => {
 
   return (
     <div>
-    <MemberProfile/>
+    {userData && <MemberProfile memberName={userData.name}/>}
       <div style={{ color: 'white', position: 'relative', top: '93px' }}>
         Add Member Profile here @Sithu & Joyce -- consider creating a separate component for the
         profile
