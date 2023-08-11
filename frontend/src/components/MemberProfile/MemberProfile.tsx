@@ -1,22 +1,30 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { AuthContext } from '../../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { User } from '../../utils/types';
-import { Avatar, Box, Button, Divider, Grid, Typography, createTheme, useMediaQuery } from '@mui/material';
-import { memberProfile } from './styles';
+import React from 'react';
+//import { AuthContext } from '../../context/AuthContext';
+//import { useNavigate } from 'react-router-dom';
+//import axios from 'axios';
+//import { User } from '../../utils/types';
+import {
+  Avatar,
+  Box,
+  // Button,
+  // Divider,
+  Grid,
+  Typography,
+  createTheme,
+  useMediaQuery,
+} from '@mui/material';
+// import { memberProfile } from './styles';
 import LinearProgress, { LinearProgressProps } from '@mui/material/LinearProgress';
 
-const styles = memberProfile();
+// const styles = memberProfile();
 
-interface MemberProfileProps{
+interface MemberProfileProps {
   memberName: string;
 }
-const MemberProfile = ({memberName}: MemberProfileProps) => {
+const MemberProfile = ({ memberName }: MemberProfileProps) => {
   const theme = createTheme();
-  const isSmScreen = useMediaQuery(theme.breakpoints.between('sm', 'md'));
+  // const isSmScreen = useMediaQuery(theme.breakpoints.between('sm', 'md'));
   const isXsScreen = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
-
 
   function LinearProgressWithLabel(props: LinearProgressProps & { value: number }) {
     return (
@@ -25,7 +33,11 @@ const MemberProfile = ({memberName}: MemberProfileProps) => {
           <LinearProgress variant="determinate" {...props} />
         </Box>
         <Box sx={{ minWidth: 35 }}>
-          <Typography variant="body2" color="white" fontSize="clamp(1rem, 1.5vw, 1rem)">{`${Math.round(props.value)}%`}</Typography>
+          <Typography
+            variant="body2"
+            color="white"
+            fontSize="clamp(1rem, 1.5vw, 1rem)"
+          >{`${Math.round(props.value)}%`}</Typography>
         </Box>
       </Box>
     );
@@ -33,7 +45,14 @@ const MemberProfile = ({memberName}: MemberProfileProps) => {
 
   return (
     <div style={{ color: 'white', position: 'relative', top: '93px' }}>
-      <h1 style={{ textAlign: 'center', fontFamily: 'Chakra Petch', fontSize: 'clamp(2rem, 4vw, 4rem)', marginTop: '8%' }}>
+      <h1
+        style={{
+          textAlign: 'center',
+          fontFamily: 'Chakra Petch',
+          fontSize: 'clamp(2rem, 4vw, 4rem)',
+          marginTop: '8%',
+        }}
+      >
         MEMBER PROFILE
       </h1>
       <Grid container justifyContent="center" alignItems="center" spacing={1}>
@@ -55,8 +74,24 @@ const MemberProfile = ({memberName}: MemberProfileProps) => {
           </Grid>
         )}
         <div>
-          <p style={{ fontWeight: 'bold', fontSize: 'clamp(1.2rem, 2.5vw, 2rem)', margin: '0', marginTop: '10%' }}>Welcome Back</p>
-          <p style={{ fontWeight: 'bold', fontSize: 'clamp(1.2rem, 2.5vw, 2rem)', margin: '0', marginBottom: '5%' }}>
+          <p
+            style={{
+              fontWeight: 'bold',
+              fontSize: 'clamp(1.2rem, 2.5vw, 2rem)',
+              margin: '0',
+              marginTop: '10%',
+            }}
+          >
+            Welcome Back
+          </p>
+          <p
+            style={{
+              fontWeight: 'bold',
+              fontSize: 'clamp(1.2rem, 2.5vw, 2rem)',
+              margin: '0',
+              marginBottom: '5%',
+            }}
+          >
             {memberName}
           </p>
           <Box sx={{ width: '110%' }}>
@@ -85,6 +120,4 @@ const MemberProfile = ({memberName}: MemberProfileProps) => {
   );
 };
 
-
 export default MemberProfile;
-
