@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '../Button/Button';
 import { Container, Box, Grid } from '@mui/material';
 import background from '../../images/shape.svg';
+//import desktopTail from '../../images/desktop_tail.png';
 import EventBox from '../Event/Event';
 import { homeStyles } from './styles';
 import SlideShow from './SlideShow/SlideShow';
@@ -18,6 +20,7 @@ interface EventData {
 }
 
 const Home = () => {
+  const navigate = useNavigate();
   const styles = homeStyles();
 
   const [displayedFutureEvents, setDisplayedFutureEvents] = useState<EventData[]>([]);
@@ -55,7 +58,7 @@ const Home = () => {
                 <Box
                   sx={{
                     ...styles.title,
-                    marginTop: { xs: '5%', sm: '8%', md: '10%' },
+                    marginTop: { xs: '5%', sm: '8%', md: '12%' },
                     marginLeft: { xs: '0%', sm: '3%', md: '12%' },
                   }}
                 >
@@ -68,11 +71,7 @@ const Home = () => {
                   Connect.
                 </Box>
                 <Box sx={{ ...styles.button, marginLeft: { xs: '0%', sm: '2%', md: '12%' } }}>
-                  <Button
-                    size="large"
-                    text="Learn About Us!"
-                    onClick={() => console.log('click')}
-                  />
+                  <Button size="large" text="Learn About Us!" onClick={() => navigate('/about')} />
                 </Box>
               </Box>
             </Grid>
@@ -103,7 +102,7 @@ const Home = () => {
                 <Button
                   size="large"
                   text="Become a Member ->"
-                  onClick={() => console.log('click')}
+                  onClick={() => navigate('/membership')}
                 />
               </Box>
             </Grid>
@@ -197,7 +196,7 @@ const Home = () => {
             <Button
               size="medium"
               text="See All Events ->"
-              onClick={() => console.log('click')}
+              onClick={() => navigate('/events')}
             ></Button>
           </div>
         </Container>

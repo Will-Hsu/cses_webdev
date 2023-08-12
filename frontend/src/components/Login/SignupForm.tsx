@@ -1,6 +1,15 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FormControl, Box, Input, InputLabel, Button, Autocomplete, TextField, FormHelperText } from '@mui/material';
+import {
+  FormControl,
+  Box,
+  Input,
+  InputLabel,
+  Button,
+  Autocomplete,
+  TextField,
+  FormHelperText,
+} from '@mui/material';
 import { createUserAPI } from '../../api';
 import { loginStyles } from './styles';
 import { Profanity, ProfanityOptions } from '@2toad/profanity';
@@ -47,13 +56,13 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
 
   const onMajorChange = (e: React.ChangeEvent<{}>, value: string | null) => {
     setSelectedMajor(value);
-    setFormData({ ...formData, major: value || ''})
+    setFormData({ ...formData, major: value || '' });
   };
 
   const onGradYearChange = (e: React.ChangeEvent<{}>, value: string | null) => {
-    const numValue = Number(value)
+    const numValue = Number(value);
     setSelectedGradYear(value);
-    setFormData({ ...formData, expectedGraduateYear: numValue })
+    setFormData({ ...formData, expectedGraduateYear: numValue });
   };
 
   const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -102,7 +111,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
           navigate('/membership');
         })
         .catch((error) => {
-          console.error(error)
+          console.error(error);
         });
     }
   };
@@ -131,9 +140,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
           onChange={onInputChange}
         />
         {!showError && (
-          <FormHelperText id='name-error-text'>
-            Please enter your display name
-          </FormHelperText>
+          <FormHelperText id="name-error-text">Please enter your display name</FormHelperText>
         )}
         {showError && (
           <>
@@ -170,7 +177,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
         required
         variant="standard"
         sx={styles.inputField}
-        error={showError && (majorEmptyError)}
+        error={showError && majorEmptyError}
       >
         <Autocomplete
           id="major"
@@ -180,16 +187,12 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
           renderInput={(params) => <TextField {...params} label="Major *" />}
         />
         {!showError && (
-          <FormHelperText id='major-error-text'>
-            Please select your major
-          </FormHelperText>
+          <FormHelperText id="major-error-text">Please select your major</FormHelperText>
         )}
         {showError && (
           <>
             {majorEmptyError && (
-              <FormHelperText id="major-empty-error-text">
-                Please select your major.
-              </FormHelperText>
+              <FormHelperText id="major-empty-error-text">Please select your major.</FormHelperText>
             )}
           </>
         )}
@@ -200,7 +203,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
         required
         variant="standard"
         sx={styles.inputField}
-        error={showError && (gradYearEmptyError)}
+        error={showError && gradYearEmptyError}
       >
         <Autocomplete
           id="expected-graduate-year"
@@ -210,7 +213,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
           renderInput={(params) => <TextField {...params} label="Expected Graduation Year *" />}
         />
         {!showError && (
-          <FormHelperText id='expected-graduate-year-error-text'>
+          <FormHelperText id="expected-graduate-year-error-text">
             Please select your expected graduation year
           </FormHelperText>
         )}
@@ -224,9 +227,19 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
           </>
         )}
       </FormControl>
-      
+
       <Box sx={{ textAlign: 'center' }}>
-        <Button variant="contained" type="submit" sx={styles.inputField}>
+        <Button
+          variant="contained"
+          type="submit"
+          sx={{
+            ...styles.inputField,
+            backgroundColor: 'black',
+            '&:hover': {
+              backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            },
+          }}
+        >
           Sign up
         </Button>
       </Box>

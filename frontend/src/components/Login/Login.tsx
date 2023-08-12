@@ -1,11 +1,11 @@
 import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-//import axios from 'axios';
+// import axios from 'axios';
 import SignupForm from './SignupForm';
 import LoginForm from './LoginForm';
 import { AuthContext } from '../../context/AuthContext';
 import { Container } from '@mui/material';
-//import { checkUserAPI } from '../../api';
+// import { checkUserAPI } from '../../api';
 
 interface RenderContentProps {
   name: string;
@@ -35,7 +35,13 @@ const Login = () => {
     <div>
       <Container
         maxWidth="xl"
-        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+        sx={{
+          background:
+            'linear-gradient(to bottom, black 0%, #2F56BC 30%, black 50%, #2F56BC 70%, black 100%)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
       >
         {renderContent({ name: user.name, email: user.email, login })}
       </Container>

@@ -11,9 +11,9 @@ const LoginForm = ({ showEmailError, login }: LoginFormProps) => {
   const styles = loginStyles();
 
   return (
-    <div style={{ marginTop: '150px' }}>
+    <div style={{ marginTop: '200px', marginBottom: '100px' }}>
       {showEmailError ? <Alert severity="error">Please use UCSD email</Alert> : null}
-      <Box sx={styles.loginForm}>
+      <div style={styles.loginForm}>
         <Typography
           variant="h4"
           sx={{
@@ -22,22 +22,34 @@ const LoginForm = ({ showEmailError, login }: LoginFormProps) => {
             alignItems: 'center',
             marginTop: '10%',
             marginBottom: '5%',
+            fontWeight: 'bold',
+            fontFamily: 'Chakra Petch',
+            color: 'white',
           }}
         >
-          Login
+          CSES Member Login
         </Typography>
-        <Divider variant="middle" />
+        <Divider variant="middle" sx={{ bgcolor: 'white' }} />
         <Box
           sx={{
-            marginTop: '15%',
+            marginTop: '10%',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
           }}
         >
-          <GoogleButton onClick={login} />
+          <GoogleButton
+            style={{
+              fontFamily: 'Chakra Petch',
+              backgroundColor: 'black',
+              borderColor: 'white',
+              borderWidth: '0.5px',
+              borderStyle: 'solid',
+            }}
+            onClick={login}
+          />
         </Box>
-      </Box>
+      </div>
     </div>
   );
 };

@@ -20,10 +20,10 @@ export const homeStyles = () => ({
   },
   title: {
     color: 'white',
-    fontSize: 'clamp(32px, 8vw, 100px)',
+    fontSize: 'clamp(32px, 8vw, 85px)',
     fontFamily: 'Chakra Petch',
     marginLeft: '12%',
-    marginTop: '5%',
+    marginTop: '3%',
     fontWeight: 700,
   },
   subtitle: {
@@ -81,6 +81,6 @@ export const homeStyles = () => ({
     fontWeight: 500,
     fontFamily: 'Chakra Petch',
     marginLeft: '11%',
-    marginTop: '5%',
+    marginTop: '3%',
   },
 });

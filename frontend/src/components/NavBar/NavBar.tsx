@@ -10,6 +10,7 @@ import {
   Box,
   Button,
   Toolbar,
+  Avatar,
 } from '@mui/material';
 import { Menu as MenuIcon, Close as CloseIcon } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
@@ -18,7 +19,7 @@ import MuiButton from '../Button/Button';
 import { navBarStyles } from './styles';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-//import ProfileDropdown from './ProfileDropdown';
+import ProfileDropdown from './ProfileDropdown';
 
 const NavBar = () => {
   const styles = navBarStyles();
@@ -48,7 +49,6 @@ const NavBar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
   return (
     <div>
       <AppBar
@@ -74,6 +74,17 @@ const NavBar = () => {
               />
             )}
           </Box>
+          {isLoggedIn && (
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                <Avatar
+                  alt="Remy Sharp"
+                  src="https://img.freepik.com/free-photo/puppy-that-is-walking-snow_1340-37228.jpg"
+                  sx={{ width: 60, height: 60, marginLeft: '1%' }}
+                />
+              <ProfileDropdown />
+              </div>
+             
+            )}
           <Box sx={{ display: { xs: 'block', md: 'none' } }}>
             <IconButton onClick={() => setIsDrawerOpen(!isDrawerOpen)} color="inherit">
               {!isDrawerOpen && <MenuIcon sx={styles.menuicon} />}
