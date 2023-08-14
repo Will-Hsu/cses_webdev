@@ -38,7 +38,7 @@ export const getUserInfo = asyncHandler(async (req, res) => {
   const { email } = req.params;
 
   try {
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).populate('eventsAttended');
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
@@ -126,12 +126,62 @@ export const userDelete = [
   }),
 ];
 
+// GET request for getting top performers.
+export const getTopMembers = asyncHandler(async (_, res) => {
+  try {
+    const topUsers = await User.find()
+      .sort({ points: -1 })
+      .limit(3)
+      .select('name email profilePicture points')
+      .exec();
+
+    // console.log(topUsers);
+
+    res.status(200).json(topUsers);
+  } catch (error) {
+    console.error('Error fetching user info: ', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// POST request for creating new event entries for a user.
+export const userEventsUpdate = asyncHandler(async (req, res) => {
+  const { email, id } = req.params;
+
+  try {
+    // Find the user by email
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Check if the event ID is already in the eventsAttended array
+    if (user.eventsAttended.includes(id)) {
+      return res.status(400).json({ message: 'Event already attended' });
+    }
+
+    // Add the event ID to the eventsAttended array
+    user.eventsAttended.push(id);
+
+    // Save the updated user
+    await user.save();
+
+    return res.status(200).json({ message: 'Event added to eventsAttended' });
+  } catch (error) {
+    console.error('Error:', error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
 export default {
   userCheck,
   userCreate,
   getUserInfo,
   userUpdate,
   userDelete,
+  userEventsUpdate,
+  getTopMembers,
 };
 
 function isValidEventId(eventIds) {

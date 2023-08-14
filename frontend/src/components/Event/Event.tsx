@@ -43,14 +43,14 @@ const EventBox = ({
   _id,
 }: EventBoxProps) => {
   const styles = event_style();
-  const mediaQuery = window.matchMedia('(max-width: 1000px)');
+  //   const mediaQuery = window.matchMedia('(max-width: 1000px)');
 
-  if (mediaQuery.matches) {
-    styles.outerBox.width = '300px';
-    styles.outerBox.height = '312px';
-    styles.innerBox.width = '288px';
-    styles.innerBox.height = '296px';
-  }
+  //   if (mediaQuery.matches) {
+  //     styles.outerBox.width = '300px';
+  //     styles.outerBox.height = '312px';
+  //     styles.innerBox.width = '288px';
+  //     styles.innerBox.height = '296px';
+  //   }
 
   /**
    * Calculates the time in days, hours, mins, and secs by subtracting the target date, minus the curent date.
@@ -160,34 +160,20 @@ const EventBox = ({
 
   // Apply style adjustments only for screens with width less than 1000px
   //const mediaQuery = window.matchMedia('(max-width: 1000px)');
-  const shouldReduceSize = mediaQuery.matches;
+  //const shouldReduceSize = mediaQuery.matches;
 
   return (
     <div style={{ display: 'flex' }}>
-      <div
-        className="outerBox"
-        style={
-          shouldReduceSize
-            ? { ...styles?.outerBox, width: '300px', height: '312px' }
-            : styles?.outerBox
-        }
-      >
-        <div
-          className="innerBox"
-          style={
-            shouldReduceSize
-              ? { ...styles?.innerBox, width: '288px', height: '296px' }
-              : styles?.innerBox
-          }
-        >
+      <div className="outerBox" style={styles?.outerBox}>
+        <div className="innerBox" style={styles?.innerBox}>
           <h4
             style={{
               color: 'white',
-              fontSize: shouldReduceSize ? '26px' : '40px',
+              fontSize: '40px',
               fontFamily: 'Chakra Petch',
               fontWeight: '600',
-              marginTop: shouldReduceSize ? '20px' : '30px',
-              marginLeft: shouldReduceSize ? '20px' : '30px',
+              marginTop: '30px',
+              marginLeft: '30px',
             }}
           >
             {title}
@@ -196,7 +182,7 @@ const EventBox = ({
             className="countDown"
             style={{
               marginTop: '2px',
-              marginLeft: shouldReduceSize ? '20px' : '30px',
+              marginLeft: '30px',
               display: 'flex',
             }}
           >
@@ -205,9 +191,9 @@ const EventBox = ({
                 key={index}
                 style={{
                   backgroundColor: character === ':' ? 'transparent' : 'white',
-                  padding: shouldReduceSize ? '8px' : '10px',
-                  marginLeft: character === ':' ? '0px' : shouldReduceSize ? '2px' : '4px',
-                  fontSize: shouldReduceSize ? '16px' : '20px',
+                  padding: '10px',
+                  marginLeft: character === ':' ? '0px' : '4px',
+                  fontSize: '20px',
                   fontFamily: 'Chakra Petch',
                   fontWeight: '500',
                   color: character === ':' ? 'white' : 'black',
@@ -220,8 +206,8 @@ const EventBox = ({
           </div>
           <div
             style={{
-              marginTop: shouldReduceSize ? '-10px' : '0',
-              marginLeft: shouldReduceSize ? '25px' : '35px',
+              marginTop: '0',
+              marginLeft: '35px',
               display: 'flex',
               flexDirection: 'row',
             }}
@@ -229,7 +215,7 @@ const EventBox = ({
             <p
               style={{
                 color: 'white',
-                fontSize: shouldReduceSize ? '12px' : '16px',
+                fontSize: '16px',
                 fontFamily: 'Chakra Petch',
                 fontWeight: '600',
               }}
@@ -239,7 +225,7 @@ const EventBox = ({
             <p
               style={{
                 color: 'white',
-                fontSize: shouldReduceSize ? '16px' : '20px',
+                fontSize: '20px',
                 fontFamily: 'Chakra Petch',
                 fontWeight: '500',
               }}
@@ -249,7 +235,7 @@ const EventBox = ({
             <p
               style={{
                 color: 'white',
-                fontSize: shouldReduceSize ? '12px' : '16px',
+                fontSize: '16px',
                 fontFamily: 'Chakra Petch',
                 fontWeight: '600',
               }}
@@ -259,7 +245,7 @@ const EventBox = ({
             <p
               style={{
                 color: 'white',
-                fontSize: shouldReduceSize ? '16px' : '20px',
+                fontSize: '20px',
                 fontFamily: 'Chakra Petch',
                 fontWeight: '500',
               }}
@@ -269,7 +255,7 @@ const EventBox = ({
             <p
               style={{
                 color: 'white',
-                fontSize: shouldReduceSize ? '12px' : '16px',
+                fontSize: '16px',
                 fontFamily: 'Chakra Petch',
                 fontWeight: '600',
               }}
@@ -279,7 +265,7 @@ const EventBox = ({
             <p
               style={{
                 color: 'white',
-                fontSize: shouldReduceSize ? '16px' : '20px',
+                fontSize: '20px',
                 fontFamily: 'Chakra Petch',
                 fontWeight: '500',
               }}
@@ -289,7 +275,7 @@ const EventBox = ({
             <p
               style={{
                 color: 'white',
-                fontSize: shouldReduceSize ? '12px' : '16px',
+                fontSize: '16px',
                 fontFamily: 'Chakra Petch',
                 fontWeight: '600',
               }}
@@ -299,7 +285,7 @@ const EventBox = ({
           </div>
           <div
             style={{
-              marginTop: shouldReduceSize ? '20px' : '30px',
+              marginTop: '30px',
               display: 'flex',
               flexDirection: 'column',
             }}
@@ -307,11 +293,11 @@ const EventBox = ({
             <p
               style={{
                 color: 'white',
-                fontSize: shouldReduceSize ? '16px' : '20px',
+                fontSize: '20px',
                 fontFamily: 'Chakra Petch',
                 fontWeight: '500',
                 marginTop: '5px',
-                marginLeft: shouldReduceSize ? '20px' : '30px',
+                marginLeft: '30px',
                 lineHeight: '0px',
               }}
             >
@@ -320,11 +306,11 @@ const EventBox = ({
             <p
               style={{
                 color: 'white',
-                fontSize: shouldReduceSize ? '16px' : '20px',
+                fontSize: '20px',
                 fontFamily: 'Chakra Petch',
                 fontWeight: '500',
                 marginTop: '5px',
-                marginLeft: shouldReduceSize ? '20px' : '30px',
+                marginLeft: '30px',
                 lineHeight: '0px',
               }}
             >
@@ -334,40 +320,34 @@ const EventBox = ({
             <p
               style={{
                 color: 'white',
-                fontSize: shouldReduceSize ? '16px' : '20px',
+                fontSize: '20px',
                 fontFamily: 'Chakra Petch',
                 fontWeight: '500',
                 marginTop: '5px',
-                marginLeft: shouldReduceSize ? '20px' : '30px',
+                marginLeft: '30px',
                 lineHeight: '0px',
               }}
             >
               {location}
             </p>
 
-            <a
-              href={calendar_link}
-              style={{ marginLeft: '305px', marginTop: shouldReduceSize ? '-30px' : '-50px' }}
-            >
+            <a href={calendar_link} style={{ marginLeft: '305px', marginTop: '-50px' }}>
               <img
                 src={calendarIcon}
                 alt="Calendar Icon"
                 style={{
-                  width: shouldReduceSize ? '25px' : '30px',
-                  height: shouldReduceSize ? '25px' : '30px',
+                  width: '30px',
+                  height: '30px',
                 }}
               />
             </a>
-            <a
-              href={instagram_link}
-              style={{ marginLeft: '350px', marginTop: shouldReduceSize ? '-20px' : '-36px' }}
-            >
+            <a href={instagram_link} style={{ marginLeft: '350px', marginTop: '-36px' }}>
               <img
                 src={instagramIcon}
                 alt="Instagram Icon"
                 style={{
-                  width: shouldReduceSize ? '25px' : '30px',
-                  height: shouldReduceSize ? '25px' : '30px',
+                  width: '30px',
+                  height: '30px',
                 }}
               />
             </a>

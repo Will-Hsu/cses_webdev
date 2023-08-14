@@ -6,6 +6,8 @@ import { Box, Button, Divider, Typography } from '@mui/material';
 import { membershipStyles } from './styles';
 import EventsAttended from './EventsAttended';
 import LeaderBoard from './LeaderBoard';
+import MemberProfile from '../MemberProfile/MemberProfile';
+import axios from 'axios';
 
 const styles = membershipStyles();
 
@@ -69,8 +71,7 @@ const Membership = () => {
     },
   ];
 
-  // Note from Will -- I commented this out, so we can focus on coding up the UI for this milestone
-  /*useEffect(() => {
+  useEffect(() => {
     const fetchUserData = async () => {
       try {
         if (isLoggedIn === true) {
@@ -86,14 +87,11 @@ const Membership = () => {
     };
 
     fetchUserData();
-  }, [isLoggedIn, user.email, navigate]);*/
+  }, [isLoggedIn, user.email, navigate]);
 
   return (
-    <>
-      <div style={{ color: 'white', position: 'relative', top: '93px' }}>
-        Add Member Profile here @Sithu & Joyce -- consider creating a separate component for the
-        profile
-      </div>
+    <div>
+      {userData && <MemberProfile memberName={userData.name} />}
       <div
         style={{
           color: 'white',
@@ -171,7 +169,7 @@ const Membership = () => {
           </Box>
         )}
       </div>
-    </>
+    </div>
   );
 };
 

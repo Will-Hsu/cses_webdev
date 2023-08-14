@@ -5,6 +5,8 @@ import bgBtm from '../../images/shape.svg';
 import { event_style } from './styles';
 import EventBox from '../Event/Event';
 import Button from '../Button/Button';
+import { height } from '@mui/system';
+import useMediaQuery from '../../hooks/useMediaQuery';
 
 interface EventData {
   calendar_link: string;
@@ -16,15 +18,48 @@ interface EventData {
   title: string;
   _id: string;
 }
+
 const Events = () => {
   const styles = event_style();
+  const eventsContainerStyle: any = styles.eventsContainer;
 
   const [upcomingEvents, setUpcomingEvents] = useState<EventData[]>([]);
   const [pastEvents, setPastEvents] = useState<EventData[]>([]);
   const [selectedYear, setSelectedYear] = useState<number | null>(null);
   const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
 
+  const isDesktop = useMediaQuery('(min-width: 1024px)');
+  const isIpad = useMediaQuery('(min-width: 768px) and (max-width: 1023px)');
+  const isMobile = useMediaQuery('(max-width: 767px)');
+
+  if (isDesktop) {
+    // if desktop view set styles for desktop
+    eventsContainerStyle.maxWidth = '100vw';
+    eventsContainerStyle.overflowX = 'hidden';
+    eventsContainerStyle.flexWrap = 'wrap' as 'wrap';
+  }
+
+  if (isIpad) {
+    // if ipad view set styles for ipad
+    eventsContainerStyle.maxWidth = '100vw';
+    eventsContainerStyle.overflowX = 'hidden';
+    eventsContainerStyle.flexWrap = 'wrap' as 'wrap';
+  }
+
+  if (isMobile) {
+    // if mobile view set styles for mobile
+    eventsContainerStyle.maxWidth = '100vw';
+    eventsContainerStyle.width = '100%'; // Set width to 100% of the parent container
+    eventsContainerStyle.padding = '0'; // Remove any padding
+    eventsContainerStyle.margin = '0'; // Remove any margin
+    eventsContainerStyle.overflowX = 'auto'; 
+    eventsContainerStyle.overflowY = 'auto'; 
+    eventsContainerStyle.flexWrap = 'wrap' as 'wrap';
+  }
+
   useEffect(() => {
+    // Set media queries
+
     let upcomingEventsEndpoint = 'http://127.0.0.1:5000/api/v1/events?type=upcoming';
     let pastEventsEndpoint = 'http://127.0.0.1:5000/api/v1/events?type=past';
 
@@ -40,6 +75,7 @@ const Events = () => {
         const response = await fetch(upcomingEventsEndpoint);
         const data = await response.json();
         setUpcomingEvents(data);
+        setDisplayedFutureEvents(data);
       } catch (error) {
         console.error('Error fetching upcoming events:', error);
       }
@@ -57,6 +93,7 @@ const Events = () => {
         const response = await fetch(pastEventsEndpoint);
         const data = await response.json();
         setPastEvents(data);
+        setDisplayedPastEvents(data);
       } catch (error) {
         console.error('Error fetching past events:', error);
       }
@@ -86,8 +123,11 @@ const Events = () => {
           new Date(event.start_time).getTime() <= oneWeekAfter,
       );
 
+      console.log(thisWeekEvents);
+
       setDisplayedFutureEvents(thisWeekEvents);
       setIsThisWeekClicked(true);
+      setIsThisMonthClicked(false);
     }
   };
 
@@ -105,7 +145,10 @@ const Events = () => {
           new Date(event.start_time).getTime() <= oneMonthAfter,
       );
 
+      console.log(thisMonthEvents);
+
       setDisplayedFutureEvents(thisMonthEvents);
+      setIsThisWeekClicked(false);
       setIsThisMonthClicked(true);
     }
   };
@@ -139,24 +182,14 @@ const Events = () => {
           instagram_link={eventData.instagram_link}
           start_time={eventData.start_time}
           _id={eventData._id}
+          
         />
-        {/* Add space between EventBoxes */}
-        <p
-          style={{
-            color: 'white',
-            fontSize: '20px',
-            fontFamily: 'Chakra Petch',
-            fontWeight: '500',
-          }}
-        >
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        </p>
       </React.Fragment>
     ));
   };
 
   return (
-    <div style={{ position: 'relative', overflow: 'hidden' }}>
+    <div style={{ position: 'relative', overflowY:'auto'}}>
       <img src={bgTop} alt="bg1" style={styles.bg1} />
       <img src={bgBtm} alt="bg2" style={styles.bg2} />
       <Container maxWidth="xl" sx={styles.body}>
@@ -185,21 +218,14 @@ const Events = () => {
           <Button size="medium" text="This Week" onClick={handleThisWeekClick}></Button>
           <Button size="medium" text="This Month" onClick={handleThisMonthClick}></Button>
         </div>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
         {/* Render EventBoxes for future events */}
         <div
           style={{
-            color: 'white',
-            fontSize: '20px',
-            fontFamily: 'Chakra Petch',
-            fontWeight: '700',
-            display: 'flex',
-            flexDirection: 'row',
-            marginLeft: '39px',
+            ...eventsContainerStyle,
           }}
         >
-          {renderEventBoxes(upcomingEvents)}
+          {renderEventBoxes(displayedFutureEvents)}
         </div>
 
         {/* ... (previous code) */}
@@ -230,18 +256,23 @@ const Events = () => {
         </div>
         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 
-        <div
-          style={{
-            color: 'white',
-            fontSize: '20px',
-            fontFamily: 'Chakra Petch',
-            fontWeight: '700',
-            display: 'flex',
-            flexDirection: 'row',
-            marginLeft: '39px',
-          }}
-        >
-          {renderEventBoxes(pastEvents)}
+        <div style={{ ...eventsContainerStyle }}>
+          {(displayedPastEvents.length === 0 && (
+            <div
+              style={{
+                color: 'white',
+                fontSize: '20px',
+                fontFamily: 'Chakra Petch',
+                fontWeight: '700',
+                display: 'flex',
+                flexDirection: 'row',
+                marginLeft: '39px',
+              }}
+            >
+              No events found
+            </div>
+          )) ||
+            renderEventBoxes(displayedPastEvents)}
         </div>
       </Container>
     </div>
