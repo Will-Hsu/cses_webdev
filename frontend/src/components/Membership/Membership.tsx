@@ -1,11 +1,13 @@
-import React, { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { User } from '../../utils/types';
 import { Box, Button, Divider, Typography } from '@mui/material';
 import { membershipStyles } from './styles';
-import MemberProfile from '../MemberProfile/MemberProfile'
+import EventsAttended from './EventsAttended';
+import LeaderBoard from './LeaderBoard';
+import MemberProfile from '../MemberProfile/MemberProfile';
+import axios from 'axios';
 
 const styles = membershipStyles();
 
@@ -14,7 +16,61 @@ const Membership = () => {
   const [userData, setUserData] = useState<User | null>(null);
   const navigate = useNavigate();
 
-  // Note from Will -- I commented this out, so we can focus on coding up the UI for this milestone
+  // For demo purposes, we are hardcoding the events attended and leaderboard data
+  const eventsAttended = [
+    {
+      title: 'Google ML SWE Alumnus Q&A',
+      targetDate: new Date('2023-09-02T21:00:00.000Z'),
+      location: 'Virtual',
+      calendar_link: 'https://example.com/calendar',
+      description: 'Event Description',
+      end_time: '2023-09-02T23:00:00.000Z',
+      instagram_link: 'https://www.instagram.com/event',
+      start_time: '2023-09-02T21:00:00.000Z',
+      _id: '64b81a1228022bc1461c5ea4',
+    },
+    {
+      title: 'Google ML SWE Alumnus Q&A',
+      targetDate: new Date('2023-09-02T21:00:00.000Z'),
+      location: 'Virtual',
+      calendar_link: 'https://example.com/calendar',
+      description: 'Event Description',
+      end_time: '2023-09-02T23:00:00.000Z',
+      instagram_link: 'https://www.instagram.com/event',
+      start_time: '2023-09-02T21:00:00.000Z',
+      _id: '64b81a1228022bc1461c5ea4',
+    },
+    {
+      title: 'Google ML SWE Alumnus Q&A',
+      targetDate: new Date('2023-09-02T21:00:00.000Z'),
+      location: 'Virtual',
+      calendar_link: 'https://example.com/calendar',
+      description: 'Event Description',
+      end_time: '2023-09-02T23:00:00.000Z',
+      instagram_link: 'https://www.instagram.com/event',
+      start_time: '2023-09-02T21:00:00.000Z',
+      _id: '64b81a1228022bc1461c5ea4',
+    },
+  ];
+
+  const leaderBoardData = [
+    {
+      rank: 1,
+      name: 'Sarah M.',
+      points: 70,
+    },
+    {
+      rank: 2,
+      name: 'Jake S.',
+      points: 55,
+    },
+    {
+      rank: 3,
+      name: 'Ivan C.',
+      points: 50,
+    },
+  ];
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -35,14 +91,21 @@ const Membership = () => {
 
   return (
     <div>
-    {userData && <MemberProfile memberName={userData.name}/>}
-      <div style={{ color: 'white', position: 'relative', top: '93px' }}>
-        Add Member Profile here @Sithu & Joyce -- consider creating a separate component for the
-        profile
-      </div>
-      <div style={{ color: 'white', position: 'relative', top: '93px' }}>
-        Add Events Attended + Leaderboard UI for the membership page @Brian & Eddie & Yashil --
-        consider creating a separate component for this as well
+      {userData && <MemberProfile memberName={userData.name} />}
+      <div
+        style={{
+          color: 'white',
+          position: 'relative',
+          top: '93px',
+          overflow: 'hidden',
+        }}
+      >
+        {/* Add Events Attended + Leaderboard UI for the membership page @Brian & Eddie & Yashil --
+        consider creating a separate component for this as well */}
+
+        <EventsAttended eventsAttended={eventsAttended} />
+
+        <LeaderBoard rankings={leaderBoardData} />
       </div>
       <div
         style={{
