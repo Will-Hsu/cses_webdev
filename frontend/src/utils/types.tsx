@@ -3,5 +3,7 @@ export interface User {
     email: string;
     major: string;
     expectedGraduationYear: number;
+    points: number;
+    profilePicture: string;
   }
   
