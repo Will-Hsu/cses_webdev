@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../Button/Button';
 import { Container, Box, Grid } from '@mui/material';
 import background from '../../images/shape.svg';
-//import desktopTail from '../../images/desktop_tail.png';
+import infinity from '../../images/infinity.svg';
 import EventBox from '../Event/Event';
 import { homeStyles } from './styles';
 import SlideShow from './SlideShow/SlideShow';
@@ -24,19 +24,16 @@ const Home = () => {
   const styles = homeStyles();
 
   const [displayedFutureEvents, setDisplayedFutureEvents] = useState<EventData[]>([]);
+
   useEffect(() => {
     const fetchRecentEvents = async () => {
       try {
         const response = await fetch('http://127.0.0.1:5000/api/v1/events?type=upcoming');
-        const data = await response.json();
+        let mostRecentEvents = await response.json();
         // Sort events based on the end_time in descending order to get the most recent events first
-        const sortedEvents = data.sort(
-          (a: EventData, b: EventData) =>
-            new Date(b.end_time).getTime() - new Date(a.end_time).getTime(),
-        );
+        /*const sortedEvents = data.sort((a: EventData, b: EventData) => new Date(b.end_time).getTime() - new Date(a.end_time).getTime(),);*/
         // Take the first three events (most recent)
-        const mostRecentEvents = sortedEvents.slice(0, 3);
-        setDisplayedFutureEvents(mostRecentEvents);
+        setDisplayedFutureEvents(mostRecentEvents.slice(0, 3));
       } catch (error) {
         console.error('Error fetching upcoming events:', error);
       }
@@ -46,7 +43,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div style={{ position: 'relative', paddingBottom: '80px' }}>
       <Box sx={styles.root}>
         <Box sx={styles.backgroundImage}>
           <img src={background} alt="bg" style={{ ...styles.bg, position: 'absolute' }} />
@@ -127,27 +124,28 @@ const Home = () => {
             <Grid item xs={11} sm={2.5} md={2}>
               <Box sx={styles.statisticContainer}>
                 <Box sx={styles.statisticWrapper}>
-                  <Box sx={{ ...styles.statisticTitle }}>n+</Box>
-                  <Box sx={{ ...styles.statisticSubtitle }}>Another statistic!</Box>
+                  <Box sx={{ ...styles.statisticTitle }}>50+</Box>
+                  <Box sx={{ ...styles.statisticSubtitle }}>Events & counting.</Box>
                 </Box>
               </Box>
             </Grid>
             <Grid item xs={11} sm={2.5} md={2}>
               <Box sx={styles.statisticContainer}>
                 <Box sx={styles.statisticWrapper}>
-                  <Box sx={{ ...styles.statisticTitle }}>1000+</Box>
-                  <Box sx={{ ...styles.statisticSubtitle }}>Members & counting.</Box>
+                  <Box sx={{ ...styles.statisticTitle }}>
+                    <img src={infinity} alt="infiniteSign" />
+                  </Box>
+                  <Box sx={{ ...styles.statisticSubtitle }}>Opportunities.</Box>
                 </Box>
               </Box>
             </Grid>
           </Grid>
-          <div>
+          <div style={{ marginLeft: '39px' }}>
             <div
               style={{
                 color: 'white',
                 fontSize: '40px',
                 fontFamily: 'Chakra Petch',
-                marginLeft: '39px',
                 marginTop: '117px',
                 fontWeight: '700',
               }}
@@ -157,17 +155,13 @@ const Home = () => {
 
             <div
               style={{
-                color: 'white',
-                fontSize: '20px',
-                fontFamily: 'Chakra Petch',
-                fontWeight: '700',
                 display: 'flex',
                 flexDirection: 'row',
-                marginLeft: '39px',
+                marginBottom: '25px',
               }}
             >
               {displayedFutureEvents.map((eventData) => (
-                <React.Fragment key={eventData._id}>
+                <div key={eventData._id} style={{ marginRight: '30px' }}>
                   <EventBox
                     title={eventData.title}
                     targetDate={new Date(eventData.end_time)}
@@ -179,22 +173,11 @@ const Home = () => {
                     start_time={eventData.start_time}
                     _id={eventData._id}
                   />
-                  {/* Add space between EventBoxes */}
-                  <p
-                    style={{
-                      color: 'white',
-                      fontSize: '20px',
-                      fontFamily: 'Chakra Petch',
-                      fontWeight: '500',
-                    }}
-                  >
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  </p>
-                </React.Fragment>
+                </div>
               ))}
             </div>
             <Button
-              size="medium"
+              size="large"
               text="See All Events ->"
               onClick={() => navigate('/events')}
             ></Button>
