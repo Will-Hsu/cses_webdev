@@ -5,5 +5,6 @@ export interface User {
     expectedGraduationYear: number;
     points: number;
     profilePicture: string;
+    memberProfilePicture: string;
   }
   

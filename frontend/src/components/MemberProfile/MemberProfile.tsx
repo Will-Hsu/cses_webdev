@@ -25,7 +25,9 @@ interface MemberProfileProps {
   memberMajor: string;
   memberExpectedGraduationYear: number;
   memberPoints: number;
+  memberProfilePicture: string;
 }
+
 const MemberProfile = ( userData: MemberProfileProps) => {
   const theme = createTheme();
   // const isSmScreen = useMediaQuery(theme.breakpoints.between('sm', 'md'));
@@ -64,16 +66,16 @@ const MemberProfile = ( userData: MemberProfileProps) => {
         {isXsScreen ? (
           <Grid item xs={12}>
             <Avatar
-              alt="Dog"
-              src="https://img.freepik.com/free-photo/puppy-that-is-walking-snow_1340-37228.jpg"
+              alt="profilepicture"
+              src={userData.memberProfilePicture}
               sx={{ width: 180, height: 180, margin: '0 auto' }}
             />
           </Grid>
         ) : (
           <Grid item xs={12} sm={4.5} lg={2.7}>
             <Avatar
-              alt="Dog"
-              src="https://img.freepik.com/free-photo/puppy-that-is-walking-snow_1340-37228.jpg"
+              alt="profilepicture"
+              src={userData.memberProfilePicture}
               sx={{ width: 250, height: 250 }}
             />
           </Grid>

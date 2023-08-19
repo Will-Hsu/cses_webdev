@@ -5,6 +5,7 @@ interface ProfileMenuProps {
     onClose: () => void;
 };
 
+
 const ProfileMenu: React.FC<ProfileMenuProps> = ({ anchorEl, onClose }) => {
     return (
         <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={onClose}>

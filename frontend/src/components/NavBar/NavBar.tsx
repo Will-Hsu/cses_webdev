@@ -77,7 +77,7 @@ const NavBar = () => {
           {isLoggedIn && (
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                 <Avatar
-                  alt="Remy Sharp"
+                  alt="profilepicture"
                   src="https://img.freepik.com/free-photo/puppy-that-is-walking-snow_1340-37228.jpg"
                   sx={{ width: 60, height: 60, marginLeft: '1%' }}
                 />
