@@ -76,6 +76,7 @@ const Membership = () => {
       try {
         if (isLoggedIn === true) {
           const response = await axios.get(`http://127.0.0.1:5000/api/v1/users/${user.email}`);
+          console.log(response.data);
           setUserData(response.data);
         } else {
           navigate('/login');
@@ -89,9 +90,10 @@ const Membership = () => {
     fetchUserData();
   }, [isLoggedIn, user.email, navigate]);
 
+
   return (
     <div>
-      {userData && <MemberProfile memberName={userData.name} />}
+      {userData && <MemberProfile memberName={userData.name} memberEmail={userData.email} memberMajor={userData.major} memberExpectedGraduationYear={userData.expectedGraduationYear} memberPoints = {userData.points} />}
       <div
         style={{
           color: 'white',
