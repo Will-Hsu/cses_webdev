@@ -7,6 +7,7 @@ import { membershipStyles } from './styles';
 import EventsAttended from './EventsAttended';
 import LeaderBoard from './LeaderBoard';
 import MemberProfile from '../MemberProfile/MemberProfile';
+import EventsDashborad from './EventsDashboard';
 import axios from 'axios';
 
 const styles = membershipStyles();
@@ -169,6 +170,9 @@ const Membership = () => {
           </Box>
         )}
       </div>
+
+      {/* Events Dashboard */}
+      <EventsDashborad />
     </div>
   );
 };

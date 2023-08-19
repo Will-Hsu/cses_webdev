@@ -41,3 +41,15 @@ export const checkUserAPI = (email) => {
       });
   });
 }
+
+export const eventListAPI = () => {
+  return new Promise((resolve, reject) => {
+    API.get('/events')
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
