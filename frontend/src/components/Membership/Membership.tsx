@@ -92,7 +92,7 @@ const Membership = () => {
   
   return (
     <div>
-      {userData && <MemberProfile memberName={userData.name} memberMajor={userData.major} memberPoints={userData.points} memberPic={userData.profilePicture} />}
+      {userData && <MemberProfile memberName={userData.name} memberMajor={userData.major} memberPoints={userData.points} memberPicture={userData.profilePicture} />}
       <div
         style={{
           color: 'white',
