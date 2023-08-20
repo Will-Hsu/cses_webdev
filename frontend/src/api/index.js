@@ -23,7 +23,7 @@ export const createUserAPI = (newUser) => {
       })
       .catch((error) => {
         if (error.response.status === 409) {
-          console.log('User already exists with this email')
+          console.log('User already exists with this email');
         }
         reject(error);
       });
@@ -40,11 +40,35 @@ export const checkUserAPI = (email) => {
         reject(error);
       });
   });
-}
+};
 
 export const eventListAPI = () => {
   return new Promise((resolve, reject) => {
     API.get('/events')
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+export const eventCreateAPI = (newEvent) => {
+  return new Promise((resolve, reject) => {
+    API.post('/event/create', newEvent)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+export const eventDeleteAPI = (id) => {
+  return new Promise((resolve, reject) => {
+    API.delete(`/event/${id}/delete`)
       .then((response) => {
         resolve(response.data);
       })

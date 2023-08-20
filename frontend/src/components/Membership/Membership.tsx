@@ -13,7 +13,7 @@ import axios from 'axios';
 const styles = membershipStyles();
 
 const Membership = () => {
-  const { user, isLoggedIn, logout } = useContext(AuthContext);
+  // const { user, isLoggedIn, logout } = useContext(AuthContext);
   const [userData, setUserData] = useState<User | null>(null);
   const navigate = useNavigate();
 
@@ -72,27 +72,27 @@ const Membership = () => {
     },
   ];
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        if (isLoggedIn === true) {
-          const response = await axios.get(`http://127.0.0.1:5000/api/v1/users/${user.email}`);
-          setUserData(response.data);
-        } else {
-          navigate('/login');
-        }
-      } catch (error) {
-        console.log('Error fetching user data: ', error);
-        navigate('/login');
-      }
-    };
+  // useEffect(() => {
+  //   const fetchUserData = async () => {
+  //     try {
+  //       if (isLoggedIn === true) {
+  //         const response = await axios.get(`http://127.0.0.1:5000/api/v1/users/${user.email}`);
+  //         setUserData(response.data);
+  //       } else {
+  //         navigate('/login');
+  //       }
+  //     } catch (error) {
+  //       console.log('Error fetching user data: ', error);
+  //       navigate('/login');
+  //     }
+  //   };
 
-    fetchUserData();
-  }, [isLoggedIn, user.email, navigate]);
+  //   fetchUserData();
+  // }, [isLoggedIn, user.email, navigate]);
 
   return (
     <div>
-      {userData && <MemberProfile memberName={userData.name} />}
+      {/* {userData && <MemberProfile memberName={userData.name} />} */}
       <div
         style={{
           color: 'white',
@@ -108,7 +108,7 @@ const Membership = () => {
 
         <LeaderBoard rankings={leaderBoardData} />
       </div>
-      <div
+      {/* <div
         style={{
           height: '1000px',
           display: 'flex',
@@ -169,7 +169,7 @@ const Membership = () => {
             </Button>
           </Box>
         )}
-      </div>
+      </div> */}
 
       {/* Events Dashboard */}
       <EventsDashborad />
