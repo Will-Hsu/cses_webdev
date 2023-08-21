@@ -43,7 +43,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div style={{ position: 'relative', paddingBottom: '80px' }}>
+    <div style={{ position: 'relative', paddingBottom: '80px', overflow: 'hidden' }}>
       <Box sx={styles.root}>
         <Box sx={styles.backgroundImage}>
           <img src={background} alt="bg" style={{ ...styles.bg, position: 'absolute' }} />
@@ -76,7 +76,7 @@ const Home = () => {
               <SlideShow />
             </Grid>
           </Grid>
-          <Grid container spacing={0} sx={{ marginTop: '17%' }}>
+          <Grid container spacing={0} sx={{ margin: '17% 0% 20px 20px' }}>
             <Grid item xs={12} sm={4.5} md={5}>
               <Box
                 sx={{
@@ -140,7 +140,7 @@ const Home = () => {
               </Box>
             </Grid>
           </Grid>
-          <div style={{ marginLeft: '39px' }}>
+          <div style={{ margin: '0 39px' }}>
             <div
               style={{
                 color: 'white',
@@ -150,18 +150,19 @@ const Home = () => {
                 fontWeight: '700',
               }}
             >
-              <h2>UPCOMING EVENTS.</h2>
+              <h2 style={{ marginBottom: '20px' }}>UPCOMING EVENTS.</h2>
             </div>
 
             <div
               style={{
                 display: 'flex',
-                flexDirection: 'row',
                 marginBottom: '25px',
+                overflowX: 'auto', // Enable horizontal scrolling
+                maxWidth: '100%', // Ensure the container doesn't exceed its parent's width
               }}
             >
-              {displayedFutureEvents.map((eventData) => (
-                <div key={eventData._id} style={{ marginRight: '30px' }}>
+              {displayedFutureEvents.map((eventData, id) => (
+                <div key={id} style={{ marginRight: '30px', marginTop: '30px' }}>
                   <EventBox
                     title={eventData.title}
                     targetDate={new Date(eventData.end_time)}
