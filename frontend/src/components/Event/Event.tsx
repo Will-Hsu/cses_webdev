@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { event_style } from './styles';
 import calendarIcon from '../../images/calendarIcon.svg';
-import instagramIcon from '../../images/instagramIcon.svg';
+import instagramIcon from '../../images/instaLogo.svg';
 
 interface EventBoxProps {
   title: string;
   targetDate: Date;
   location: string;
   style?: EventBoxStyles;
-  // new stuff
   calendar_link: string;
   description: string;
   end_time: string;
-  instagram_link: string;
+  instagram_link?: string;
   start_time: string;
   _id: string;
 }
@@ -166,23 +165,21 @@ const EventBox = ({
     <div style={{ display: 'flex' }}>
       <div className="outerBox" style={styles?.outerBox}>
         <div className="innerBox" style={styles?.innerBox}>
-          <h4
+          <p
             style={{
               color: 'white',
               fontSize: '40px',
               fontFamily: 'Chakra Petch',
               fontWeight: '600',
-              marginTop: '30px',
-              marginLeft: '30px',
+              marginTop: '0',
             }}
           >
             {title}
-          </h4>
+          </p>
           <div
             className="countDown"
             style={{
               marginTop: '2px',
-              marginLeft: '30px',
               display: 'flex',
             }}
           >
@@ -190,8 +187,12 @@ const EventBox = ({
               <div
                 key={index}
                 style={{
+                  width: '30px', // Adjust the width as needed
+                  height: '60px', // Adjust the height as needed
+                  alignItems: 'center',
+                  display: 'flex',
+                  justifyContent: 'center',
                   backgroundColor: character === ':' ? 'transparent' : 'white',
-                  padding: '10px',
                   marginLeft: character === ':' ? '0px' : '4px',
                   fontSize: '20px',
                   fontFamily: 'Chakra Petch',
@@ -207,7 +208,6 @@ const EventBox = ({
           <div
             style={{
               marginTop: '0',
-              marginLeft: '35px',
               display: 'flex',
               flexDirection: 'row',
             }}
@@ -220,7 +220,7 @@ const EventBox = ({
                 fontWeight: '600',
               }}
             >
-              days
+              &nbsp;days
             </p>
             <p
               style={{
@@ -250,7 +250,7 @@ const EventBox = ({
                 fontWeight: '500',
               }}
             >
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </p>
             <p
               style={{
@@ -270,7 +270,7 @@ const EventBox = ({
                 fontWeight: '500',
               }}
             >
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </p>
             <p
               style={{
@@ -297,7 +297,6 @@ const EventBox = ({
                 fontFamily: 'Chakra Petch',
                 fontWeight: '500',
                 marginTop: '5px',
-                marginLeft: '30px',
                 lineHeight: '0px',
               }}
             >
@@ -310,7 +309,6 @@ const EventBox = ({
                 fontFamily: 'Chakra Petch',
                 fontWeight: '500',
                 marginTop: '5px',
-                marginLeft: '30px',
                 lineHeight: '0px',
               }}
             >
@@ -324,31 +322,38 @@ const EventBox = ({
                 fontFamily: 'Chakra Petch',
                 fontWeight: '500',
                 marginTop: '5px',
-                marginLeft: '30px',
                 lineHeight: '0px',
               }}
             >
               {location}
             </p>
 
-            <a href={calendar_link} style={{ marginLeft: '305px', marginTop: '-50px' }}>
+            <a href={calendar_link} style={{ marginLeft: '280px', marginTop: '-50px' }}>
               <img
                 src={calendarIcon}
                 alt="Calendar Icon"
                 style={{
                   width: '30px',
                   height: '30px',
+                  filter: 'grayscale(100%)',
+                  transition: 'filter 0.3s',
                 }}
+                onMouseEnter={(e) => (e.currentTarget.style.filter = 'grayscale(0%)')}
+                onMouseLeave={(e) => (e.currentTarget.style.filter = 'grayscale(100%)')}
               />
             </a>
-            <a href={instagram_link} style={{ marginLeft: '350px', marginTop: '-36px' }}>
+            <a href={instagram_link} style={{ marginLeft: '325px', marginTop: '-34px' }}>
               <img
                 src={instagramIcon}
                 alt="Instagram Icon"
                 style={{
                   width: '30px',
                   height: '30px',
+                  filter: 'grayscale(100%)',
+                  transition: 'filter 0.3s',
                 }}
+                onMouseEnter={(e) => (e.currentTarget.style.filter = 'grayscale(0%)')}
+                onMouseLeave={(e) => (e.currentTarget.style.filter = 'grayscale(100%)')}
               />
             </a>
           </div>

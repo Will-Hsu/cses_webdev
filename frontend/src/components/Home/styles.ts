@@ -31,7 +31,8 @@ export const homeStyles = () => ({
     fontSize: {
       xs: 'clamp(20px, 8vw, 65px)',
       sm: 'clamp(15px, 8vw, 31.5px)',
-      md: 'clamp(20px, 8vw, 65px)',
+      md: 'clamp(20px, 8vw, 50px)',
+      lg: 'clamp(20px, 8vw, 55px)',
     },
     whiteSpace: 'nowrap',
     overflow: 'hidden',
@@ -57,8 +58,8 @@ export const homeStyles = () => ({
   statisticTitle: {
     fontSize: {
       xs: 'clamp(40px, 3vw, 100px)',
-      sm: 'clamp(20px, 3vw, 30px)',
-      md: 'clamp(15px, 3vw, 50px)',
+      sm: 'clamp(20px, 3vw, 100px)',
+      md: 'clamp(20px, 3vw, 100px)',
     },
     fontFamily: 'Inter',
     fontWeight: 700,
@@ -68,8 +69,8 @@ export const homeStyles = () => ({
   statisticSubtitle: {
     fontSize: {
       xs: 'clamp(15px, 3vw, 50px)',
-      sm: 'clamp(10px, 3vw, 12px)',
-      md: 'clamp(12px, 3vw, 17px)',
+      sm: 'clamp(10px, 3vw, 15px)',
+      md: 'clamp(12px, 3vw, 15px)',
     },
     fontFamily: 'Inter',
     fontWeight: 500,

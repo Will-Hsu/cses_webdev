@@ -52,8 +52,8 @@ const Events = () => {
     eventsContainerStyle.width = '100%'; // Set width to 100% of the parent container
     eventsContainerStyle.padding = '0'; // Remove any padding
     eventsContainerStyle.margin = '0'; // Remove any margin
-    eventsContainerStyle.overflowX = 'auto'; 
-    eventsContainerStyle.overflowY = 'auto'; 
+    eventsContainerStyle.overflowX = 'auto';
+    eventsContainerStyle.overflowY = 'auto';
     eventsContainerStyle.flexWrap = 'wrap' as 'wrap';
   }
 
@@ -182,16 +182,15 @@ const Events = () => {
           instagram_link={eventData.instagram_link}
           start_time={eventData.start_time}
           _id={eventData._id}
-          
         />
       </React.Fragment>
     ));
   };
 
   return (
-    <div style={{ position: 'relative', overflowY:'auto'}}>
-      <img src={bgTop} alt="bg1" style={styles.bg1} />
-      <img src={bgBtm} alt="bg2" style={styles.bg2} />
+    <div style={{ position: 'relative' }}>
+      <img src={bgTop} alt="bg1" style={{ ...styles.bg1, position: 'absolute' }} />
+      <img src={bgBtm} alt="bg2" style={{ ...styles.bg2, position: 'absolute' }} />
       <Container maxWidth="xl" sx={styles.body}>
         <div
           style={{
