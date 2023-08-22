@@ -17,7 +17,7 @@ const About = () => {
   const isSmallScreen = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
 
   return (
-    <div style={{ position: 'relative', overflow: 'hidden' }}>
+    <Box sx={{ position: 'relative', overflow: 'hidden', padding: { xs: '5%' } }}>
       <Box sx={styles.root}>
         <Box sx={styles.backgroundImage}>
           <img src={bgTop} alt="bg1" style={{ ...styles.bg1, position: 'absolute' }} />
@@ -36,6 +36,7 @@ const About = () => {
                   sm: '5%',
                 },
                 textAlign: 'right',
+                marginBottom: '5%',
               }}
             >
               <img src={blankPhoto} alt="img" />
@@ -58,12 +59,13 @@ const About = () => {
                 >
                   WHAT IS CSES?
                 </h1>
+
+                <p style={{ color: 'white', fontSize: '20px', width: '90%' }}>
+                  CSES is the Computer Science and Engineering Society at UCSD that focuses on the
+                  professional development of CSE students and students interested in computing
+                  through various programs and career development events.
+                </p>
               </Box>
-              <p style={{ color: 'white', fontSize: '20px', width: '90%' }}>
-                CSES is the Computer Science and Engineering Society at UCSD that focuses on the
-                professional development of CSE students and students interested in computing
-                through various programs and career development events.
-              </p>
             </Grid>
           </Grid>
           <h1
@@ -79,7 +81,12 @@ const About = () => {
             WHAT DO WE DO?
           </h1>
           <Grid container sx={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
-            <Grid item sm={4} lg={3} sx={{ display: 'flex', alignItems: 'center' }}>
+            <Grid
+              item
+              sm={4}
+              lg={3}
+              sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            >
               <img src={books} alt="img" style={{ width: '80%' }} />
             </Grid>
             <Grid item sm={5} lg={5}>
@@ -90,24 +97,19 @@ const About = () => {
                 }}
               >
                 <h1>Our History</h1>
+                <p style={{ color: 'white', fontSize: '20px' }}>
+                  CSES was the first CSE organization at UCSD starting nearly twenty years ago, and
+                  we have innovated over the years to stay relevant in serving the CSE community. We
+                  aim to continue innovating and improving, so we could continue to serve this
+                  community for another twenty years.
+                </p>
               </Box>
-              <p style={{ color: 'white', fontSize: '20px' }}>
-                CSES was the first CSE organization at UCSD starting nearly twenty years ago, and we
-                have innovated over the years to stay relevant in serving the CSE community. We aim
-                to continue innovating and improving, so we could continue to serve this community
-                for another twenty years.
-              </p>
             </Grid>
           </Grid>
           {!isSmallScreen && (
             <Grid container sx={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
               <Grid item sm={5.5} lg={5.5}>
-                <Box
-                  sx={{
-                    color: 'white',
-                    textAlign: { lg: 'left', sm: 'left', xs: 'center' },
-                  }}
-                >
+                <Box sx={{ color: 'white', marginBottom: 'auto' }}>
                   <h1>Our Future</h1>
                 </Box>
                 <p style={{ color: 'white', fontSize: '20px' }}>
@@ -116,6 +118,7 @@ const About = () => {
                   programs for career development, and project opportunities to gain experience.
                 </p>
               </Grid>
+
               <Grid
                 item
                 sm={3.5}
@@ -135,7 +138,7 @@ const About = () => {
                 <Box sx={{ color: 'white', textAlign: { lg: 'left', sm: 'center', xs: 'center' } }}>
                   <h1>Our Future</h1>
                 </Box>
-                <p style={{ color: 'white', fontSize: '20px' }}>
+                <p style={{ color: 'white', fontSize: '20px', textAlign: 'center' }}>
                   Our mission statement is to help our members get professional opportunities while
                   fostering a network of individuals. We do this through quarterly career fairs,
                   programs for career development, and project opportunities to gain experience.
@@ -152,16 +155,23 @@ const About = () => {
               <Box
                 sx={{
                   color: 'white',
-                  textAlign: { md: 'left', sm: 'center', xs: 'center' },
+                  textAlign: { md: 'left', sm: 'left', xs: 'center' },
                   fontSize: { xs: '0.9em', sm: '1em', lg: '1em' },
                 }}
               >
                 <h1>What's in store for me?</h1>
               </Box>
-              <p style={{ color: 'white', fontSize: '20px' }}>
-                Check out amazing events we have planned as well as the opportunities we have for
-                members.
-              </p>
+              <Box
+                sx={{
+                  display: 'flex',
+                  textAlign: { xs: 'center', sm: 'left' }, // Center on small screens, start from top on larger screens
+                }}
+              >
+                <p style={{ color: 'white', fontSize: '20px' }}>
+                  Check out amazing events we have planned as well as the opportunities we have for
+                  members.
+                </p>
+              </Box>
               <Box
                 sx={{
                   marginLeft: '-2%',
@@ -182,7 +192,7 @@ const About = () => {
           {!isSmallScreen && (
             <Grid container sx={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
               <Grid item sm={5} lg={5}>
-                <Box sx={{ color: 'white', textAlign: { md: 'left', sm: 'center', xs: 'center' } }}>
+                <Box sx={{ color: 'white', textAlign: { md: 'left', sm: 'left', xs: 'center' } }}>
                   <h1>How do I join?</h1>
                 </Box>
                 <Box sx={{ color: 'white', textAlign: { lg: 'left', sm: 'left', xs: 'center' } }}>
@@ -194,7 +204,7 @@ const About = () => {
                     sx={{
                       marginLeft: '-2%',
                       display: 'flex',
-                      justifyContent: { xs: 'center', sm: 'left', lg: 'left' },
+                      justifyContent: { xs: 'center', sm: 'left' },
                     }}
                   >
                     <Button
@@ -225,7 +235,7 @@ const About = () => {
                 <Box sx={{ color: 'white', textAlign: { lg: 'left', sm: 'center', xs: 'center' } }}>
                   <h1>How do I join?</h1>
                 </Box>
-                <p style={{ color: 'white' }}>
+                <p style={{ color: 'white', textAlign: 'center' }}>
                   Check out amazing events we have planned as well as the opportunities we have for
                   members.
                 </p>
@@ -249,7 +259,7 @@ const About = () => {
           <MeetTheTeam />
         </Container>
       </Box>
-    </div>
+    </Box>
   );
 };
 
