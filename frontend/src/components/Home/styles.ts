@@ -20,7 +20,7 @@ export const homeStyles = () => ({
   },
   title: {
     color: 'white',
-    fontSize: 'clamp(32px, 8vw, 85px)',
+    fontSize: 'clamp(60px, 8vw, 85px)',
     fontFamily: 'Chakra Petch',
     marginLeft: '12%',
     marginTop: '3%',
@@ -30,9 +30,7 @@ export const homeStyles = () => ({
     color: 'white',
     fontSize: {
       xs: 'clamp(20px, 8vw, 65px)',
-      sm: 'clamp(15px, 8vw, 31.5px)',
-      md: 'clamp(20px, 8vw, 50px)',
-      lg: 'clamp(20px, 8vw, 55px)',
+      sm: 'clamp(30px, 4vw, 60px)',
     },
     whiteSpace: 'nowrap',
     overflow: 'hidden',
@@ -58,9 +56,7 @@ export const homeStyles = () => ({
   statisticTitle: {
     fontSize: {
       xs: 'clamp(40px, 3vw, 100px)',
-      sm: 'clamp(20px, 3vw, 100px)',
-      md: 'clamp(20px, 3vw, 100px)',
-      lg: 'clamp(20px, 3vw, 50px)',
+      sm: 'clamp(25px, 3vw, 40px)',
     },
     fontFamily: 'Inter',
     fontWeight: 700,
