@@ -116,8 +116,13 @@ const About = () => {
                   programs for career development, and project opportunities to gain experience.
                 </p>
               </Grid>
-              <Grid item sm={3.5} lg={2.5} sx={{ display: 'flex', alignItems: 'center' }}>
-                <img src={lightBulb} alt="img" style={{ marginLeft: '10%', height: '75%' }} />
+              <Grid
+                item
+                sm={3.5}
+                lg={2.5}
+                sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}
+              >
+                <img src={lightBulb} alt="img" style={{ marginRight: '10%', height: '75%' }} />
               </Grid>
             </Grid>
           )}
@@ -147,7 +152,7 @@ const About = () => {
               <Box
                 sx={{
                   color: 'white',
-                  textAlign: { lg: 'left', sm: 'center', xs: 'center' },
+                  textAlign: { md: 'left', sm: 'center', xs: 'center' },
                   fontSize: { xs: '0.9em', sm: '1em', lg: '1em' },
                 }}
               >
@@ -177,7 +182,7 @@ const About = () => {
           {!isSmallScreen && (
             <Grid container sx={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
               <Grid item sm={5} lg={5}>
-                <Box sx={{ color: 'white', textAlign: { lg: 'left', sm: 'center', xs: 'center' } }}>
+                <Box sx={{ color: 'white', textAlign: { md: 'left', sm: 'center', xs: 'center' } }}>
                   <h1>How do I join?</h1>
                 </Box>
                 <Box sx={{ color: 'white', textAlign: { lg: 'left', sm: 'left', xs: 'center' } }}>
@@ -200,7 +205,12 @@ const About = () => {
                   </Box>
                 </Box>
               </Grid>
-              <Grid item sm={4} lg={3} sx={{ display: 'flex', alignItems: 'center' }}>
+              <Grid
+                item
+                sm={4}
+                lg={3}
+                sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}
+              >
                 <div style={{ width: '250px', height: '250px', backgroundColor: 'grey' }}></div>
               </Grid>
             </Grid>
