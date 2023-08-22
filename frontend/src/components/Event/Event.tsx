@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { event_style } from './styles';
+import { Box } from '@mui/material';
+
 import calendarIcon from '../../images/calendarIcon.svg';
 import instagramIcon from '../../images/instaLogo.svg';
 
@@ -162,8 +164,8 @@ const EventBox = ({
   //const shouldReduceSize = mediaQuery.matches;
 
   return (
-    <div style={{ display: 'flex' }}>
-      <div className="outerBox" style={styles?.outerBox}>
+    <Box style={{ display: 'flex' }}>
+      <Box className="outerBox" sx={styles?.outerBox}>
         <div className="innerBox" style={styles?.innerBox}>
           <p
             style={{
@@ -358,8 +360,8 @@ const EventBox = ({
             </a>
           </div>
         </div>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

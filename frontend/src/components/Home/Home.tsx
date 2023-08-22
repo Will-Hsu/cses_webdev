@@ -76,8 +76,9 @@ const Home = () => {
               <SlideShow />
             </Grid>
           </Grid>
-          <Grid container spacing={0} sx={{ margin: '17% 0% 20px 20px' }}>
-            <Grid item xs={12} sm={4.5} md={5}>
+          <Grid container spacing={0} sx={{ marginTop: '17%' }}>
+            <Grid item xs={0} sm={0} md={0.5} lg={1} />
+            <Grid item xs={12} sm={4.5} md={5.3} lg={4.3}>
               <Box
                 sx={{
                   ...styles.subtitle,
@@ -103,43 +104,35 @@ const Home = () => {
                 />
               </Box>
             </Grid>
-            <Grid
-              item
-              xs={11}
-              sm={2.5}
-              md={2}
-              sx={{
-                display: { xs: 'flex', sm: 'block' },
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <Box sx={{ ...styles.statisticContainer, width: { xs: '100%', sm: 'auto' } }}>
+            <Grid item xs={11} sm={2.5} md={1.8} lg={1.8}>
+              <Box sx={{ ...styles.statisticContainer }}>
                 <Box sx={styles.statisticWrapper}>
-                  <Box sx={{ ...styles.statisticTitle }}>1000+</Box>
-                  <Box sx={{ ...styles.statisticSubtitle }}>Members & counting.</Box>
+                  <Box sx={styles.statisticTitle}>1000+</Box>
+                  <Box sx={styles.statisticSubtitle}>Members & counting.</Box>
                 </Box>
               </Box>
             </Grid>
-            <Grid item xs={11} sm={2.5} md={2}>
+            <Grid item xs={11} sm={2.5} md={1.8} lg={1.8}>
               <Box sx={styles.statisticContainer}>
                 <Box sx={styles.statisticWrapper}>
-                  <Box sx={{ ...styles.statisticTitle }}>50+</Box>
-                  <Box sx={{ ...styles.statisticSubtitle }}>Events & counting.</Box>
+                  <Box sx={styles.statisticTitle}>50+</Box>
+                  <Box sx={styles.statisticSubtitle}>Events & counting.</Box>
                 </Box>
               </Box>
             </Grid>
-            <Grid item xs={11} sm={2.5} md={2}>
+            <Grid item xs={11} sm={2.5} md={1.8} lg={1.8}>
               <Box sx={styles.statisticContainer}>
                 <Box sx={styles.statisticWrapper}>
-                  <Box sx={{ ...styles.statisticTitle }}>
+                  <Box sx={styles.statisticTitle}>
                     <img src={infinity} alt="infiniteSign" />
                   </Box>
-                  <Box sx={{ ...styles.statisticSubtitle }}>Opportunities.</Box>
+                  <Box sx={styles.statisticSubtitle}>Opportunities.</Box>
                 </Box>
               </Box>
             </Grid>
+            <Grid item xs={0} sm={0} md={0.5} lg={1} />
           </Grid>
+
           <div style={{ margin: '0 39px' }}>
             <div
               style={{
