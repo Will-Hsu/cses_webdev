@@ -8,6 +8,9 @@ export const event_style = () => ({
     margin: '0 auto',
     width: '390px',
     padding: '0px 10px 15px 15px',
+    '&:hover': {
+      boxShadow: '0 0 20px 5px rgba(52, 152, 219, 0.7)',
+    },
   },
   innerBox: {
     padding: '25px',

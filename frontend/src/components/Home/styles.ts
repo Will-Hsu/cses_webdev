@@ -60,6 +60,7 @@ export const homeStyles = () => ({
       xs: 'clamp(40px, 3vw, 100px)',
       sm: 'clamp(20px, 3vw, 100px)',
       md: 'clamp(20px, 3vw, 100px)',
+      lg: 'clamp(20px, 3vw, 50px)',
     },
     fontFamily: 'Inter',
     fontWeight: 700,

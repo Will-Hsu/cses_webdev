@@ -540,16 +540,39 @@ const About = () => {
               >
                 <Grid item>
                   <button
-                    style={{ border: 'none', background: 'none', cursor: 'pointer' }}
+                    style={{
+                      border: 'none',
+                      background: 'none',
+                      cursor: currentPage === 1 ? 'auto' : 'pointer',
+                      opacity: currentPage === 1 ? '20%' : '100%',
+                    }}
                     onClick={handlePreviousPage}
                     disabled={currentPage === 1}
                   >
-                    <img src={previous} alt="img" style={{ width: 30, height: 30 }} />
+                    <img
+                      src={previous}
+                      alt="img"
+                      style={{
+                        width: 30,
+                        height: 30,
+                      }}
+                    />
                   </button>
                 </Grid>
                 <Grid item>
                   <button
-                    style={{ border: 'none', background: 'none', cursor: 'pointer' }}
+                    style={{
+                      border: 'none',
+                      background: 'none',
+                      cursor:
+                        currentPage === Math.ceil(currentCategory.members.length / 6)
+                          ? 'auto'
+                          : 'pointer',
+                      opacity:
+                        currentPage === Math.ceil(currentCategory.members.length / 6)
+                          ? '20%'
+                          : '100%',
+                    }}
                     onClick={handleNextPage}
                     disabled={currentPage === Math.ceil(currentCategory.members.length / 6)}
                   >
