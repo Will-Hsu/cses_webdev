@@ -18,7 +18,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { useState, useEffect } from 'react';
-import { eventListAPI, eventCreateAPI, eventDeleteAPI } from '../../api';
+import { eventListAPI, eventCreateAPI, eventDeleteAPI, eventUpdateAPI } from '../../api';
 
 interface Event {
   title: string;
@@ -98,7 +98,7 @@ const EventRow = ({
   );
 };
 
-const DashBorad = () => {
+const DashBoard = () => {
   const [openCreate, setOpenCreate] = useState(false);
   const [events, setEvents] = useState<Array<Event>>([]);
   const [title, setTitle] = useState('');
@@ -154,6 +154,22 @@ const DashBorad = () => {
         console.log(err);
       });
   };
+
+  const handleEdit = (id: string, updatedEvent: Event) => {
+    // Send API request to update the event
+    eventUpdateAPI(id, updatedEvent)
+      .then((res) => {
+        console.log(res);
+        const updatedEvents = events.map((event) =>
+          event._id === id ? updatedEvent : event
+        );
+        setEvents(updatedEvents);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  
 
   return (
     <Container style={{ background: 'white' }}>
@@ -279,4 +295,4 @@ const DashBorad = () => {
   );
 };
 
-export default DashBorad;
+export default DashBoard;
