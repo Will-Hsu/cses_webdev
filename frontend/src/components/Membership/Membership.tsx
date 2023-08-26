@@ -89,9 +89,10 @@ const Membership = () => {
     fetchUserData();
   }, [isLoggedIn, user.email, navigate]);
 
+  
   return (
     <div>
-      {userData && <MemberProfile memberName={userData.name} />}
+      {userData && <MemberProfile memberName={userData.name} memberMajor={userData.major} memberPoints={userData.points} memberPicture={userData.profilePicture} />}
       <div
         style={{
           color: 'white',
