@@ -13,7 +13,7 @@ import axios from 'axios';
 const styles = membershipStyles();
 
 const Membership = () => {
-  // const { user, isLoggedIn, logout } = useContext(AuthContext);
+  const { user, isLoggedIn, logout } = useContext(AuthContext);
   const [userData, setUserData] = useState<User | null>(null);
   const navigate = useNavigate();
 
@@ -73,27 +73,34 @@ const Membership = () => {
   ];
 
   // For dashboard dev, commenting out the useEffect for now
-  // useEffect(() => {
-  //   const fetchUserData = async () => {
-  //     try {
-  //       if (isLoggedIn === true) {
-  //         const response = await axios.get(`http://127.0.0.1:5000/api/v1/users/${user.email}`);
-  //         setUserData(response.data);
-  //       } else {
-  //         navigate('/login');
-  //       }
-  //     } catch (error) {
-  //       console.log('Error fetching user data: ', error);
-  //       navigate('/login');
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        if (isLoggedIn === true) {
+          const response = await axios.get(`http://127.0.0.1:5000/api/v1/users/${user.email}`);
+          setUserData(response.data);
+        } else {
+          navigate('/login');
+        }
+      } catch (error) {
+        console.log('Error fetching user data: ', error);
+        navigate('/login');
+      }
+    };
 
-  //   fetchUserData();
-  // }, [isLoggedIn, user.email, navigate]);
+    fetchUserData();
+  }, [isLoggedIn, user.email, navigate]);
 
   return (
     <div>
-      {/* {userData && <MemberProfile memberName={userData.name} />} */}
+      {userData && (
+        <MemberProfile
+          memberName={userData.name}
+          memberMajor={userData.major}
+          memberPoints={userData.points}
+          memberPicture={userData.profilePicture}
+        />
+      )}
       <div
         style={{
           color: 'white',
@@ -105,72 +112,74 @@ const Membership = () => {
         {/* Add Events Attended + Leaderboard UI for the membership page @Brian & Eddie & Yashil --
         consider creating a separate component for this as well */}
 
-        <EventsAttended eventsAttended={eventsAttended} />
+        {isLoggedIn && <EventsAttended eventsAttended={eventsAttended} />}
 
-        <LeaderBoard rankings={leaderBoardData} />
+        {isLoggedIn && <LeaderBoard rankings={leaderBoardData} />}
       </div>
-      {/* <div
-        style={{
-          height: '1000px',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        {isLoggedIn && userData && (
-          <Box sx={styles.name}>
-            <Typography
-              variant="h4"
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                marginTop: '10px',
-                marginBottom: '10px',
-              }}
-            >
-              Welcome, {userData.name}!
-            </Typography>
-            <Divider variant="middle" sx={{ marginBottom: '7%' }} />
-            <Box sx={styles.attribute}>
+      {
+        <div
+          style={{
+            height: '1000px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          {isLoggedIn && userData && (
+            <Box sx={styles.name}>
               <Typography
+                variant="h4"
                 sx={{
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
+                  marginTop: '10px',
+                  marginBottom: '10px',
                 }}
               >
-                Your email: {userData.email}
+                Welcome, {userData.name}!
               </Typography>
+              <Divider variant="middle" sx={{ marginBottom: '7%' }} />
+              <Box sx={styles.attribute}>
+                <Typography
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  Your email: {userData.email}
+                </Typography>
+              </Box>
+              <Box sx={styles.attribute}>
+                <Typography
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  Your major: {userData.major}
+                </Typography>
+              </Box>
+              <Box sx={styles.attribute}>
+                <Typography
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  Your expected graduation year: {userData.expectedGraduationYear}
+                </Typography>
+              </Box>
+              <Button variant="outlined" onClick={logout}>
+                Logout
+              </Button>
             </Box>
-            <Box sx={styles.attribute}>
-              <Typography
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-              >
-                Your major: {userData.major}
-              </Typography>
-            </Box>
-            <Box sx={styles.attribute}>
-              <Typography
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-              >
-                Your expected graduation year: {userData.expectedGraduationYear}
-              </Typography>
-            </Box>
-            <Button variant="outlined" onClick={logout}>
-              Logout
-            </Button>
-          </Box>
-        )}
-      </div> */}
+          )}
+        </div>
+      }
 
       {/* Events Dashboard */}
       <EventsDashborad />

@@ -57,7 +57,10 @@ const Footer = () => {
           <div style={{ display: 'flex', justifyContent: 'space-between', margin: '10px 0px' }}>
             <Typography sx={styles.footerNote}>© 2023 All Rights Reserved CSES at UCSD</Typography>
             <Typography sx={styles.footerNote}>
-              <Link href="/privacy-policy" sx={{ textDecorationColor: 'white', color: 'white' }}>
+              <Link
+                href="https://www.privacypolicies.com/live/6398f18c-8e29-4bd5-8f73-7352a244ac95"
+                sx={{ textDecorationColor: 'white', color: 'white' }}
+              >
                 Privacy Policy
               </Link>
             </Typography>

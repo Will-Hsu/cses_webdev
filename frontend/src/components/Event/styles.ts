@@ -6,14 +6,17 @@ export const event_style = () => ({
     display: 'flex',
     borderTopRightRadius: '40px',
     margin: '0 auto',
-    width: '425px',
-    height: '437px',
-    padding: '1px 0px 10px 10px',
+    width: '390px',
+    padding: '0px 10px 15px 15px',
+    '&:hover': {
+      boxShadow: '0 0 20px 5px rgba(52, 152, 219, 0.7)',
+    },
   },
   innerBox: {
-    width: '416px',
+    padding: '25px',
+    width: '350px',
+    marginTop: '5px',
     borderTopRightRadius: '40px',
-    height: '410px',
     backgroundColor: 'black',
     color: 'white',
   },
@@ -39,7 +42,5 @@ export const event_style = () => ({
   buttons: {
     position: 'absolute',
     zIndex: 10,
-    },
-  
-  
+  },
 });
