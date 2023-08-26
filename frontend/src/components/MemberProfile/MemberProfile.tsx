@@ -20,8 +20,11 @@ import LinearProgress, { LinearProgressProps } from '@mui/material/LinearProgres
 
 interface MemberProfileProps {
   memberName: string;
+  memberMajor: string;
+  memberPoints: number;
+  memberPicture: string;
 }
-const MemberProfile = ({ memberName }: MemberProfileProps) => {
+const MemberProfile = (userData: MemberProfileProps) => {
   const theme = createTheme();
   // const isSmScreen = useMediaQuery(theme.breakpoints.between('sm', 'md'));
   const isXsScreen = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
@@ -60,7 +63,7 @@ const MemberProfile = ({ memberName }: MemberProfileProps) => {
           <Grid item xs={12}>
             <Avatar
               alt="Dog"
-              src="https://img.freepik.com/free-photo/puppy-that-is-walking-snow_1340-37228.jpg"
+              src={userData.memberPicture}
               sx={{ width: 180, height: 180, margin: '0 auto' }}
             />
           </Grid>
@@ -68,7 +71,8 @@ const MemberProfile = ({ memberName }: MemberProfileProps) => {
           <Grid item xs={12} sm={4.5} lg={2.7}>
             <Avatar
               alt="Dog"
-              src="https://img.freepik.com/free-photo/puppy-that-is-walking-snow_1340-37228.jpg"
+              //src="https://img.freepik.com/free-photo/puppy-that-is-walking-snow_1340-37228.jpg"
+              src={userData.memberPicture}
               sx={{ width: 250, height: 250 }}
             />
           </Grid>
@@ -92,7 +96,7 @@ const MemberProfile = ({ memberName }: MemberProfileProps) => {
               marginBottom: '5%',
             }}
           >
-            {memberName}
+            {userData.memberName}
           </p>
           <Box sx={{ width: '110%' }}>
             <LinearProgressWithLabel
@@ -112,7 +116,10 @@ const MemberProfile = ({ memberName }: MemberProfileProps) => {
           <p style={{ fontSize: 'clamp(0.8rem, 2.5vw, 1rem)' }}>
             Member Tier: <span style={{ fontWeight: 'bold' }}>JUNIOR</span>{' '}
             <span style={{ color: '#F3C969', fontWeight: 'bold' }}>|</span> Point Balance:{' '}
-            <span style={{ fontWeight: 'bold' }}>45</span>
+            <span style={{ fontWeight: 'bold' }}>{userData.memberPoints}</span>
+          </p>
+          <p style={{ fontSize: 'clamp(0.8rem, 2.5vw, 1rem)' }}>
+            Major: <span style={{ fontWeight: 'bold' }}>{userData.memberMajor}</span>{' '}
           </p>
         </div>
       </Grid>

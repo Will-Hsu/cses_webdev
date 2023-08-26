@@ -84,6 +84,7 @@ const Home = () => {
                   ...styles.subtitle,
                   display: 'flex',
                   justifyContent: { xs: 'center', sm: 'right' },
+                  minHeight: '50%',
                 }}
               >
                 Join CSES today.
@@ -123,8 +124,24 @@ const Home = () => {
             <Grid item xs={11} sm={2.5} md={1.8} lg={1.8}>
               <Box sx={styles.statisticContainer}>
                 <Box sx={styles.statisticWrapper}>
-                  <Box sx={styles.statisticTitle}>
-                    <img src={infinity} alt="infiniteSign" />
+                  <Box
+                    sx={{
+                      ...styles.statisticTitle,
+                      height: {
+                        xs: 'clamp(40px, 3vw, 100px)',
+                        sm: 'clamp(25px, 3vw, 35px)',
+                      },
+                      marginBottom: '10px',
+                    }}
+                  >
+                    <img
+                      src={infinity}
+                      alt="infiniteSign"
+                      style={{
+                        width: 'auto', // Make sure the image takes up its container's width
+                        height: '100%', // Make sure the image takes up its container's height
+                      }}
+                    />
                   </Box>
                   <Box sx={styles.statisticSubtitle}>Opportunities.</Box>
                 </Box>
@@ -143,7 +160,9 @@ const Home = () => {
                 fontWeight: '700',
               }}
             >
-              <h2 style={{ marginBottom: '20px' }}>UPCOMING EVENTS.</h2>
+              <p style={{ marginBottom: '20px', fontSize: 'clamp(32px, 8vw, 65px)' }}>
+                UPCOMING EVENTS.
+              </p>
             </div>
 
             <div

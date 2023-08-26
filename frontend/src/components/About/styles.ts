@@ -9,18 +9,16 @@ export const aboutStyles = () => ({
     opacity: '0.8',
   },
   bg2: {
-    width: '100%',
-    transform: 'scaleX(-1) rotate(10deg)',
-    margin: '20% 0%',
-    marginRight: '-1%',
-    marginTop: '120%',
+    transform: 'scaleX(-1) rotate(8deg)',
+    margin: '15% 0%',
+    position: 'absolute',
+    top: '50%',
     scale: '110%',
     opacity: '0.8',
   },
   body: { position: 'relative', top: '93px', marginBottom: '200px' },
   root: {
     position: 'relative',
-    //overflow: 'auto',
   },
   button1: {
     color: 'white',
