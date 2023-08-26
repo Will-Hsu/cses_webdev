@@ -116,10 +116,14 @@ export const eventCreate = [
     .isURL({ require_protocol: true })
     .withMessage('Calendar link must be a valid URL.'),
   body('instagram_link')
-    .optional()
     .trim()
-    .isURL({ require_protocol: true })
-    .withMessage('Instagram link must be a valid URL.'),
+    .custom((url) => {
+      if (url === '' || url.isURL({ require_protocol: true })) {
+        return true;
+      }
+
+      throw new Error('Instagram link must be a valid URL.');
+    }),
 
   asyncHandler(async (req, res) => {
     // Extract the validation errors from a request.
