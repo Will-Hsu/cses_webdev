@@ -77,3 +77,15 @@ export const eventDeleteAPI = (id) => {
       });
   });
 }
+
+export const eventUpdateAPI = (id, updatedEvent) => {
+  return new Promise((resolve, reject) => {
+    API.put(`/event/${id}/update`, updatedEvent)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
