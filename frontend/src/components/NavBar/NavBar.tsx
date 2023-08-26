@@ -23,7 +23,6 @@ import ProfileDropdown from './ProfileDropdown';
 import { User } from '../../utils/types';
 import axios from 'axios';
 
-
 const NavBar = () => {
   const styles = navBarStyles();
   const navigate = useNavigate();
@@ -61,7 +60,7 @@ const NavBar = () => {
           const response = await axios.get(`http://127.0.0.1:5000/api/v1/users/${user.email}`);
           setUserData(response.data);
         } else {
-          navigate('/login');
+          // navigate('/login');
         }
       } catch (error) {
         console.log('Error fetching user data: ', error);
@@ -98,16 +97,15 @@ const NavBar = () => {
             )}
           </Box>
           {isLoggedIn && userData && (
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                <Avatar
-                  alt="Remy Sharp"
-                  src={userData.profilePicture}
-                  sx={{ width: 60, height: 60, marginLeft: '1%' }}
-                />
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <Avatar
+                alt="Remy Sharp"
+                src={userData.profilePicture}
+                sx={{ width: 60, height: 60, marginLeft: '1%' }}
+              />
               <ProfileDropdown />
-              </div>
-             
-            )}
+            </div>
+          )}
           <Box sx={{ display: { xs: 'block', md: 'none' } }}>
             <IconButton onClick={() => setIsDrawerOpen(!isDrawerOpen)} color="inherit">
               {!isDrawerOpen && <MenuIcon sx={styles.menuicon} />}
