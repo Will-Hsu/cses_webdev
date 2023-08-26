@@ -139,7 +139,7 @@ const MeetTheTeam = () => {
 
   return (
     <div>
-      <Grid item xs={12} sm={4.5} md={5}>
+      <Grid item xs={12} sm={4.5} md={5.5} lg={5}>
         <Box
           sx={{
             ...styles.mainTitleBottom,
@@ -152,7 +152,14 @@ const MeetTheTeam = () => {
       </Grid>
       <Grid container sx={{ marginTop: '5%', display: 'flex', justifyContent: 'center' }}>
         {categories.map((category) => (
-          <Grid item md={1.6} key={category.id}>
+          <Grid
+            item
+            md={1.7}
+            lg={1.8}
+            xl={1.5}
+            key={category.id}
+            sx={{ display: 'flex', justifyContent: 'center' }}
+          >
             <Button
               size="large"
               text={category.name}
