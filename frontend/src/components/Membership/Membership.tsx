@@ -7,13 +7,13 @@ import { membershipStyles } from './styles';
 import EventsAttended from './EventsAttended';
 import LeaderBoard from './LeaderBoard';
 import MemberProfile from '../MemberProfile/MemberProfile';
-import EventsDashborad from './EventsDashboard';
+import EventsDashboard from './EventsDashboard';
 import axios from 'axios';
 
 const styles = membershipStyles();
 
 const Membership = () => {
-  const { user, isLoggedIn, logout } = useContext(AuthContext);
+  const { user, isLoggedIn, isAdmin, logout } = useContext(AuthContext);
   const [userData, setUserData] = useState<User | null>(null);
   const navigate = useNavigate();
 
@@ -182,7 +182,7 @@ const Membership = () => {
       }
 
       {/* Events Dashboard */}
-      <EventsDashborad />
+      {isAdmin && <EventsDashboard />}
     </div>
   );
 };

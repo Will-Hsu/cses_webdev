@@ -217,7 +217,7 @@ export const eventUpdate = [
     .isURL({ require_protocol: true })
     .withMessage('Calendar link must be a valid URL.'),
   body('instagram_link')
-    .optional()
+    .optional({ checkFalsy: true })
     .trim()
     .isURL({ require_protocol: true })
     .withMessage('Instagram link must be a valid URL.'),
@@ -231,7 +231,6 @@ export const eventUpdate = [
       res.status(400).json({ message: 'Failed', errors: errors.array() });
     } else {
       // Data from param and body is valid.
-
       // Query database for event with given ID
       const event = await Event.findById(req.params.id).exec();
 

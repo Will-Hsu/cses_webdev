@@ -12,7 +12,7 @@ import {
   Modal,
   TextField,
 } from '@mui/material';
-import { Dayjs } from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
@@ -49,9 +49,10 @@ const EventRow = ({
 }: {
   event: Event;
   onDelete: () => void;
-  onEdit: () => void;
+  onEdit: (updatedEvent: Event) => void;
 }) => {
   const [openEdit, setOpenEdit] = useState(false);
+  const [editedEvent, setEditedEvent] = useState({ ...event });
   const [openDelete, setOpenDelete] = useState(false);
 
   return (
@@ -64,12 +65,106 @@ const EventRow = ({
       <TableCell>{event.calendar_link}</TableCell>
       <TableCell>{event.instagram_link}</TableCell>
       <TableCell>
-        <Button itemID={event._id} onClick={() => setOpenEdit(true)} variant="outlined">
+        <Button itemID={event._id} onClick={() => {
+            setOpenEdit(true);
+            setEditedEvent({ ...event });
+          }}
+          variant="outlined"
+        >
           Edit
         </Button>
         <Modal open={openEdit} onClose={() => setOpenEdit(false)}>
           <Box sx={style} component="form">
-            <p>Edit Box</p>
+          <TextField
+              label="Title"
+              id="title"
+              size="small"
+              fullWidth
+              margin="normal"
+              value={editedEvent.title}
+              onChange={(e) => setEditedEvent({ ...editedEvent, title: e.target.value })}
+              required
+              helperText="Please enter the title of the event"
+            />
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DateTimePicker
+                label="Start Time"
+                value={dayjs(editedEvent.start_time)}
+                onChange={(newValue) => {
+                  if (newValue) {
+                    setEditedEvent({ ...editedEvent, start_time: newValue.toISOString() })
+                  }
+                }}
+                disablePast
+                sx={{ width: '100%', marginBottom: '20px' }}
+              />
+              <DateTimePicker
+                label="End Time"
+                value={dayjs(editedEvent.end_time)}
+                onChange={(newValue) => {
+                  if (newValue) {
+                    setEditedEvent({ ...editedEvent, end_time: newValue.toISOString() })
+                  }
+                }}
+                disablePast
+                sx={{ width: '100%' }}
+              />
+            </LocalizationProvider>
+            <TextField
+              label="Description"
+              id="description"
+              size="small"
+              fullWidth
+              margin="normal"
+              value={editedEvent.description}
+              onChange={(e) => setEditedEvent({ ...editedEvent, description: e.target.value })}
+              helperText="Optional"
+            />
+            <TextField
+              label="Location"
+              id="location"
+              size="small"
+              fullWidth
+              margin="normal"
+              value={editedEvent.location}
+              onChange={(e) => setEditedEvent({ ...editedEvent, location: e.target.value })}
+              required
+              helperText="Please enter the location of the event"
+            />
+            <TextField
+              label="Calendar Link"
+              id="calendar_link"
+              size="small"
+              fullWidth
+              required
+              margin="normal"
+              value={editedEvent.calendar_link}
+              onChange={(e) => setEditedEvent({ ...editedEvent, calendar_link: e.target.value })}
+              helperText="Please enter the calendar link of the event"
+            />
+            <TextField
+              label="Instagram Link"
+              id="instagram_link"
+              size="small"
+              fullWidth
+              margin="normal"
+              value={editedEvent.instagram_link}
+              onChange={(e) => setEditedEvent({ ...editedEvent, instagram_link: e.target.value })}
+              helperText="Optional"
+            />
+
+            <Button 
+              variant="contained" 
+              onClick={() => {
+                onEdit(editedEvent);
+                setOpenEdit(false);
+              }}
+            >
+              Update
+            </Button>
+            <Button variant="outlined" onClick={() => setOpenEdit(false)}>
+              Cancel
+            </Button>
           </Box>
         </Modal>
         <Button itemID={event._id} onClick={() => setOpenDelete(true)} variant="outlined">
@@ -282,9 +377,10 @@ const DashBoard = () => {
           <TableBody>
             {events.map((event) => (
               <EventRow
+                key={event._id}
                 event={event}
                 onDelete={() => handleDelete(event._id)}
-                onEdit={() => console.log('Edit')}
+                onEdit={(updatedEvent: Event) => handleEdit(event._id, updatedEvent)}
               />
             ))}
           </TableBody>
