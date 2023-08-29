@@ -15,6 +15,8 @@ interface AuthContextType {
   setIsUcsdEmail: (isUcsdEmail: boolean) => void;
   isNewUser: boolean;
   setIsNewUser: (isNewUser: boolean) => void;
+  isAdmin: boolean;
+  setIsAdmin: (isAdmin: boolean) => void;
   isLoggedIn: boolean;
   setIsLoggedIn: (isLoggedIn: boolean) => void;
   login: () => void;
@@ -32,6 +34,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isUcsdEmail, setIsUcsdEmail] = useState(true);
   const [isNewUser, setIsNewUser] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     const verifyToken = async () => {
@@ -52,6 +55,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
             setUser(userInfo.data);
             setIsLoggedIn(true);
             setIsUcsdEmail(true);
+            setIsAdmin(true);
           }
         }
       } catch (err) {
@@ -78,6 +82,13 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
           setIsNewUser(true);
         }
       });
+
+      // Check if user is admin
+      if (userInfo.data.email === 'cses@ucsd.edu') {
+        setIsAdmin(true);
+      } else {
+        setIsAdmin(false);
+      }
 
       // TODO: Check if user exists in database
       if (userInfo.data.email.endsWith('@ucsd.edu')) {
@@ -110,6 +121,8 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         setIsUcsdEmail,
         isNewUser,
         setIsNewUser,
+        isAdmin,
+        setIsAdmin,
         login,
         logout,
       }}
