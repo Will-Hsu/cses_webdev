@@ -4,6 +4,8 @@ import bg from '../../images/shape2.svg';
 import Button from '../Button/Button';
 import sponsor from '../../images/cseLogo.gif';
 import { opportunitiesStyles } from './styles';
+import members from '../../images/opportunitiespage/members.png'
+import sponsors from '../../images/opportunitiespage/sponsors.png'
 
 const Opportunities = () => {
   const theme = useTheme();
@@ -17,8 +19,8 @@ const Opportunities = () => {
       <Container maxWidth="xl" sx={styles.body}>
         <Typography sx={styles.title}>OPPORTUNITIES</Typography>
         <Grid container spacing={2} sx={{ justifyContent: 'center', alignItems: 'center' }}>
-          <Grid item sx={{ width: '550px', marginTop: '3%' }}>
-            <div style={{ width: '400px', height: '450px', backgroundColor: 'grey' }}></div>
+          <Grid item sx={{ width: '550px', marginTop: '3%', marginRight: '2%' }}>
+            <img src={members} alt="members" style={{ width: '90%', height: 'auto' }} />
           </Grid>
           <Grid item sx={{ width: '550px', marginTop: '3%' }}>
             <Typography sx={styles.subtitle}>
@@ -38,8 +40,8 @@ const Opportunities = () => {
               in our events.
             </Typography>
           </Grid>
-          <Grid item sx={{ width: '550px', marginTop: '8%' }}>
-            <div style={{ width: '400px', height: '450px', backgroundColor: 'grey' }}></div>
+          <Grid item sx={{ width: '550px', marginTop: '8%', marginRight: '2%' }}>
+            <img src={sponsors} alt="sponsors" style={{ width: '90%', height: 'auto' }} />
           </Grid>
           <Grid item sx={{ width: '550px', marginTop: '3%' }}>
             <Typography sx={styles.subtitle}>
