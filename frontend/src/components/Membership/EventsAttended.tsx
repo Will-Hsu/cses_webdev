@@ -3,7 +3,7 @@ import EventBox from '../Event/Event';
 import { membershipStyles } from './styles';
 import alertLogo from '../../images/events-attended-alert.svg';
 
-interface EventsAttendedProps {
+export interface EventsAttendedProps {
   eventsAttended: Array<{
     _id: string;
     title: string;

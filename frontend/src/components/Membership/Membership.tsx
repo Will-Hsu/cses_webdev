@@ -9,68 +9,35 @@ import LeaderBoard from './LeaderBoard';
 import MemberProfile from '../MemberProfile/MemberProfile';
 import EventsDashborad from './EventsDashboard';
 import axios from 'axios';
+import { userInfoAPI, topMembersAPI } from '../../api';
+
+interface Event {
+  _id: string;
+  title: string;
+  location: string;
+  description: string;
+  start_time: string;
+  end_time: string;
+  calendar_link: string;
+  instagram_link: string;
+  targetDate?: Date;
+}
+
+interface Ranking {
+  rank: number;
+  name: string;
+  points: number;
+  profilePicture?: string;
+}
 
 const styles = membershipStyles();
 
 const Membership = () => {
   const { user, isLoggedIn, logout } = useContext(AuthContext);
   const [userData, setUserData] = useState<User | null>(null);
+  const [eventsAttended, setEventsAttended] = useState<Array<Event>>([]);
+  const [rankings, setRankings] = useState<Array<Ranking>>([]);
   const navigate = useNavigate();
-
-  // For demo purposes, we are hardcoding the events attended and leaderboard data
-  const eventsAttended = [
-    {
-      title: 'Google ML SWE Alumnus Q&A',
-      targetDate: new Date('2023-09-02T21:00:00.000Z'),
-      location: 'Virtual',
-      calendar_link: 'https://example.com/calendar',
-      description: 'Event Description',
-      end_time: '2023-09-02T23:00:00.000Z',
-      instagram_link: 'https://www.instagram.com/event',
-      start_time: '2023-09-02T21:00:00.000Z',
-      _id: '64b81a1228022bc1461c5ea4',
-    },
-    {
-      title: 'Google ML SWE Alumnus Q&A',
-      targetDate: new Date('2023-09-02T21:00:00.000Z'),
-      location: 'Virtual',
-      calendar_link: 'https://example.com/calendar',
-      description: 'Event Description',
-      end_time: '2023-09-02T23:00:00.000Z',
-      instagram_link: 'https://www.instagram.com/event',
-      start_time: '2023-09-02T21:00:00.000Z',
-      _id: '64b81a1228022bc1461c5ea4',
-    },
-    {
-      title: 'Google ML SWE Alumnus Q&A',
-      targetDate: new Date('2023-09-02T21:00:00.000Z'),
-      location: 'Virtual',
-      calendar_link: 'https://example.com/calendar',
-      description: 'Event Description',
-      end_time: '2023-09-02T23:00:00.000Z',
-      instagram_link: 'https://www.instagram.com/event',
-      start_time: '2023-09-02T21:00:00.000Z',
-      _id: '64b81a1228022bc1461c5ea4',
-    },
-  ];
-
-  const leaderBoardData = [
-    {
-      rank: 1,
-      name: 'Sarah M.',
-      points: 70,
-    },
-    {
-      rank: 2,
-      name: 'Jake S.',
-      points: 55,
-    },
-    {
-      rank: 3,
-      name: 'Ivan C.',
-      points: 50,
-    },
-  ];
 
   // For dashboard dev, commenting out the useEffect for now
   useEffect(() => {
@@ -79,6 +46,7 @@ const Membership = () => {
         if (isLoggedIn === true) {
           const response = await axios.get(`http://127.0.0.1:5000/api/v1/users/${user.email}`);
           setUserData(response.data);
+          await topMembersAPI().then((data) => setRankings(data));
         } else {
           navigate('/login');
         }
@@ -90,6 +58,16 @@ const Membership = () => {
 
     fetchUserData();
   }, [isLoggedIn, user.email, navigate]);
+
+  useEffect(() => {
+    const updateEvents = async () => {
+      if (user.email !== undefined) {
+        await userInfoAPI(user.email).then((data) => setEventsAttended(data.eventsAttended));
+      }
+    };
+
+    updateEvents();
+  }, [user.email]);
 
   return (
     <div>
@@ -114,7 +92,7 @@ const Membership = () => {
 
         {isLoggedIn && <EventsAttended eventsAttended={eventsAttended} />}
 
-        {isLoggedIn && <LeaderBoard rankings={leaderBoardData} />}
+        {isLoggedIn && rankings.length > 0 && <LeaderBoard rankings={rankings} />}
       </div>
       {
         <div

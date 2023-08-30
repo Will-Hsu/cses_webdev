@@ -42,6 +42,30 @@ export const checkUserAPI = (email) => {
   });
 };
 
+export const userInfoAPI = (email) => {
+  return new Promise((resolve, reject) => {
+    API.get(`/users/${email}`)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+export const topMembersAPI = () => {
+  return new Promise((resolve, reject) => {
+    API.get('/users/topMembers')
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
 export const eventListAPI = () => {
   return new Promise((resolve, reject) => {
     API.get('/events')
@@ -76,7 +100,7 @@ export const eventDeleteAPI = (id) => {
         reject(error);
       });
   });
-}
+};
 
 export const eventUpdateAPI = (id, updatedEvent) => {
   return new Promise((resolve, reject) => {
