@@ -4,6 +4,7 @@ import shape from '../../images/shape.svg';
 import previous from '../../images/previous.png';
 import next from '../../images/next.png';
 import Button from '../Button/Button';
+import ToggleButton from '../ToggleButton/ToggleButton'
 import { aboutStyles } from './styles';
 import Nabil from '../../images/meettheteamImages/nabil.jpg';
 import Samvrit from '../../images/meettheteamImages/samvrit.jpeg';
@@ -160,11 +161,12 @@ const MeetTheTeam = () => {
             key={category.id}
             sx={{ display: 'flex', justifyContent: 'center' }}
           >
-            <Button
-              size="large"
+            <ToggleButton
               text={category.name}
+              isSelected={currentCategory.id === category.id}
               onClick={() => handleCategoryChange(category)}
             />
+
           </Grid>
         ))}
       </Grid>
