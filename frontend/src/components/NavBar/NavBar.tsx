@@ -61,7 +61,7 @@ const NavBar = () => {
           const response = await axios.get(`http://127.0.0.1:5000/api/v1/users/${user.email}`);
           setUserData(response.data);
         } else {
-          navigate('/login');
+          // navigate('/login');
         }
       } catch (error) {
         console.log('Error fetching user data: ', error);
