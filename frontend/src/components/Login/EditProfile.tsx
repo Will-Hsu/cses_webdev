@@ -10,7 +10,7 @@ import {
   TextField,
   FormHelperText,
 } from '@mui/material';
-import { createUserAPI } from '../../api';
+import { createUserAPI, updateUserAPI } from '../../api';
 import { loginStyles } from './styles';
 import { Profanity, ProfanityOptions } from '@2toad/profanity';
 import MajorsContext from './MajorsContext';
@@ -30,7 +30,6 @@ interface EditFormProps {
 }
 
 const EditForm: React.FC<EditFormProps> = ({ name, email, major, expectedGraduateYear }) => {
-  
   const styles = loginStyles();
   const { isLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -38,7 +37,9 @@ const EditForm: React.FC<EditFormProps> = ({ name, email, major, expectedGraduat
   const availableMajors = useContext(MajorsContext);
   const availableGradYears = useContext(GradYearsContext);
   const [selectedMajor, setSelectedMajor] = useState<string | null>(major);
-  const [selectedGradYear, setSelectedGradYear] = useState<string | null>(String(expectedGraduateYear));
+  const [selectedGradYear, setSelectedGradYear] = useState<string | null>(
+    String(expectedGraduateYear),
+  );
 
   const [showError, setShowError] = useState(false);
   const [nameEmptyError, setNameEmptyError] = useState(false);
@@ -77,6 +78,7 @@ const EditForm: React.FC<EditFormProps> = ({ name, email, major, expectedGraduat
   }, [isLoggedIn, navigate]);
 
   const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    console.log('submit');
     e.preventDefault();
 
     // Reset error states
@@ -117,7 +119,7 @@ const EditForm: React.FC<EditFormProps> = ({ name, email, major, expectedGraduat
       setShowError(true);
     } else {
       setShowError(false);
-      createUserAPI(formData)
+      updateUserAPI(formData.email, formData)
         .then(() => {
           navigate('/membership');
         })
@@ -251,7 +253,7 @@ const EditForm: React.FC<EditFormProps> = ({ name, email, major, expectedGraduat
             },
           }}
         >
-          Edit Profile
+          Submit
         </Button>
       </Box>
     </Box>

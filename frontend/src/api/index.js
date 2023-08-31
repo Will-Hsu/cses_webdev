@@ -30,6 +30,18 @@ export const createUserAPI = (newUser) => {
   });
 };
 
+export const updateUserAPI = (email, updatedUser) => {
+  return new Promise((resolve, reject) => {
+    API.put(`/users/${email}`, updatedUser)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  });
+};
+
 export const checkUserAPI = (email) => {
   return new Promise((resolve, reject) => {
     API.post('/users/check', email)
