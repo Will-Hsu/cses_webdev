@@ -4,7 +4,9 @@ import shape from '../../images/shape.svg';
 import previous from '../../images/previous.png';
 import next from '../../images/next.png';
 import Button from '../Button/Button';
-import ToggleButton from '../ToggleButton/ToggleButton'
+import ButtonToggle from '../Button/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import { buttonStyles } from '../Button/styles';
 import { aboutStyles } from './styles';
 import Nabil from '../../images/meettheteamImages/nabil.jpg';
 import Samvrit from '../../images/meettheteamImages/samvrit.jpeg';
@@ -161,11 +163,26 @@ const MeetTheTeam = () => {
             key={category.id}
             sx={{ display: 'flex', justifyContent: 'center' }}
           >
-            <ToggleButton
-              text={category.name}
-              isSelected={currentCategory.id === category.id}
-              onClick={() => handleCategoryChange(category)}
-            />
+            <ToggleButtonGroup
+              value={currentCategory.name}
+              exclusive
+              onChange={(_, newValue) => {
+                const selectedCategory = categories.find(category => category.name === newValue);
+                if (selectedCategory) {
+                  handleCategoryChange(selectedCategory);
+                }
+              }}
+              aria-label="Category Selection"
+              sx={buttonStyles(false)}
+            >
+              {/* {categories.map((category) => ( */}
+              <ButtonToggle
+                key={category.id}
+                text={category.name}
+              />
+              
+            </ToggleButtonGroup>  
+
 
           </Grid>
         ))}
