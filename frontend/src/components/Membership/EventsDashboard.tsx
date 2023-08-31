@@ -205,7 +205,6 @@ const DashBoard = () => {
 
   useEffect(() => {
     eventListAPI().then((res) => {
-      console.log(res);
       setEvents(res);
     });
   }, []);
@@ -229,7 +228,6 @@ const DashBoard = () => {
 
     eventCreateAPI(requestBody)
       .then((res) => {
-        console.log(res);
         eventListAPI().then((res) => setEvents(res));
         handleClose();
       })
@@ -241,7 +239,6 @@ const DashBoard = () => {
   const handleDelete = (id: string) => {
     eventDeleteAPI(id)
       .then((res) => {
-        console.log(res);
         setEvents(events.filter((event) => event._id !== id));
       })
       .catch((err) => {
@@ -253,7 +250,6 @@ const DashBoard = () => {
     // Send API request to update the event
     eventUpdateAPI(id, updatedEvent)
       .then((res) => {
-        console.log(res);
         const updatedEvents = events.map((event) =>
           event._id === id ? updatedEvent : event
         );
