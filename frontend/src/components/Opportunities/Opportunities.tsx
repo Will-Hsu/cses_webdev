@@ -3,6 +3,7 @@ import { Container, Typography, Grid, Link, Box, useTheme } from '@mui/material'
 import bg from '../../images/shape2.svg';
 import Button from '../Button/Button';
 import sponsor from '../../images/cseLogo.gif';
+import sponsor2 from '../../images/AS.png';
 import { opportunitiesStyles } from './styles';
 
 const Opportunities = () => {
@@ -66,9 +67,12 @@ const Opportunities = () => {
           Thank you to our current sponsors!
         </Typography>
 
-        <Box display="flex" justifyContent="center">
+        <Box display="flex" flexDirection="column" alignItems="center">
           <a href="https://cse.ucsd.edu/" style={styles.link}>
-            <img src={sponsor} alt="sponsor" style={styles.sponsor} />
+            <img src={sponsor} alt="sponsor" style={{ height: '100px' }} />
+          </a>
+          <a href="https://as.ucsd.edu/" style={styles.link}>
+            <img src={sponsor2} alt="sponsor2" style={{ height: '200px' }} />
           </a>
         </Box>
       </Container>
