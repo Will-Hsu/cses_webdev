@@ -147,7 +147,9 @@ const LeaderBoard = ({ rankings }: { rankings: Array<RankingProps> }) => {
   };
   return (
     <Container maxWidth="xl" sx={styles.leaderBoardBody}>
-      <Typography sx={styles.eventsAttendedTitle}>LEADERBOARD</Typography>
+      <Typography sx={isMobile ? styles.eventsAttendedTitleMobile : styles.eventsAttendedTitle}>
+        LEADERBOARD
+      </Typography>
 
       <div style={{ display: 'flex', alignItems: 'center', marginBottom: '60px' }}>
         <img

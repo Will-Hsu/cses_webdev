@@ -1,4 +1,4 @@
-import { Container, Typography } from '@mui/material';
+import { Container, Typography, useMediaQuery } from '@mui/material';
 import EventBox from '../Event/Event';
 import { membershipStyles } from './styles';
 import alertLogo from '../../images/events-attended-alert.svg';
@@ -19,9 +19,13 @@ export interface EventsAttendedProps {
 const EventsAttended = ({ eventsAttended }: EventsAttendedProps) => {
   const styles = membershipStyles();
 
+  const isMobile = useMediaQuery('(max-width: 767px)');
+
   return (
     <Container maxWidth="xl" sx={styles.eventsAttendedBody}>
-      <Typography sx={styles.eventsAttendedTitle}>EVENTS ATTENDED</Typography>
+      <Typography sx={isMobile ? styles.eventsAttendedTitleMobile : styles.eventsAttendedTitle}>
+        EVENTS ATTENDED
+      </Typography>
       <div style={{ display: 'flex', alignItems: 'center', marginBottom: '60px' }}>
         <img
           src={alertLogo}
