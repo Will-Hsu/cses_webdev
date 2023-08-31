@@ -55,7 +55,6 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
             setUser(userInfo.data);
             setIsLoggedIn(true);
             setIsUcsdEmail(true);
-            setIsAdmin(true);
           }
         }
       } catch (err) {
