@@ -17,7 +17,7 @@ const About = () => {
   const isSmallScreen = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
 
   return (
-    <Box sx={{ position: 'relative', overflow: 'hidden', padding: { xs: '5%' } }}>
+    <Box sx={{ position: 'relative', overflow: 'hidden' }}>
       <Box sx={styles.root}>
         <Box sx={styles.backgroundImage}>
           <img src={bgTop} alt="bg1" style={{ ...styles.bg1, position: 'absolute' }} />

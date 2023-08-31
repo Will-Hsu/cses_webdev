@@ -16,7 +16,7 @@ export const aboutStyles = () => ({
     scale: '110%',
     opacity: '0.8',
   },
-  body: { position: 'relative', top: '93px', marginBottom: '200px' },
+  body: { padding: '5%', position: 'relative', top: '93px', marginBottom: '200px' },
   root: {
     position: 'relative',
   },
