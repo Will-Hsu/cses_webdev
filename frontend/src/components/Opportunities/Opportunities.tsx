@@ -19,8 +19,8 @@ const Opportunities = () => {
       <Container maxWidth="xl" sx={styles.body}>
         <Typography sx={styles.title}>OPPORTUNITIES</Typography>
         <Grid container spacing={2} sx={{ justifyContent: 'center', alignItems: 'center' }}>
-          <Grid item sx={{ width: '550px', marginTop: '3%', marginRight: '2%' }}>
-            <img src={members} alt="members" style={{ width: '90%', height: 'auto' }} />
+          <Grid item sx={{ width: '550px', marginTop: '3%' }}>
+            <img src={members} alt="members" style={{ width: '85%', height: 'auto' }} />
           </Grid>
           <Grid item sx={{ width: '550px', marginTop: '3%' }}>
             <Typography sx={styles.subtitle}>
@@ -40,8 +40,8 @@ const Opportunities = () => {
               in our events.
             </Typography>
           </Grid>
-          <Grid item sx={{ width: '550px', marginTop: '8%', marginRight: '2%' }}>
-            <img src={sponsors} alt="sponsors" style={{ width: '90%', height: 'auto' }} />
+          <Grid item sx={{ width: '550px', marginTop: '8%' }}>
+            <img src={sponsors} alt="sponsors" style={{ width: '85%', height: 'auto' }} />
           </Grid>
           <Grid item sx={{ width: '550px', marginTop: '3%' }}>
             <Typography sx={styles.subtitle}>

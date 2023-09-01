@@ -40,13 +40,14 @@ const About = () => {
                 },
                 textAlign: 'right',
                 marginBottom: '5%',
+                marginRight: '2%',
                 display: 'flex',
                 alignItems: 'center', 
                 justifyContent: 'center',
-                marginTop: '2%',
+                marginTop: '1%',
               }}
             >
-              <img src={about1} alt="img" style={{ maxWidth: '115%', height: 'auto' }} />
+              <img src={about1} alt="img" style={{ maxWidth: '130%', height: 'auto' }} />
             </Grid>
             <Grid item sm={6} md={5} lg={5}>
               <Box
