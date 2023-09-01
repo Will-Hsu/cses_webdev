@@ -5,6 +5,8 @@ import Button from '../Button/Button';
 import sponsor from '../../images/cseLogo.gif';
 import sponsor2 from '../../images/AS.png';
 import { opportunitiesStyles } from './styles';
+import members from '../../images/opportunitiespage/members.png'
+import sponsors from '../../images/opportunitiespage/sponsors.png'
 
 const Opportunities = () => {
   const theme = useTheme();
@@ -19,7 +21,7 @@ const Opportunities = () => {
         <Typography sx={styles.title}>OPPORTUNITIES</Typography>
         <Grid container spacing={2} sx={{ justifyContent: 'center', alignItems: 'center' }}>
           <Grid item sx={{ width: '550px', marginTop: '3%' }}>
-            <div style={{ width: '400px', height: '450px', backgroundColor: 'grey' }}></div>
+            <img src={members} alt="members" style={{ width: '85%', height: 'auto' }} />
           </Grid>
           <Grid item sx={{ width: '550px', marginTop: '3%' }}>
             <Typography sx={styles.subtitle}>
@@ -40,7 +42,7 @@ const Opportunities = () => {
             </Typography>
           </Grid>
           <Grid item sx={{ width: '550px', marginTop: '8%' }}>
-            <div style={{ width: '400px', height: '450px', backgroundColor: 'grey' }}></div>
+            <img src={sponsors} alt="sponsors" style={{ width: '85%', height: 'auto' }} />
           </Grid>
           <Grid item sx={{ width: '550px', marginTop: '3%' }}>
             <Typography sx={styles.subtitle}>
