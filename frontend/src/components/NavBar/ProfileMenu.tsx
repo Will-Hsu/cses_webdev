@@ -16,6 +16,8 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ anchorEl, onClose }) => {
       <MenuItem
         onClick={() => {
           navigate('/editprofile', { replace: true });
+          // BAND-AID FIX
+          window.location.reload();
         }}
       >
         Edit Profile

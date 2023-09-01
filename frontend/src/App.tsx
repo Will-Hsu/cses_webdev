@@ -16,7 +16,7 @@ import axios from 'axios';
 import { AuthContext } from './context/AuthContext';
 
 function App() {
-  /*  const { user, isLoggedIn } = useContext(AuthContext);
+  const { user, isLoggedIn } = useContext(AuthContext);
   const [userData, setUserData] = useState<User | null>(null);
   useEffect(() => {
     const fetchUserData = async () => {
@@ -31,7 +31,7 @@ function App() {
     };
 
     fetchUserData();
-  }, [isLoggedIn, user.email]);*/
+  }, [isLoggedIn, user.email]);
   return (
     <BrowserRouter>
       <ScrollToTop />
@@ -44,19 +44,21 @@ function App() {
           <Route path="/opportunities" element={<Opportunities />} />
           <Route path="/membership" element={<Membership />} />
           <Route path="/login" element={<Login />} />
-          {/*<Route
-            path="/editprofile"
-            element={
-              userData && (
-                <EditForm
-                  name={userData.name}
-                  email={userData.email}
-                  major={userData.major}
-                  expectedGraduateYear={userData.expectedGraduationYear}
-                />
-              )
-            }
-          />*/}
+          {
+            <Route
+              path="/editprofile"
+              element={
+                userData && (
+                  <EditForm
+                    name={userData.name}
+                    email={userData.email}
+                    major={userData.major}
+                    expectedGraduateYear={userData.expectedGraduationYear}
+                  />
+                )
+              }
+            />
+          }
         </Routes>
         <Footer />
       </Container>
