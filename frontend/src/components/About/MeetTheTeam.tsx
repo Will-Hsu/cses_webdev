@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Grid, createTheme, useMediaQuery } from '@mui/material';
+import { Box, Grid, ToggleButton, createTheme, useMediaQuery } from '@mui/material';
 import shape from '../../images/shape.svg';
 import previous from '../../images/previous.png';
 import next from '../../images/next.png';
@@ -154,38 +154,51 @@ const MeetTheTeam = () => {
         </Box>
       </Grid>
       <Grid container sx={{ marginTop: '5%', display: 'flex', justifyContent: 'center' }}>
-        {categories.map((category) => (
-          <Grid
-            item
-            md={1.7}
-            lg={1.8}
-            xl={1.5}
-            key={category.id}
-            sx={{ display: 'flex', justifyContent: 'center' }}
-          >
+          
             <ToggleButtonGroup
               value={currentCategory.name}
               exclusive
               onChange={(_, newValue) => {
                 const selectedCategory = categories.find(category => category.name === newValue);
                 if (selectedCategory) {
-                  handleCategoryChange(selectedCategory);
+                  handleCategoryChange(newValue);
                 }
               }}
               aria-label="Category Selection"
               sx={buttonStyles(false)}
             >
-              {/* {categories.map((category) => ( */}
-              <ButtonToggle
-                key={category.id}
-                text={category.name}
-              />
+              {/* <ToggleButton sx={buttonStyles(false)} value={'CSES Board'} onChange={} >
+                  CSES Board
+              </ToggleButton>
+              <ToggleButton sx={buttonStyles(false)} value={'CSES Officers'}>
+                  CSES Officers
+              </ToggleButton>
+              <ToggleButton sx={buttonStyles(false)} value={'Internal Webdev'}>
+                  Internal Webdev
+              </ToggleButton>
+              <ToggleButton sx={buttonStyles(false)} value={'External Webdev'}>
+                  External Webdev
+              </ToggleButton> */}
               
-            </ToggleButtonGroup>  
+              {categories.map((category) => (
+              
+                <Button
+                  size="large"
+                  text={category.name}
+                  onClick={() => handleCategoryChange(category)}
+                />
+                // <ToggleButton
+                //   key={category.name}
+                //   value={category.name}
+                //   sx={buttonStyles(false)}
+                //   onChange={() => handleCategoryChange(category)}
+                //   >
+                //   {category.name}
+                // </ToggleButton>
+    
+            ))}
 
-
-          </Grid>
-        ))}
+          </ToggleButtonGroup>
       </Grid>
       <Grid
         container

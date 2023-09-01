@@ -2,6 +2,7 @@ import * as React from 'react';
 import ToggleButton from '@mui/material/ToggleButton';
 import MuiButton from '@mui/material/Button';
 import { buttonStyles } from './styles';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
 interface ButtonProps {
   text: string;
@@ -9,17 +10,55 @@ interface ButtonProps {
   isLogin?: boolean;
 }
 
+export default function ButtonToggle(isLogin=false, myFunction: (arg0: string) => void, newCategory: string) {
+  const [isChecked, setIsChecked] = React.useState(false);
 
-const ButtonToggle = ({ text, isLogin = false}: ButtonProps) => {
+  const handleToggleChange = () => {
+    setIsChecked(!isChecked);
+  };
+
   const style = buttonStyles(isLogin);
-  return (
-    <ToggleButton sx={style} value={text}>
-        {text}
-    </ToggleButton>
-  );
-};
 
-export default ButtonToggle;
+  return (
+    <ToggleButtonGroup
+      color="primary"
+      value={isChecked}
+      exclusive
+      onChange={handleToggleChange}
+      aria-label="Platform"
+    >
+      <ToggleButton sx={style} value={'CSES Board'}>
+          CSES Board
+      </ToggleButton>
+      <ToggleButton sx={style} value={'CSES Officers'}>
+          CSES Officers
+      </ToggleButton>
+      <ToggleButton sx={style} value={'Internal Webdev'}>
+          Internal Webdev
+      </ToggleButton>
+      <ToggleButton sx={style} value={'External Webdev'}>
+          External Webdev
+      </ToggleButton>
+
+    </ToggleButtonGroup>
+  );
+}
+
+
+
+
+//   const ButtonToggle = ({ text, isLogin = false}: ButtonProps) => {
+//     const style = buttonStyles(isLogin);
+//     return (
+//       <ToggleButton sx={style} value={text}>
+//           {text}
+//       </ToggleButton>
+//     );
+//   };
+// }
+
+
+// export default ButtonToggle;
 
 
 // import * as React from 'react';
