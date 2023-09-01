@@ -28,7 +28,9 @@ const Home = () => {
   useEffect(() => {
     const fetchRecentEvents = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:5000/api/v1/events?type=upcoming');
+        const response = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/api/v1/events?type=upcoming`,
+        );
         let mostRecentEvents = await response.json();
         // Sort events based on the end_time in descending order to get the most recent events first
         /*const sortedEvents = data.sort((a: EventData, b: EventData) => new Date(b.end_time).getTime() - new Date(a.end_time).getTime(),);*/

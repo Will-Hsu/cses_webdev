@@ -57,7 +57,9 @@ const NavBar = () => {
     const fetchUserData = async () => {
       try {
         if (isLoggedIn === true) {
-          const response = await axios.get(`http://127.0.0.1:5000/api/v1/users/${user.email}`);
+          const response = await axios.get(
+            `${process.env.REACT_APP_BACKEND_URL}/api/v1/users/${user.email}`,
+          );
           setUserData(response.data);
         }
       } catch (error) {
