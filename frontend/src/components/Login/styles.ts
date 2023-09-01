@@ -20,6 +20,16 @@ export const loginStyles = () => ({
     borderRadius: '10px',
     backgroundColor: 'rgba(255, 255, 255, 0.8)',
   },
+  
+  editForm: {
+    width: 350,
+    height: 400,
+    padding: '20px',
+    marginY: '150px',
+    marginX: "auto",
+    borderRadius: '10px',
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+  },
 
   inputField: {
     marginY: '8px',

@@ -1,4 +1,4 @@
-import { Container, Typography } from '@mui/material';
+import { Container, Typography, useMediaQuery } from '@mui/material';
 import alertLogo from '../../images/events-attended-alert.svg';
 import defaultPic from '../../images/profile.png';
 import { membershipStyles } from './styles';
@@ -7,10 +7,10 @@ interface RankingProps {
   rank: number;
   name: string;
   points: number;
-  profilePic?: string;
+  profilePicture?: string;
 }
 
-const Ranking = ({ rank, name, points, profilePic }: RankingProps) => {
+const Ranking = ({ rank, name, points, profilePicture: profilePic }: RankingProps) => {
   const styles = membershipStyles();
   const profile = profilePic || defaultPic;
   let width, height;
@@ -70,9 +70,86 @@ const Ranking = ({ rank, name, points, profilePic }: RankingProps) => {
 const LeaderBoard = ({ rankings }: { rankings: Array<RankingProps> }) => {
   const styles = membershipStyles();
 
+  const isDesktop = useMediaQuery('(min-width: 1161px)');
+  const isIpad = useMediaQuery('(min-width: 768px) and (max-width: 1160px)');
+  const isMobile = useMediaQuery('(max-width: 767px)');
+
+  const orderRankings = (rankings: Array<RankingProps>) => {
+    if (isDesktop) {
+      return (
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: '70px',
+          }}
+        >
+          <Ranking
+            rank={2}
+            name={rankings[1].name}
+            points={rankings[1].points}
+            profilePicture={rankings[1].profilePicture}
+          />
+
+          <Ranking
+            rank={1}
+            name={rankings[0].name}
+            points={rankings[0].points}
+            profilePicture={rankings[0].profilePicture}
+          />
+
+          <Ranking
+            rank={3}
+            name={rankings[2].name}
+            points={rankings[2].points}
+            profilePicture={rankings[2].profilePicture}
+          />
+        </div>
+      );
+    }
+
+    if (isMobile || isIpad) {
+      return (
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: '70px',
+          }}
+        >
+          <Ranking
+            rank={1}
+            name={rankings[0].name}
+            points={rankings[0].points}
+            profilePicture={rankings[0].profilePicture}
+          />
+
+          <Ranking
+            rank={2}
+            name={rankings[1].name}
+            points={rankings[1].points}
+            profilePicture={rankings[1].profilePicture}
+          />
+
+          <Ranking
+            rank={3}
+            name={rankings[2].name}
+            points={rankings[2].points}
+            profilePicture={rankings[2].profilePicture}
+          />
+        </div>
+      );
+    }
+  };
   return (
     <Container maxWidth="xl" sx={styles.leaderBoardBody}>
-      <Typography sx={styles.eventsAttendedTitle}>LEADERBOARD</Typography>
+      <Typography sx={isMobile ? styles.eventsAttendedTitleMobile : styles.eventsAttendedTitle}>
+        LEADERBOARD
+      </Typography>
 
       <div style={{ display: 'flex', alignItems: 'center', marginBottom: '60px' }}>
         <img
@@ -87,55 +164,7 @@ const LeaderBoard = ({ rankings }: { rankings: Array<RankingProps> }) => {
         </Typography>
       </div>
 
-      <div
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-          alignItems: 'center',
-          gap: '70px',
-        }}
-      >
-
-        <Ranking
-          rank={rankings[0].rank}
-          name={rankings[0].name}
-          points={rankings[0].points}
-          profilePic={rankings[0].profilePic}
-        />
-
-        <Ranking
-          rank={rankings[1].rank}
-          name={rankings[1].name}
-          points={rankings[1].points}
-          profilePic={rankings[1].profilePic}
-        />
-
-        <Ranking
-          rank={rankings[2].rank}
-          name={rankings[2].name}
-          points={rankings[2].points}
-          profilePic={rankings[2].profilePic}
-        />
-      </div>
-
-      {/* <Grid
-        container
-        spacing={3}
-        sx={{ justifyContent: 'center', alignItems: 'center', gap: '70px' }}
-      >
-        <Grid item>
-          <Ranking rank={2} name="Jake S." points={55} profilePic={gloriaPic} />
-        </Grid>
-
-        <Grid item>
-          <Ranking rank={1} name="Sarah M." points={70} />
-        </Grid>
-
-        <Grid item>
-          <Ranking rank={3} name="Ivan C." points={50} />
-        </Grid>
-      </Grid> */}
+      {orderRankings(rankings)}
     </Container>
   );
 };

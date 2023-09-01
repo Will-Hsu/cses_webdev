@@ -51,7 +51,8 @@ export const opportunitiesStyles = (theme: any) => ({
   },
   greyBox: { width: '300px', height: '150px', backgroundColor: 'grey', margin: '1%' },
   sponsor: {
-    width: '300px',
+    maxHeight: '50%',
+    margin: '0 10px',
   },
-  link: { display: 'flex', justifyContent: 'center' },
+  link: { display: 'flex', justifyContent: 'center', margin: '20px' },
 });
