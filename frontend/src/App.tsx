@@ -16,26 +16,25 @@ import axios from 'axios';
 import { AuthContext } from './context/AuthContext';
 
 function App() {
-  const { user, isLoggedIn } = useContext(AuthContext);
+  /*  const { user, isLoggedIn } = useContext(AuthContext);
   const [userData, setUserData] = useState<User | null>(null);
   useEffect(() => {
-    console.log("HI");
     const fetchUserData = async () => {
       try {
         if (isLoggedIn === true) {
           const response = await axios.get(`http://127.0.0.1:5000/api/v1/users/${user.email}`);
           setUserData(response.data);
-        } 
+        }
       } catch (error) {
         console.log('Error fetching user data: ', error);
       }
     };
 
     fetchUserData();
-  }, [isLoggedIn, user.email]);
+  }, [isLoggedIn, user.email]);*/
   return (
     <BrowserRouter>
-      <ScrollToTop/>
+      <ScrollToTop />
       <Container maxWidth={false} style={{ margin: 0, padding: 0 }}>
         <NavBar />
         <Routes>
@@ -45,7 +44,19 @@ function App() {
           <Route path="/opportunities" element={<Opportunities />} />
           <Route path="/membership" element={<Membership />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/editprofile" element={userData && <EditForm name={userData.name} email={userData.email} major={userData.major} expectedGraduateYear={userData.expectedGraduationYear} />} />
+          {/*<Route
+            path="/editprofile"
+            element={
+              userData && (
+                <EditForm
+                  name={userData.name}
+                  email={userData.email}
+                  major={userData.major}
+                  expectedGraduateYear={userData.expectedGraduationYear}
+                />
+              )
+            }
+          />*/}
         </Routes>
         <Footer />
       </Container>

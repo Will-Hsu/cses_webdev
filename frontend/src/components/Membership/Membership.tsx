@@ -2,12 +2,11 @@ import { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { User } from '../../utils/types';
-import { Box, Button, Divider, Typography } from '@mui/material';
-import { membershipStyles } from './styles';
+// import { membershipStyles } from './styles';
 import EventsAttended from './EventsAttended';
 import LeaderBoard from './LeaderBoard';
 import MemberProfile from '../MemberProfile/MemberProfile';
-import EventsDashboard from './EventsDashboard';
+// import EventsDashboard from './EventsDashboard';
 import axios from 'axios';
 import { userInfoAPI, topMembersAPI } from '../../api';
 
@@ -30,10 +29,10 @@ interface Ranking {
   profilePicture?: string;
 }
 
-const styles = membershipStyles();
+// const styles = membershipStyles();
 
 const Membership = () => {
-  const { user, isLoggedIn, isAdmin, logout } = useContext(AuthContext);
+  const { user, isLoggedIn /*, isAdmin, logout*/ } = useContext(AuthContext);
   const [userData, setUserData] = useState<User | null>(null);
   const [eventsAttended, setEventsAttended] = useState<Array<Event>>([]);
   const [rankings, setRankings] = useState<Array<Ranking>>([]);
@@ -79,88 +78,23 @@ const Membership = () => {
           memberPicture={userData.profilePicture}
         />
       )}
+
       <div
         style={{
           color: 'white',
           position: 'relative',
           top: '93px',
           overflow: 'hidden',
+          margin: '10% 0',
         }}
       >
         {/* Add Events Attended + Leaderboard UI for the membership page @Brian & Eddie & Yashil --
         consider creating a separate component for this as well */}
-
         {isLoggedIn && <EventsAttended eventsAttended={eventsAttended} />}
-
         {isLoggedIn && rankings.length > 0 && <LeaderBoard rankings={rankings} />}
+        {/* admin dashboard commented out for beta testing */}
+        {/*isAdmin && <EventsDashboard />*/}
       </div>
-      {
-        <div
-          style={{
-            height: '1000px',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          {isLoggedIn && userData && (
-            <Box sx={styles.name}>
-              <Typography
-                variant="h4"
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  marginTop: '10px',
-                  marginBottom: '10px',
-                }}
-              >
-                Welcome, {userData.name}!
-              </Typography>
-              <Divider variant="middle" sx={{ marginBottom: '7%' }} />
-              <Box sx={styles.attribute}>
-                <Typography
-                  sx={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}
-                >
-                  Your email: {userData.email}
-                </Typography>
-              </Box>
-              <Box sx={styles.attribute}>
-                <Typography
-                  sx={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}
-                >
-                  Your major: {userData.major}
-                </Typography>
-              </Box>
-              <Box sx={styles.attribute}>
-                <Typography
-                  sx={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}
-                >
-                  Your expected graduation year: {userData.expectedGraduationYear}
-                </Typography>
-              </Box>
-              <Button variant="outlined" onClick={logout}>
-                Logout
-              </Button>
-            </Box>
-          )}
-        </div>
-      }
-
-      {/* Events Dashboard */}
-      {isAdmin && <EventsDashboard />}
     </div>
   );
 };

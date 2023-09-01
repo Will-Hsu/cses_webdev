@@ -77,8 +77,10 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
       checkUserAPI({ email: userInfo.data.email }).then((data) => {
         if (data && data.exists === true) {
+          console.log('set not new user');
           setIsNewUser(false);
         } else {
+          console.log('set new user');
           setIsNewUser(true);
         }
       });

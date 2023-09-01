@@ -86,7 +86,7 @@ const MemberProfile = (userData: MemberProfileProps) => {
               marginTop: '10%',
             }}
           >
-            Welcome Back
+            Welcome Back,
           </p>
           <p
             style={{
@@ -100,7 +100,7 @@ const MemberProfile = (userData: MemberProfileProps) => {
           </p>
           <Box sx={{ width: '110%' }}>
             <LinearProgressWithLabel
-              value={25}
+              value={0}
               sx={{
                 backgroundColor: 'black',
                 '& .MuiLinearProgress-bar': {
@@ -114,7 +114,7 @@ const MemberProfile = (userData: MemberProfileProps) => {
           </Box>
 
           <p style={{ fontSize: 'clamp(0.8rem, 2.5vw, 1rem)' }}>
-            Member Tier: <span style={{ fontWeight: 'bold' }}>JUNIOR</span>{' '}
+            Member Tier: <span style={{ fontWeight: 'bold' }}>BRONZE I</span>{' '}
             <span style={{ color: '#F3C969', fontWeight: 'bold' }}>|</span> Point Balance:{' '}
             <span style={{ fontWeight: 'bold' }}>{userData.memberPoints}</span>
           </p>

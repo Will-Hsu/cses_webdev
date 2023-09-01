@@ -29,7 +29,7 @@ const NavBar = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [userData, setUserData] = useState<User | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
-  const { user, isLoggedIn, logout } = useContext(AuthContext);
+  const { user, isLoggedIn } = useContext(AuthContext);
 
   const navItems = [
     { text: 'About', link: '/about' },
@@ -59,12 +59,10 @@ const NavBar = () => {
         if (isLoggedIn === true) {
           const response = await axios.get(`http://127.0.0.1:5000/api/v1/users/${user.email}`);
           setUserData(response.data);
-        } else {
-          // navigate('/login');
         }
       } catch (error) {
         console.log('Error fetching user data: ', error);
-        navigate('/login');
+        // navigate('/login');
       }
     };
 
