@@ -91,7 +91,7 @@ const Membership = () => {
       >
         {/* Add Events Attended + Leaderboard UI for the membership page @Brian & Eddie & Yashil --
         consider creating a separate component for this as well */}
-        {isLoggedIn && <EventsAttended eventsAttended={eventsAttended} />}
+        {isLoggedIn && userData && <EventsAttended eventsAttended={eventsAttended} />}
         {isLoggedIn && rankings.length > 0 && <LeaderBoard rankings={rankings} />}
         {/* admin dashboard commented out for beta testing */}
         {/*isAdmin && <EventsDashboard />*/}
