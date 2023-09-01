@@ -8,7 +8,7 @@ import LeaderBoard from './LeaderBoard';
 import MemberProfile from '../MemberProfile/MemberProfile';
 // import EventsDashboard from './EventsDashboard';
 import axios from 'axios';
-import { userInfoAPI, topMembersAPI } from '../../api';
+import { /*userInfoAPI,*/ topMembersAPI } from '../../api';
 
 interface Event {
   _id: string;
@@ -61,7 +61,7 @@ const Membership = () => {
   useEffect(() => {
     const updateEvents = async () => {
       if (user.email !== undefined) {
-        await userInfoAPI(user.email).then((data) => setEventsAttended(data.eventsAttended));
+        // await userInfoAPI(user.email).then((data) => setEventsAttended(data.eventsAttended));
       }
     };
 
