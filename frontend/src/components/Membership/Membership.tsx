@@ -8,6 +8,7 @@ import LeaderBoard from './LeaderBoard';
 import MemberProfile from '../MemberProfile/MemberProfile';
 // import EventsDashboard from './EventsDashboard';
 import axios from 'axios';
+// TODO: fix user info api
 import { /*userInfoAPI,*/ topMembersAPI } from '../../api';
 
 interface Event {

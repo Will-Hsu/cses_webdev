@@ -37,8 +37,7 @@ const Login = () => {
       <Container
         maxWidth="xl"
         sx={{
-          background:
-            'linear-gradient(to bottom, black 0%, #2F56BC 30%, black 50%, #2F56BC 70%, black 100%)',
+          background: 'linear-gradient(to bottom, black 0%, #2F56BC 50%, black 100%)',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
