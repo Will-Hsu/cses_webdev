@@ -10,7 +10,7 @@ import {
   TextField,
   FormHelperText,
 } from '@mui/material';
-import { createUserAPI, updateUserAPI } from '../../api';
+import { updateUserAPI } from '../../api';
 import { loginStyles } from './styles';
 import { Profanity, ProfanityOptions } from '@2toad/profanity';
 import MajorsContext from './MajorsContext';

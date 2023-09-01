@@ -5,7 +5,6 @@ import { Container, Box, Grid, createTheme, useMediaQuery } from '@mui/material'
 import bgTop from '../../images/shape2.svg';
 import bgBtm from '../../images/shape2.svg';
 import { aboutStyles } from './styles';
-import blankPhoto from '../../images/aboutpagephoto.png';
 import books from '../../images/aboutbooks.png';
 import lightBulb from '../../images/aboutlightbulb.png';
 import MeetTheTeam from './MeetTheTeam';
@@ -42,7 +41,7 @@ const About = () => {
                 marginBottom: '5%',
                 marginRight: '2%',
                 display: 'flex',
-                alignItems: 'center', 
+                alignItems: 'center',
                 justifyContent: 'center',
                 marginTop: '1%',
               }}
@@ -156,7 +155,12 @@ const About = () => {
           )}
 
           <Grid container sx={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
-            <Grid item sm={4} lg={3} sx={{ display: 'flex', alignItems: 'center', marginRight: '3%' }}>
+            <Grid
+              item
+              sm={4}
+              lg={3}
+              sx={{ display: 'flex', alignItems: 'center', marginRight: '3%' }}
+            >
               <img src={about2} alt="img" style={{ maxWidth: '100%', height: 'auto' }} />
             </Grid>
             <Grid item sm={5} lg={5}>
