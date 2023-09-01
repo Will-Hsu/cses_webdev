@@ -253,7 +253,8 @@ const MeetTheTeam = () => {
                   item
                   xs={12}
                   sm={3.5}
-                  md={3.1}
+                  md={0}
+                  lg={3.1}
                   key={index}
                   sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
                 >
