@@ -2,9 +2,6 @@ export const buttonStyles = (isLogin: boolean) => {
   const fontFamily = isLogin ? 'Inter, sans-serif' : 'Chakra Petch, sans-serif';
   const fontSize = isLogin ? '20px' : 'auto';
   const padding = isLogin ? '2px 20px' : 'auto';
-  const selectedButtonStyle = {
-    fontWeight: 'bold',
-  };
   
   return {
     fontSize: fontSize,
