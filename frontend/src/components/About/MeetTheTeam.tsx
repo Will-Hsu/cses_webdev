@@ -158,43 +158,26 @@ const MeetTheTeam = () => {
             <ToggleButtonGroup
               value={currentCategory.name}
               exclusive
-              onChange={(_, newValue) => {
-                const selectedCategory = categories.find(category => category.name === newValue);
-                if (selectedCategory) {
-                  handleCategoryChange(newValue);
-                }
-              }}
               aria-label="Category Selection"
               sx={buttonStyles(false)}
             >
-              {/* <ToggleButton sx={buttonStyles(false)} value={'CSES Board'} onChange={} >
-                  CSES Board
-              </ToggleButton>
-              <ToggleButton sx={buttonStyles(false)} value={'CSES Officers'}>
-                  CSES Officers
-              </ToggleButton>
-              <ToggleButton sx={buttonStyles(false)} value={'Internal Webdev'}>
-                  Internal Webdev
-              </ToggleButton>
-              <ToggleButton sx={buttonStyles(false)} value={'External Webdev'}>
-                  External Webdev
-              </ToggleButton> */}
-              
+                            
               {categories.map((category) => (
               
-                <Button
-                  size="large"
-                  text={category.name}
-                  onClick={() => handleCategoryChange(category)}
-                />
-                // <ToggleButton
-                //   key={category.name}
-                //   value={category.name}
-                //   sx={buttonStyles(false)}
-                //   onChange={() => handleCategoryChange(category)}
-                //   >
-                //   {category.name}
-                // </ToggleButton>
+                // <Button
+                //   size="large"
+                //   text={category.name}
+                //   onClick={() => handleCategoryChange(category)}
+                // />
+                <ToggleButton
+                  key={category.name}
+                  value={category.name}
+                  sx={buttonStyles(false)}
+                  onClick={() => {
+                    handleCategoryChange(category)}}
+                  >
+                  {category.name}
+                </ToggleButton>
     
             ))}
 
