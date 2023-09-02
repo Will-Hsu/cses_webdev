@@ -163,12 +163,6 @@ const MeetTheTeam = () => {
             >
                             
               {categories.map((category) => (
-              
-                // <Button
-                //   size="large"
-                //   text={category.name}
-                //   onClick={() => handleCategoryChange(category)}
-                // />
                 <ToggleButton
                   key={category.name}
                   value={category.name}
