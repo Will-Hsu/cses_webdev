@@ -4,7 +4,6 @@ import shape from '../../images/shape.svg';
 import previous from '../../images/previous.png';
 import next from '../../images/next.png';
 import Button from '../Button/Button';
-import ButtonToggle from '../Button/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { buttonStyles } from '../Button/styles';
 import { aboutStyles } from './styles';
