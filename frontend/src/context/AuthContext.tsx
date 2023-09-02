@@ -33,7 +33,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState({} as User);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isUcsdEmail, setIsUcsdEmail] = useState(true);
-  const [isNewUser, setIsNewUser] = useState(true);
+  const [isNewUser, setIsNewUser] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
