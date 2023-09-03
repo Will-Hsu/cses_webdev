@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Container } from '@mui/material';
+import { Container, ToggleButton } from '@mui/material';
 import bgTop from '../../images/shape.svg';
 import bgBtm from '../../images/shape.svg';
 import { event_style } from './styles';
 import EventBox from '../Event/Event';
 import Button from '../Button/Button';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import { buttonStyles } from '../Button/styles';
 import { height } from '@mui/system';
 import useMediaQuery from '../../hooks/useMediaQuery';
 
@@ -214,8 +216,31 @@ const Events = () => {
             marginTop: '-20px',
           }}
         >
-          <Button size="medium" text="This Week" onClick={handleThisWeekClick}></Button>
-          <Button size="medium" text="This Month" onClick={handleThisMonthClick}></Button>
+          <ToggleButtonGroup
+            value="Timeframe"
+            exclusive
+            aria-label="Events Filter"
+            sx={buttonStyles(false)}
+          >
+            <ToggleButton
+                  key="This Week"
+                  value="This Week"
+                  sx={buttonStyles(false)}
+                  onClick={handleThisWeekClick}
+                  >
+                  This Week
+            </ToggleButton>
+            <ToggleButton
+                  key="This Month"
+                  value="This Month"
+                  sx={buttonStyles(false)}
+                  onClick={handleThisMonthClick}
+                  >
+                  This Month
+            </ToggleButton>
+          </ToggleButtonGroup>
+          {/* <Button size="medium" text="This Week" onClick={handleThisWeekClick}></Button>
+          <Button size="medium" text="This Month" onClick={handleThisMonthClick}></Button> */}
         </div>
         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
         {/* Render EventBoxes for future events */}
