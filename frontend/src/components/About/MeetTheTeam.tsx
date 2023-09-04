@@ -158,17 +158,15 @@ const MeetTheTeam = () => {
               value={currentCategory.name}
               exclusive
               aria-label="Category Selection"
-              // sx={{
-              //   backgroundColor:'grey',
-              // }}
             >
-                            
               {categories.map((category) => (
                 <ToggleButton
                   key={category.name}
                   value={category.name}
                   sx={{
                     ...buttonStyles(false),
+                    marginRight:'0px',
+                    marginLeft:'0px',
                     '&.MuiToggleButton-root.Mui-selected, &.MuiToggleButton-root.Mui-selected:hover': {
                       backgroundColor: 'grey',
                       color: 'white',
@@ -179,7 +177,6 @@ const MeetTheTeam = () => {
                   >
                   {category.name}
                 </ToggleButton>
-    
             ))}
 
           </ToggleButtonGroup>

@@ -226,6 +226,8 @@ const Events = () => {
                   value="This Week"
                   sx={{
                     ...buttonStyles(false),
+                    marginRight:'0px',
+                    marginLeft:'0px',
                     '&.MuiToggleButton-root.Mui-selected, &.MuiToggleButton-root.Mui-selected:hover': {
                       backgroundColor: 'grey',
                       color: 'white',
@@ -240,6 +242,8 @@ const Events = () => {
                   value="This Month"
                   sx={{
                     ...buttonStyles(false),
+                    marginRight:'0px',
+                    marginLeft:'0px',
                     '&.MuiToggleButton-root.Mui-selected, &.MuiToggleButton-root.Mui-selected:hover': {
                       backgroundColor: 'grey',
                       color: 'white',
