@@ -220,12 +220,17 @@ const Events = () => {
             value="Timeframe"
             exclusive
             aria-label="Events Filter"
-            sx={buttonStyles(false)}
           >
             <ToggleButton
                   key="This Week"
                   value="This Week"
-                  sx={buttonStyles(false)}
+                  sx={{
+                    ...buttonStyles(false),
+                    '&.MuiToggleButton-root.Mui-selected, &.MuiToggleButton-root.Mui-selected:hover': {
+                      backgroundColor: 'grey',
+                      color: 'white',
+                    },
+                  }}
                   onClick={handleThisWeekClick}
                   >
                   This Week
@@ -233,7 +238,13 @@ const Events = () => {
             <ToggleButton
                   key="This Month"
                   value="This Month"
-                  sx={buttonStyles(false)}
+                  sx={{
+                    ...buttonStyles(false),
+                    '&.MuiToggleButton-root.Mui-selected, &.MuiToggleButton-root.Mui-selected:hover': {
+                      backgroundColor: 'grey',
+                      color: 'white',
+                    },
+                  }}
                   onClick={handleThisMonthClick}
                   >
                   This Month

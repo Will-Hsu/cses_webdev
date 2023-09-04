@@ -158,14 +158,22 @@ const MeetTheTeam = () => {
               value={currentCategory.name}
               exclusive
               aria-label="Category Selection"
-              sx={buttonStyles(false)}
+              // sx={{
+              //   backgroundColor:'grey',
+              // }}
             >
                             
               {categories.map((category) => (
                 <ToggleButton
                   key={category.name}
                   value={category.name}
-                  sx={buttonStyles(false)}
+                  sx={{
+                    ...buttonStyles(false),
+                    '&.MuiToggleButton-root.Mui-selected, &.MuiToggleButton-root.Mui-selected:hover': {
+                      backgroundColor: 'grey',
+                      color: 'white',
+                    },
+                  }}
                   onClick={() => {
                     handleCategoryChange(category)}}
                   >
