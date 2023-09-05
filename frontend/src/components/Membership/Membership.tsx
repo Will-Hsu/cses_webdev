@@ -95,7 +95,7 @@ const Membership = () => {
         {isLoggedIn && userData && <EventsAttended eventsAttended={eventsAttended} />}
         {isLoggedIn && rankings.length > 0 && <LeaderBoard rankings={rankings} />}
         {/* admin dashboard commented out for beta testing */}
-        {/*isAdmin && <EventsDashboard />*/}
+        {isAdmin && <EventsDashboard />}
       </div>
     </div>
   );
