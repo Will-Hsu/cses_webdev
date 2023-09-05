@@ -6,7 +6,7 @@ import { User } from '../../utils/types';
 import EventsAttended from './EventsAttended';
 import LeaderBoard from './LeaderBoard';
 import MemberProfile from '../MemberProfile/MemberProfile';
-// import EventsDashboard from './EventsDashboard';
+import EventsDashboard from './EventsDashboard';
 import axios from 'axios';
 // TODO: fix user info api
 import { /*userInfoAPI,*/ topMembersAPI } from '../../api';
@@ -33,7 +33,7 @@ interface Ranking {
 // const styles = membershipStyles();
 
 const Membership = () => {
-  const { user, isLoggedIn /*, isAdmin, logout*/ } = useContext(AuthContext);
+  const { user, isLoggedIn, isAdmin, logout } = useContext(AuthContext);
   const [userData, setUserData] = useState<User | null>(null);
   const [eventsAttended, setEventsAttended] = useState<Array<Event>>([]);
   const [rankings, setRankings] = useState<Array<Ranking>>([]);
