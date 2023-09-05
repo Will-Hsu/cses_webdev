@@ -18,7 +18,7 @@ const Login = () => {
 
   useEffect(() => {
     if (isLoggedIn && !isNewUser) {
-      navigate('/membership');
+      // navigate('/membership');
     }
   }, [isLoggedIn, isNewUser, navigate]);
 

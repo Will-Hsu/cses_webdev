@@ -2,14 +2,12 @@ import { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { User } from '../../utils/types';
-// import { membershipStyles } from './styles';
 import EventsAttended from './EventsAttended';
 import LeaderBoard from './LeaderBoard';
 import MemberProfile from '../MemberProfile/MemberProfile';
 import EventsDashboard from './EventsDashboard';
 import axios from 'axios';
-// TODO: fix user info api
-import { /*userInfoAPI,*/ topMembersAPI } from '../../api';
+import { userInfoAPI, topMembersAPI } from '../../api';
 
 interface Event {
   _id: string;
@@ -30,10 +28,8 @@ interface Ranking {
   profilePicture?: string;
 }
 
-// const styles = membershipStyles();
-
 const Membership = () => {
-  const { user, isLoggedIn, isAdmin, logout } = useContext(AuthContext);
+  const { user, isLoggedIn, isAdmin, isNewUser } = useContext(AuthContext);
   const [userData, setUserData] = useState<User | null>(null);
   const [eventsAttended, setEventsAttended] = useState<Array<Event>>([]);
   const [rankings, setRankings] = useState<Array<Ranking>>([]);
@@ -58,17 +54,17 @@ const Membership = () => {
     };
 
     fetchUserData();
-  }, [isLoggedIn, user.email, navigate]);
+  }, [isLoggedIn, user.email, navigate, isNewUser]);
 
   useEffect(() => {
     const updateEvents = async () => {
-      if (user.email !== undefined) {
-        // await userInfoAPI(user.email).then((data) => setEventsAttended(data.eventsAttended));
+      if (isLoggedIn && user.email !== undefined) {
+        await userInfoAPI(user.email).then((data) => setEventsAttended(data.eventsAttended));
       }
     };
 
     updateEvents();
-  }, [user.email]);
+  }, [isLoggedIn, user.email]);
 
   return (
     <div>
@@ -94,7 +90,6 @@ const Membership = () => {
         consider creating a separate component for this as well */}
         {isLoggedIn && userData && <EventsAttended eventsAttended={eventsAttended} />}
         {isLoggedIn && rankings.length > 0 && <LeaderBoard rankings={rankings} />}
-        {/* admin dashboard commented out for beta testing */}
         {isAdmin && <EventsDashboard />}
       </div>
     </div>
