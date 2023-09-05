@@ -62,8 +62,8 @@ const Events = () => {
   useEffect(() => {
     // Set media queries
 
-    let upcomingEventsEndpoint = 'http://127.0.0.1:5000/api/v1/events?type=upcoming';
-    let pastEventsEndpoint = 'http://127.0.0.1:5000/api/v1/events?type=past';
+    let upcomingEventsEndpoint = `${process.env.REACT_APP_BACKEND_URL}/api/v1/events?type=upcoming`;
+    let pastEventsEndpoint = `${process.env.REACT_APP_BACKEND_URL}/api/v1/events?type=past`;
 
     const fetchUpcomingEvents = async () => {
       try {

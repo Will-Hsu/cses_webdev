@@ -17,20 +17,20 @@ import { Link } from 'react-router-dom';
 import csesLogo from '../../images/logo.svg';
 import MuiButton from '../Button/Button';
 import { navBarStyles } from './styles';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import ProfileDropdown from './ProfileDropdown';
 import { User } from '../../utils/types';
 import axios from 'axios';
 
 const NavBar = () => {
+  const location = useLocation();
   const styles = navBarStyles();
   const navigate = useNavigate();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [userData, setUserData] = useState<User | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
-  const { user, isLoggedIn, logout } = useContext(AuthContext);
-
+  const { user, isLoggedIn } = useContext(AuthContext);
   const navItems = [
     { text: 'About', link: '/about' },
     { text: 'Events', link: '/events' },
@@ -57,10 +57,10 @@ const NavBar = () => {
     const fetchUserData = async () => {
       try {
         if (isLoggedIn === true) {
-          const response = await axios.get(`http://127.0.0.1:5000/api/v1/users/${user.email}`);
+          const response = await axios.get(
+            `${process.env.REACT_APP_BACKEND_URL}/api/v1/users/${user.email}`,
+          );
           setUserData(response.data);
-        } else {
-          // navigate('/login');
         }
       } catch (error) {
         console.log('Error fetching user data: ', error);
@@ -87,7 +87,7 @@ const NavBar = () => {
                 {text}
               </Button>
             ))}
-            {!isLoggedIn && (
+            {!isLoggedIn && location.pathname !== '/login' && (
               <MuiButton
                 onClick={() => navigate('/login')}
                 text="Login"
@@ -133,7 +133,7 @@ const NavBar = () => {
               />
             </ListItem>
           ))}
-          {!isLoggedIn && (
+          {!isLoggedIn && location.pathname !== '/login' && (
             <ListItem button key="Login" sx={styles.listitem} onClick={() => clickItem('/login')}>
               <ListItemText
                 primary={
