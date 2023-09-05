@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Container } from '@mui/material';
+import { Container, ToggleButton } from '@mui/material';
 import bgTop from '../../images/shape.svg';
 import bgBtm from '../../images/shape.svg';
 import { event_style } from './styles';
 import EventBox from '../Event/Event';
 import Button from '../Button/Button';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import { buttonStyles } from '../Button/styles';
 import { height } from '@mui/system';
 import useMediaQuery from '../../hooks/useMediaQuery';
 
@@ -60,8 +62,8 @@ const Events = () => {
   useEffect(() => {
     // Set media queries
 
-    let upcomingEventsEndpoint = 'http://127.0.0.1:5000/api/v1/events?type=upcoming';
-    let pastEventsEndpoint = 'http://127.0.0.1:5000/api/v1/events?type=past';
+    let upcomingEventsEndpoint = `${process.env.REACT_APP_BACKEND_URL}/api/v1/events?type=upcoming`;
+    let pastEventsEndpoint = `${process.env.REACT_APP_BACKEND_URL}/api/v1/events?type=past`;
 
     const fetchUpcomingEvents = async () => {
       try {
@@ -214,8 +216,46 @@ const Events = () => {
             marginTop: '-20px',
           }}
         >
-          <Button size="medium" text="This Week" onClick={handleThisWeekClick}></Button>
-          <Button size="medium" text="This Month" onClick={handleThisMonthClick}></Button>
+          <ToggleButtonGroup
+            value="Timeframe"
+            exclusive
+            aria-label="Events Filter"
+          >
+            <ToggleButton
+                  key="This Week"
+                  value="This Week"
+                  sx={{
+                    ...buttonStyles(false),
+                    marginRight:'0px',
+                    marginLeft:'0px',
+                    '&.MuiToggleButton-root.Mui-selected, &.MuiToggleButton-root.Mui-selected:hover': {
+                      backgroundColor: 'grey',
+                      color: 'white',
+                    },
+                  }}
+                  onClick={handleThisWeekClick}
+                  >
+                  This Week
+            </ToggleButton>
+            <ToggleButton
+                  key="This Month"
+                  value="This Month"
+                  sx={{
+                    ...buttonStyles(false),
+                    marginRight:'0px',
+                    marginLeft:'0px',
+                    '&.MuiToggleButton-root.Mui-selected, &.MuiToggleButton-root.Mui-selected:hover': {
+                      backgroundColor: 'grey',
+                      color: 'white',
+                    },
+                  }}
+                  onClick={handleThisMonthClick}
+                  >
+                  This Month
+            </ToggleButton>
+          </ToggleButtonGroup>
+          {/* <Button size="medium" text="This Week" onClick={handleThisWeekClick}></Button>
+          <Button size="medium" text="This Month" onClick={handleThisMonthClick}></Button> */}
         </div>
         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
         {/* Render EventBoxes for future events */}

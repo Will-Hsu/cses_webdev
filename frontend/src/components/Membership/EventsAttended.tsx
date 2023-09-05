@@ -35,7 +35,10 @@ const EventsAttended = ({ eventsAttended }: EventsAttendedProps) => {
           style={{ marginRight: '10px' }}
         />
         <Typography variant="subtitle1" sx={styles.eventsAttendText}>
-          <i>Attend 2 more events and reach SENIOR MEMBER status!</i>
+          <i>
+            Haven't attended an event yet? Let's change that!
+            {/* Attend 2 more events and reach SENIOR MEMBER status!*/}
+          </i>
         </Typography>
       </div>
 
@@ -53,42 +56,6 @@ const EventsAttended = ({ eventsAttended }: EventsAttendedProps) => {
             _id={event._id}
           />
         ))}
-
-        {/* <EventBox
-          title="Google ML SWE Alumnus Q&A"
-          targetDate={new Date('2023-09-02T21:00:00.000Z')}
-          location={'Virtual'}
-          calendar_link="https://example.com/calendar"
-          description="Event Description"
-          end_time="2023-09-02T23:00:00.000Z"
-          instagram_link="https://www.instagram.com/event"
-          start_time="2023-09-02T21:00:00.000Z"
-          _id="64b81a1228022bc1461c5ea4"
-        />
-
-        <EventBox
-          title="Google ML SWE Alumnus Q&A"
-          targetDate={new Date('2023-09-02T21:00:00.000Z')}
-          location={'Virtual'}
-          calendar_link="https://example.com/calendar"
-          description="Event Description"
-          end_time="2023-09-02T23:00:00.000Z"
-          instagram_link="https://www.instagram.com/event"
-          start_time="2023-09-02T21:00:00.000Z"
-          _id="64b81a1228022bc1461c5ea4"
-        />
-
-        <EventBox
-          title="Google ML SWE Alumnus Q&A"
-          targetDate={new Date('2023-09-02T21:00:00.000Z')}
-          location={'Virtual'}
-          calendar_link="https://example.com/calendar"
-          description="Event Description"
-          end_time="2023-09-02T23:00:00.000Z"
-          instagram_link="https://www.instagram.com/event"
-          start_time="2023-09-02T21:00:00.000Z"
-          _id="64b81a1228022bc1461c5ea4"
-        /> */}
       </div>
     </Container>
   );

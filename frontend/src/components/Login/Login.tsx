@@ -5,7 +5,6 @@ import SignupForm from './SignupForm';
 import LoginForm from './LoginForm';
 import { AuthContext } from '../../context/AuthContext';
 import { Container } from '@mui/material';
-// import { checkUserAPI } from '../../api';
 
 interface RenderContentProps {
   name: string;
@@ -26,7 +25,7 @@ const Login = () => {
   const renderContent = ({ name, email, login }: RenderContentProps) => {
     if (isLoggedIn && isUcsdEmail && isNewUser) {
       return <SignupForm name={name} email={email} />;
-    } else {
+    } else if (!isLoggedIn) {
       return <LoginForm showEmailError={!isUcsdEmail} login={login} />;
     }
   };
@@ -36,8 +35,7 @@ const Login = () => {
       <Container
         maxWidth="xl"
         sx={{
-          background:
-            'linear-gradient(to bottom, black 0%, #2F56BC 30%, black 50%, #2F56BC 70%, black 100%)',
+          background: 'linear-gradient(to bottom, black 0%, #2F56BC 50%, black 100%)',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',

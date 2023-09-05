@@ -34,7 +34,7 @@ app.use(`${baseApi}`, eventRoutes);
 app.use(`${baseApi}/subscribers`, subscriptionRoutes);
 app.use(`${baseApi}/users`, userRoutes);
 
-var server = app.listen(PORT, '127.0.0.1', function () {
+var server = app.listen(PORT, function () {
   var port = server.address().port;
   console.log('Example app listening at http://localhost:%s', port);
 });

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { Box, Grid, createTheme, useMediaQuery } from '@mui/material';
+import { Box, Grid, ToggleButton, createTheme, useMediaQuery } from '@mui/material';
 import shape from '../../images/shape.svg';
 import previous from '../../images/previous.png';
 import next from '../../images/next.png';
 import Button from '../Button/Button';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import { buttonStyles } from '../Button/styles';
 import { aboutStyles } from './styles';
 import Nabil from '../../images/meettheteamImages/nabil.jpg';
 import Samvrit from '../../images/meettheteamImages/samvrit.jpeg';
@@ -151,22 +153,33 @@ const MeetTheTeam = () => {
         </Box>
       </Grid>
       <Grid container sx={{ marginTop: '5%', display: 'flex', justifyContent: 'center' }}>
-        {categories.map((category) => (
-          <Grid
-            item
-            md={1.7}
-            lg={1.8}
-            xl={1.5}
-            key={category.id}
-            sx={{ display: 'flex', justifyContent: 'center' }}
-          >
-            <Button
-              size="large"
-              text={category.name}
-              onClick={() => handleCategoryChange(category)}
-            />
-          </Grid>
-        ))}
+          
+            <ToggleButtonGroup
+              value={currentCategory.name}
+              exclusive
+              aria-label="Category Selection"
+            >
+              {categories.map((category) => (
+                <ToggleButton
+                  key={category.name}
+                  value={category.name}
+                  sx={{
+                    ...buttonStyles(false),
+                    marginRight:'0px',
+                    marginLeft:'0px',
+                    '&.MuiToggleButton-root.Mui-selected, &.MuiToggleButton-root.Mui-selected:hover': {
+                      backgroundColor: 'grey',
+                      color: 'white',
+                    },
+                  }}
+                  onClick={() => {
+                    handleCategoryChange(category)}}
+                  >
+                  {category.name}
+                </ToggleButton>
+            ))}
+
+          </ToggleButtonGroup>
       </Grid>
       <Grid
         container
@@ -253,7 +266,8 @@ const MeetTheTeam = () => {
                   item
                   xs={12}
                   sm={3.5}
-                  md={3.1}
+                  md={0}
+                  lg={3.1}
                   key={index}
                   sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
                 >
