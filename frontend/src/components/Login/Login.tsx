@@ -5,7 +5,6 @@ import SignupForm from './SignupForm';
 import LoginForm from './LoginForm';
 import { AuthContext } from '../../context/AuthContext';
 import { Container } from '@mui/material';
-// import { checkUserAPI } from '../../api';
 
 interface RenderContentProps {
   name: string;
@@ -19,7 +18,6 @@ const Login = () => {
 
   useEffect(() => {
     if (isLoggedIn && !isNewUser) {
-      console.log('new thing here');
       navigate('/membership');
     }
   }, [isLoggedIn, isNewUser, navigate]);
@@ -27,7 +25,7 @@ const Login = () => {
   const renderContent = ({ name, email, login }: RenderContentProps) => {
     if (isLoggedIn && isUcsdEmail && isNewUser) {
       return <SignupForm name={name} email={email} />;
-    } else {
+    } else if (!isLoggedIn) {
       return <LoginForm showEmailError={!isUcsdEmail} login={login} />;
     }
   };

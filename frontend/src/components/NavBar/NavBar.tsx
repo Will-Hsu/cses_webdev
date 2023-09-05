@@ -30,7 +30,6 @@ const NavBar = () => {
   const [userData, setUserData] = useState<User | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const { user, isLoggedIn } = useContext(AuthContext);
-
   const navItems = [
     { text: 'About', link: '/about' },
     { text: 'Events', link: '/events' },
@@ -64,7 +63,7 @@ const NavBar = () => {
         }
       } catch (error) {
         console.log('Error fetching user data: ', error);
-        // navigate('/login');
+        navigate('/login');
       }
     };
 

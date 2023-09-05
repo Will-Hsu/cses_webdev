@@ -31,6 +31,7 @@ export const createUserAPI = (newUser) => {
 };
 
 export const updateUserAPI = (email, updatedUser) => {
+  console.log(updatedUser);
   return new Promise((resolve, reject) => {
     API.put(`/users/${email}`, updatedUser)
       .then((response) => {

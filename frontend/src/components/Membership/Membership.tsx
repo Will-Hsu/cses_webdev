@@ -39,7 +39,6 @@ const Membership = () => {
   const [rankings, setRankings] = useState<Array<Ranking>>([]);
   const navigate = useNavigate();
 
-  // For dashboard dev, commenting out the useEffect for now
   useEffect(() => {
     const fetchUserData = async () => {
       try {

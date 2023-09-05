@@ -54,9 +54,12 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
             setUser(userInfo.data);
             setIsLoggedIn(true);
+            console.log('Logged In');
+
             setIsUcsdEmail(true);
-            setIsAdmin(true);
           }
+        } else {
+          console.log('Not Logged In');
         }
       } catch (err) {
         console.error(err);
@@ -77,10 +80,10 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
       checkUserAPI({ email: userInfo.data.email }).then((data) => {
         if (data && data.exists === true) {
-          console.log('set not new user');
+          console.log('Returning User');
           setIsNewUser(false);
         } else {
-          console.log('set new user');
+          console.log('New User');
           setIsNewUser(true);
         }
       });
@@ -134,4 +137,4 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   );
 };
 
-export { AuthContext, AuthProvider };
+export { AuthProvider, AuthContext };
