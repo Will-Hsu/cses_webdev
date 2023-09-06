@@ -66,7 +66,11 @@ const Membership = () => {
   }, [isLoggedIn, user.email]);
 
   return (
-    <div>
+    <div
+      style={{
+        minHeight: '100vh',
+      }}
+    >
       {userData && (
         <MemberProfile
           memberName={userData.name}

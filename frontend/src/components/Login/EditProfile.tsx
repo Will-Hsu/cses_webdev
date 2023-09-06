@@ -153,144 +153,152 @@ const EditForm = () => {
   };
 
   return (
-    <Box
-      component="form"
-      sx={styles.editForm}
-      noValidate
-      autoComplete="off"
-      onSubmit={onFormSubmit}
+    <div
+      style={{
+        minHeight: '100vh',
+      }}
     >
-      {isLoading && (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <CircularProgress size="3em" style={{ color: 'black' }} />
-        </div>
-      )}
-      {!isLoading && (
-        <>
-          <FormControl
-            fullWidth
-            required
-            variant="standard"
-            sx={styles.inputField}
-            error={showError && (nameEmptyError || nameLengthError || nameProfanityError)}
-          >
-            <InputLabel htmlFor="name">Name</InputLabel>
-            <Input
-              id="name"
-              name="name"
-              aria-describedby="my-helper-text"
-              defaultValue={formData.name}
-              onChange={onInputChange}
-            />
-            {!showError && (
-              <FormHelperText id="name-error-text">Please enter your display name</FormHelperText>
-            )}
-            {showError && (
-              <>
-                {nameEmptyError && (
-                  <FormHelperText id="name-empty-error-text">
-                    Please enter a display name.
-                  </FormHelperText>
-                )}
-                {nameLengthError && (
-                  <FormHelperText id="name-length-error-text">
-                    Name should be between 5 and 20 characters.
-                  </FormHelperText>
-                )}
-                {nameProfanityError && (
-                  <FormHelperText id="name-profanity-error-text">
-                    Please choose a different name without profanity.
-                  </FormHelperText>
-                )}
-              </>
-            )}
-          </FormControl>
-          <FormControl fullWidth disabled variant="standard" sx={styles.inputField}>
-            <InputLabel htmlFor="email">Email address</InputLabel>
-            <Input
-              id="email"
-              name="email"
-              aria-describedby="my-helper-text"
-              defaultValue={formData.email}
-              onChange={onInputChange}
-            />
-          </FormControl>
-          <FormControl
-            fullWidth
-            required
-            variant="standard"
-            sx={styles.inputField}
-            error={showError && majorEmptyError}
-          >
-            <Autocomplete
-              id="major"
-              options={availableMajors}
-              value={selectedMajor}
-              onChange={onMajorChange}
-              renderInput={(params) => <TextField {...params} label="Major *" />}
-            />
-            {!showError && (
-              <FormHelperText id="major-error-text">Please select your major</FormHelperText>
-            )}
-            {showError && (
-              <>
-                {majorEmptyError && (
-                  <FormHelperText id="major-empty-error-text">
-                    Please select your major.
-                  </FormHelperText>
-                )}
-              </>
-            )}
-          </FormControl>
-
-          <FormControl
-            fullWidth
-            required
-            variant="standard"
-            sx={styles.inputField}
-            error={showError && gradYearEmptyError}
-          >
-            <Autocomplete
-              id="expected-graduate-year"
-              options={availableGradYears}
-              value={selectedGradYear}
-              onChange={onGradYearChange}
-              renderInput={(params) => <TextField {...params} label="Expected Graduation Year *" />}
-            />
-            {!showError && (
-              <FormHelperText id="expected-graduate-year-error-text">
-                Please select your expected graduation year
-              </FormHelperText>
-            )}
-            {showError && (
-              <>
-                {gradYearEmptyError && (
-                  <FormHelperText id="expected-graduate-year-empty-error-text">
-                    Please select an expected graduation year.
-                  </FormHelperText>
-                )}
-              </>
-            )}
-          </FormControl>
-
-          <Box sx={{ textAlign: 'center' }}>
-            <Button
-              variant="contained"
-              type="submit"
-              sx={{
-                ...styles.inputField,
-                backgroundColor: 'black',
-                '&:hover': {
-                  backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                },
-              }}
+      <Box
+        component="form"
+        sx={styles.editForm}
+        noValidate
+        autoComplete="off"
+        onSubmit={onFormSubmit}
+      >
+        {isLoading && (
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <CircularProgress size="3em" style={{ color: 'black' }} />
+          </div>
+        )}
+        {!isLoading && (
+          <>
+            <FormControl
+              fullWidth
+              required
+              variant="standard"
+              sx={styles.inputField}
+              error={showError && (nameEmptyError || nameLengthError || nameProfanityError)}
             >
-              Submit
-            </Button>
-          </Box>
-        </>
-      )}
-    </Box>
+              <InputLabel htmlFor="name">Name</InputLabel>
+              <Input
+                id="name"
+                name="name"
+                aria-describedby="my-helper-text"
+                defaultValue={formData.name}
+                onChange={onInputChange}
+              />
+              {!showError && (
+                <FormHelperText id="name-error-text">Please enter your display name</FormHelperText>
+              )}
+              {showError && (
+                <>
+                  {nameEmptyError && (
+                    <FormHelperText id="name-empty-error-text">
+                      Please enter a display name.
+                    </FormHelperText>
+                  )}
+                  {nameLengthError && (
+                    <FormHelperText id="name-length-error-text">
+                      Name should be between 5 and 20 characters.
+                    </FormHelperText>
+                  )}
+                  {nameProfanityError && (
+                    <FormHelperText id="name-profanity-error-text">
+                      Please choose a different name without profanity.
+                    </FormHelperText>
+                  )}
+                </>
+              )}
+            </FormControl>
+            <FormControl fullWidth disabled variant="standard" sx={styles.inputField}>
+              <InputLabel htmlFor="email">Email address</InputLabel>
+              <Input
+                id="email"
+                name="email"
+                aria-describedby="my-helper-text"
+                defaultValue={formData.email}
+                onChange={onInputChange}
+              />
+            </FormControl>
+            <FormControl
+              fullWidth
+              required
+              variant="standard"
+              sx={styles.inputField}
+              error={showError && majorEmptyError}
+            >
+              <Autocomplete
+                id="major"
+                options={availableMajors}
+                value={selectedMajor}
+                onChange={onMajorChange}
+                renderInput={(params) => <TextField {...params} label="Major *" />}
+              />
+              {!showError && (
+                <FormHelperText id="major-error-text">Please select your major</FormHelperText>
+              )}
+              {showError && (
+                <>
+                  {majorEmptyError && (
+                    <FormHelperText id="major-empty-error-text">
+                      Please select your major.
+                    </FormHelperText>
+                  )}
+                </>
+              )}
+            </FormControl>
+
+            <FormControl
+              fullWidth
+              required
+              variant="standard"
+              sx={styles.inputField}
+              error={showError && gradYearEmptyError}
+            >
+              <Autocomplete
+                id="expected-graduate-year"
+                options={availableGradYears}
+                value={selectedGradYear}
+                onChange={onGradYearChange}
+                renderInput={(params) => (
+                  <TextField {...params} label="Expected Graduation Year *" />
+                )}
+              />
+              {!showError && (
+                <FormHelperText id="expected-graduate-year-error-text">
+                  Please select your expected graduation year
+                </FormHelperText>
+              )}
+              {showError && (
+                <>
+                  {gradYearEmptyError && (
+                    <FormHelperText id="expected-graduate-year-empty-error-text">
+                      Please select an expected graduation year.
+                    </FormHelperText>
+                  )}
+                </>
+              )}
+            </FormControl>
+
+            <Box sx={{ textAlign: 'center' }}>
+              <Button
+                variant="contained"
+                type="submit"
+                sx={{
+                  ...styles.inputField,
+                  backgroundColor: 'black',
+                  '&:hover': {
+                    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                  },
+                }}
+              >
+                Submit
+              </Button>
+            </Box>
+          </>
+        )}
+      </Box>
+    </div>
   );
 };
 
