@@ -17,7 +17,7 @@ const Login = () => {
   const { login, isNewUser, isUcsdEmail, isLoggedIn, user } = useContext(AuthContext);
 
   useEffect(() => {
-    if (isLoggedIn || localStorage.getItem('token')) {
+    if (isLoggedIn) {
       console.log('logged in -- move from login to membership');
       navigate('/membership');
     }
@@ -33,19 +33,17 @@ const Login = () => {
 
   return (
     <div>
-      {!localStorage.getItem('token') && (
-        <Container
-          maxWidth="xl"
-          sx={{
-            background: 'linear-gradient(to bottom, black 0%, #2F56BC 50%, black 100%)',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          {renderContent({ name: user.name, email: user.email, login })}
-        </Container>
-      )}
+      <Container
+        maxWidth="xl"
+        sx={{
+          background: 'linear-gradient(to bottom, black 0%, #2F56BC 50%, black 100%)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        {renderContent({ name: user.name, email: user.email, login })}
+      </Container>
     </div>
   );
 };

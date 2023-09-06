@@ -71,6 +71,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
           console.log('Check: Not Logged In');
         }
       } catch (err) {
+        localStorage.removeItem('token');
         console.error(err);
       }
     };
@@ -88,6 +89,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
       });
 
       checkUserAPI({ email: userInfo.data.email }).then((data) => {
+        console.log(userInfo.data.email);
         if (data && data.exists === true) {
           console.log('Returning User');
           setIsNewUser(false);
@@ -95,6 +97,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
           console.log('Returning User Successfully Logged In');
         } else {
           setIsNewUser(true);
+          console.log('New User');
         }
       });
 
