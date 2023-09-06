@@ -52,12 +52,23 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
               },
             });
 
-            // TODO: this is used when simply reload
-            setUser(userInfo.data);
-            setIsUcsdEmail(true);
+            checkUserAPI({ email: userInfo.data.email }).then((data) => {
+              if (data && data.exists === true) {
+                console.log('Check -- Valid Token & User Registered');
+                setIsNewUser(false);
+                setIsLoggedIn(true);
+                setUser(userInfo.data);
+                setIsUcsdEmail(true);
+              } else {
+                localStorage.removeItem('token');
+              }
+            });
+          } else {
+            // remove faulty token
+            localStorage.removeItem('token');
           }
         } else {
-          console.log('Not Logged In');
+          console.log('Check: Not Logged In');
         }
       } catch (err) {
         console.error(err);
@@ -96,9 +107,9 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
       // TODO: Check if user exists in database
       if (userInfo.data.email.endsWith('@ucsd.edu')) {
-        localStorage.setItem('token', res.access_token);
         setUser(userInfo.data);
         setIsUcsdEmail(true);
+        localStorage.setItem('token', res.access_token);
       } else {
         console.log('Login Failed: must use UCSD email');
         setIsUcsdEmail(false);

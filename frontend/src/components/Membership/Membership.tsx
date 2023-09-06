@@ -44,12 +44,11 @@ const Membership = () => {
           );
           setUserData(response.data);
           await topMembersAPI().then((data) => setRankings(data));
-        } else {
+        } else if (!localStorage.getItem('token')) {
           navigate('/login');
         }
       } catch (error) {
         console.log('Error fetching user data: ', error);
-        navigate('/login');
       }
     };
 
