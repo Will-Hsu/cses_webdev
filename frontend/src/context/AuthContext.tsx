@@ -52,16 +52,26 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
               },
             });
 
-            setUser(userInfo.data);
-            setIsLoggedIn(true);
-            console.log('Logged In');
-
-            setIsUcsdEmail(true);
+            checkUserAPI({ email: userInfo.data.email }).then((data) => {
+              if (data && data.exists === true) {
+                console.log('Check -- Valid Token & User Registered');
+                setIsNewUser(false);
+                setIsLoggedIn(true);
+                setUser(userInfo.data);
+                setIsUcsdEmail(true);
+              } else {
+                localStorage.removeItem('token');
+              }
+            });
+          } else {
+            // remove faulty token
+            localStorage.removeItem('token');
           }
         } else {
-          console.log('Not Logged In');
+          console.log('Check: Not Logged In');
         }
       } catch (err) {
+        localStorage.removeItem('token');
         console.error(err);
       }
     };
@@ -79,12 +89,15 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
       });
 
       checkUserAPI({ email: userInfo.data.email }).then((data) => {
+        console.log(userInfo.data.email);
         if (data && data.exists === true) {
           console.log('Returning User');
           setIsNewUser(false);
+          setIsLoggedIn(true);
+          console.log('Returning User Successfully Logged In');
         } else {
-          console.log('New User');
           setIsNewUser(true);
+          console.log('New User');
         }
       });
 
@@ -97,10 +110,9 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
       // TODO: Check if user exists in database
       if (userInfo.data.email.endsWith('@ucsd.edu')) {
-        localStorage.setItem('token', res.access_token);
         setUser(userInfo.data);
         setIsUcsdEmail(true);
-        setIsLoggedIn(true);
+        localStorage.setItem('token', res.access_token);
       } else {
         console.log('Login Failed: must use UCSD email');
         setIsUcsdEmail(false);

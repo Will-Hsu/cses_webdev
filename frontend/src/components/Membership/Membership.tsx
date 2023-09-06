@@ -2,14 +2,12 @@ import { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { User } from '../../utils/types';
-// import { membershipStyles } from './styles';
 import EventsAttended from './EventsAttended';
 import LeaderBoard from './LeaderBoard';
 import MemberProfile from '../MemberProfile/MemberProfile';
-// import EventsDashboard from './EventsDashboard';
+import EventsDashboard from './EventsDashboard';
 import axios from 'axios';
-// TODO: fix user info api
-import { /*userInfoAPI,*/ topMembersAPI } from '../../api';
+import { userInfoAPI, topMembersAPI } from '../../api';
 
 interface Event {
   _id: string;
@@ -30,10 +28,8 @@ interface Ranking {
   profilePicture?: string;
 }
 
-// const styles = membershipStyles();
-
 const Membership = () => {
-  const { user, isLoggedIn /*, isAdmin, logout*/ } = useContext(AuthContext);
+  const { user, isLoggedIn, isAdmin } = useContext(AuthContext);
   const [userData, setUserData] = useState<User | null>(null);
   const [eventsAttended, setEventsAttended] = useState<Array<Event>>([]);
   const [rankings, setRankings] = useState<Array<Ranking>>([]);
@@ -42,18 +38,17 @@ const Membership = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        if (isLoggedIn === true) {
+        if (isLoggedIn) {
           const response = await axios.get(
             `${process.env.REACT_APP_BACKEND_URL}/api/v1/users/${user.email}`,
           );
           setUserData(response.data);
           await topMembersAPI().then((data) => setRankings(data));
-        } else {
+        } else if (!localStorage.getItem('token')) {
           navigate('/login');
         }
       } catch (error) {
         console.log('Error fetching user data: ', error);
-        navigate('/login');
       }
     };
 
@@ -62,16 +57,20 @@ const Membership = () => {
 
   useEffect(() => {
     const updateEvents = async () => {
-      if (user.email !== undefined) {
-        // await userInfoAPI(user.email).then((data) => setEventsAttended(data.eventsAttended));
+      if (isLoggedIn && user.email !== undefined) {
+        await userInfoAPI(user.email).then((data) => setEventsAttended(data.eventsAttended));
       }
     };
 
     updateEvents();
-  }, [user.email]);
+  }, [isLoggedIn, user.email]);
 
   return (
-    <div>
+    <div
+      style={{
+        minHeight: '100vh',
+      }}
+    >
       {userData && (
         <MemberProfile
           memberName={userData.name}
@@ -94,8 +93,7 @@ const Membership = () => {
         consider creating a separate component for this as well */}
         {isLoggedIn && userData && <EventsAttended eventsAttended={eventsAttended} />}
         {isLoggedIn && rankings.length > 0 && <LeaderBoard rankings={rankings} />}
-        {/* admin dashboard commented out for beta testing */}
-        {/*isAdmin && <EventsDashboard />*/}
+        {isAdmin && <EventsDashboard />}
       </div>
     </div>
   );

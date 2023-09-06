@@ -189,6 +189,25 @@ const Events = () => {
     ));
   };
 
+  const renderPastEventBoxes = (events: EventData[]) => {
+    return events.map((eventData) => (
+      <React.Fragment key={eventData._id}>
+        <EventBox
+          title={eventData.title}
+          targetDate={new Date(eventData.end_time)}
+          location={eventData.location}
+          calendar_link={eventData.calendar_link}
+          description={eventData.description}
+          end_time={eventData.end_time}
+          instagram_link={eventData.instagram_link}
+          start_time={eventData.start_time}
+          _id={eventData._id}
+          pastEvent
+        />
+      </React.Fragment>
+    ));
+  };
+
   return (
     <div style={{ position: 'relative', overflow: 'hidden' }}>
       <img src={bgTop} alt="bg1" style={{ ...styles.bg1, position: 'absolute' }} />
@@ -216,42 +235,38 @@ const Events = () => {
             marginTop: '-20px',
           }}
         >
-          <ToggleButtonGroup
-            value="Timeframe"
-            exclusive
-            aria-label="Events Filter"
-          >
+          <ToggleButtonGroup value="Timeframe" exclusive aria-label="Events Filter">
             <ToggleButton
-                  key="This Week"
-                  value="This Week"
-                  sx={{
-                    ...buttonStyles(false),
-                    marginRight:'0px',
-                    marginLeft:'0px',
-                    '&.MuiToggleButton-root.Mui-selected, &.MuiToggleButton-root.Mui-selected:hover': {
-                      backgroundColor: 'grey',
-                      color: 'white',
-                    },
-                  }}
-                  onClick={handleThisWeekClick}
-                  >
-                  This Week
+              key="This Week"
+              value="This Week"
+              sx={{
+                ...buttonStyles(false),
+                marginRight: '0px',
+                marginLeft: '0px',
+                '&.MuiToggleButton-root.Mui-selected, &.MuiToggleButton-root.Mui-selected:hover': {
+                  backgroundColor: 'grey',
+                  color: 'white',
+                },
+              }}
+              onClick={handleThisWeekClick}
+            >
+              This Week
             </ToggleButton>
             <ToggleButton
-                  key="This Month"
-                  value="This Month"
-                  sx={{
-                    ...buttonStyles(false),
-                    marginRight:'0px',
-                    marginLeft:'0px',
-                    '&.MuiToggleButton-root.Mui-selected, &.MuiToggleButton-root.Mui-selected:hover': {
-                      backgroundColor: 'grey',
-                      color: 'white',
-                    },
-                  }}
-                  onClick={handleThisMonthClick}
-                  >
-                  This Month
+              key="This Month"
+              value="This Month"
+              sx={{
+                ...buttonStyles(false),
+                marginRight: '0px',
+                marginLeft: '0px',
+                '&.MuiToggleButton-root.Mui-selected, &.MuiToggleButton-root.Mui-selected:hover': {
+                  backgroundColor: 'grey',
+                  color: 'white',
+                },
+              }}
+              onClick={handleThisMonthClick}
+            >
+              This Month
             </ToggleButton>
           </ToggleButtonGroup>
           {/* <Button size="medium" text="This Week" onClick={handleThisWeekClick}></Button>
@@ -311,7 +326,7 @@ const Events = () => {
               No events found
             </div>
           )) ||
-            renderEventBoxes(displayedPastEvents)}
+            renderPastEventBoxes(displayedPastEvents)}
         </div>
       </Container>
     </div>

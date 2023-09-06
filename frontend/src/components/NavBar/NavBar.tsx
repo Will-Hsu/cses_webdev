@@ -56,7 +56,7 @@ const NavBar = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        if (isLoggedIn === true) {
+        if (isLoggedIn) {
           const response = await axios.get(
             `${process.env.REACT_APP_BACKEND_URL}/api/v1/users/${user.email}`,
           );
@@ -64,7 +64,6 @@ const NavBar = () => {
         }
       } catch (error) {
         console.log('Error fetching user data: ', error);
-        navigate('/login');
       }
     };
 

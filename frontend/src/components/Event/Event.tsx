@@ -16,6 +16,7 @@ interface EventBoxProps {
   instagram_link?: string;
   start_time: string;
   _id: string;
+  pastEvent?: boolean;
 }
 interface EventBoxStyles {
   outerBox?: React.CSSProperties;
@@ -42,6 +43,7 @@ const EventBox = ({
   start_time,
   title,
   _id,
+  pastEvent,
 }: EventBoxProps) => {
   const styles = event_style();
   //   const mediaQuery = window.matchMedia('(max-width: 1000px)');
@@ -178,113 +180,118 @@ const EventBox = ({
           >
             {title}
           </p>
-          <div
-            className="countDown"
-            style={{
-              marginTop: '2px',
-              display: 'flex',
-            }}
-          >
-            {countdownCharacters.map((character, index) => (
+          {!pastEvent && (
+            <>
               <div
-                key={index}
+                className="countDown"
                 style={{
-                  width: '30px', // Adjust the width as needed
-                  height: '60px', // Adjust the height as needed
-                  alignItems: 'center',
+                  marginTop: '2px',
                   display: 'flex',
-                  justifyContent: 'center',
-                  backgroundColor: character === ':' ? 'transparent' : 'white',
-                  marginLeft: character === ':' ? '0px' : '4px',
-                  fontSize: '20px',
-                  fontFamily: 'Chakra Petch',
-                  fontWeight: '500',
-                  color: character === ':' ? 'white' : 'black',
-                  borderRadius: '4px',
                 }}
               >
-                {character}
+                {countdownCharacters.map((character, index) => (
+                  <div
+                    key={index}
+                    style={{
+                      width: '30px', // Adjust the width as needed
+                      height: '60px', // Adjust the height as needed
+                      alignItems: 'center',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      backgroundColor: character === ':' ? 'transparent' : 'white',
+                      marginLeft: character === ':' ? '0px' : '4px',
+                      fontSize: '20px',
+                      fontFamily: 'Chakra Petch',
+                      fontWeight: '500',
+                      color: character === ':' ? 'white' : 'black',
+                      borderRadius: '4px',
+                    }}
+                  >
+                    {character}
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-          <div
-            style={{
-              marginTop: '0',
-              display: 'flex',
-              flexDirection: 'row',
-            }}
-          >
-            <p
-              style={{
-                color: 'white',
-                fontSize: '16px',
-                fontFamily: 'Chakra Petch',
-                fontWeight: '600',
-              }}
-            >
-              &nbsp;days
-            </p>
-            <p
-              style={{
-                color: 'white',
-                fontSize: '20px',
-                fontFamily: 'Chakra Petch',
-                fontWeight: '500',
-              }}
-            >
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </p>
-            <p
-              style={{
-                color: 'white',
-                fontSize: '16px',
-                fontFamily: 'Chakra Petch',
-                fontWeight: '600',
-              }}
-            >
-              hours
-            </p>
-            <p
-              style={{
-                color: 'white',
-                fontSize: '20px',
-                fontFamily: 'Chakra Petch',
-                fontWeight: '500',
-              }}
-            >
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </p>
-            <p
-              style={{
-                color: 'white',
-                fontSize: '16px',
-                fontFamily: 'Chakra Petch',
-                fontWeight: '600',
-              }}
-            >
-              minutes
-            </p>
-            <p
-              style={{
-                color: 'white',
-                fontSize: '20px',
-                fontFamily: 'Chakra Petch',
-                fontWeight: '500',
-              }}
-            >
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </p>
-            <p
-              style={{
-                color: 'white',
-                fontSize: '16px',
-                fontFamily: 'Chakra Petch',
-                fontWeight: '600',
-              }}
-            >
-              seconds
-            </p>
-          </div>
+              <div
+                style={{
+                  marginTop: '0',
+                  display: 'flex',
+                  flexDirection: 'row',
+                }}
+              >
+                <p
+                  style={{
+                    color: 'white',
+                    fontSize: '16px',
+                    fontFamily: 'Chakra Petch',
+                    fontWeight: '600',
+                  }}
+                >
+                  &nbsp;days
+                </p>
+                <p
+                  style={{
+                    color: 'white',
+                    fontSize: '20px',
+                    fontFamily: 'Chakra Petch',
+                    fontWeight: '500',
+                  }}
+                >
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </p>
+                <p
+                  style={{
+                    color: 'white',
+                    fontSize: '16px',
+                    fontFamily: 'Chakra Petch',
+                    fontWeight: '600',
+                  }}
+                >
+                  hours
+                </p>
+                <p
+                  style={{
+                    color: 'white',
+                    fontSize: '20px',
+                    fontFamily: 'Chakra Petch',
+                    fontWeight: '500',
+                  }}
+                >
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </p>
+                <p
+                  style={{
+                    color: 'white',
+                    fontSize: '16px',
+                    fontFamily: 'Chakra Petch',
+                    fontWeight: '600',
+                  }}
+                >
+                  minutes
+                </p>
+                <p
+                  style={{
+                    color: 'white',
+                    fontSize: '20px',
+                    fontFamily: 'Chakra Petch',
+                    fontWeight: '500',
+                  }}
+                >
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </p>
+                <p
+                  style={{
+                    color: 'white',
+                    fontSize: '16px',
+                    fontFamily: 'Chakra Petch',
+                    fontWeight: '600',
+                  }}
+                >
+                  seconds
+                </p>
+              </div>
+            </>
+          )}
+
           <div
             style={{
               marginTop: '30px',
