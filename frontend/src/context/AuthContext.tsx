@@ -52,10 +52,8 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
               },
             });
 
+            // TODO: this is used when simply reload
             setUser(userInfo.data);
-            setIsLoggedIn(true);
-            console.log('Logged In');
-
             setIsUcsdEmail(true);
           }
         } else {
@@ -82,8 +80,9 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         if (data && data.exists === true) {
           console.log('Returning User');
           setIsNewUser(false);
+          setIsLoggedIn(true);
+          console.log('Returning User Successfully Logged In');
         } else {
-          console.log('New User');
           setIsNewUser(true);
         }
       });
@@ -100,7 +99,6 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         localStorage.setItem('token', res.access_token);
         setUser(userInfo.data);
         setIsUcsdEmail(true);
-        setIsLoggedIn(true);
       } else {
         console.log('Login Failed: must use UCSD email');
         setIsUcsdEmail(false);

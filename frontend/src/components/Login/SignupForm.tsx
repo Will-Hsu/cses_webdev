@@ -15,6 +15,7 @@ import { loginStyles } from './styles';
 import { Profanity, ProfanityOptions } from '@2toad/profanity';
 import MajorsContext from './MajorsContext';
 import GradYearsContext from './GradYearsContext';
+import { AuthContext } from '../../context/AuthContext';
 
 // Set up profanity checker
 const options = new ProfanityOptions();
@@ -31,6 +32,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
   const navigate = useNavigate();
 
   const availableMajors = useContext(MajorsContext);
+  const { setIsLoggedIn } = useContext(AuthContext);
   const availableGradYears = useContext(GradYearsContext);
   const [selectedMajor, setSelectedMajor] = useState<string | null>(null);
   const [selectedGradYear, setSelectedGradYear] = useState<string | null>(null);
@@ -108,6 +110,9 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
       setShowError(false);
       createUserAPI(formData)
         .then(() => {
+          // set logged in to true
+          setIsLoggedIn(true);
+          console.log('New User Successfully Logged In');
           navigate('/membership');
         })
         .catch((error) => {

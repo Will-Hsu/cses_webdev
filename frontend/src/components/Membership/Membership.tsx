@@ -29,7 +29,7 @@ interface Ranking {
 }
 
 const Membership = () => {
-  const { user, isLoggedIn, isAdmin, isNewUser } = useContext(AuthContext);
+  const { user, isLoggedIn, isAdmin } = useContext(AuthContext);
   const [userData, setUserData] = useState<User | null>(null);
   const [eventsAttended, setEventsAttended] = useState<Array<Event>>([]);
   const [rankings, setRankings] = useState<Array<Ranking>>([]);
@@ -38,7 +38,7 @@ const Membership = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        if (isLoggedIn === true) {
+        if (isLoggedIn) {
           const response = await axios.get(
             `${process.env.REACT_APP_BACKEND_URL}/api/v1/users/${user.email}`,
           );
@@ -54,7 +54,7 @@ const Membership = () => {
     };
 
     fetchUserData();
-  }, [isLoggedIn, user.email, navigate, isNewUser]);
+  }, [isLoggedIn, user.email, navigate]);
 
   useEffect(() => {
     const updateEvents = async () => {

@@ -17,16 +17,17 @@ const Login = () => {
   const { login, isNewUser, isUcsdEmail, isLoggedIn, user } = useContext(AuthContext);
 
   useEffect(() => {
-    if (isLoggedIn && !isNewUser) {
-      // navigate('/membership');
+    if (isLoggedIn) {
+      console.log('logged in -- move from login to membership');
+      navigate('/membership');
     }
-  }, [isLoggedIn, isNewUser, navigate]);
+  }, [isLoggedIn, navigate]);
 
   const renderContent = ({ name, email, login }: RenderContentProps) => {
-    if (isLoggedIn && isUcsdEmail && isNewUser) {
-      return <SignupForm name={name} email={email} />;
-    } else if (!isLoggedIn) {
+    if (!isLoggedIn && !isNewUser) {
       return <LoginForm showEmailError={!isUcsdEmail} login={login} />;
+    } else if (isUcsdEmail && isNewUser) {
+      return <SignupForm name={name} email={email} />;
     }
   };
 
