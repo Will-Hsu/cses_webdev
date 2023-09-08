@@ -18,8 +18,6 @@ router.get('/:email', userController.getUserInfo);
 // GET request for checking if user exists.
 router.post('/check', userController.userCheck);
 
-// TODO: other CRUD methods
-
 // PUT request for updating a user's info.
 router.put('/:email', userController.userUpdate);
 
@@ -28,6 +26,15 @@ router.post('/:email/event/:id', userController.userEventsUpdate);
 
 // DELETE request for deleting a user.
 router.delete('/:email', userController.userDelete);
+
+// PUT request to redeem small prize.
+router.put('/:email/redeemSmall', userController.redeemSmall);
+
+// PUT request to redeem medium prize.
+router.put('/:email/redeemMedium', userController.redeemMedium);
+
+// PUT request to redeem large prize.
+router.put('/:email/redeemLarge', userController.redeemLarge);
 
 // Export router.
 export default router;

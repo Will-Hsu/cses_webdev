@@ -174,6 +174,71 @@ export const userEventsUpdate = asyncHandler(async (req, res) => {
   }
 });
 
+export const redeemSmall = asyncHandler(async (req, res) => {
+  const { email } = req.params;
+
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    return res.status(404).json({ message: 'User not found' });
+  }
+
+  if (user.points >= 500) {
+    user.points -= 500;
+
+    // Perform additional prize actions here
+
+    await user.save();
+    return res.status(200).json({ message: 'Small prize redeemed successfully '});
+  } else {
+    return res.status(400).json({ message: 'Insufficient points for redemption' });
+  }
+
+  
+});
+
+export const redeemMedium = asyncHandler(async (req, res) => {
+  const { email } = req.params;
+
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    return res.status(404).json({ message: 'User not found' });
+  }
+
+  if (user.points >= 1250) {
+    user.points -= 1250;
+
+    // Perform additional prize actions here
+
+    await user.save();
+    return res.status(200).json({ message: 'Medium prize redeemed successfully '});
+  } else {
+    return res.status(400).json({ message: 'Insufficient points for redemption' });
+  }
+});
+
+export const redeemLarge = asyncHandler(async (req, res) => {
+  const { email } = req.params;
+
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    return res.status(404).json({ message: 'User not found' });
+  }
+
+  if (user.points >= 2500) {
+    user.points -= 2500;
+
+    // Perform additional prize actions here
+
+    await user.save();
+    return res.status(200).json({ message: 'Large prize redeemed successfully '});
+  } else {
+    return res.status(400).json({ message: 'Insufficient points for redemption' });
+  }
+});
+
 export default {
   userCheck,
   userCreate,
@@ -182,6 +247,9 @@ export default {
   userDelete,
   userEventsUpdate,
   getTopMembers,
+  redeemSmall,
+  redeemMedium,
+  redeemLarge,
 };
 
 function isValidEventId(eventIds) {
