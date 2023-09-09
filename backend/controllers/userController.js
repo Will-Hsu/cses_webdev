@@ -161,7 +161,21 @@ export const userEventsUpdate = asyncHandler(async (req, res) => {
       return res.status(400).json({ message: 'Event already attended' });
     }
 
+    // Find the event by ID to determine if it's major or minor
+
+    const event = await Event.findById(id);
+    if (!event) {
+      return res.status(404).json({ message: 'Event not found' });
+    }
+
+    // Determine points based on whether the event is major or minor
+    const pointsToAdd = event.major_event ? 300 : 100;
+
+    // Update user's points
+    user.points += pointsToAdd;
+    
     // Add the event ID to the eventsAttended array
+
     user.eventsAttended.push(id);
 
     // Save the updated user
