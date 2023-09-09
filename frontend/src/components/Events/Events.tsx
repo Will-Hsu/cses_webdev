@@ -22,6 +22,17 @@ interface EventData {
 }
 
 const Events = () => {
+  // add state for page number
+  const [pageNumberUpcoming, setPageNumberUpcoming] = useState(1);
+  const [pageNumberPast, setPageNumberPast] = useState(1);
+
+  // add state for the total number of pages
+  const [totalPagesUpcoming, setTotalPagesUpcoming] = useState(1);
+  const [totalPagesPast, setTotalPagesPast] = useState(1);
+
+  // add state for the number of events per page
+  const [eventsPerPage, setEventsPerPage] = useState(6);
+
   const styles = event_style();
   const eventsContainerStyle: any = styles.eventsContainer;
 
@@ -29,6 +40,25 @@ const Events = () => {
   const [pastEvents, setPastEvents] = useState<EventData[]>([]);
   const [selectedYear, setSelectedYear] = useState<number | null>(null);
   const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
+
+  const paginate = (
+    events: Array<EventData>,
+    pageNumber: number,
+    totalPages: number,
+    type: string,
+  ) => {
+    if (type === 'upcoming') {
+      setPageNumberUpcoming(pageNumber);
+      setDisplayedFutureEvents(
+        events.slice((pageNumber - 1) * eventsPerPage, pageNumber * eventsPerPage),
+      );
+    } else {
+      setPageNumberPast(pageNumber);
+      setDisplayedPastEvents(
+        events.slice((pageNumber - 1) * eventsPerPage, pageNumber * eventsPerPage),
+      );
+    }
+  };
 
   const isDesktop = useMediaQuery('(min-width: 1024px)');
   const isIpad = useMediaQuery('(min-width: 768px) and (max-width: 1023px)');
@@ -281,8 +311,41 @@ const Events = () => {
         >
           {renderEventBoxes(displayedFutureEvents)}
         </div>
-
-        {/* ... (previous code) */}
+        <div>
+          <p
+            style={{
+              color: 'white',
+              fontSize: '20px',
+              fontFamily: 'Chakra Petch',
+              fontWeight: '700',
+              display: 'flex',
+              flexDirection: 'row',
+              marginLeft: '39px',
+            }}
+          >
+            Page {pageNumberUpcoming} of {totalPagesUpcoming}
+          </p>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+          <Button
+            size="medium"
+            text="Previous"
+            onClick={() => {
+              if (pageNumberUpcoming > 1) {
+                paginate(upcomingEvents, pageNumberUpcoming - 1, totalPagesUpcoming, 'upcoming');
+              }
+            }}
+          ></Button>
+          <Button
+            size="medium"
+            text="Next"
+            onClick={() => {
+              if (pageNumberUpcoming < totalPagesUpcoming) {
+                paginate(upcomingEvents, pageNumberUpcoming + 1, totalPagesUpcoming, 'upcoming');
+              }
+            }}
+          ></Button>
+        </div>
 
         {/* Render EventBoxes for past events */}
         <div
@@ -327,6 +390,48 @@ const Events = () => {
             </div>
           )) ||
             renderPastEventBoxes(displayedPastEvents)}
+        </div>
+        <div>
+          <p
+            style={{
+              color: 'white',
+              fontSize: '20px',
+              fontFamily: 'Chakra Petch',
+              fontWeight: '700',
+              display: 'flex',
+              flexDirection: 'row',
+              marginLeft: '39px',
+            }}
+          >
+            Page {pageNumberPast} of {totalPagesPast}
+          </p>
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            marginTop: '20px',
+            marginBottom: '20px',
+          }}
+        >
+          <Button
+            size="medium"
+            text="Previous"
+            onClick={() => {
+              if (pageNumberPast > 1) {
+                paginate(pastEvents, pageNumberPast - 1, totalPagesPast, 'past');
+              }
+            }}
+          ></Button>
+          <Button
+            size="medium"
+            text="Next"
+            onClick={() => {
+              if (pageNumberPast < totalPagesPast) {
+                paginate(pastEvents, pageNumberPast + 1, totalPagesPast, 'past');
+              }
+            }}
+          ></Button>
         </div>
       </Container>
     </div>
