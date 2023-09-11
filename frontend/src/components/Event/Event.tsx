@@ -176,6 +176,7 @@ const EventBox = ({
               fontFamily: 'Chakra Petch',
               fontWeight: '600',
               marginTop: '0',
+              height: '100px',
             }}
           >
             {title}
