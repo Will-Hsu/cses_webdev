@@ -26,21 +26,24 @@ const EventsAttended = ({ eventsAttended }: EventsAttendedProps) => {
       <Typography sx={isMobile ? styles.eventsAttendedTitleMobile : styles.eventsAttendedTitle}>
         EVENTS ATTENDED
       </Typography>
-      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '60px' }}>
-        <img
-          src={alertLogo}
-          alt="Events Attended Alert"
-          width="32"
-          height="32"
-          style={{ marginRight: '10px' }}
-        />
-        <Typography variant="subtitle1" sx={styles.eventsAttendText}>
-          <i>
-            Haven't attended an event yet? Let's change that!
-            {/* Attend 2 more events and reach SENIOR MEMBER status!*/}
-          </i>
-        </Typography>
-      </div>
+      {eventsAttended.length === 0 && (
+        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '60px' }}>
+          <img
+            src={alertLogo}
+            alt="Events Attended Alert"
+            width="32"
+            height="32"
+            style={{ marginRight: '10px' }}
+          />
+          <Typography variant="subtitle1" sx={styles.eventsAttendText}>
+            <i>
+              Haven't attended an event yet? Let's change that!
+              {/* Attend 2 more events and reach SENIOR MEMBER status!*/}
+            </i>
+          </Typography>
+          ,
+        </div>
+      )}
 
       <div style={{ display: 'flex', flexDirection: 'row', gap: '40px' }}>
         {eventsAttended.map((event) => (

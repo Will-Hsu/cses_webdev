@@ -3,7 +3,7 @@ import { Box, Grid, ToggleButton, createTheme, useMediaQuery } from '@mui/materi
 import shape from '../../images/shape.svg';
 import previous from '../../images/previous.png';
 import next from '../../images/next.png';
-import Button from '../Button/Button';
+// import Button from '../Button/Button';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { buttonStyles } from '../Button/styles';
 import { aboutStyles } from './styles';

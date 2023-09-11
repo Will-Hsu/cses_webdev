@@ -69,6 +69,8 @@ const Membership = () => {
     <div
       style={{
         minHeight: '100vh',
+        background:
+          'linear-gradient(to bottom, black 0%, #2F56BC 30%, #162756 50%, #2F56BC 70%, black 100%)',
       }}
     >
       {userData && (
