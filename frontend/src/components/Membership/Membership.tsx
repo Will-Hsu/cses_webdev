@@ -77,6 +77,7 @@ const Membership = () => {
           memberMajor={userData.major}
           memberPoints={userData.points}
           memberPicture={userData.profilePicture}
+          memberEventsCount={userData.eventsAttended.length}
         />
       )}
 

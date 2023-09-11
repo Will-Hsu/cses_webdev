@@ -153,33 +153,28 @@ const MeetTheTeam = () => {
         </Box>
       </Grid>
       <Grid container sx={{ marginTop: '5%', display: 'flex', justifyContent: 'center' }}>
-          
-            <ToggleButtonGroup
-              value={currentCategory.name}
-              exclusive
-              aria-label="Category Selection"
+        <ToggleButtonGroup value={currentCategory.name} exclusive aria-label="Category Selection">
+          {categories.map((category) => (
+            <ToggleButton
+              key={category.name}
+              value={category.name}
+              sx={{
+                ...buttonStyles(false, false),
+                marginRight: '0px',
+                marginLeft: '0px',
+                '&.MuiToggleButton-root.Mui-selected, &.MuiToggleButton-root.Mui-selected:hover': {
+                  backgroundColor: 'grey',
+                  color: 'white',
+                },
+              }}
+              onClick={() => {
+                handleCategoryChange(category);
+              }}
             >
-              {categories.map((category) => (
-                <ToggleButton
-                  key={category.name}
-                  value={category.name}
-                  sx={{
-                    ...buttonStyles(false),
-                    marginRight:'0px',
-                    marginLeft:'0px',
-                    '&.MuiToggleButton-root.Mui-selected, &.MuiToggleButton-root.Mui-selected:hover': {
-                      backgroundColor: 'grey',
-                      color: 'white',
-                    },
-                  }}
-                  onClick={() => {
-                    handleCategoryChange(category)}}
-                  >
-                  {category.name}
-                </ToggleButton>
-            ))}
-
-          </ToggleButtonGroup>
+              {category.name}
+            </ToggleButton>
+          ))}
+        </ToggleButtonGroup>
       </Grid>
       <Grid
         container

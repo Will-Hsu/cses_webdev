@@ -176,6 +176,7 @@ const EventBox = ({
               fontFamily: 'Chakra Petch',
               fontWeight: '600',
               marginTop: '0',
+              height: '100px',
             }}
           >
             {title}
@@ -351,7 +352,7 @@ const EventBox = ({
                 onMouseLeave={(e) => (e.currentTarget.style.filter = 'grayscale(100%)')}
               />
             </a>
-            <a href={instagram_link} style={{ marginLeft: '325px', marginTop: '-34px' }}>
+            <a href={instagram_link} style={{ marginLeft: '325px', marginTop: '-35px' }}>
               <img
                 src={instagramIcon}
                 alt="Instagram Icon"
