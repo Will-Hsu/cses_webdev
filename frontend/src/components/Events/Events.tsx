@@ -7,7 +7,6 @@ import EventBox from '../Event/Event';
 import Button from '../Button/Button';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { buttonStyles } from '../Button/styles';
-import { height } from '@mui/system';
 import useMediaQuery from '../../hooks/useMediaQuery';
 
 interface EventData {
@@ -47,6 +46,7 @@ const Events = () => {
     totalPages: number,
     type: string,
   ) => {
+    // console.log('paginate ' + pageNumber);
     if (type === 'upcoming') {
       setPageNumberUpcoming(pageNumber);
       setDisplayedFutureEvents(
@@ -106,8 +106,9 @@ const Events = () => {
 
         const response = await fetch(upcomingEventsEndpoint);
         const data = await response.json();
+        setTotalPagesUpcoming(Math.ceil(data.length / 6));
         setUpcomingEvents(data);
-        setDisplayedFutureEvents(data);
+        paginate(data, 1, totalPagesUpcoming, 'upcoming');
       } catch (error) {
         console.error('Error fetching upcoming events:', error);
       }
@@ -124,8 +125,9 @@ const Events = () => {
 
         const response = await fetch(pastEventsEndpoint);
         const data = await response.json();
+        setTotalPagesPast(Math.ceil(data.length / 6));
         setPastEvents(data);
-        setDisplayedPastEvents(data);
+        paginate(data, 1, totalPagesPast, 'past');
       } catch (error) {
         console.error('Error fetching past events:', error);
       }
@@ -155,7 +157,7 @@ const Events = () => {
           new Date(event.start_time).getTime() <= oneWeekAfter,
       );
 
-      console.log(thisWeekEvents);
+      // console.log(thisWeekEvents);
 
       setDisplayedFutureEvents(thisWeekEvents);
       setIsThisWeekClicked(true);
@@ -177,7 +179,7 @@ const Events = () => {
           new Date(event.start_time).getTime() <= oneMonthAfter,
       );
 
-      console.log(thisMonthEvents);
+      // console.log(thisMonthEvents);
 
       setDisplayedFutureEvents(thisMonthEvents);
       setIsThisWeekClicked(false);
