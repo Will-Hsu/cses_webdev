@@ -272,7 +272,7 @@ const Events = () => {
               key="This Week"
               value="This Week"
               sx={{
-                ...buttonStyles(false),
+                ...buttonStyles(false, false),
                 marginRight: '0px',
                 marginLeft: '0px',
                 '&.MuiToggleButton-root.Mui-selected, &.MuiToggleButton-root.Mui-selected:hover': {
@@ -288,7 +288,7 @@ const Events = () => {
               key="This Month"
               value="This Month"
               sx={{
-                ...buttonStyles(false),
+                ...buttonStyles(false, false),
                 marginRight: '0px',
                 marginLeft: '0px',
                 '&.MuiToggleButton-root.Mui-selected, &.MuiToggleButton-root.Mui-selected:hover': {
@@ -328,26 +328,30 @@ const Events = () => {
             Page {pageNumberUpcoming} of {totalPagesUpcoming}
           </p>
         </div>
-        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-          <Button
-            size="medium"
-            text="Previous"
-            onClick={() => {
-              if (pageNumberUpcoming > 1) {
-                paginate(upcomingEvents, pageNumberUpcoming - 1, totalPagesUpcoming, 'upcoming');
-              }
-            }}
-          ></Button>
-          <Button
-            size="medium"
-            text="Next"
-            onClick={() => {
-              if (pageNumberUpcoming < totalPagesUpcoming) {
-                paginate(upcomingEvents, pageNumberUpcoming + 1, totalPagesUpcoming, 'upcoming');
-              }
-            }}
-          ></Button>
-        </div>
+        {totalPagesUpcoming > 1 && (
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+            <Button
+              size="medium"
+              text="Previous"
+              onClick={() => {
+                if (pageNumberUpcoming > 1) {
+                  paginate(upcomingEvents, pageNumberUpcoming - 1, totalPagesUpcoming, 'upcoming');
+                }
+              }}
+              inactive={pageNumberUpcoming === 1}
+            />
+            <Button
+              size="medium"
+              text="Next"
+              onClick={() => {
+                if (pageNumberUpcoming < totalPagesUpcoming) {
+                  paginate(upcomingEvents, pageNumberUpcoming + 1, totalPagesUpcoming, 'upcoming');
+                }
+              }}
+              inactive={pageNumberUpcoming === totalPagesUpcoming}
+            />
+          </div>
+        )}
 
         {/* Render EventBoxes for past events */}
         <div
@@ -408,33 +412,37 @@ const Events = () => {
             Page {pageNumberPast} of {totalPagesPast}
           </p>
         </div>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            marginTop: '20px',
-            marginBottom: '20px',
-          }}
-        >
-          <Button
-            size="medium"
-            text="Previous"
-            onClick={() => {
-              if (pageNumberPast > 1) {
-                paginate(pastEvents, pageNumberPast - 1, totalPagesPast, 'past');
-              }
+        {totalPagesPast > 1 && (
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              marginTop: '20px',
+              marginBottom: '20px',
             }}
-          ></Button>
-          <Button
-            size="medium"
-            text="Next"
-            onClick={() => {
-              if (pageNumberPast < totalPagesPast) {
-                paginate(pastEvents, pageNumberPast + 1, totalPagesPast, 'past');
-              }
-            }}
-          ></Button>
-        </div>
+          >
+            <Button
+              size="medium"
+              text="Previous"
+              onClick={() => {
+                if (pageNumberPast > 1) {
+                  paginate(pastEvents, pageNumberPast - 1, totalPagesPast, 'past');
+                }
+              }}
+              inactive={pageNumberPast === 1}
+            ></Button>
+            <Button
+              size="medium"
+              text="Next"
+              onClick={() => {
+                if (pageNumberPast < totalPagesPast) {
+                  paginate(pastEvents, pageNumberPast + 1, totalPagesPast, 'past');
+                }
+              }}
+              inactive={pageNumberPast === totalPagesPast}
+            ></Button>
+          </div>
+        )}
       </Container>
     </div>
   );
