@@ -92,7 +92,7 @@ const Home = () => {
                   minHeight: '50%',
                 }}
               >
-                Join CSES today.
+                Join CSES today!
               </Box>
               <Box
                 sx={{
