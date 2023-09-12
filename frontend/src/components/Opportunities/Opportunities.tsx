@@ -5,8 +5,8 @@ import Button from '../Button/Button';
 import sponsor from '../../images/cseLogo.gif';
 import sponsor2 from '../../images/AS.png';
 import { opportunitiesStyles } from './styles';
-import members from '../../images/opportunitiespage/members.png'
-import sponsors from '../../images/opportunitiespage/sponsors.png'
+import members from '../../images/opportunitiespage/members.png';
+import sponsors from '../../images/opportunitiespage/sponsors.png';
 
 const Opportunities = () => {
   const theme = useTheme();
@@ -58,11 +58,10 @@ const Opportunities = () => {
               </Link>
               .
             </Typography>
-            <Button
+            {/*<Button
               size="medium"
               text="See Opportunities ->"
-              onClick={() => console.log('click')}
-            ></Button>
+              onClick={() => console.log('click')}></Button>*/}
           </Grid>
         </Grid>
         <Typography align="center" sx={{ ...styles.subtitle, margin: '60px 0% 50px 0%' }}>

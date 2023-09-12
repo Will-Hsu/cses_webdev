@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Container, ToggleButton } from '@mui/material';
 import bgTop from '../../images/shape.svg';
 import bgBtm from '../../images/shape.svg';
@@ -47,7 +47,6 @@ const Events = () => {
     totalPages: number,
     type: string,
   ) => {
-    // console.log('paginate ' + pageNumber);
     if (type === 'upcoming') {
       setPageNumberUpcoming(pageNumber);
       setDisplayedFutureEvents(
@@ -157,8 +156,6 @@ const Events = () => {
           new Date(event.start_time).getTime() >= now &&
           new Date(event.start_time).getTime() <= oneWeekAfter,
       );
-
-      // console.log(thisWeekEvents);
 
       setDisplayedFutureEvents(thisWeekEvents);
       setIsThisWeekClicked(true);
@@ -273,6 +270,9 @@ const Events = () => {
     });
   };
 
+  const upcomingTitleRef = useRef<HTMLHeadingElement | null>(null);
+  const titleRef = useRef<HTMLHeadingElement | null>(null);
+
   return (
     <div style={{ position: 'relative', overflow: 'hidden' }}>
       <img src={bgTop} alt="bg1" style={{ ...styles.bg1, position: 'absolute' }} />
@@ -299,6 +299,7 @@ const Events = () => {
             marginLeft: '38px',
             marginTop: '-20px',
           }}
+          ref={upcomingTitleRef}
         >
           <ToggleButtonGroup value="Timeframe" exclusive aria-label="Events Filter">
             <ToggleButton
@@ -369,6 +370,11 @@ const Events = () => {
               onClick={() => {
                 if (pageNumberUpcoming > 1) {
                   paginate(upcomingEvents, pageNumberUpcoming - 1, totalPagesUpcoming, 'upcoming');
+                  if (upcomingTitleRef.current) {
+                    upcomingTitleRef.current.scrollIntoView({
+                      behavior: 'smooth',
+                    });
+                  }
                 }
               }}
               inactive={pageNumberUpcoming === 1}
@@ -379,6 +385,11 @@ const Events = () => {
               onClick={() => {
                 if (pageNumberUpcoming < totalPagesUpcoming) {
                   paginate(upcomingEvents, pageNumberUpcoming + 1, totalPagesUpcoming, 'upcoming');
+                  if (upcomingTitleRef.current) {
+                    upcomingTitleRef.current.scrollIntoView({
+                      behavior: 'smooth',
+                    });
+                  }
                 }
               }}
               inactive={pageNumberUpcoming === totalPagesUpcoming}
@@ -407,6 +418,7 @@ const Events = () => {
             marginLeft: '30px',
             marginTop: '-20px',
           }}
+          ref={titleRef}
         >
           <Button size="medium" text="2023" onClick={handle2023}></Button>
         </div>
@@ -460,6 +472,9 @@ const Events = () => {
               onClick={() => {
                 if (pageNumberPast > 1) {
                   paginate(pastEvents, pageNumberPast - 1, totalPagesPast, 'past');
+                  if (titleRef.current) {
+                    titleRef.current.scrollIntoView({ behavior: 'smooth' });
+                  }
                 }
               }}
               inactive={pageNumberPast === 1}
@@ -470,6 +485,9 @@ const Events = () => {
               onClick={() => {
                 if (pageNumberPast < totalPagesPast) {
                   paginate(pastEvents, pageNumberPast + 1, totalPagesPast, 'past');
+                  if (titleRef.current) {
+                    titleRef.current.scrollIntoView({ behavior: 'smooth' });
+                  }
                 }
               }}
               inactive={pageNumberPast === totalPagesPast}
