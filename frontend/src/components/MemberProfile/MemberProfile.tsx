@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Avatar, Box, Grid, Typography, createTheme, useMediaQuery } from '@mui/material';
 import LinearProgress, { LinearProgressProps } from '@mui/material/LinearProgress';
 
@@ -58,6 +58,7 @@ const getTier = (eventCount: number) => {
 const MemberProfile = (userData: MemberProfileProps) => {
   const theme = createTheme();
   const isXsScreen = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
+  const [isHovered, setIsHovered] = useState(false);
 
   function LinearProgressWithLabel(props: LinearProgressProps & { value: number }) {
     return (
@@ -128,7 +129,11 @@ const MemberProfile = (userData: MemberProfileProps) => {
           >
             {userData.memberName}
           </p>
-          <Box sx={{ width: '110%' }}>
+          <Box
+            sx={{ width: '110%' }}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
             <LinearProgressWithLabel
               value={getProgress(userData.memberEventsCount)}
               sx={{
@@ -141,6 +146,22 @@ const MemberProfile = (userData: MemberProfileProps) => {
                 border: '1px solid #F3C969',
               }}
             />
+            {isHovered && (
+              <div
+                className="info-box"
+                style={{
+                  backgroundColor: 'white',
+                  color: 'black',
+                  padding: '3px 20px',
+                  maxWidth: '40%',
+                  borderRadius: '15px',
+                  fontSize: '12px',
+                  position: 'absolute',
+                }}
+              >
+                <p> This progress bar displays your progress towards the next membership tier. </p>
+              </div>
+            )}
           </Box>
 
           <p style={{ fontSize: 'clamp(0.8rem, 2.5vw, 1rem)' }}>

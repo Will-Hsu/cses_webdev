@@ -67,7 +67,7 @@ const Ranking = ({ rank, name, points, profilePicture: profilePic }: RankingProp
   );
 };
 
-const LeaderBoard = ({ rankings }: { rankings: Array<RankingProps> }) => {
+const LeaderBoard = ({ rankings, myPoint }: { rankings: Array<RankingProps>; myPoint: number }) => {
   const styles = membershipStyles();
 
   const isDesktop = useMediaQuery('(min-width: 1161px)');
@@ -151,18 +151,20 @@ const LeaderBoard = ({ rankings }: { rankings: Array<RankingProps> }) => {
         LEADERBOARD
       </Typography>
 
-      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '60px' }}>
-        <img
-          src={alertLogo}
-          alt="Events Attended Alert"
-          width="32"
-          height="32"
-          style={{ marginRight: '10px' }}
-        />
-        <Typography variant="subtitle1" sx={styles.eventsAttendText}>
-          <i>You are 5 points behind THIRD PLACE!</i>
-        </Typography>
-      </div>
+      {myPoint < rankings[2].points && (
+        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '60px' }}>
+          <img
+            src={alertLogo}
+            alt="Events Attended Alert"
+            width="32"
+            height="32"
+            style={{ marginRight: '10px' }}
+          />
+          <Typography variant="subtitle1" sx={styles.eventsAttendText}>
+            <i>You are {rankings[2].points - myPoint} points behind THIRD PLACE!</i>
+          </Typography>
+        </div>
+      )}
 
       {orderRankings(rankings)}
     </Container>

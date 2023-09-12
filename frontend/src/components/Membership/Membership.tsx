@@ -70,7 +70,7 @@ const Membership = () => {
       style={{
         minHeight: '100vh',
         background:
-          'linear-gradient(to bottom, black 0%, #2F56BC 30%, #162756 50%, #2F56BC 70%, black 100%)',
+          'linear-gradient(to bottom, black 0%, #2F56BC 35%, #162756 50%, #2F56BC 70%, black 100%)',
       }}
     >
       {userData && (
@@ -95,7 +95,9 @@ const Membership = () => {
         {/* Add Events Attended + Leaderboard UI for the membership page @Brian & Eddie & Yashil --
         consider creating a separate component for this as well */}
         {isLoggedIn && userData && <EventsAttended eventsAttended={eventsAttended} />}
-        {isLoggedIn && rankings.length > 0 && <LeaderBoard rankings={rankings} />}
+        {isLoggedIn && rankings.length > 0 && userData && (
+          <LeaderBoard rankings={rankings} myPoint={userData.points} />
+        )}
         {isAdmin && <EventsDashboard />}
       </div>
     </div>
