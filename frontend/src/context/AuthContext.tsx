@@ -57,11 +57,11 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
             checkUserAPI({ email: userInfo.data.email }).then((data) => {
               if (data && data.exists === true) {
                 console.log('Check -- Valid Token & User Registered');
-                updateUserAPI(userInfo.data.email, { profilePicture: userInfo.data.picture }).catch(
-                  (error) => {
-                    console.error(error);
-                  },
-                );
+                updateUserAPI(userInfo.data.email, {
+                  profilePicture: userInfo.data.picture.replaceAll('s96-c', 's384-c'),
+                }).catch((error) => {
+                  console.error(error);
+                });
                 setIsNewUser(false);
                 setIsLoggedIn(true);
                 setUser(userInfo.data);
