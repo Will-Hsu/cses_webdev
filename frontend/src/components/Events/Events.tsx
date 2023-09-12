@@ -4,6 +4,7 @@ import bgTop from '../../images/shape.svg';
 import bgBtm from '../../images/shape.svg';
 import { event_style } from './styles';
 import EventBox from '../Event/Event';
+import MobileEventBox from '../Event/MobileEvent';
 import Button from '../Button/Button';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { buttonStyles } from '../Button/styles';
@@ -204,40 +205,72 @@ const Events = () => {
 
   // Render EventBoxes using map
   const renderEventBoxes = (events: EventData[]) => {
-    return events.map((eventData) => (
-      <React.Fragment key={eventData._id}>
-        <EventBox
-          title={eventData.title}
-          targetDate={new Date(eventData.end_time)}
-          location={eventData.location}
-          calendar_link={eventData.calendar_link}
-          description={eventData.description}
-          end_time={eventData.end_time}
-          instagram_link={eventData.instagram_link}
-          start_time={eventData.start_time}
-          _id={eventData._id}
-        />
-      </React.Fragment>
-    ));
+    return events.map((eventData) => {
+      if (isMobile) {
+        return (
+          <MobileEventBox
+            title={eventData.title}
+            targetDate={new Date(eventData.end_time)}
+            location={eventData.location}
+            end_time={eventData.end_time}
+            start_time={eventData.start_time}
+            _id={eventData._id}
+            pastEvent
+          />
+        );
+      } else {
+        return (
+          <React.Fragment key={eventData._id}>
+            <EventBox
+              title={eventData.title}
+              targetDate={new Date(eventData.end_time)}
+              location={eventData.location}
+              calendar_link={eventData.calendar_link}
+              description={eventData.description}
+              end_time={eventData.end_time}
+              instagram_link={eventData.instagram_link}
+              start_time={eventData.start_time}
+              _id={eventData._id}
+            />
+          </React.Fragment>
+        );
+      }
+    });
   };
 
   const renderPastEventBoxes = (events: EventData[]) => {
-    return events.map((eventData) => (
-      <React.Fragment key={eventData._id}>
-        <EventBox
-          title={eventData.title}
-          targetDate={new Date(eventData.end_time)}
-          location={eventData.location}
-          calendar_link={eventData.calendar_link}
-          description={eventData.description}
-          end_time={eventData.end_time}
-          instagram_link={eventData.instagram_link}
-          start_time={eventData.start_time}
-          _id={eventData._id}
-          pastEvent
-        />
-      </React.Fragment>
-    ));
+    return events.map((eventData) => {
+      if (isMobile) {
+        return (
+          <MobileEventBox
+            title={eventData.title}
+            targetDate={new Date(eventData.end_time)}
+            location={eventData.location}
+            end_time={eventData.end_time}
+            start_time={eventData.start_time}
+            _id={eventData._id}
+            pastEvent
+          />
+        );
+      } else {
+        return (
+          <React.Fragment key={eventData._id}>
+            <EventBox
+              title={eventData.title}
+              targetDate={new Date(eventData.end_time)}
+              location={eventData.location}
+              calendar_link={eventData.calendar_link}
+              description={eventData.description}
+              end_time={eventData.end_time}
+              instagram_link={eventData.instagram_link}
+              start_time={eventData.start_time}
+              _id={eventData._id}
+              pastEvent
+            />
+          </React.Fragment>
+        );
+      }
+    });
   };
 
   return (
