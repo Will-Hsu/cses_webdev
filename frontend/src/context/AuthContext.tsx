@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { useGoogleLogin } from '@react-oauth/google';
-import { checkUserAPI } from '../api';
+import { checkUserAPI, updateUserAPI } from '../api';
 
 interface User {
   name: string;
@@ -52,9 +52,16 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
               },
             });
 
+            console.log(userInfo);
+
             checkUserAPI({ email: userInfo.data.email }).then((data) => {
               if (data && data.exists === true) {
                 console.log('Check -- Valid Token & User Registered');
+                updateUserAPI(userInfo.data.email, {
+                  profilePicture: userInfo.data.picture.replaceAll('s96-c', 's384-c'),
+                }).catch((error) => {
+                  console.error(error);
+                });
                 setIsNewUser(false);
                 setIsLoggedIn(true);
                 setUser(userInfo.data);

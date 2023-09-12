@@ -30,15 +30,15 @@ const Events = () => {
   const [totalPagesPast, setTotalPagesPast] = useState(1);
 
   // add state for the number of events per page
-  const [eventsPerPage, setEventsPerPage] = useState(6);
+  const eventsPerPage = 6;
 
   const styles = event_style();
   const eventsContainerStyle: any = styles.eventsContainer;
 
   const [upcomingEvents, setUpcomingEvents] = useState<EventData[]>([]);
   const [pastEvents, setPastEvents] = useState<EventData[]>([]);
-  const [selectedYear, setSelectedYear] = useState<number | null>(null);
-  const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
+  const [selectedYear] = useState<number | null>(null);
+  const [selectedMonth] = useState<number | null>(null);
 
   const paginate = (
     events: Array<EventData>,
@@ -135,7 +135,7 @@ const Events = () => {
 
     fetchUpcomingEvents();
     fetchPastEvents();
-  }, [selectedYear, selectedMonth]);
+  }, [selectedYear, selectedMonth, totalPagesUpcoming, totalPagesPast]);
 
   const [displayedFutureEvents, setDisplayedFutureEvents] = useState(upcomingEvents);
   const [displayedPastEvents, setDisplayedPastEvents] = useState(pastEvents);

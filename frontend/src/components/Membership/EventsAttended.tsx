@@ -22,10 +22,11 @@ const EventsAttended = ({ eventsAttended }: EventsAttendedProps) => {
   const isMobile = useMediaQuery('(max-width: 767px)');
 
   return (
-    <Container maxWidth="xl" sx={styles.eventsAttendedBody}>
+    <Container sx={styles.eventsAttendedBody}>
       <Typography sx={isMobile ? styles.eventsAttendedTitleMobile : styles.eventsAttendedTitle}>
         EVENTS ATTENDED
       </Typography>
+
       <div style={{ display: 'flex', alignItems: 'center', marginBottom: '60px' }}>
         <img
           src={alertLogo}
@@ -35,14 +36,22 @@ const EventsAttended = ({ eventsAttended }: EventsAttendedProps) => {
           style={{ marginRight: '10px' }}
         />
         <Typography variant="subtitle1" sx={styles.eventsAttendText}>
-          <i>
-            Haven't attended an event yet? Let's change that!
-            {/* Attend 2 more events and reach SENIOR MEMBER status!*/}
-          </i>
+          {eventsAttended.length === 0 && (
+            <i>
+              Haven't attended an event yet? Let's change that!
+              {/* Attend 2 more events and reach SENIOR MEMBER status!*/}
+            </i>
+          )}
+          {eventsAttended.length > 0 && (
+            <i>
+              You have attended {eventsAttended.length} events!
+              {/* Attend 2 more events and reach SENIOR MEMBER status!*/}
+            </i>
+          )}
         </Typography>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'row', gap: '40px' }}>
+      <div style={{ display: 'flex', flexDirection: 'row', gap: '40px', overflow: 'scroll' }}>
         {eventsAttended.map((event) => (
           <EventBox
             title={event.title}
@@ -54,6 +63,7 @@ const EventsAttended = ({ eventsAttended }: EventsAttendedProps) => {
             instagram_link={event.instagram_link}
             start_time={event.start_time}
             _id={event._id}
+            pastEvent
           />
         ))}
       </div>

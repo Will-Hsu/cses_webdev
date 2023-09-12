@@ -96,7 +96,7 @@ const NavBar = () => {
             )}
           </Box>
           {isLoggedIn && userData && (
-            <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div style={{ display: 'flex', alignItems: 'center', marginLeft: '10px' }}>
               <Avatar
                 alt="Remy Sharp"
                 src={userData.profilePicture}
