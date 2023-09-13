@@ -83,7 +83,7 @@ const MemberProfile = (userData: MemberProfileProps) => {
         style={{
           textAlign: 'center',
           fontFamily: 'Chakra Petch',
-          fontSize: 'clamp(2rem, 4vw, 4rem)',
+          fontSize: 'clamp(3rem, 5vw, 4.5rem)',
           marginTop: '8%',
         }}
       >
