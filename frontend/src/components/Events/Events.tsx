@@ -270,9 +270,6 @@ const Events = () => {
     });
   };
 
-  const upcomingTitleRef = useRef<HTMLHeadingElement | null>(null);
-  const titleRef = useRef<HTMLHeadingElement | null>(null);
-
   return (
     <div style={{ position: 'relative', overflow: 'hidden' }}>
       <img src={bgTop} alt="bg1" style={{ ...styles.bg1, position: 'absolute' }} />
@@ -288,7 +285,7 @@ const Events = () => {
             fontWeight: '700',
           }}
         >
-          <h2>EVENTS</h2>
+          <h2 id="eventsTitle">EVENTS</h2>
         </div>
 
         {/* Buttons for filtering events */}
@@ -299,7 +296,6 @@ const Events = () => {
             marginLeft: '38px',
             marginTop: '-20px',
           }}
-          ref={upcomingTitleRef}
         >
           <ToggleButtonGroup value="Timeframe" exclusive aria-label="Events Filter">
             <ToggleButton
@@ -370,8 +366,14 @@ const Events = () => {
               onClick={() => {
                 if (pageNumberUpcoming > 1) {
                   paginate(upcomingEvents, pageNumberUpcoming - 1, totalPagesUpcoming, 'upcoming');
-                  if (upcomingTitleRef.current) {
-                    upcomingTitleRef.current.scrollIntoView({
+                  const titleElement = document.getElementById('eventsTitle');
+                  if (titleElement) {
+                    const rect = titleElement.getBoundingClientRect();
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    const targetY = rect.top + scrollTop;
+
+                    window.scrollTo({
+                      top: targetY,
                       behavior: 'smooth',
                     });
                   }
@@ -385,8 +387,14 @@ const Events = () => {
               onClick={() => {
                 if (pageNumberUpcoming < totalPagesUpcoming) {
                   paginate(upcomingEvents, pageNumberUpcoming + 1, totalPagesUpcoming, 'upcoming');
-                  if (upcomingTitleRef.current) {
-                    upcomingTitleRef.current.scrollIntoView({
+                  const titleElement = document.getElementById('eventsTitle');
+                  if (titleElement) {
+                    const rect = titleElement.getBoundingClientRect();
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    const targetY = rect.top + scrollTop;
+
+                    window.scrollTo({
+                      top: targetY,
                       behavior: 'smooth',
                     });
                   }
@@ -408,7 +416,7 @@ const Events = () => {
             fontWeight: '700',
           }}
         >
-          <h2> PAST EVENTS</h2>
+          <h2 id="pastEventsTitle">PAST EVENTS</h2>
         </div>
         {/* Buttons for filtering past events */}
         <div
@@ -418,7 +426,6 @@ const Events = () => {
             marginLeft: '30px',
             marginTop: '-20px',
           }}
-          ref={titleRef}
         >
           <Button size="medium" text="2023" onClick={handle2023}></Button>
         </div>
@@ -472,8 +479,17 @@ const Events = () => {
               onClick={() => {
                 if (pageNumberPast > 1) {
                   paginate(pastEvents, pageNumberPast - 1, totalPagesPast, 'past');
-                  if (titleRef.current) {
-                    titleRef.current.scrollIntoView({ behavior: 'smooth' });
+                  const titleElement = document.getElementById('pastEventsTitle');
+
+                  if (titleElement) {
+                    const rect = titleElement.getBoundingClientRect();
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    const targetY = rect.top + scrollTop;
+
+                    window.scrollTo({
+                      top: targetY,
+                      behavior: 'smooth',
+                    });
                   }
                 }
               }}
@@ -485,8 +501,16 @@ const Events = () => {
               onClick={() => {
                 if (pageNumberPast < totalPagesPast) {
                   paginate(pastEvents, pageNumberPast + 1, totalPagesPast, 'past');
-                  if (titleRef.current) {
-                    titleRef.current.scrollIntoView({ behavior: 'smooth' });
+                  const titleElement = document.getElementById('pastEventsTitle');
+                  if (titleElement) {
+                    const rect = titleElement.getBoundingClientRect();
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    const targetY = rect.top + scrollTop;
+
+                    window.scrollTo({
+                      top: targetY,
+                      behavior: 'smooth',
+                    });
                   }
                 }
               }}

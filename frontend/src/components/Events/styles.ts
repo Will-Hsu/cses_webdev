@@ -1,15 +1,15 @@
 export const event_style = () => ({
   bg1: {
-    opacity: '0.8',
     width: '100%',
     margin: '10% 0%',
     transform: 'rotate(-25deg)',
     scale: '120%',
     top: '0%',
     marginTop: '-10%',
+    opacity: '0.7',
   },
   bg2: {
-    opacity: '0.8',
+    opacity: '0.7',
     width: '100%',
     scale: '120%',
     transform: 'scaleX(-1) scaleY(-1)',

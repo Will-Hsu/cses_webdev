@@ -4,14 +4,14 @@ export const opportunitiesStyles = (theme: any) => ({
     marginTop: '70%',
     marginLeft: '-20%',
     scale: '150%',
-    opacity: '0.8',
+    opacity: '0.6',
   },
   bg2: {
     transform: 'rotate(130deg)',
     marginTop: '300%',
     marginLeft: '-20%',
     scale: '150%',
-    opacity: '0.8',
+    opacity: '0.6',
   },
   body: {
     position: 'relative',
