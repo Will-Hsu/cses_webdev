@@ -79,9 +79,12 @@ const Membership = () => {
 
   return (
     <div
-      style={{
-        minHeight: '100vh',
-      }}
+    style={{
+      position: 'relative',
+      overflow: 'hidden',
+      flexDirection: 'column', // Stack items vertically
+    }}
+      
     >
       {userData && (
         <MemberProfile
@@ -106,7 +109,6 @@ const Membership = () => {
             color: 'white',
             fontSize: '20px',
             fontFamily: 'Chakra Petch',
-            marginLeft: '177px',
             marginTop: '117px',
             fontWeight: '700',
           }}
@@ -116,8 +118,21 @@ const Membership = () => {
             type="text"
             value={verificationCode}
             onChange={(e) => setVerificationCode(e.target.value)}
+            style={{
+              fontSize: '16px',      // Change the font size of the input
+              width: '115px',        // Change the width of the input
+              marginRight: '10px',   // Adjust the distance between the input and button
+            }}
           />
-          <button onClick={handleVerifyCodeClick}>Verify Code</button>
+          <button
+            onClick={handleVerifyCodeClick}
+            style={{
+              fontFamily: 'Chakra Petch',
+              fontSize: '14px',      // Change the font size of the button
+            }}
+          >
+            Verify Code
+          </button>
         </div>
 
         {isLoggedIn && userData && <RewardsMenu points={userData.points}/>}
