@@ -6,6 +6,7 @@ import EventsAttended from './EventsAttended';
 import LeaderBoard from './LeaderBoard';
 import MemberProfile from '../MemberProfile/MemberProfile';
 import EventsDashboard from './EventsDashboard';
+import RewardsMenu from './RewardsMenu';
 import axios from 'axios';
 import { userInfoAPI, topMembersAPI } from '../../api';
 
@@ -34,6 +35,17 @@ const Membership = () => {
   const [eventsAttended, setEventsAttended] = useState<Array<Event>>([]);
   const [rankings, setRankings] = useState<Array<Ranking>>([]);
   const navigate = useNavigate();
+
+  const [verificationCode, setVerificationCode] = useState('');
+  const [isCodeVisible, setIsCodeVisible] = useState(true);
+
+
+  const handleVerifyCodeClick = () => {
+    console.log('Verification Code:', verificationCode);
+    setIsCodeVisible(false);
+    setVerificationCode('');
+  };
+
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -89,6 +101,27 @@ const Membership = () => {
           margin: '10% 0',
         }}
       >
+        <div
+          style={{
+            color: 'white',
+            fontSize: '20px',
+            fontFamily: 'Chakra Petch',
+            marginLeft: '177px',
+            marginTop: '117px',
+            fontWeight: '700',
+          }}
+        >
+          <p>6-digit code!</p>
+          <input
+            type="text"
+            value={verificationCode}
+            onChange={(e) => setVerificationCode(e.target.value)}
+          />
+          <button onClick={handleVerifyCodeClick}>Verify Code</button>
+        </div>
+
+        {isLoggedIn && userData && <RewardsMenu points={userData.points}/>}
+
         {/* Add Events Attended + Leaderboard UI for the membership page @Brian & Eddie & Yashil --
         consider creating a separate component for this as well */}
         {isLoggedIn && userData && <EventsAttended eventsAttended={eventsAttended} />}

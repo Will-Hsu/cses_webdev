@@ -84,4 +84,23 @@ export const membershipStyles = () => ({
     fontFamily: 'Inter, sans-serif',
     fontSize: '20px',
   },
+
+  rewardsBody: {
+    position: 'relative',
+    width: '80%',
+    marginBottom: '100px',
+  },
+
+  rewardBox: {
+    backgroundColor: 'black',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    flexDirection: 'column',
+    display: 'flex',
+    margin: '0',
+    marginRight: '1%',
+    width: '200px',
+    height: '230px',
+    padding: '20px 20px 20px 20px',
+  },
 });
