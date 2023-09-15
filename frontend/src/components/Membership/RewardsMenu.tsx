@@ -24,6 +24,9 @@ import {
 import LinearProgress, { LinearProgressProps } from '@mui/material/LinearProgress';
 import { membershipStyles } from './styles';
 import prize from '../../images/gift.png'
+import smallPrize from '../../images/rewardsImages/small_gift.png'
+import medPrize from '../../images/rewardsImages/med_gift.png'
+import bigPrize from '../../images/rewardsImages/big_gift.png'
 
 
 interface RewardsProp {
@@ -40,10 +43,10 @@ const RewardsMenu = (userData: RewardsProp) => {
 
     return (
       <Container maxWidth="xl" sx={styles.rewardsBody}>
-      <Typography sx={isMobile ? styles.eventsAttendedTitleMobile : styles.eventsAttendedTitle}>
+      <Typography sx={{...isMobile ? styles.eventsAttendedTitleMobile : styles.eventsAttendedTitle, marginLeft: isMobile ? '16%' : '0'}}>
         REWARDS
       </Typography>
-      <Box style={{ display: 'flex', flexDirection: isMobile ? 'column': 'row', alignItems: 'flex-start'}}>
+      <Box style={{ display: 'flex', flexDirection: isMobile ? 'column': 'row', alignItems: 'flex-start', marginLeft: isMobile ? '16%' : '0'}}>
       
         <Button sx={{...styles.rewardBox, 
           cursor: userData.points >= smallPrizePoints ? 'pointer' : 'not-allowed', 
@@ -53,11 +56,11 @@ const RewardsMenu = (userData: RewardsProp) => {
           filter: userData.points >= smallPrizePoints ? 'grayscale(0%)': 'grayscale(100%)',
           }}>
           <Box>
-          <img src={prize} alt="img" style={{ maxWidth: '50%'}} />
+          <img src={smallPrize} alt="img" style={{ maxWidth: '80%'}} />
           </Box>
           <Box
             style={{
-              color: 'white',
+              color: userData.points >= smallPrizePoints ? 'white': 'gray',
               fontSize: '20px',
               fontFamily: 'Inter',
               fontWeight: '600',
@@ -68,7 +71,7 @@ const RewardsMenu = (userData: RewardsProp) => {
           </Box>
           <Box
             style={{
-              color: 'white',
+              color: userData.points >= smallPrizePoints ? 'white': 'gray',
               fontSize: '16px',
               fontFamily: 'Inter',
               fontWeight: '600',
@@ -86,11 +89,11 @@ const RewardsMenu = (userData: RewardsProp) => {
           filter: userData.points >= mediumPrizePoints ? 'grayscale(0%)': 'grayscale(100%)',
           }}>
           <Box>
-          <img src={prize} alt="img" style={{ maxWidth: '65%'}} />
+          <img src={medPrize} alt="img" style={{ maxWidth: '80%'}} />
           </Box>
           <Box
             style={{
-              color: 'white',
+              color: userData.points >= mediumPrizePoints ? 'white': 'gray',
               fontSize: '20px',
               fontFamily: 'Inter',
               fontWeight: '600',
@@ -101,7 +104,7 @@ const RewardsMenu = (userData: RewardsProp) => {
           </Box>
           <Box
             style={{
-              color: 'white',
+              color: userData.points >= mediumPrizePoints ? 'white': 'gray',
               fontSize: '16px',
               fontFamily: 'Inter',
               fontWeight: '600',
@@ -119,11 +122,11 @@ const RewardsMenu = (userData: RewardsProp) => {
           filter: userData.points >= largePrizePoints ? 'grayscale(0%)': 'grayscale(100%)',
           }}>
           <Box>
-          <img src={prize} alt="img" style={{ maxWidth: '80%'}} />
+          <img src={bigPrize} alt="img" style={{ maxWidth: '80%'}} />
           </Box>
           <Box
             style={{
-              color: 'white',
+              color: userData.points >= largePrizePoints ? 'white': 'gray',
               fontSize: '20px',
               fontFamily: 'Inter',
               fontWeight: '600',
@@ -134,7 +137,7 @@ const RewardsMenu = (userData: RewardsProp) => {
           </Box>
           <Box
             style={{
-              color: 'white',
+              color: userData.points >= largePrizePoints ? 'white': 'gray',
               fontSize: '16px',
               fontFamily: 'Inter',
               fontWeight: '600',

@@ -1,4 +1,5 @@
 import { useContext, useState, useEffect } from 'react';
+import { useMediaQuery, Typography } from '@mui/material';
 import { AuthContext } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { User } from '../../utils/types';
@@ -9,6 +10,7 @@ import EventsDashboard from './EventsDashboard';
 import RewardsMenu from './RewardsMenu';
 import axios from 'axios';
 import { userInfoAPI, topMembersAPI } from '../../api';
+import { membershipStyles } from './styles';
 
 interface Event {
   _id: string;
@@ -35,7 +37,8 @@ const Membership = () => {
   const [eventsAttended, setEventsAttended] = useState<Array<Event>>([]);
   const [rankings, setRankings] = useState<Array<Ranking>>([]);
   const navigate = useNavigate();
-
+  const isMobile = useMediaQuery('(max-width: 767px)');
+  const styles = membershipStyles();
   const [verificationCode, setVerificationCode] = useState('');
   const [isCodeVisible, setIsCodeVisible] = useState(true);
 
@@ -80,9 +83,7 @@ const Membership = () => {
   return (
     <div
     style={{
-      position: 'relative',
-      overflow: 'hidden',
-      flexDirection: 'column', // Stack items vertically
+      minHeight: '100vh',
     }}
       
     >
@@ -104,38 +105,43 @@ const Membership = () => {
           margin: '10% 0',
         }}
       >
-        <div
-          style={{
-            color: 'white',
-            fontSize: '20px',
-            fontFamily: 'Chakra Petch',
-            marginTop: '117px',
-            fontWeight: '700',
-          }}
-        >
-          <p>6-digit code!</p>
-          <input
-            type="text"
-            value={verificationCode}
-            onChange={(e) => setVerificationCode(e.target.value)}
-            style={{
-              fontSize: '16px',      // Change the font size of the input
-              width: '115px',        // Change the width of the input
-              marginRight: '10px',   // Adjust the distance between the input and button
-            }}
-          />
-          <button
-            onClick={handleVerifyCodeClick}
-            style={{
-              fontFamily: 'Chakra Petch',
-              fontSize: '14px',      // Change the font size of the button
-            }}
-          >
-            Verify Code
-          </button>
+      
+      <div style={{ display: 'flex', alignItems: 'flex-start', flexDirection: isMobile ? 'column': 'row' }}>
+        <div style={{ flex: 1 }}>
+          <div>
+            <Typography sx={{...isMobile ? styles.eventsAttendedTitleMobile : styles.eventsAttendedTitle, marginLeft: isMobile ? '18%' : '23%'}}>
+              EVENT CHECK-IN
+            </Typography>
+            <input
+              type="text"
+              value={verificationCode}
+              onChange={(e) => setVerificationCode(e.target.value)}
+              style={{
+                fontSize: '16px',      
+                width: '115px',  
+                marginTop: '3%',
+                marginLeft: isMobile ? '18%' : '23%',
+                marginRight: '10px',
+                marginBottom: '100px',
+              }}
+            />
+            <button
+              onClick={handleVerifyCodeClick}
+              style={{
+                fontFamily: 'Chakra Petch',
+                fontSize: '14px',  
+                marginBottom: '100px',
+              }}
+            >
+              Verify Code
+            </button>
+          </div>
         </div>
 
-        {isLoggedIn && userData && <RewardsMenu points={userData.points}/>}
+        <div style={{ flex: 1 }}>
+          {isLoggedIn && userData && <RewardsMenu points={userData.points} />}
+        </div>
+      </div>
 
         {/* Add Events Attended + Leaderboard UI for the membership page @Brian & Eddie & Yashil --
         consider creating a separate component for this as well */}
