@@ -38,6 +38,7 @@ const Membership = () => {
   const [rankings, setRankings] = useState<Array<Ranking>>([]);
   const navigate = useNavigate();
   const isMobile = useMediaQuery('(max-width: 767px)');
+  const isiPad = useMediaQuery('(max-width: 820px)');
   const styles = membershipStyles();
   const [verificationCode, setVerificationCode] = useState('');
   const [isCodeVisible, setIsCodeVisible] = useState(true);
@@ -106,7 +107,7 @@ const Membership = () => {
         }}
       >
       
-      <div style={{ display: 'flex', alignItems: 'flex-start', flexDirection: isMobile ? 'column': 'row' }}>
+      <div style={{ display: 'flex', alignItems: 'flex-start', flexDirection: isiPad ? 'column': 'row' }}>
         <div style={{ flex: 1 }}>
           <div>
             <Typography sx={{...isMobile ? styles.eventsAttendedTitleMobile : styles.eventsAttendedTitle, marginLeft: isMobile ? '18%' : '23%'}}>
