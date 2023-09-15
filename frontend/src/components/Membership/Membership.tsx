@@ -38,7 +38,7 @@ const Membership = () => {
   const [rankings, setRankings] = useState<Array<Ranking>>([]);
   const navigate = useNavigate();
   const isMobile = useMediaQuery('(max-width: 767px)');
-  const isiPad = useMediaQuery('(max-width: 820px)');
+  const isiPad = useMediaQuery('(max-width: 890px)');
   const styles = membershipStyles();
   const [verificationCode, setVerificationCode] = useState('');
   const [isCodeVisible, setIsCodeVisible] = useState(true);
