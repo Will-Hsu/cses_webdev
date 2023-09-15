@@ -93,7 +93,7 @@ export const membershipStyles = () => ({
   },
 
   rewardBox: {
-    backgroundColor: 'black',
+    backgroundColor: 'transparent',
     justifyContent: 'flex-end',
     alignItems: 'center',
     flexDirection: 'column',

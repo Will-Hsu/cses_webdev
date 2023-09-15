@@ -56,7 +56,7 @@ const RewardsMenu = (userData: RewardsProp) => {
           filter: userData.points >= smallPrizePoints ? 'grayscale(0%)': 'grayscale(100%)',
           }}>
           <Box>
-          <img src={smallPrize} alt="img" style={{ maxWidth: '80%'}} />
+          <img src={smallPrize} alt="img" style={{ maxWidth: '70%'}} />
           </Box>
           <Box
             style={{
@@ -89,7 +89,7 @@ const RewardsMenu = (userData: RewardsProp) => {
           filter: userData.points >= mediumPrizePoints ? 'grayscale(0%)': 'grayscale(100%)',
           }}>
           <Box>
-          <img src={medPrize} alt="img" style={{ maxWidth: '80%'}} />
+          <img src={medPrize} alt="img" style={{ maxWidth: '70%'}} />
           </Box>
           <Box
             style={{
@@ -122,7 +122,7 @@ const RewardsMenu = (userData: RewardsProp) => {
           filter: userData.points >= largePrizePoints ? 'grayscale(0%)': 'grayscale(100%)',
           }}>
           <Box>
-          <img src={bigPrize} alt="img" style={{ maxWidth: '80%'}} />
+          <img src={bigPrize} alt="img" style={{ maxWidth: '70%'}} />
           </Box>
           <Box
             style={{
