@@ -3,7 +3,7 @@ import { Box, Grid, ToggleButton, createTheme, useMediaQuery } from '@mui/materi
 import shape from '../../images/shape.svg';
 import previous from '../../images/previous.png';
 import next from '../../images/next.png';
-import Button from '../Button/Button';
+// import Button from '../Button/Button';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { buttonStyles } from '../Button/styles';
 import { aboutStyles } from './styles';
@@ -153,33 +153,28 @@ const MeetTheTeam = () => {
         </Box>
       </Grid>
       <Grid container sx={{ marginTop: '5%', display: 'flex', justifyContent: 'center' }}>
-          
-            <ToggleButtonGroup
-              value={currentCategory.name}
-              exclusive
-              aria-label="Category Selection"
+        <ToggleButtonGroup value={currentCategory.name} exclusive aria-label="Category Selection">
+          {categories.map((category) => (
+            <ToggleButton
+              key={category.name}
+              value={category.name}
+              sx={{
+                ...buttonStyles(false, false),
+                marginRight: '0px',
+                marginLeft: '0px',
+                '&.MuiToggleButton-root.Mui-selected, &.MuiToggleButton-root.Mui-selected:hover': {
+                  backgroundColor: 'grey',
+                  color: 'white',
+                },
+              }}
+              onClick={() => {
+                handleCategoryChange(category);
+              }}
             >
-              {categories.map((category) => (
-                <ToggleButton
-                  key={category.name}
-                  value={category.name}
-                  sx={{
-                    ...buttonStyles(false),
-                    marginRight:'0px',
-                    marginLeft:'0px',
-                    '&.MuiToggleButton-root.Mui-selected, &.MuiToggleButton-root.Mui-selected:hover': {
-                      backgroundColor: 'grey',
-                      color: 'white',
-                    },
-                  }}
-                  onClick={() => {
-                    handleCategoryChange(category)}}
-                  >
-                  {category.name}
-                </ToggleButton>
-            ))}
-
-          </ToggleButtonGroup>
+              {category.name}
+            </ToggleButton>
+          ))}
+        </ToggleButtonGroup>
       </Grid>
       <Grid
         container

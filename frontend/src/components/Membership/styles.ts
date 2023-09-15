@@ -19,8 +19,9 @@ export const membershipStyles = () => ({
   },
 
   eventsAttendedBody: {
+    marginLeft: '10%',
     position: 'relative',
-    width: '80%',
+    width: '90%',
     marginBottom: '100px',
   },
 

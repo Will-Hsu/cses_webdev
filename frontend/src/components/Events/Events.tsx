@@ -7,7 +7,6 @@ import EventBox from '../Event/Event';
 import Button from '../Button/Button';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { buttonStyles } from '../Button/styles';
-import { height } from '@mui/system';
 import useMediaQuery from '../../hooks/useMediaQuery';
 
 interface EventData {
@@ -22,13 +21,44 @@ interface EventData {
 }
 
 const Events = () => {
+  // add state for page number
+  const [pageNumberUpcoming, setPageNumberUpcoming] = useState(1);
+  const [pageNumberPast, setPageNumberPast] = useState(1);
+
+  // add state for the total number of pages
+  const [totalPagesUpcoming, setTotalPagesUpcoming] = useState(1);
+  const [totalPagesPast, setTotalPagesPast] = useState(1);
+
+  // add state for the number of events per page
+  const eventsPerPage = 6;
+
   const styles = event_style();
   const eventsContainerStyle: any = styles.eventsContainer;
 
   const [upcomingEvents, setUpcomingEvents] = useState<EventData[]>([]);
   const [pastEvents, setPastEvents] = useState<EventData[]>([]);
-  const [selectedYear, setSelectedYear] = useState<number | null>(null);
-  const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
+  const [selectedYear] = useState<number | null>(null);
+  const [selectedMonth] = useState<number | null>(null);
+
+  const paginate = (
+    events: Array<EventData>,
+    pageNumber: number,
+    totalPages: number,
+    type: string,
+  ) => {
+    // console.log('paginate ' + pageNumber);
+    if (type === 'upcoming') {
+      setPageNumberUpcoming(pageNumber);
+      setDisplayedFutureEvents(
+        events.slice((pageNumber - 1) * eventsPerPage, pageNumber * eventsPerPage),
+      );
+    } else {
+      setPageNumberPast(pageNumber);
+      setDisplayedPastEvents(
+        events.slice((pageNumber - 1) * eventsPerPage, pageNumber * eventsPerPage),
+      );
+    }
+  };
 
   const isDesktop = useMediaQuery('(min-width: 1024px)');
   const isIpad = useMediaQuery('(min-width: 768px) and (max-width: 1023px)');
@@ -76,8 +106,9 @@ const Events = () => {
 
         const response = await fetch(upcomingEventsEndpoint);
         const data = await response.json();
+        setTotalPagesUpcoming(Math.ceil(data.length / 6));
         setUpcomingEvents(data);
-        setDisplayedFutureEvents(data);
+        paginate(data, 1, totalPagesUpcoming, 'upcoming');
       } catch (error) {
         console.error('Error fetching upcoming events:', error);
       }
@@ -94,8 +125,9 @@ const Events = () => {
 
         const response = await fetch(pastEventsEndpoint);
         const data = await response.json();
+        setTotalPagesPast(Math.ceil(data.length / 6));
         setPastEvents(data);
-        setDisplayedPastEvents(data);
+        paginate(data, 1, totalPagesPast, 'past');
       } catch (error) {
         console.error('Error fetching past events:', error);
       }
@@ -103,7 +135,7 @@ const Events = () => {
 
     fetchUpcomingEvents();
     fetchPastEvents();
-  }, [selectedYear, selectedMonth]);
+  }, [selectedYear, selectedMonth, totalPagesUpcoming, totalPagesPast]);
 
   const [displayedFutureEvents, setDisplayedFutureEvents] = useState(upcomingEvents);
   const [displayedPastEvents, setDisplayedPastEvents] = useState(pastEvents);
@@ -125,7 +157,7 @@ const Events = () => {
           new Date(event.start_time).getTime() <= oneWeekAfter,
       );
 
-      console.log(thisWeekEvents);
+      // console.log(thisWeekEvents);
 
       setDisplayedFutureEvents(thisWeekEvents);
       setIsThisWeekClicked(true);
@@ -147,7 +179,7 @@ const Events = () => {
           new Date(event.start_time).getTime() <= oneMonthAfter,
       );
 
-      console.log(thisMonthEvents);
+      // console.log(thisMonthEvents);
 
       setDisplayedFutureEvents(thisMonthEvents);
       setIsThisWeekClicked(false);
@@ -244,7 +276,7 @@ const Events = () => {
               key="This Week"
               value="This Week"
               sx={{
-                ...buttonStyles(false),
+                ...buttonStyles(false, false),
                 marginRight: '0px',
                 marginLeft: '0px',
                 '&.MuiToggleButton-root.Mui-selected, &.MuiToggleButton-root.Mui-selected:hover': {
@@ -260,7 +292,7 @@ const Events = () => {
               key="This Month"
               value="This Month"
               sx={{
-                ...buttonStyles(false),
+                ...buttonStyles(false, false),
                 marginRight: '0px',
                 marginLeft: '0px',
                 '&.MuiToggleButton-root.Mui-selected, &.MuiToggleButton-root.Mui-selected:hover': {
@@ -285,8 +317,45 @@ const Events = () => {
         >
           {renderEventBoxes(displayedFutureEvents)}
         </div>
-
-        {/* ... (previous code) */}
+        <div>
+          <p
+            style={{
+              color: 'white',
+              fontSize: '20px',
+              fontFamily: 'Chakra Petch',
+              fontWeight: '700',
+              display: 'flex',
+              flexDirection: 'row',
+              marginLeft: '39px',
+            }}
+          >
+            Page {pageNumberUpcoming} of {totalPagesUpcoming}
+          </p>
+        </div>
+        {totalPagesUpcoming > 1 && (
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+            <Button
+              size="medium"
+              text="Previous"
+              onClick={() => {
+                if (pageNumberUpcoming > 1) {
+                  paginate(upcomingEvents, pageNumberUpcoming - 1, totalPagesUpcoming, 'upcoming');
+                }
+              }}
+              inactive={pageNumberUpcoming === 1}
+            />
+            <Button
+              size="medium"
+              text="Next"
+              onClick={() => {
+                if (pageNumberUpcoming < totalPagesUpcoming) {
+                  paginate(upcomingEvents, pageNumberUpcoming + 1, totalPagesUpcoming, 'upcoming');
+                }
+              }}
+              inactive={pageNumberUpcoming === totalPagesUpcoming}
+            />
+          </div>
+        )}
 
         {/* Render EventBoxes for past events */}
         <div
@@ -332,6 +401,52 @@ const Events = () => {
           )) ||
             renderPastEventBoxes(displayedPastEvents)}
         </div>
+        <div>
+          <p
+            style={{
+              color: 'white',
+              fontSize: '20px',
+              fontFamily: 'Chakra Petch',
+              fontWeight: '700',
+              display: 'flex',
+              flexDirection: 'row',
+              marginLeft: '39px',
+            }}
+          >
+            Page {pageNumberPast} of {totalPagesPast}
+          </p>
+        </div>
+        {totalPagesPast > 1 && (
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              marginTop: '20px',
+              marginBottom: '20px',
+            }}
+          >
+            <Button
+              size="medium"
+              text="Previous"
+              onClick={() => {
+                if (pageNumberPast > 1) {
+                  paginate(pastEvents, pageNumberPast - 1, totalPagesPast, 'past');
+                }
+              }}
+              inactive={pageNumberPast === 1}
+            ></Button>
+            <Button
+              size="medium"
+              text="Next"
+              onClick={() => {
+                if (pageNumberPast < totalPagesPast) {
+                  paginate(pastEvents, pageNumberPast + 1, totalPagesPast, 'past');
+                }
+              }}
+              inactive={pageNumberPast === totalPagesPast}
+            ></Button>
+          </div>
+        )}
       </Container>
     </div>
   );

@@ -7,10 +7,17 @@ interface ButtonProps {
   size?: 'small' | 'medium' | 'large';
   onClick?: () => void;
   isLogin?: boolean;
+  inactive?: boolean;
 }
 
-const Button = ({ text, size = 'small', isLogin = false, onClick }: ButtonProps) => {
-  const style = buttonStyles(isLogin);
+const Button = ({
+  text,
+  size = 'small',
+  isLogin = false,
+  onClick,
+  inactive = false,
+}: ButtonProps) => {
+  const style = buttonStyles(isLogin, inactive);
   return (
     <MuiButton sx={style} size={size} variant="outlined" onClick={onClick}>
       {text}
