@@ -1,7 +1,6 @@
 import React from 'react';
 import { Container, Typography, Grid, Link, Box, useTheme } from '@mui/material';
 import bg from '../../images/shape2.svg';
-import Button from '../Button/Button';
 import sponsor from '../../images/cseLogo.gif';
 import sponsor2 from '../../images/AS.png';
 import { opportunitiesStyles } from './styles';

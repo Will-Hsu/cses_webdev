@@ -45,11 +45,10 @@ const Membership = () => {
   const theme = useTheme();
 
   const handleVerifyCodeClick = () => {
-    console.log('Verification Code:', verificationCode);
+    console.log('Verification Code:', verificationCode, isCodeVisible);
     setIsCodeVisible(false);
     setVerificationCode('');
   };
-
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -108,48 +107,58 @@ const Membership = () => {
           margin: '10% 0',
         }}
       >
-      
-      <div style={{ display: 'flex', alignItems: 'flex-start', flexDirection: isiPad ? 'column': 'row' }}>
-        <div style={{ flex: 1 }}>
-          <div>
-            <Typography sx={{...isMobile ? styles.eventsAttendedTitleMobile : styles.eventsAttendedTitle, marginLeft: isMobile ? '18%' : '23%'}}>
-              EVENT CHECK-IN
-            </Typography>
-            <TextField
-              sx={{
-                ...styles.textfield,
-                width: '35%',
-                marginLeft: isMobile ? '18%' : '23%',
-                marginBottom: '100px',
-                [theme.breakpoints.down('sm')]: {
-                  width: '40%',
-                },
-              }}
-              size="small"
-              placeholder={'6 Digit Code'}
-              value={verificationCode}
-              onChange={(e) => setVerificationCode(e.target.value)}
-            />
-            <Button
-              sx={{
-                ...styles.button,
-                width: '20%',
-                marginBottom: '100px',
-                [theme.breakpoints.down('sm')]: {
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'flex-start',
+            flexDirection: isiPad ? 'column' : 'row',
+          }}
+        >
+          <div style={{ flex: 1 }}>
+            <div>
+              <Typography
+                sx={{
+                  ...(isMobile ? styles.eventsAttendedTitleMobile : styles.eventsAttendedTitle),
+                  marginLeft: isMobile ? '18%' : '23%',
+                }}
+              >
+                EVENT CHECK-IN
+              </Typography>
+              <TextField
+                sx={{
+                  ...styles.textfield,
+                  width: '35%',
+                  marginLeft: isMobile ? '18%' : '23%',
+                  marginBottom: '100px',
+                  [theme.breakpoints.down('sm')]: {
+                    width: '40%',
+                  },
+                }}
+                size="small"
+                placeholder={'6 Digit Code'}
+                value={verificationCode}
+                onChange={(e) => setVerificationCode(e.target.value)}
+              />
+              <Button
+                sx={{
+                  ...styles.button,
                   width: '20%',
-                },
-              }}
-              onClick={handleVerifyCodeClick}
-            >
-              Verify
-            </Button>
+                  marginBottom: '100px',
+                  [theme.breakpoints.down('sm')]: {
+                    width: '20%',
+                  },
+                }}
+                onClick={handleVerifyCodeClick}
+              >
+                Verify
+              </Button>
+            </div>
+          </div>
+
+          <div style={{ flex: 1 }}>
+            {isLoggedIn && userData && <RewardsMenu points={userData.points} />}
           </div>
         </div>
-
-        <div style={{ flex: 1 }}>
-          {isLoggedIn && userData && <RewardsMenu points={userData.points} />}
-        </div>
-      </div>
 
         {/* Add Events Attended + Leaderboard UI for the membership page @Brian & Eddie & Yashil --
         consider creating a separate component for this as well */}
