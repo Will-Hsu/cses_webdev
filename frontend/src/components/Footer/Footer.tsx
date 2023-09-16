@@ -21,7 +21,9 @@ const Footer = () => {
     <Container disableGutters maxWidth={false} sx={styles.footer}>
       <Grid container spacing={2}>
         <Grid item sx={{ marginRight: 'auto' }}>
-          <img src={csesLogo} alt="logo" style={{ height: '80px', margin: '20px' }} />
+          <a href="/">
+            <img src={csesLogo} alt="logo" style={{ height: '80px', margin: '20px' }} />
+          </a>
           <Grid container spacing={2} sx={{ margin: '10px' }}>
             <Grid item sx={{ marginRight: '50px' }}>
               {links.map(({ text, link }, id) => (
@@ -38,9 +40,9 @@ const Footer = () => {
                   {text}
                 </Typography>
               ))}
-              <Typography sx={styles.text} style={{ marginTop: '30px' }}>
+              {/* <Typography sx={styles.text} style={{ marginTop: '30px' }}>
                 (862) 223-9756
-              </Typography>
+              </Typography> */}
               <Link sx={styles.text} href="mailto:cses@eng.ucsd.edu">
                 cses@eng.ucsd.edu
               </Link>

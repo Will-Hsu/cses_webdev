@@ -7,6 +7,7 @@ import infinity from '../../images/infinity.svg';
 import EventBox from '../Event/Event';
 import { homeStyles } from './styles';
 import SlideShow from './SlideShow/SlideShow';
+import axios from 'axios';
 
 interface EventData {
   calendar_link: string;
@@ -20,8 +21,31 @@ interface EventData {
 }
 
 const Home = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
   const styles = homeStyles();
+
+  const [totalEvents, setTotalEvents] = useState(0);
+  const [totalUsers, setTotalUsers] = useState(0);
+
+  useEffect(() => {
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/v1/total-events`)
+      .then((response) => {
+        setTotalEvents(response.data.totalEvents);
+      })
+      .catch((error) => {
+        console.error('Error fetching total events:', error);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/v1/users/total-users`)
+      .then((response) => {
+        setTotalUsers(response.data.totalUsers);
+      })
+      .catch((error) => {
+        console.error('Error fetching total users:', error);
+      });
+  }, []);
 
   const [displayedFutureEvents, setDisplayedFutureEvents] = useState<EventData[]>([]);
 
@@ -101,7 +125,7 @@ const Home = () => {
                 }}
               >
                 <Button
-                  size="large"
+                  size="large" 
                   text="Become a Member ->"
                   onClick={() => navigate('/membership')}
                 />
@@ -110,7 +134,7 @@ const Home = () => {
             <Grid item xs={11} sm={2.5} md={1.8} lg={1.8}>
               <Box sx={{ ...styles.statisticContainer }}>
                 <Box sx={styles.statisticWrapper}>
-                  <Box sx={styles.statisticTitle}>1000+</Box>
+                  <Box sx={styles.statisticTitle}>{totalUsers}+</Box>
                   <Box sx={styles.statisticSubtitle}>Members & counting.</Box>
                 </Box>
               </Box>
@@ -118,7 +142,7 @@ const Home = () => {
             <Grid item xs={11} sm={2.5} md={1.8} lg={1.8}>
               <Box sx={styles.statisticContainer}>
                 <Box sx={styles.statisticWrapper}>
-                  <Box sx={styles.statisticTitle}>50+</Box>
+                  <Box sx={styles.statisticTitle}>{totalEvents}+</Box>
                   <Box sx={styles.statisticSubtitle}>Events & counting.</Box>
                 </Box>
               </Box>
