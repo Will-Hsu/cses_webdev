@@ -1,4 +1,5 @@
 import { useContext, useState, useEffect } from 'react';
+import { useMediaQuery, Typography, TextField, useTheme, Button } from '@mui/material';
 import { AuthContext } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { User } from '../../utils/types';
@@ -6,8 +7,10 @@ import EventsAttended from './EventsAttended';
 import LeaderBoard from './LeaderBoard';
 import MemberProfile from '../MemberProfile/MemberProfile';
 import EventsDashboard from './EventsDashboard';
+import RewardsMenu from './RewardsMenu';
 import axios from 'axios';
 import { userInfoAPI, topMembersAPI } from '../../api';
+import { membershipStyles } from './styles';
 
 interface Event {
   _id: string;
@@ -34,6 +37,19 @@ const Membership = () => {
   const [eventsAttended, setEventsAttended] = useState<Array<Event>>([]);
   const [rankings, setRankings] = useState<Array<Ranking>>([]);
   const navigate = useNavigate();
+  const isMobile = useMediaQuery('(max-width: 767px)');
+  const isiPad = useMediaQuery('(max-width: 890px)');
+  const styles = membershipStyles();
+  const [verificationCode, setVerificationCode] = useState('');
+  const [isCodeVisible, setIsCodeVisible] = useState(true);
+  const theme = useTheme();
+
+  const handleVerifyCodeClick = () => {
+    console.log('Verification Code:', verificationCode);
+    setIsCodeVisible(false);
+    setVerificationCode('');
+  };
+
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -92,6 +108,49 @@ const Membership = () => {
           margin: '10% 0',
         }}
       >
+      
+      <div style={{ display: 'flex', alignItems: 'flex-start', flexDirection: isiPad ? 'column': 'row' }}>
+        <div style={{ flex: 1 }}>
+          <div>
+            <Typography sx={{...isMobile ? styles.eventsAttendedTitleMobile : styles.eventsAttendedTitle, marginLeft: isMobile ? '18%' : '23%'}}>
+              EVENT CHECK-IN
+            </Typography>
+            <TextField
+              sx={{
+                ...styles.textfield,
+                width: '35%',
+                marginLeft: isMobile ? '18%' : '23%',
+                marginBottom: '100px',
+                [theme.breakpoints.down('sm')]: {
+                  width: '40%',
+                },
+              }}
+              size="small"
+              placeholder={'6 Digit Code'}
+              value={verificationCode}
+              onChange={(e) => setVerificationCode(e.target.value)}
+            />
+            <Button
+              sx={{
+                ...styles.button,
+                width: '20%',
+                marginBottom: '100px',
+                [theme.breakpoints.down('sm')]: {
+                  width: '20%',
+                },
+              }}
+              onClick={handleVerifyCodeClick}
+            >
+              Verify
+            </Button>
+          </div>
+        </div>
+
+        <div style={{ flex: 1 }}>
+          {isLoggedIn && userData && <RewardsMenu points={userData.points} />}
+        </div>
+      </div>
+
         {/* Add Events Attended + Leaderboard UI for the membership page @Brian & Eddie & Yashil --
         consider creating a separate component for this as well */}
         {isLoggedIn && userData && <EventsAttended eventsAttended={eventsAttended} />}

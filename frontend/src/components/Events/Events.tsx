@@ -240,18 +240,22 @@ const Events = () => {
     ));
   };
 
+  
+  
   return (
     <div style={{ position: 'relative', overflow: 'hidden' }}>
       <img src={bgTop} alt="bg1" style={{ ...styles.bg1, position: 'absolute' }} />
       <img src={bgBtm} alt="bg2" style={{ ...styles.bg2, position: 'absolute' }} />
       <Container maxWidth="xl" sx={styles.body}>
+
+
         <div
           style={{
             color: 'white',
             fontSize: '40px',
             fontFamily: 'Chakra Petch',
             marginLeft: '39px',
-            marginTop: '117px',
+            marginTop: '20px',
             fontWeight: '700',
           }}
         >
