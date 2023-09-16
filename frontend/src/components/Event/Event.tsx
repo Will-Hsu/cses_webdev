@@ -352,20 +352,22 @@ const EventBox = ({
                 onMouseLeave={(e) => (e.currentTarget.style.filter = 'grayscale(100%)')}
               />
             </a>
-            <a href={instagram_link} style={{ marginLeft: '325px', marginTop: '-35px' }}>
-              <img
-                src={instagramIcon}
-                alt="Instagram Icon"
-                style={{
-                  width: '30px',
-                  height: '30px',
-                  filter: 'grayscale(100%)',
-                  transition: 'filter 0.3s',
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.filter = 'grayscale(0%)')}
-                onMouseLeave={(e) => (e.currentTarget.style.filter = 'grayscale(100%)')}
-              />
-            </a>
+            {instagram_link !== null && (
+              <a href={instagram_link} style={{ marginLeft: '325px', marginTop: '-35px' }}>
+                <img
+                  src={instagramIcon}
+                  alt="Instagram Icon"
+                  style={{
+                    width: '30px',
+                    height: '30px',
+                    filter: 'grayscale(100%)',
+                    transition: 'filter 0.3s',
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.filter = 'grayscale(0%)')}
+                  onMouseLeave={(e) => (e.currentTarget.style.filter = 'grayscale(100%)')}
+                />
+              </a>
+            )}
           </div>
         </div>
       </Box>

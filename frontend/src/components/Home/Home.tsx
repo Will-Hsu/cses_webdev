@@ -8,6 +8,8 @@ import EventBox from '../Event/Event';
 import { homeStyles } from './styles';
 import SlideShow from './SlideShow/SlideShow';
 import axios from 'axios';
+import useMediaQuery from '../../hooks/useMediaQuery';
+import MobileEventBox from '../Event/MobileEvent';
 
 interface EventData {
   calendar_link: string;
@@ -21,14 +23,16 @@ interface EventData {
 }
 
 const Home = () => {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const styles = homeStyles();
+  const isMobile = useMediaQuery('(max-width: 767px)');
 
   const [totalEvents, setTotalEvents] = useState(0);
   const [totalUsers, setTotalUsers] = useState(0);
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/v1/total-events`)
+    axios
+      .get(`${process.env.REACT_APP_BACKEND_URL}/api/v1/total-events`)
       .then((response) => {
         setTotalEvents(response.data.totalEvents);
       })
@@ -38,7 +42,8 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/v1/users/total-users`)
+    axios
+      .get(`${process.env.REACT_APP_BACKEND_URL}/api/v1/users/total-users`)
       .then((response) => {
         setTotalUsers(response.data.totalUsers);
       })
@@ -113,7 +118,7 @@ const Home = () => {
                   minHeight: '50%',
                 }}
               >
-                Join CSES today.
+                Join CSES today!
               </Box>
               <Box
                 sx={{
@@ -125,7 +130,7 @@ const Home = () => {
                 }}
               >
                 <Button
-                  size="large" 
+                  size="large"
                   text="Become a Member ->"
                   onClick={() => navigate('/membership')}
                 />
@@ -191,30 +196,55 @@ const Home = () => {
               </p>
             </div>
 
-            <div
-              style={{
-                display: 'flex',
-                marginBottom: '25px',
-                overflowX: 'auto', // Enable horizontal scrolling
-                maxWidth: '100%', // Ensure the container doesn't exceed its parent's width
-              }}
-            >
-              {displayedFutureEvents.map((eventData, id) => (
-                <div key={id} style={{ marginRight: '30px', marginTop: '30px' }}>
-                  <EventBox
-                    title={eventData.title}
-                    targetDate={new Date(eventData.end_time)}
-                    location={eventData.location}
-                    calendar_link={eventData.calendar_link}
-                    description={eventData.description}
-                    end_time={eventData.end_time}
-                    instagram_link={eventData.instagram_link}
-                    start_time={eventData.start_time}
-                    _id={eventData._id}
-                  />
-                </div>
-              ))}
-            </div>
+            {isMobile && (
+              <div
+                style={{
+                  marginBottom: '25px',
+                  overflowX: 'auto', // Enable horizontal scrolling
+                  maxWidth: '100%', // Ensure the container doesn't exceed its parent's width
+                }}
+              >
+                {displayedFutureEvents.map((eventData, id) => (
+                  <div key={id}>
+                    <MobileEventBox
+                      title={eventData.title}
+                      targetDate={new Date(eventData.end_time)}
+                      location={eventData.location}
+                      end_time={eventData.end_time}
+                      start_time={eventData.start_time}
+                      _id={eventData._id}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {!isMobile && (
+              <div
+                style={{
+                  display: 'flex',
+                  marginBottom: '25px',
+                  overflowX: 'auto', // Enable horizontal scrolling
+                  maxWidth: '100%', // Ensure the container doesn't exceed its parent's width
+                }}
+              >
+                {displayedFutureEvents.map((eventData, id) => (
+                  <div key={id} style={{ marginRight: '30px', marginTop: '30px' }}>
+                    <EventBox
+                      title={eventData.title}
+                      targetDate={new Date(eventData.end_time)}
+                      location={eventData.location}
+                      calendar_link={eventData.calendar_link}
+                      description={eventData.description}
+                      end_time={eventData.end_time}
+                      instagram_link={eventData.instagram_link}
+                      start_time={eventData.start_time}
+                      _id={eventData._id}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
             <Button
               size="large"
               text="See All Events ->"
