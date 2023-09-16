@@ -115,29 +115,6 @@ const Membership = () => {
             <Typography sx={{...isMobile ? styles.eventsAttendedTitleMobile : styles.eventsAttendedTitle, marginLeft: isMobile ? '18%' : '23%'}}>
               EVENT CHECK-IN
             </Typography>
-            {/* <input
-              type="text"
-              value={verificationCode}
-              onChange={(e) => setVerificationCode(e.target.value)}
-              style={{
-                fontSize: '16px',      
-                width: '115px',  
-                marginTop: '3%',
-                marginLeft: isMobile ? '18%' : '23%',
-                marginRight: '10px',
-                marginBottom: '100px',
-              }}
-            />
-            <button
-              onClick={handleVerifyCodeClick}
-              style={{
-                fontFamily: 'Chakra Petch',
-                fontSize: '14px',  
-                marginBottom: '100px',
-              }}
-            >
-              Verify Code
-            </button> */}
             <TextField
               sx={{
                 ...styles.textfield,
