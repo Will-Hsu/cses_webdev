@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Container, ToggleButton } from '@mui/material';
 import bgTop from '../../images/shape.svg';
 import bgBtm from '../../images/shape.svg';
 import { event_style } from './styles';
 import EventBox from '../Event/Event';
+import MobileEventBox from '../Event/MobileEvent';
 import Button from '../Button/Button';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { buttonStyles } from '../Button/styles';
@@ -46,7 +47,6 @@ const Events = () => {
     totalPages: number,
     type: string,
   ) => {
-    // console.log('paginate ' + pageNumber);
     if (type === 'upcoming') {
       setPageNumberUpcoming(pageNumber);
       setDisplayedFutureEvents(
@@ -157,8 +157,6 @@ const Events = () => {
           new Date(event.start_time).getTime() <= oneWeekAfter,
       );
 
-      // console.log(thisWeekEvents);
-
       setDisplayedFutureEvents(thisWeekEvents);
       setIsThisWeekClicked(true);
       setIsThisMonthClicked(false);
@@ -204,40 +202,72 @@ const Events = () => {
 
   // Render EventBoxes using map
   const renderEventBoxes = (events: EventData[]) => {
-    return events.map((eventData) => (
-      <React.Fragment key={eventData._id}>
-        <EventBox
-          title={eventData.title}
-          targetDate={new Date(eventData.end_time)}
-          location={eventData.location}
-          calendar_link={eventData.calendar_link}
-          description={eventData.description}
-          end_time={eventData.end_time}
-          instagram_link={eventData.instagram_link}
-          start_time={eventData.start_time}
-          _id={eventData._id}
-        />
-      </React.Fragment>
-    ));
+    return events.map((eventData) => {
+      if (isMobile) {
+        return (
+          <MobileEventBox
+            title={eventData.title}
+            targetDate={new Date(eventData.end_time)}
+            location={eventData.location}
+            end_time={eventData.end_time}
+            start_time={eventData.start_time}
+            _id={eventData._id}
+            pastEvent
+          />
+        );
+      } else {
+        return (
+          <React.Fragment key={eventData._id}>
+            <EventBox
+              title={eventData.title}
+              targetDate={new Date(eventData.end_time)}
+              location={eventData.location}
+              calendar_link={eventData.calendar_link}
+              description={eventData.description}
+              end_time={eventData.end_time}
+              instagram_link={eventData.instagram_link}
+              start_time={eventData.start_time}
+              _id={eventData._id}
+            />
+          </React.Fragment>
+        );
+      }
+    });
   };
 
   const renderPastEventBoxes = (events: EventData[]) => {
-    return events.map((eventData) => (
-      <React.Fragment key={eventData._id}>
-        <EventBox
-          title={eventData.title}
-          targetDate={new Date(eventData.end_time)}
-          location={eventData.location}
-          calendar_link={eventData.calendar_link}
-          description={eventData.description}
-          end_time={eventData.end_time}
-          instagram_link={eventData.instagram_link}
-          start_time={eventData.start_time}
-          _id={eventData._id}
-          pastEvent
-        />
-      </React.Fragment>
-    ));
+    return events.map((eventData) => {
+      if (isMobile) {
+        return (
+          <MobileEventBox
+            title={eventData.title}
+            targetDate={new Date(eventData.end_time)}
+            location={eventData.location}
+            end_time={eventData.end_time}
+            start_time={eventData.start_time}
+            _id={eventData._id}
+            pastEvent
+          />
+        );
+      } else {
+        return (
+          <React.Fragment key={eventData._id}>
+            <EventBox
+              title={eventData.title}
+              targetDate={new Date(eventData.end_time)}
+              location={eventData.location}
+              calendar_link={eventData.calendar_link}
+              description={eventData.description}
+              end_time={eventData.end_time}
+              instagram_link={eventData.instagram_link}
+              start_time={eventData.start_time}
+              _id={eventData._id}
+              pastEvent
+            />
+          </React.Fragment>
+        );
+      }
+    });
   };
 
   
@@ -259,7 +289,7 @@ const Events = () => {
             fontWeight: '700',
           }}
         >
-          <h2>EVENTS</h2>
+          <h2 id="eventsTitle">EVENTS</h2>
         </div>
 
         {/* Buttons for filtering events */}
@@ -340,6 +370,17 @@ const Events = () => {
               onClick={() => {
                 if (pageNumberUpcoming > 1) {
                   paginate(upcomingEvents, pageNumberUpcoming - 1, totalPagesUpcoming, 'upcoming');
+                  const titleElement = document.getElementById('eventsTitle');
+                  if (titleElement) {
+                    const rect = titleElement.getBoundingClientRect();
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    const targetY = rect.top + scrollTop;
+
+                    window.scrollTo({
+                      top: targetY,
+                      behavior: 'smooth',
+                    });
+                  }
                 }
               }}
               inactive={pageNumberUpcoming === 1}
@@ -350,6 +391,17 @@ const Events = () => {
               onClick={() => {
                 if (pageNumberUpcoming < totalPagesUpcoming) {
                   paginate(upcomingEvents, pageNumberUpcoming + 1, totalPagesUpcoming, 'upcoming');
+                  const titleElement = document.getElementById('eventsTitle');
+                  if (titleElement) {
+                    const rect = titleElement.getBoundingClientRect();
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    const targetY = rect.top + scrollTop;
+
+                    window.scrollTo({
+                      top: targetY,
+                      behavior: 'smooth',
+                    });
+                  }
                 }
               }}
               inactive={pageNumberUpcoming === totalPagesUpcoming}
@@ -368,7 +420,7 @@ const Events = () => {
             fontWeight: '700',
           }}
         >
-          <h2> PAST EVENTS</h2>
+          <h2 id="pastEventsTitle">PAST EVENTS</h2>
         </div>
         {/* Buttons for filtering past events */}
         <div
@@ -431,6 +483,18 @@ const Events = () => {
               onClick={() => {
                 if (pageNumberPast > 1) {
                   paginate(pastEvents, pageNumberPast - 1, totalPagesPast, 'past');
+                  const titleElement = document.getElementById('pastEventsTitle');
+
+                  if (titleElement) {
+                    const rect = titleElement.getBoundingClientRect();
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    const targetY = rect.top + scrollTop;
+
+                    window.scrollTo({
+                      top: targetY,
+                      behavior: 'smooth',
+                    });
+                  }
                 }
               }}
               inactive={pageNumberPast === 1}
@@ -441,6 +505,17 @@ const Events = () => {
               onClick={() => {
                 if (pageNumberPast < totalPagesPast) {
                   paginate(pastEvents, pageNumberPast + 1, totalPagesPast, 'past');
+                  const titleElement = document.getElementById('pastEventsTitle');
+                  if (titleElement) {
+                    const rect = titleElement.getBoundingClientRect();
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    const targetY = rect.top + scrollTop;
+
+                    window.scrollTo({
+                      top: targetY,
+                      behavior: 'smooth',
+                    });
+                  }
                 }
               }}
               inactive={pageNumberPast === totalPagesPast}

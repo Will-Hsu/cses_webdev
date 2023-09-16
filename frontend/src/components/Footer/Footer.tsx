@@ -38,11 +38,9 @@ const Footer = () => {
                   {text}
                 </Typography>
               ))}
-              <Typography sx={styles.text} style={{ marginTop: '30px' }}>
-                (862) 223-9756
-              </Typography>
-              <Link sx={styles.text} href="mailto:cses@eng.ucsd.edu">
-                cses@eng.ucsd.edu
+              <Typography sx={styles.text} style={{ marginTop: '60px' }}></Typography>
+              <Link sx={styles.text} href="mailto:cses@ucsd.edu">
+                cses@ucsd.edu
               </Link>
             </Grid>
           </Grid>
