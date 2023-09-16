@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from 'react';
-import { useMediaQuery, Typography } from '@mui/material';
+import { useMediaQuery, Typography, TextField, useTheme, Button } from '@mui/material';
 import { AuthContext } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { User } from '../../utils/types';
@@ -42,7 +42,7 @@ const Membership = () => {
   const styles = membershipStyles();
   const [verificationCode, setVerificationCode] = useState('');
   const [isCodeVisible, setIsCodeVisible] = useState(true);
-
+  const theme = useTheme();
 
   const handleVerifyCodeClick = () => {
     console.log('Verification Code:', verificationCode);
@@ -115,7 +115,7 @@ const Membership = () => {
             <Typography sx={{...isMobile ? styles.eventsAttendedTitleMobile : styles.eventsAttendedTitle, marginLeft: isMobile ? '18%' : '23%'}}>
               EVENT CHECK-IN
             </Typography>
-            <input
+            {/* <input
               type="text"
               value={verificationCode}
               onChange={(e) => setVerificationCode(e.target.value)}
@@ -137,7 +137,35 @@ const Membership = () => {
               }}
             >
               Verify Code
-            </button>
+            </button> */}
+            <TextField
+              sx={{
+                ...styles.textfield,
+                width: '35%',
+                marginLeft: isMobile ? '18%' : '23%',
+                marginBottom: '100px',
+                [theme.breakpoints.down('sm')]: {
+                  width: '40%',
+                },
+              }}
+              size="small"
+              placeholder={'6 Digit Code'}
+              value={verificationCode}
+              onChange={(e) => setVerificationCode(e.target.value)}
+            />
+            <Button
+              sx={{
+                ...styles.button,
+                width: '20%',
+                marginBottom: '100px',
+                [theme.breakpoints.down('sm')]: {
+                  width: '20%',
+                },
+              }}
+              onClick={handleVerifyCodeClick}
+            >
+              Verify
+            </Button>
           </div>
         </div>
 
