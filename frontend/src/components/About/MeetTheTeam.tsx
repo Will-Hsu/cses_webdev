@@ -71,7 +71,7 @@ const categories = [
   },
   {
     id: 3,
-    name: 'Internal Webdev',
+    name: 'CSES Dev',
     members: [
       { name: 'Will Hsu', title: 'Engineering Manager', photo: Will },
       { name: 'Delvin Bajoua', title: 'Product Manager', photo: Delvin },
@@ -87,7 +87,7 @@ const categories = [
   },
   {
     id: 4,
-    name: 'External Webdev',
+    name: 'CSES WebDev',
     members: [
       { name: 'Shruti Bhamidipati', title: 'President', photo: Shruti },
       { name: 'Manan Patel', title: 'VP Finance', photo: Manan },

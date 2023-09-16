@@ -92,6 +92,9 @@ const Events = () => {
   useEffect(() => {
     // Set media queries
 
+    // let upcomingEventsEndpoint = `http://localhost:5000/api/v1/events?type=upcoming`;
+    // let pastEventsEndpoint = `http://localhost:5000/api/v1/events`;
+
     let upcomingEventsEndpoint = `${process.env.REACT_APP_BACKEND_URL}/api/v1/events?type=upcoming`;
     let pastEventsEndpoint = `${process.env.REACT_APP_BACKEND_URL}/api/v1/events?type=past`;
 
@@ -270,22 +273,18 @@ const Events = () => {
     });
   };
 
-  
-  
   return (
     <div style={{ position: 'relative', overflow: 'hidden' }}>
       <img src={bgTop} alt="bg1" style={{ ...styles.bg1, position: 'absolute' }} />
       <img src={bgBtm} alt="bg2" style={{ ...styles.bg2, position: 'absolute' }} />
       <Container maxWidth="xl" sx={styles.body}>
-
-
         <div
           style={{
             color: 'white',
             fontSize: '40px',
             fontFamily: 'Chakra Petch',
             marginLeft: '39px',
-            marginTop: '20px',
+            marginTop: '117px',
             fontWeight: '700',
           }}
         >
