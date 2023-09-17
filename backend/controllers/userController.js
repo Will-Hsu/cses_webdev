@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import User from '../models/user.js';
+import Event from '../models/event.js';
 import { body, param, validationResult } from 'express-validator';
 import asyncHandler from 'express-async-handler';
 
