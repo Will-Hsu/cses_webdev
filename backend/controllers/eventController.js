@@ -247,6 +247,22 @@ export const eventUpdate = [
   }),
 ];
 
+export const getCode = asyncHandler(async (req, res) => {
+  const eventId = req.params.id;
+
+  // Query database for event with given ID
+  try {
+    const event = await Event.findById(eventId);
+    if (event) {
+      res.status(200).json({ message: 'Success' });
+    } else {
+      res.status(404).json({ message: 'Event not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
 // Export default controller methods
 export default {
   eventList,
