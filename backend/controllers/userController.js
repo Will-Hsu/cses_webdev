@@ -160,7 +160,26 @@ export const userEventsUpdate = asyncHandler(async (req, res) => {
     const event = await Event.findOne({ code: code }).exec();
 
     if (!event) {
-      return res.status(400).json({ message: 'Invalid or Expired Code' });
+      return res.status(400).json({ message: 'Invalid Code' });
+    }
+
+    // Get the current time
+    const currentTime = new Date();
+
+    // Check if the event has already started
+    if (currentTime < event.start_time) {
+      return res.status(400).json({ message: 'Event has not started' });
+    }
+
+    // Calculate the time difference between the event start time and the current time in milliseconds
+    const timeDifference = currentTime - event.start_time;
+
+    // Calculate the number of hours until the event starts (in hours)
+    const hoursUntilEventStart = timeDifference / (1000 * 60 * 60);
+
+    // Check if the event is within 24 hours of its start time
+    if (hoursUntilEventStart > 24) {
+      return res.status(400).json({ message: 'Expired Code' });
     }
 
     // Check if the event ID is already in the eventsAttended array
@@ -175,7 +194,6 @@ export const userEventsUpdate = asyncHandler(async (req, res) => {
     user.points += pointsToAdd;
 
     // Add the event ID to the eventsAttended array
-
     user.eventsAttended.push(event._id);
 
     // Save the updated user
