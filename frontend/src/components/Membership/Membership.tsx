@@ -1,5 +1,15 @@
 import { useContext, useState, useEffect } from 'react';
-import { useMediaQuery, Typography, TextField, useTheme, Button } from '@mui/material';
+import {
+  useMediaQuery,
+  Typography,
+  TextField,
+  useTheme,
+  Button,
+  Collapse,
+  IconButton,
+  Alert,
+} from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import { AuthContext } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { User } from '../../utils/types';
@@ -44,17 +54,35 @@ const Membership = () => {
   const [isCodeVisible, setIsCodeVisible] = useState(true);
   const theme = useTheme();
 
+  const [showError, setShowError] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  const alertCloseBtn = (func: any) => {
+    return (
+      <IconButton aria-label="close" size="small" onClick={() => func(false)}>
+        <CloseIcon fontSize="inherit" />
+      </IconButton>
+    );
+  };
+
   const handleVerifyCodeClick = () => {
     addEvent(userData?.email, verificationCode)
       .then(() => {
+        setIsCodeVisible(false);
+        setVerificationCode('');
+        setShowSuccess(true);
+        setTimeout(function () {
+          setShowSuccess(false);
+        }, 5000);
         console.log('good code');
       })
       .catch((error) => {
+        setIsCodeVisible(false);
+        setVerificationCode('');
+        setShowError(true);
         console.log('bad code: ', error);
       });
     console.log('Verification Code:', verificationCode, isCodeVisible);
-    setIsCodeVisible(false);
-    setVerificationCode('');
   };
 
   useEffect(() => {
@@ -131,6 +159,35 @@ const Membership = () => {
               >
                 EVENT CHECK-IN
               </Typography>
+              <Collapse
+                in={showSuccess}
+                sx={{
+                  ...styles.textfield,
+                  marginLeft: isMobile ? '18%' : '23%',
+                  [theme.breakpoints.down('sm')]: {
+                    width: '40%',
+                  },
+                }}
+              >
+                <Alert severity="success" action={alertCloseBtn(setShowSuccess)}>
+                  Successfully checked in!
+                </Alert>
+              </Collapse>
+
+              <Collapse
+                in={showError}
+                sx={{
+                  ...styles.textfield,
+                  marginLeft: isMobile ? '18%' : '23%',
+                  [theme.breakpoints.down('sm')]: {
+                    width: '40%',
+                  },
+                }}
+              >
+                <Alert severity="error" action={alertCloseBtn(setShowError)}>
+                  Invalid event code — <strong>please re-enter a code!</strong>
+                </Alert>
+              </Collapse>
               <TextField
                 sx={{
                   ...styles.textfield,
