@@ -126,3 +126,39 @@ export const eventUpdateAPI = (id, updatedEvent) => {
       });
   });
 };
+
+export const prizeRedeemSmallAPI = (email) => {
+  return new Promise((resolve, reject) => {
+    API.put(`/${email}/redeemSmall`)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+export const prizeRedeemMediumAPI = (email) => {
+  return new Promise((resolve, reject) => {
+    API.put(`/${email}/redeemMedium`)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+export const prizeRedeemLargeAPI = (email) => {
+  return new Promise((resolve, reject) => {
+    API.put(`/${email}/redeemLarge`)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};

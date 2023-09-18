@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 //import { AuthContext } from '../../context/AuthContext';
 //import { useNavigate } from 'react-router-dom';
 //import axios from 'axios';
@@ -30,6 +31,7 @@ import bigPrize from '../../images/rewardsImages/big_gift.png'
 
 
 interface RewardsProp {
+  email: string;
   points: number;
 }
 
@@ -40,6 +42,37 @@ const RewardsMenu = (userData: RewardsProp) => {
     const smallPrizePoints = 500;
     const mediumPrizePoints = 1250;
     const largePrizePoints = 2500;
+
+    const redeemSmallPrize = async () => {
+      try {
+        await axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/v1/users/${userData.email}/redeemSmall`);
+        console.log('Redeem Small Prize endpoint called');
+
+        window.location.reload();
+      } catch (error) {
+        console.error('Error redeeming small prize:', error);
+      }
+    };  
+    
+    const redeemMediumPrize = async () => {
+      try {
+        await axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/v1/users/${userData.email}/redeemMedium`);
+        
+        window.location.reload();
+      } catch (error) {
+        console.error('Error redeeming medium prize:', error);
+      }
+    };    
+
+    const redeemLargePrize = async () => {
+      try {
+        await axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/v1/users/${userData.email}/redeemLarge`);
+        
+        window.location.reload();
+      } catch (error) {
+        console.error('Error redeeming large prize:', error);
+      }
+    };    
 
     return (
       <Container maxWidth="xl" sx={styles.rewardsBody}>
@@ -54,7 +87,7 @@ const RewardsMenu = (userData: RewardsProp) => {
             boxShadow: '0 0 20px 5px rgba(52, 152, 219, 0.7)',
           }: 'none', 
           filter: userData.points >= smallPrizePoints ? 'grayscale(0%)': 'grayscale(100%)',
-          }}>
+          }} onClick={() => redeemSmallPrize()}>
           <Box>
           <img src={smallPrize} alt="img" style={{ maxWidth: '70%'}} />
           </Box>
@@ -87,7 +120,7 @@ const RewardsMenu = (userData: RewardsProp) => {
             boxShadow: '0 0 20px 5px rgba(52, 152, 219, 0.7)',
           }: 'none', 
           filter: userData.points >= mediumPrizePoints ? 'grayscale(0%)': 'grayscale(100%)',
-          }}>
+          }} onClick={() => redeemMediumPrize()}>
           <Box>
           <img src={medPrize} alt="img" style={{ maxWidth: '70%'}} />
           </Box>
@@ -120,7 +153,7 @@ const RewardsMenu = (userData: RewardsProp) => {
             boxShadow: '0 0 20px 5px rgba(52, 152, 219, 0.7)',
           }: 'none', 
           filter: userData.points >= largePrizePoints ? 'grayscale(0%)': 'grayscale(100%)',
-          }}>
+          }} onClick={() => redeemLargePrize()}>
           <Box>
           <img src={bigPrize} alt="img" style={{ maxWidth: '70%'}} />
           </Box>

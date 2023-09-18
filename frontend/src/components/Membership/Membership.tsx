@@ -147,7 +147,7 @@ const Membership = () => {
         </div>
 
         <div style={{ flex: 1 }}>
-          {isLoggedIn && userData && <RewardsMenu points={userData.points} />}
+          {isLoggedIn && userData && <RewardsMenu email={userData.email} points={userData.points} />}
         </div>
       </div>
 
