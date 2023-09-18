@@ -12,6 +12,9 @@ router.post('/create', userController.userCreate);
 // GET request for getting top performers.
 router.get('/topMembers', userController.getTopMembers);
 
+// GET request for getting users count.
+router.get('/usersCount', userController.getUsersCount);
+
 // GET request for getting a user's info.
 router.get('/:email', userController.getUserInfo);
 

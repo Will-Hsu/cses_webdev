@@ -4,6 +4,16 @@ import Event from '../models/event.js';
 import { body, param, validationResult } from 'express-validator';
 import asyncHandler from 'express-async-handler';
 
+export const getUsersCount = asyncHandler(async (_, res) => {
+  try {
+    const count = await User.countDocuments();
+
+    res.status(200).json(count);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 export const userCheck = [
   body('email').notEmpty().isEmail(),
   asyncHandler(async (req, res) => {
@@ -282,6 +292,7 @@ export default {
   redeemSmall,
   redeemMedium,
   redeemLarge,
+  getUsersCount,
 };
 
 function isValidEventId(eventIds) {
