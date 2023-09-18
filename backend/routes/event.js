@@ -21,8 +21,5 @@ router.delete('/event/:id/delete', eventController.eventDelete);
 // PUT request to update Event.
 router.put('/event/:id/update', eventController.eventUpdate);
 
-// GET request to get 6 digit code.
-router.get('/event/:id/sixDigit', eventController.getCode);
-
 // Export router.
 export default router;

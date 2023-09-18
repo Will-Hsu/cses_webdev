@@ -22,7 +22,7 @@ router.post('/check', userController.userCheck);
 router.put('/:email', userController.userUpdate);
 
 // POST request for creating new event entries for a user.
-router.post('/:email/event/:id', userController.userEventsUpdate);
+router.post('/:email/event/:code', userController.userEventsUpdate);
 
 // DELETE request for deleting a user.
 router.delete('/:email', userController.userDelete);

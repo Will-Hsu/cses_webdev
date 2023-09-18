@@ -147,7 +147,7 @@ export const getTopMembers = asyncHandler(async (_, res) => {
 
 // POST request for creating new event entries for a user.
 export const userEventsUpdate = asyncHandler(async (req, res) => {
-  const { email, id } = req.params;
+  const { email, code } = req.params;
 
   try {
     // Find the user by email
@@ -157,16 +157,15 @@ export const userEventsUpdate = asyncHandler(async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    // Check if the event ID is already in the eventsAttended array
-    if (user.eventsAttended.includes(id)) {
-      return res.status(400).json({ message: 'Event already attended' });
+    const event = await Event.findOne({ code: code }).exec();
+
+    if (!event) {
+      return res.status(400).json({ message: 'Invalid or Expired Code' });
     }
 
-    // Find the event by ID to determine if it's major or minor
-
-    const event = await Event.findById(id);
-    if (!event) {
-      return res.status(404).json({ message: 'Event not found' });
+    // Check if the event ID is already in the eventsAttended array
+    if (user.eventsAttended.includes(event._id)) {
+      return res.status(400).json({ message: 'Event already attended' });
     }
 
     // Determine points based on whether the event is major or minor
@@ -174,10 +173,10 @@ export const userEventsUpdate = asyncHandler(async (req, res) => {
 
     // Update user's points
     user.points += pointsToAdd;
-    
+
     // Add the event ID to the eventsAttended array
 
-    user.eventsAttended.push(id);
+    user.eventsAttended.push(event._id);
 
     // Save the updated user
     await user.save();
@@ -204,12 +203,10 @@ export const redeemSmall = asyncHandler(async (req, res) => {
     // Perform additional prize actions here
 
     await user.save();
-    return res.status(200).json({ message: 'Small prize redeemed successfully '});
+    return res.status(200).json({ message: 'Small prize redeemed successfully ' });
   } else {
     return res.status(400).json({ message: 'Insufficient points for redemption' });
   }
-
-  
 });
 
 export const redeemMedium = asyncHandler(async (req, res) => {
@@ -227,7 +224,7 @@ export const redeemMedium = asyncHandler(async (req, res) => {
     // Perform additional prize actions here
 
     await user.save();
-    return res.status(200).json({ message: 'Medium prize redeemed successfully '});
+    return res.status(200).json({ message: 'Medium prize redeemed successfully ' });
   } else {
     return res.status(400).json({ message: 'Insufficient points for redemption' });
   }
@@ -248,7 +245,7 @@ export const redeemLarge = asyncHandler(async (req, res) => {
     // Perform additional prize actions here
 
     await user.save();
-    return res.status(200).json({ message: 'Large prize redeemed successfully '});
+    return res.status(200).json({ message: 'Large prize redeemed successfully ' });
   } else {
     return res.status(400).json({ message: 'Insufficient points for redemption' });
   }

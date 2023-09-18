@@ -2,6 +2,7 @@ import Event from '../models/event.js';
 import asyncHandler from 'express-async-handler';
 import { body, param, validationResult } from 'express-validator';
 import crypto from 'crypto';
+import validator from 'validator';
 
 // Display list of all Events.
 export const eventList = asyncHandler(async (req, res) => {
@@ -51,6 +52,7 @@ export const eventList = asyncHandler(async (req, res) => {
         description,
         calendar_link,
         instagram_link,
+        code,
       } = event;
       return {
         _id,
@@ -62,6 +64,7 @@ export const eventList = asyncHandler(async (req, res) => {
         description,
         calendar_link,
         instagram_link,
+        code,
       };
     });
 
@@ -122,7 +125,8 @@ export const eventCreate = [
   body('instagram_link')
     .trim()
     .custom((url) => {
-      if (url === '' || url.isURL({ require_protocol: true })) {
+      console.log(url);
+      if (url === '' || validator.isURL(url, { require_protocol: true })) {
         return true;
       }
 
@@ -145,7 +149,19 @@ export const eventCreate = [
       // Save event.
       event
         .save()
-        .then((d) => res.json({ message: 'Successful', id: d._id }))
+        .then((d) => {
+          const sha256Hash = crypto.createHash('sha256').update(d._id.toString()).digest('hex');
+
+          // Take the first 6 characters of the hash and convert them to a number
+          const sixDigitCode = parseInt(sha256Hash.substring(0, 6), 16);
+
+          // Ensure it's a 6-digit number by padding with zeros if needed
+          const sixDigit = String(sixDigitCode).padStart(6, '0');
+
+          Event.updateOne({ _id: d._id }, { code: sixDigit })
+            .then(() => res.json({ message: 'Successful', id: d._id, code: sixDigit }))
+            .catch(() => res.status(500).json({ message: 'Internal server error 1' }));
+        })
         .catch(() => res.status(500).json({ message: 'Internal server error' }));
     }
   }),
@@ -215,9 +231,9 @@ export const eventUpdate = [
     .withMessage('End time must be a valid date.'),
   body('location').optional().trim(),
   body('major_event')
-  .optional()
-  .isBoolean()
-  .withMessage('Major event must be either true or false.'), 
+    .optional()
+    .isBoolean()
+    .withMessage('Major event must be either true or false.'),
   body('description').optional().trim(),
   body('calendar_link')
     .optional()
@@ -255,39 +271,6 @@ export const eventUpdate = [
   }),
 ];
 
-export const getCode = asyncHandler(async (req, res) => {
-  const eventId = req.params.id;
-
-  // Query database for event with given ID
-  try {
-    const event = await Event.findById(eventId);
-    if (event) {
-      var sixDigit = event.code;
-
-      if (!sixDigit) {
-        // Use a cryptographic hash function (e.g., SHA-256) to hash the ID
-        const sha256Hash = crypto.createHash('sha256').update(eventId).digest('hex');
-
-        // Take the first 6 characters of the hash and convert them to a number
-        const sixDigitCode = parseInt(sha256Hash.substring(0, 6), 16);
-
-        // Ensure it's a 6-digit number by padding with zeros if needed
-        sixDigit = String(sixDigitCode).padStart(6, '0');
-
-        Event.updateOne({ _id: req.params.id }, { code: sixDigit })
-          .then(() => res.json({ message: 'Generated new Six Digit Code for Event' }))
-          .catch(() => res.status(500).json({ message: 'Internal server error' }));
-      }
-
-      res.status(200).json({ message: 'Success', event });
-    } else {
-      res.status(404).json({ message: 'Event not found' });
-    }
-  } catch (error) {
-    res.status(500).json({ message: 'Internal server error' });
-  }
-});
-
 // Export default controller methods
 export default {
   eventList,
@@ -295,5 +278,4 @@ export default {
   eventCreate,
   eventDelete,
   eventUpdate,
-  getCode,
 };
