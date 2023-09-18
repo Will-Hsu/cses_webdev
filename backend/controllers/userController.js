@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import User from '../models/user.js';
+import RedeemLog from '../models/redeemLog.js';
 import { body, param, validationResult } from 'express-validator';
 import asyncHandler from 'express-async-handler';
 
@@ -184,17 +185,17 @@ export const redeemSmall = asyncHandler(async (req, res) => {
   }
 
   if (user.points >= 500) {
+    const pointsBefore = user.points;
     user.points -= 500;
+    const pointsAfter = user.points;
 
     // Perform additional prize actions here
-
     await user.save();
-    return res.status(200).json({ message: 'Small prize redeemed successfully '});
+    await logRedeem(user._id, 'small', pointsBefore, pointsAfter);
+    return res.status(200).json({ message: 'Small prize redeemed successfully ' });
   } else {
     return res.status(400).json({ message: 'Insufficient points for redemption' });
   }
-
-  
 });
 
 export const redeemMedium = asyncHandler(async (req, res) => {
@@ -207,12 +208,14 @@ export const redeemMedium = asyncHandler(async (req, res) => {
   }
 
   if (user.points >= 1250) {
+    const pointsBefore = user.points;
     user.points -= 1250;
+    const pointsAfter = user.points;
 
     // Perform additional prize actions here
-
     await user.save();
-    return res.status(200).json({ message: 'Medium prize redeemed successfully '});
+    await logRedeem(user._id, 'medium', pointsBefore, pointsAfter);
+    return res.status(200).json({ message: 'Medium prize redeemed successfully ' });
   } else {
     return res.status(400).json({ message: 'Insufficient points for redemption' });
   }
@@ -228,12 +231,14 @@ export const redeemLarge = asyncHandler(async (req, res) => {
   }
 
   if (user.points >= 2500) {
+    const pointsBefore = user.points;
     user.points -= 2500;
+    const pointsAfter = user.points;
 
     // Perform additional prize actions here
-
     await user.save();
-    return res.status(200).json({ message: 'Large prize redeemed successfully '});
+    await logRedeem(user._id, 'large', pointsBefore, pointsAfter);
+    return res.status(200).json({ message: 'Large prize redeemed successfully ' });
   } else {
     return res.status(400).json({ message: 'Insufficient points for redemption' });
   }
@@ -256,4 +261,16 @@ function isValidEventId(eventIds) {
   return (
     Array.isArray(eventIds) && eventIds.every((eventId) => mongoose.Types.ObjectId.isValid(eventId))
   );
+}
+
+async function logRedeem(userId, redeemType, pointsBefore, pointsAfter) {
+  const redeemLog = new RedeemLog({
+    userId,
+    redeemType,
+    timestamp: Date.now(),
+    pointsBefore,
+    pointsAfter,
+  });
+
+  await redeemLog.save();
 }
