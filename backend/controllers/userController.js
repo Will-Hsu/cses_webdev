@@ -174,6 +174,8 @@ export const userEventsUpdate = asyncHandler(async (req, res) => {
     // Calculate the time difference between the event start time and the current time in milliseconds
     const timeDifference = currentTime - event.start_time;
 
+    console.log(currentTime, event.start_time);
+
     // Calculate the number of hours until the event starts (in hours)
     const hoursUntilEventStart = timeDifference / (1000 * 60 * 60);
 

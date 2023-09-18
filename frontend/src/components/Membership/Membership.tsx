@@ -9,7 +9,7 @@ import MemberProfile from '../MemberProfile/MemberProfile';
 import EventsDashboard from './EventsDashboard';
 import RewardsMenu from './RewardsMenu';
 import axios from 'axios';
-import { userInfoAPI, topMembersAPI } from '../../api';
+import { userInfoAPI, topMembersAPI, addEvent } from '../../api';
 import { membershipStyles } from './styles';
 
 interface Event {
@@ -45,6 +45,13 @@ const Membership = () => {
   const theme = useTheme();
 
   const handleVerifyCodeClick = () => {
+    addEvent(userData?.email, verificationCode)
+      .then(() => {
+        console.log('good code');
+      })
+      .catch((error) => {
+        console.log('bad code: ', error);
+      });
     console.log('Verification Code:', verificationCode, isCodeVisible);
     setIsCodeVisible(false);
     setVerificationCode('');
@@ -137,6 +144,7 @@ const Membership = () => {
                 size="small"
                 placeholder={'6 Digit Code'}
                 value={verificationCode}
+                inputProps={{ maxLength: 6 }}
                 onChange={(e) => setVerificationCode(e.target.value)}
               />
               <Button

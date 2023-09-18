@@ -153,10 +153,12 @@ export const eventCreate = [
           const sha256Hash = crypto.createHash('sha256').update(d._id.toString()).digest('hex');
 
           // Take the first 6 characters of the hash and convert them to a number
-          const sixDigitCode = parseInt(sha256Hash.substring(0, 6), 16);
+          const sixDigitCode = parseInt(sha256Hash.substring(0, 6), 16) % 1000000;
 
           // Ensure it's a 6-digit number by padding with zeros if needed
           const sixDigit = String(sixDigitCode).padStart(6, '0');
+
+          console.log(sixDigit);
 
           Event.updateOne({ _id: d._id }, { code: sixDigit })
             .then(() => res.json({ message: 'Successful', id: d._id, code: sixDigit }))
