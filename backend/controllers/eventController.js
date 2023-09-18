@@ -1,6 +1,7 @@
 import Event from '../models/event.js';
 import asyncHandler from 'express-async-handler';
 import { body, param, validationResult } from 'express-validator';
+import crypto from 'crypto';
 
 // Display list of all Events.
 export const eventList = asyncHandler(async (req, res) => {
@@ -254,7 +255,24 @@ export const getCode = asyncHandler(async (req, res) => {
   try {
     const event = await Event.findById(eventId);
     if (event) {
-      res.status(200).json({ message: 'Success' });
+      var sixDigit = event.code;
+
+      if (!sixDigit) {
+        // Use a cryptographic hash function (e.g., SHA-256) to hash the ID
+        const sha256Hash = crypto.createHash('sha256').update(eventId).digest('hex');
+
+        // Take the first 6 characters of the hash and convert them to a number
+        const sixDigitCode = parseInt(sha256Hash.substring(0, 6), 16);
+
+        // Ensure it's a 6-digit number by padding with zeros if needed
+        sixDigit = String(sixDigitCode).padStart(6, '0');
+
+        Event.updateOne({ _id: req.params.id }, { code: sixDigit })
+          .then(() => res.json({ message: 'Generated new Six Digit Code for Event' }))
+          .catch(() => res.status(500).json({ message: 'Internal server error' }));
+      }
+
+      res.status(200).json({ message: 'Success', event });
     } else {
       res.status(404).json({ message: 'Event not found' });
     }
@@ -270,4 +288,5 @@ export default {
   eventCreate,
   eventDelete,
   eventUpdate,
+  getCode,
 };
