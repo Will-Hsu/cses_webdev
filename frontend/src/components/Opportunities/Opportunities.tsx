@@ -29,12 +29,12 @@ const Opportunities = () => {
             <Typography sx={styles.test}>
               <br />
               Our LinkedIn network has opportunities for members from companies, alumni, and
-              professors in our network. This is an opportunity for only members. To join the
-              LinkedIn network, please email{' '}
-              <Link href="mailto:cses@ucsd.edu" color="inherit">
-                cses@ucsd.edu
+              professors in our network. This is an opportunity for only members. Join our{' '}
+              <Link href="https://discord.gg/vd9aFu4V" color="inherit">
+                discord
               </Link>{' '}
-              with your UCSD email. <br />
+              for to learn about opportunities to get involved in the CSE Society and to stay
+              updated on the events we will have! <br />
               <br />
               To become a member, please press on the membership tab on this website and participate
               in our events.
