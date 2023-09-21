@@ -89,7 +89,7 @@ const RewardsMenu = (userData: RewardsProp) => {
           filter: userData.points >= smallPrizePoints ? 'grayscale(0%)': 'grayscale(100%)',
           }} onClick={() => redeemSmallPrize()}>
           <Box>
-          <img src={smallPrize} alt="img" style={{ maxWidth: '70%'}} />
+          <img src={smallPrize} alt="img" style={{ width: '70px', height: '70px' }} />
           </Box>
           <Box
             style={{
@@ -98,6 +98,7 @@ const RewardsMenu = (userData: RewardsProp) => {
               fontFamily: 'Inter',
               fontWeight: '600',
               textTransform: 'none',
+              whiteSpace: 'nowrap',
             }}
           >
             Small Prize
@@ -109,6 +110,7 @@ const RewardsMenu = (userData: RewardsProp) => {
               fontFamily: 'Inter',
               fontWeight: '600',
               textTransform: 'none',
+              whiteSpace: 'nowrap',
             }}
           >
             500 Points
@@ -122,7 +124,7 @@ const RewardsMenu = (userData: RewardsProp) => {
           filter: userData.points >= mediumPrizePoints ? 'grayscale(0%)': 'grayscale(100%)',
           }} onClick={() => redeemMediumPrize()}>
           <Box>
-          <img src={medPrize} alt="img" style={{ maxWidth: '70%'}} />
+          <img src={medPrize} alt="img" style={{ width: '80px', height: '92px' }} />
           </Box>
           <Box
             style={{
@@ -131,6 +133,7 @@ const RewardsMenu = (userData: RewardsProp) => {
               fontFamily: 'Inter',
               fontWeight: '600',
               textTransform: 'none',
+              whiteSpace: 'nowrap',
             }}
           >
             Medium Prize
@@ -142,6 +145,7 @@ const RewardsMenu = (userData: RewardsProp) => {
               fontFamily: 'Inter',
               fontWeight: '600',
               textTransform: 'none',
+              whiteSpace: 'nowrap',
             }}
           >
             1250 Points
@@ -155,7 +159,7 @@ const RewardsMenu = (userData: RewardsProp) => {
           filter: userData.points >= largePrizePoints ? 'grayscale(0%)': 'grayscale(100%)',
           }} onClick={() => redeemLargePrize()}>
           <Box>
-          <img src={bigPrize} alt="img" style={{ maxWidth: '70%'}} />
+          <img src={bigPrize} alt="img" style={{ width: '100px', height: '113px' }} />
           </Box>
           <Box
             style={{
@@ -164,6 +168,7 @@ const RewardsMenu = (userData: RewardsProp) => {
               fontFamily: 'Inter',
               fontWeight: '600',
               textTransform: 'none',
+              whiteSpace: 'nowrap',
             }}
           >
             Large Prize
@@ -175,6 +180,7 @@ const RewardsMenu = (userData: RewardsProp) => {
               fontFamily: 'Inter',
               fontWeight: '600',
               textTransform: 'none',
+              whiteSpace: 'nowrap',
             }}
           >
             2500 Points
