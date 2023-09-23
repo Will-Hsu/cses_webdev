@@ -66,6 +66,12 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
                 setIsLoggedIn(true);
                 setUser(userInfo.data);
                 setIsUcsdEmail(true);
+                // Check if user is admin
+                if (userInfo.data.email === 'cses@ucsd.edu') {
+                  setIsAdmin(true);
+                } else {
+                  setIsAdmin(false);
+                }
               } else {
                 localStorage.removeItem('token');
               }

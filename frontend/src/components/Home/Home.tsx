@@ -32,20 +32,17 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_BACKEND_URL}/api/v1/total-events`)
+      .get(`${process.env.REACT_APP_BACKEND_URL}/api/v1/events`)
       .then((response) => {
-        setTotalEvents(response.data.totalEvents);
+        setTotalEvents(response.data.length);
       })
       .catch((error) => {
         console.error('Error fetching total events:', error);
       });
-  }, []);
-
-  useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_BACKEND_URL}/api/v1/users/total-users`)
+      .get(`${process.env.REACT_APP_BACKEND_URL}/api/v1/users/usersCount`)
       .then((response) => {
-        setTotalUsers(response.data.totalUsers);
+        setTotalUsers(response.data);
       })
       .catch((error) => {
         console.error('Error fetching total users:', error);

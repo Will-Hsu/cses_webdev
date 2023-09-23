@@ -31,7 +31,6 @@ const getProgress = (eventCount: number) => {
 };
 
 const getTier = (eventCount: number) => {
-  console.log('events count: ' + eventCount);
   if (eventCount === 0) {
     return 'Bronze I';
   } else if (eventCount < 3) {
