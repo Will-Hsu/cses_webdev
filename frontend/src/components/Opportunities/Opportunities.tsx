@@ -1,12 +1,11 @@
 import React from 'react';
 import { Container, Typography, Grid, Link, Box, useTheme } from '@mui/material';
 import bg from '../../images/shape2.svg';
-import Button from '../Button/Button';
 import sponsor from '../../images/cseLogo.gif';
 import sponsor2 from '../../images/AS.png';
 import { opportunitiesStyles } from './styles';
-import members from '../../images/opportunitiespage/members.png'
-import sponsors from '../../images/opportunitiespage/sponsors.png'
+import members from '../../images/opportunitiespage/members.png';
+import sponsors from '../../images/opportunitiespage/sponsors.png';
 
 const Opportunities = () => {
   const theme = useTheme();
@@ -30,12 +29,12 @@ const Opportunities = () => {
             <Typography sx={styles.test}>
               <br />
               Our LinkedIn network has opportunities for members from companies, alumni, and
-              professors in our network. This is an opportunity for only members. To join the
-              LinkedIn network, please email{' '}
-              <Link href="mailto:cses@ucsd.edu" color="inherit">
-                cses@ucsd.edu
+              professors in our network. This is an opportunity for only members. Join our{' '}
+              <Link href="https://discord.gg/vd9aFu4V" color="inherit">
+                discord
               </Link>{' '}
-              with your UCSD email. <br />
+              for to learn about opportunities to get involved in the CSE Society and to stay
+              updated on the events we will have! <br />
               <br />
               To become a member, please press on the membership tab on this website and participate
               in our events.
@@ -58,11 +57,10 @@ const Opportunities = () => {
               </Link>
               .
             </Typography>
-            <Button
+            {/*<Button
               size="medium"
               text="See Opportunities ->"
-              onClick={() => console.log('click')}
-            ></Button>
+              onClick={() => console.log('click')}></Button>*/}
           </Grid>
         </Grid>
         <Typography align="center" sx={{ ...styles.subtitle, margin: '60px 0% 50px 0%' }}>

@@ -5,9 +5,11 @@ const eventSchema = new Schema({
   start_time: { type: Date, required: true },
   end_time: { type: Date, required: true },
   location: { type: String, required: true },
+  major_event: { type: Boolean, required: true },
   description: String,
   calendar_link: { type: String, required: true },
   instagram_link: String,
+  code: { type: String },
 });
 
 // Export model

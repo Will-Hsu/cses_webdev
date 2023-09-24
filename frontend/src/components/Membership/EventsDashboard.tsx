@@ -28,6 +28,7 @@ interface Event {
   calendar_link: string;
   instagram_link: string;
   _id: string;
+  code: string;
 }
 
 const style = {
@@ -57,6 +58,7 @@ const EventRow = ({
 
   return (
     <TableRow key={event._id}>
+      <TableCell>{event.code}</TableCell>
       <TableCell>{event.title}</TableCell>
       <TableCell>{new Date(event.start_time).toLocaleString()}</TableCell>
       <TableCell>{new Date(event.end_time).toLocaleString()}</TableCell>
@@ -65,7 +67,9 @@ const EventRow = ({
       <TableCell>{event.calendar_link}</TableCell>
       <TableCell>{event.instagram_link}</TableCell>
       <TableCell>
-        <Button itemID={event._id} onClick={() => {
+        <Button
+          itemID={event._id}
+          onClick={() => {
             setOpenEdit(true);
             setEditedEvent({ ...event });
           }}
@@ -75,7 +79,7 @@ const EventRow = ({
         </Button>
         <Modal open={openEdit} onClose={() => setOpenEdit(false)}>
           <Box sx={style} component="form">
-          <TextField
+            <TextField
               label="Title"
               id="title"
               size="small"
@@ -92,7 +96,7 @@ const EventRow = ({
                 value={dayjs(editedEvent.start_time)}
                 onChange={(newValue) => {
                   if (newValue) {
-                    setEditedEvent({ ...editedEvent, start_time: newValue.toISOString() })
+                    setEditedEvent({ ...editedEvent, start_time: newValue.toISOString() });
                   }
                 }}
                 disablePast
@@ -103,7 +107,7 @@ const EventRow = ({
                 value={dayjs(editedEvent.end_time)}
                 onChange={(newValue) => {
                   if (newValue) {
-                    setEditedEvent({ ...editedEvent, end_time: newValue.toISOString() })
+                    setEditedEvent({ ...editedEvent, end_time: newValue.toISOString() });
                   }
                 }}
                 disablePast
@@ -153,8 +157,8 @@ const EventRow = ({
               helperText="Optional"
             />
 
-            <Button 
-              variant="contained" 
+            <Button
+              variant="contained"
               onClick={() => {
                 onEdit(editedEvent);
                 setOpenEdit(false);
@@ -206,6 +210,7 @@ const DashBoard = () => {
   useEffect(() => {
     eventListAPI().then((res) => {
       setEvents(res);
+      console.log(res);
     });
   }, []);
 
@@ -250,16 +255,13 @@ const DashBoard = () => {
     // Send API request to update the event
     eventUpdateAPI(id, updatedEvent)
       .then((res) => {
-        const updatedEvents = events.map((event) =>
-          event._id === id ? updatedEvent : event
-        );
+        const updatedEvents = events.map((event) => (event._id === id ? updatedEvent : event));
         setEvents(updatedEvents);
       })
       .catch((err) => {
         console.log(err);
       });
   };
-  
 
   return (
     <Container style={{ background: 'white' }}>
@@ -359,6 +361,7 @@ const DashBoard = () => {
         <Table>
           <TableHead>
             <TableRow>
+              <TableCell>6-Digit</TableCell>
               <TableCell>Title</TableCell>
               <TableCell>Start Time</TableCell>
               <TableCell>End Time</TableCell>

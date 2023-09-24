@@ -6,7 +6,7 @@ export const aboutStyles = () => ({
     marginLeft: '-1%',
     scale: '103%',
     marginTop: '-10%',
-    opacity: '0.8',
+    opacity: '0.6',
   },
   bg2: {
     transform: 'scaleX(-1) rotate(8deg)',
@@ -14,7 +14,7 @@ export const aboutStyles = () => ({
     position: 'absolute',
     top: '50%',
     scale: '110%',
-    opacity: '0.8',
+    opacity: '0.6',
   },
   body: { padding: '5%', position: 'relative', top: '93px', marginBottom: '200px' },
   root: {

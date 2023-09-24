@@ -19,8 +19,9 @@ export const membershipStyles = () => ({
   },
 
   eventsAttendedBody: {
+    marginLeft: '10%',
     position: 'relative',
-    width: '80%',
+    width: '90%',
     marginBottom: '100px',
   },
 
@@ -83,5 +84,52 @@ export const membershipStyles = () => ({
     fontWeight: 500,
     fontFamily: 'Inter, sans-serif',
     fontSize: '20px',
+  },
+
+  rewardsBody: {
+    position: 'relative',
+    width: '80%',
+    marginBottom: '100px',
+  },
+
+  rewardBox: {
+    backgroundColor: 'transparent',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    flexDirection: 'column',
+    display: 'flex',
+    margin: '0',
+    marginRight: '1%',
+    width: '200px',
+    height: '230px',
+    padding: '20px 20px 20px 20px',
+  },
+
+  textfield: {
+    '& input::placeholder, & textarea::placeholder': {
+      opacity: 0.6,
+      color: 'black',
+    },
+    backgroundColor: 'white',
+    borderRadius: '10px',
+    margin: '5px',
+  },
+
+  button: {
+    width: '35%',
+    backgroundColor: '#1F1F1F',
+    margin: '6px 8px',
+    borderColor: 'black',
+    color: 'white',
+    borderRadius: '100px',
+    fontFamily: 'Inter, sans-serif',
+    fontWeight: '500',
+    textTransform: 'none',
+    '&:hover': {
+      backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    },
+    '&[disabled]': {
+      color: 'gray',
+    },
   },
 });

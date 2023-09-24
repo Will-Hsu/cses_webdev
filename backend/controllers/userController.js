@@ -1,7 +1,18 @@
 import mongoose from 'mongoose';
 import User from '../models/user.js';
+import Event from '../models/event.js';
 import { body, param, validationResult } from 'express-validator';
 import asyncHandler from 'express-async-handler';
+
+export const getUsersCount = asyncHandler(async (_, res) => {
+  try {
+    const count = await User.countDocuments();
+
+    res.status(200).json(count);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
 
 export const userCheck = [
   body('email').notEmpty().isEmail(),
@@ -146,7 +157,7 @@ export const getTopMembers = asyncHandler(async (_, res) => {
 
 // POST request for creating new event entries for a user.
 export const userEventsUpdate = asyncHandler(async (req, res) => {
-  const { email, id } = req.params;
+  const { email, code } = req.params;
 
   try {
     // Find the user by email
@@ -156,13 +167,46 @@ export const userEventsUpdate = asyncHandler(async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
+    const event = await Event.findOne({ code: code }).exec();
+
+    if (!event) {
+      return res.status(400).json({ message: 'Invalid Code' });
+    }
+
+    // Get the current time
+    const currentTime = new Date();
+
+    // Check if the event has already started
+    if (currentTime < event.start_time) {
+      return res.status(400).json({ message: 'Event has not started' });
+    }
+
+    // Calculate the time difference between the event start time and the current time in milliseconds
+    const timeDifference = currentTime - event.start_time;
+
+    console.log(currentTime, event.start_time);
+
+    // Calculate the number of hours until the event starts (in hours)
+    const hoursUntilEventStart = timeDifference / (1000 * 60 * 60);
+
+    // Check if the event is within 24 hours of its start time
+    if (hoursUntilEventStart > 24) {
+      return res.status(400).json({ message: 'Expired Code' });
+    }
+
     // Check if the event ID is already in the eventsAttended array
-    if (user.eventsAttended.includes(id)) {
+    if (user.eventsAttended.includes(event._id)) {
       return res.status(400).json({ message: 'Event already attended' });
     }
 
+    // Determine points based on whether the event is major or minor
+    const pointsToAdd = event.major_event ? 300 : 100;
+
+    // Update user's points
+    user.points += pointsToAdd;
+
     // Add the event ID to the eventsAttended array
-    user.eventsAttended.push(id);
+    user.eventsAttended.push(event._id);
 
     // Save the updated user
     await user.save();
@@ -189,12 +233,10 @@ export const redeemSmall = asyncHandler(async (req, res) => {
     // Perform additional prize actions here
 
     await user.save();
-    return res.status(200).json({ message: 'Small prize redeemed successfully '});
+    return res.status(200).json({ message: 'Small prize redeemed successfully ' });
   } else {
     return res.status(400).json({ message: 'Insufficient points for redemption' });
   }
-
-  
 });
 
 export const redeemMedium = asyncHandler(async (req, res) => {
@@ -212,7 +254,7 @@ export const redeemMedium = asyncHandler(async (req, res) => {
     // Perform additional prize actions here
 
     await user.save();
-    return res.status(200).json({ message: 'Medium prize redeemed successfully '});
+    return res.status(200).json({ message: 'Medium prize redeemed successfully ' });
   } else {
     return res.status(400).json({ message: 'Insufficient points for redemption' });
   }
@@ -233,7 +275,7 @@ export const redeemLarge = asyncHandler(async (req, res) => {
     // Perform additional prize actions here
 
     await user.save();
-    return res.status(200).json({ message: 'Large prize redeemed successfully '});
+    return res.status(200).json({ message: 'Large prize redeemed successfully ' });
   } else {
     return res.status(400).json({ message: 'Insufficient points for redemption' });
   }
@@ -250,6 +292,7 @@ export default {
   redeemSmall,
   redeemMedium,
   redeemLarge,
+  getUsersCount,
 };
 
 function isValidEventId(eventIds) {

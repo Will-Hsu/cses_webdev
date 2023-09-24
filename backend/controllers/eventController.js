@@ -1,6 +1,8 @@
 import Event from '../models/event.js';
 import asyncHandler from 'express-async-handler';
 import { body, param, validationResult } from 'express-validator';
+import crypto from 'crypto';
+import validator from 'validator';
 
 // Display list of all Events.
 export const eventList = asyncHandler(async (req, res) => {
@@ -46,9 +48,11 @@ export const eventList = asyncHandler(async (req, res) => {
         start_time,
         end_time,
         location,
+        major_event,
         description,
         calendar_link,
         instagram_link,
+        code,
       } = event;
       return {
         _id,
@@ -56,9 +60,11 @@ export const eventList = asyncHandler(async (req, res) => {
         start_time,
         end_time,
         location,
+        major_event,
         description,
         calendar_link,
         instagram_link,
+        code,
       };
     });
 
@@ -108,6 +114,7 @@ export const eventCreate = [
     .withMessage('End time must be a valid date.')
     .toDate(),
   body('location').trim().isLength({ min: 1 }).withMessage('Location must be specified.'),
+  body('major_event').isBoolean().withMessage('Event must be major or minor.'),
   body('description').optional().trim(),
   body('calendar_link')
     .trim()
@@ -118,7 +125,8 @@ export const eventCreate = [
   body('instagram_link')
     .trim()
     .custom((url) => {
-      if (url === '' || url.isURL({ require_protocol: true })) {
+      console.log(url);
+      if (url === '' || validator.isURL(url, { require_protocol: true })) {
         return true;
       }
 
@@ -141,7 +149,21 @@ export const eventCreate = [
       // Save event.
       event
         .save()
-        .then((d) => res.json({ message: 'Successful', id: d._id }))
+        .then((d) => {
+          const sha256Hash = crypto.createHash('sha256').update(d._id.toString()).digest('hex');
+
+          // Take the first 6 characters of the hash and convert them to a number
+          const sixDigitCode = parseInt(sha256Hash.substring(0, 6), 16) % 1000000;
+
+          // Ensure it's a 6-digit number by padding with zeros if needed
+          const sixDigit = String(sixDigitCode).padStart(6, '0');
+
+          console.log(sixDigit);
+
+          Event.updateOne({ _id: d._id }, { code: sixDigit })
+            .then(() => res.json({ message: 'Successful', id: d._id, code: sixDigit }))
+            .catch(() => res.status(500).json({ message: 'Internal server error 1' }));
+        })
         .catch(() => res.status(500).json({ message: 'Internal server error' }));
     }
   }),
@@ -210,6 +232,10 @@ export const eventUpdate = [
     .toDate()
     .withMessage('End time must be a valid date.'),
   body('location').optional().trim(),
+  body('major_event')
+    .optional()
+    .isBoolean()
+    .withMessage('Major event must be either true or false.'),
   body('description').optional().trim(),
   body('calendar_link')
     .optional()

@@ -2,6 +2,18 @@ import axios from 'axios';
 
 const API = axios.create({ baseURL: `${process.env.REACT_APP_BACKEND_URL}/api/v1` });
 
+export const addEvent = (email, sixDigitCode) => {
+  return new Promise((resolve, reject) => {
+    API.post(`/users/${email}/event/${sixDigitCode}`)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
 export const createSubscriberAPI = (newEmail) => {
   return new Promise((resolve, reject) => {
     API.post('/subscribers/create', newEmail)

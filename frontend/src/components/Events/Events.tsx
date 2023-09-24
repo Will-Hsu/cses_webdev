@@ -4,10 +4,10 @@ import bgTop from '../../images/shape.svg';
 import bgBtm from '../../images/shape.svg';
 import { event_style } from './styles';
 import EventBox from '../Event/Event';
+import MobileEventBox from '../Event/MobileEvent';
 import Button from '../Button/Button';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { buttonStyles } from '../Button/styles';
-import { height } from '@mui/system';
 import useMediaQuery from '../../hooks/useMediaQuery';
 
 interface EventData {
@@ -22,13 +22,43 @@ interface EventData {
 }
 
 const Events = () => {
+  // add state for page number
+  const [pageNumberUpcoming, setPageNumberUpcoming] = useState(1);
+  const [pageNumberPast, setPageNumberPast] = useState(1);
+
+  // add state for the total number of pages
+  const [totalPagesUpcoming, setTotalPagesUpcoming] = useState(1);
+  const [totalPagesPast, setTotalPagesPast] = useState(1);
+
+  // add state for the number of events per page
+  const eventsPerPage = 6;
+
   const styles = event_style();
   const eventsContainerStyle: any = styles.eventsContainer;
 
   const [upcomingEvents, setUpcomingEvents] = useState<EventData[]>([]);
   const [pastEvents, setPastEvents] = useState<EventData[]>([]);
-  const [selectedYear, setSelectedYear] = useState<number | null>(null);
-  const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
+  const [selectedYear] = useState<number | null>(null);
+  const [selectedMonth] = useState<number | null>(null);
+
+  const paginate = (
+    events: Array<EventData>,
+    pageNumber: number,
+    totalPages: number,
+    type: string,
+  ) => {
+    if (type === 'upcoming') {
+      setPageNumberUpcoming(pageNumber);
+      setDisplayedFutureEvents(
+        events.slice((pageNumber - 1) * eventsPerPage, pageNumber * eventsPerPage),
+      );
+    } else {
+      setPageNumberPast(pageNumber);
+      setDisplayedPastEvents(
+        events.slice((pageNumber - 1) * eventsPerPage, pageNumber * eventsPerPage),
+      );
+    }
+  };
 
   const isDesktop = useMediaQuery('(min-width: 1024px)');
   const isIpad = useMediaQuery('(min-width: 768px) and (max-width: 1023px)');
@@ -62,6 +92,9 @@ const Events = () => {
   useEffect(() => {
     // Set media queries
 
+    // let upcomingEventsEndpoint = `http://localhost:5000/api/v1/events?type=upcoming`;
+    // let pastEventsEndpoint = `http://localhost:5000/api/v1/events`;
+
     let upcomingEventsEndpoint = `${process.env.REACT_APP_BACKEND_URL}/api/v1/events?type=upcoming`;
     let pastEventsEndpoint = `${process.env.REACT_APP_BACKEND_URL}/api/v1/events?type=past`;
 
@@ -76,8 +109,9 @@ const Events = () => {
 
         const response = await fetch(upcomingEventsEndpoint);
         const data = await response.json();
+        setTotalPagesUpcoming(Math.ceil(data.length / 6));
         setUpcomingEvents(data);
-        setDisplayedFutureEvents(data);
+        paginate(data, 1, totalPagesUpcoming, 'upcoming');
       } catch (error) {
         console.error('Error fetching upcoming events:', error);
       }
@@ -94,8 +128,9 @@ const Events = () => {
 
         const response = await fetch(pastEventsEndpoint);
         const data = await response.json();
+        setTotalPagesPast(Math.ceil(data.length / 6));
         setPastEvents(data);
-        setDisplayedPastEvents(data);
+        paginate(data, 1, totalPagesPast, 'past');
       } catch (error) {
         console.error('Error fetching past events:', error);
       }
@@ -103,7 +138,7 @@ const Events = () => {
 
     fetchUpcomingEvents();
     fetchPastEvents();
-  }, [selectedYear, selectedMonth]);
+  }, [selectedYear, selectedMonth, totalPagesUpcoming, totalPagesPast]);
 
   const [displayedFutureEvents, setDisplayedFutureEvents] = useState(upcomingEvents);
   const [displayedPastEvents, setDisplayedPastEvents] = useState(pastEvents);
@@ -125,8 +160,6 @@ const Events = () => {
           new Date(event.start_time).getTime() <= oneWeekAfter,
       );
 
-      console.log(thisWeekEvents);
-
       setDisplayedFutureEvents(thisWeekEvents);
       setIsThisWeekClicked(true);
       setIsThisMonthClicked(false);
@@ -147,7 +180,7 @@ const Events = () => {
           new Date(event.start_time).getTime() <= oneMonthAfter,
       );
 
-      console.log(thisMonthEvents);
+      // console.log(thisMonthEvents);
 
       setDisplayedFutureEvents(thisMonthEvents);
       setIsThisWeekClicked(false);
@@ -172,40 +205,72 @@ const Events = () => {
 
   // Render EventBoxes using map
   const renderEventBoxes = (events: EventData[]) => {
-    return events.map((eventData) => (
-      <React.Fragment key={eventData._id}>
-        <EventBox
-          title={eventData.title}
-          targetDate={new Date(eventData.end_time)}
-          location={eventData.location}
-          calendar_link={eventData.calendar_link}
-          description={eventData.description}
-          end_time={eventData.end_time}
-          instagram_link={eventData.instagram_link}
-          start_time={eventData.start_time}
-          _id={eventData._id}
-        />
-      </React.Fragment>
-    ));
+    return events.map((eventData) => {
+      if (isMobile) {
+        return (
+          <MobileEventBox
+            title={eventData.title}
+            targetDate={new Date(eventData.end_time)}
+            location={eventData.location}
+            end_time={eventData.end_time}
+            start_time={eventData.start_time}
+            _id={eventData._id}
+            pastEvent
+          />
+        );
+      } else {
+        return (
+          <React.Fragment key={eventData._id}>
+            <EventBox
+              title={eventData.title}
+              targetDate={new Date(eventData.end_time)}
+              location={eventData.location}
+              calendar_link={eventData.calendar_link}
+              description={eventData.description}
+              end_time={eventData.end_time}
+              instagram_link={eventData.instagram_link}
+              start_time={eventData.start_time}
+              _id={eventData._id}
+            />
+          </React.Fragment>
+        );
+      }
+    });
   };
 
   const renderPastEventBoxes = (events: EventData[]) => {
-    return events.map((eventData) => (
-      <React.Fragment key={eventData._id}>
-        <EventBox
-          title={eventData.title}
-          targetDate={new Date(eventData.end_time)}
-          location={eventData.location}
-          calendar_link={eventData.calendar_link}
-          description={eventData.description}
-          end_time={eventData.end_time}
-          instagram_link={eventData.instagram_link}
-          start_time={eventData.start_time}
-          _id={eventData._id}
-          pastEvent
-        />
-      </React.Fragment>
-    ));
+    return events.map((eventData) => {
+      if (isMobile) {
+        return (
+          <MobileEventBox
+            title={eventData.title}
+            targetDate={new Date(eventData.end_time)}
+            location={eventData.location}
+            end_time={eventData.end_time}
+            start_time={eventData.start_time}
+            _id={eventData._id}
+            pastEvent
+          />
+        );
+      } else {
+        return (
+          <React.Fragment key={eventData._id}>
+            <EventBox
+              title={eventData.title}
+              targetDate={new Date(eventData.end_time)}
+              location={eventData.location}
+              calendar_link={eventData.calendar_link}
+              description={eventData.description}
+              end_time={eventData.end_time}
+              instagram_link={eventData.instagram_link}
+              start_time={eventData.start_time}
+              _id={eventData._id}
+              pastEvent
+            />
+          </React.Fragment>
+        );
+      }
+    });
   };
 
   return (
@@ -223,7 +288,7 @@ const Events = () => {
             fontWeight: '700',
           }}
         >
-          <h2>EVENTS</h2>
+          <h2 id="eventsTitle">EVENTS</h2>
         </div>
 
         {/* Buttons for filtering events */}
@@ -240,7 +305,7 @@ const Events = () => {
               key="This Week"
               value="This Week"
               sx={{
-                ...buttonStyles(false),
+                ...buttonStyles(false, false),
                 marginRight: '0px',
                 marginLeft: '0px',
                 '&.MuiToggleButton-root.Mui-selected, &.MuiToggleButton-root.Mui-selected:hover': {
@@ -256,7 +321,7 @@ const Events = () => {
               key="This Month"
               value="This Month"
               sx={{
-                ...buttonStyles(false),
+                ...buttonStyles(false, false),
                 marginRight: '0px',
                 marginLeft: '0px',
                 '&.MuiToggleButton-root.Mui-selected, &.MuiToggleButton-root.Mui-selected:hover': {
@@ -281,8 +346,67 @@ const Events = () => {
         >
           {renderEventBoxes(displayedFutureEvents)}
         </div>
+        <div>
+          <p
+            style={{
+              color: 'white',
+              fontSize: '20px',
+              fontFamily: 'Chakra Petch',
+              fontWeight: '700',
+              display: 'flex',
+              flexDirection: 'row',
+              marginLeft: '39px',
+            }}
+          >
+            Page {pageNumberUpcoming} of {totalPagesUpcoming}
+          </p>
+        </div>
+        {totalPagesUpcoming > 1 && (
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+            <Button
+              size="medium"
+              text="Previous"
+              onClick={() => {
+                if (pageNumberUpcoming > 1) {
+                  paginate(upcomingEvents, pageNumberUpcoming - 1, totalPagesUpcoming, 'upcoming');
+                  const titleElement = document.getElementById('eventsTitle');
+                  if (titleElement) {
+                    const rect = titleElement.getBoundingClientRect();
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    const targetY = rect.top + scrollTop;
 
-        {/* ... (previous code) */}
+                    window.scrollTo({
+                      top: targetY,
+                      behavior: 'smooth',
+                    });
+                  }
+                }
+              }}
+              inactive={pageNumberUpcoming === 1}
+            />
+            <Button
+              size="medium"
+              text="Next"
+              onClick={() => {
+                if (pageNumberUpcoming < totalPagesUpcoming) {
+                  paginate(upcomingEvents, pageNumberUpcoming + 1, totalPagesUpcoming, 'upcoming');
+                  const titleElement = document.getElementById('eventsTitle');
+                  if (titleElement) {
+                    const rect = titleElement.getBoundingClientRect();
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    const targetY = rect.top + scrollTop;
+
+                    window.scrollTo({
+                      top: targetY,
+                      behavior: 'smooth',
+                    });
+                  }
+                }
+              }}
+              inactive={pageNumberUpcoming === totalPagesUpcoming}
+            />
+          </div>
+        )}
 
         {/* Render EventBoxes for past events */}
         <div
@@ -295,7 +419,7 @@ const Events = () => {
             fontWeight: '700',
           }}
         >
-          <h2> PAST EVENTS</h2>
+          <h2 id="pastEventsTitle">PAST EVENTS</h2>
         </div>
         {/* Buttons for filtering past events */}
         <div
@@ -328,6 +452,75 @@ const Events = () => {
           )) ||
             renderPastEventBoxes(displayedPastEvents)}
         </div>
+        <div>
+          <p
+            style={{
+              color: 'white',
+              fontSize: '20px',
+              fontFamily: 'Chakra Petch',
+              fontWeight: '700',
+              display: 'flex',
+              flexDirection: 'row',
+              marginLeft: '39px',
+            }}
+          >
+            Page {pageNumberPast} of {totalPagesPast}
+          </p>
+        </div>
+        {totalPagesPast > 1 && (
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              marginTop: '20px',
+              marginBottom: '20px',
+            }}
+          >
+            <Button
+              size="medium"
+              text="Previous"
+              onClick={() => {
+                if (pageNumberPast > 1) {
+                  paginate(pastEvents, pageNumberPast - 1, totalPagesPast, 'past');
+                  const titleElement = document.getElementById('pastEventsTitle');
+
+                  if (titleElement) {
+                    const rect = titleElement.getBoundingClientRect();
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    const targetY = rect.top + scrollTop;
+
+                    window.scrollTo({
+                      top: targetY,
+                      behavior: 'smooth',
+                    });
+                  }
+                }
+              }}
+              inactive={pageNumberPast === 1}
+            ></Button>
+            <Button
+              size="medium"
+              text="Next"
+              onClick={() => {
+                if (pageNumberPast < totalPagesPast) {
+                  paginate(pastEvents, pageNumberPast + 1, totalPagesPast, 'past');
+                  const titleElement = document.getElementById('pastEventsTitle');
+                  if (titleElement) {
+                    const rect = titleElement.getBoundingClientRect();
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    const targetY = rect.top + scrollTop;
+
+                    window.scrollTo({
+                      top: targetY,
+                      behavior: 'smooth',
+                    });
+                  }
+                }
+              }}
+              inactive={pageNumberPast === totalPagesPast}
+            ></Button>
+          </div>
+        )}
       </Container>
     </div>
   );

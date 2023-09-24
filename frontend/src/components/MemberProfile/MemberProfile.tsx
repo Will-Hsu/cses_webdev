@@ -1,33 +1,63 @@
-import React from 'react';
-//import { AuthContext } from '../../context/AuthContext';
-//import { useNavigate } from 'react-router-dom';
-//import axios from 'axios';
-//import { User } from '../../utils/types';
-import {
-  Avatar,
-  Box,
-  // Button,
-  // Divider,
-  Grid,
-  Typography,
-  createTheme,
-  useMediaQuery,
-} from '@mui/material';
-// import { memberProfile } from './styles';
+import React, { useState } from 'react';
+import { Avatar, Box, Grid, Typography, createTheme, useMediaQuery } from '@mui/material';
 import LinearProgress, { LinearProgressProps } from '@mui/material/LinearProgress';
-
-// const styles = memberProfile();
 
 interface MemberProfileProps {
   memberName: string;
   memberMajor: string;
   memberPoints: number;
   memberPicture: string;
+  memberEventsCount: number;
 }
+
+const getProgress = (eventCount: number) => {
+  if (eventCount >= 0 && eventCount < 1) {
+    return 0;
+  } else if (eventCount >= 1 && eventCount < 4) {
+    return ((eventCount - 1) / 3) * 100;
+  } else if (eventCount >= 4 && eventCount < 10) {
+    return ((eventCount - 4) / 6) * 100;
+  } else if (eventCount >= 10 && eventCount < 15) {
+    return ((eventCount - 10) / 5) * 100;
+  } else if (eventCount >= 15 && eventCount < 20) {
+    return ((eventCount - 15) / 5) * 100;
+  } else if (eventCount >= 20 && eventCount < 26) {
+    return ((eventCount - 20) / 6) * 100;
+  } else if (eventCount >= 26 && eventCount < 33) {
+    return ((eventCount - 26) / 7) * 100;
+  } else {
+    return 100;
+  }
+};
+
+const getTier = (eventCount: number) => {
+  if (eventCount === 0) {
+    return 'Bronze I';
+  } else if (eventCount < 3) {
+    return 'Bronze II';
+  } else if (eventCount < 6) {
+    return 'Bronze III';
+  } else if (eventCount < 10) {
+    return 'Bronze IV';
+  } else if (eventCount < 15) {
+    return 'Silver I';
+  } else if (eventCount < 20) {
+    return 'Silver II';
+  } else if (eventCount < 26) {
+    return 'Silver III';
+  } else if (eventCount < 33) {
+    return 'Silver IV';
+  } else if (eventCount >= 33) {
+    return 'Gold';
+  } else {
+    return 'Unknown Tier';
+  }
+};
+
 const MemberProfile = (userData: MemberProfileProps) => {
   const theme = createTheme();
-  // const isSmScreen = useMediaQuery(theme.breakpoints.between('sm', 'md'));
   const isXsScreen = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
+  const [isHovered, setIsHovered] = useState(false);
 
   function LinearProgressWithLabel(props: LinearProgressProps & { value: number }) {
     return (
@@ -52,7 +82,7 @@ const MemberProfile = (userData: MemberProfileProps) => {
         style={{
           textAlign: 'center',
           fontFamily: 'Chakra Petch',
-          fontSize: 'clamp(2rem, 4vw, 4rem)',
+          fontSize: 'clamp(3rem, 5vw, 4.5rem)',
           marginTop: '8%',
         }}
       >
@@ -98,9 +128,13 @@ const MemberProfile = (userData: MemberProfileProps) => {
           >
             {userData.memberName}
           </p>
-          <Box sx={{ width: '110%' }}>
+          <Box
+            sx={{ width: '110%' }}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
             <LinearProgressWithLabel
-              value={0}
+              value={getProgress(userData.memberEventsCount)}
               sx={{
                 backgroundColor: 'black',
                 '& .MuiLinearProgress-bar': {
@@ -111,10 +145,27 @@ const MemberProfile = (userData: MemberProfileProps) => {
                 border: '1px solid #F3C969',
               }}
             />
+            {isHovered && (
+              <div
+                className="info-box"
+                style={{
+                  backgroundColor: 'white',
+                  color: 'black',
+                  padding: '3px 20px',
+                  maxWidth: '40%',
+                  borderRadius: '15px',
+                  fontSize: '12px',
+                  position: 'absolute',
+                }}
+              >
+                <p> This progress bar displays your progress towards the next membership tier. </p>
+              </div>
+            )}
           </Box>
 
           <p style={{ fontSize: 'clamp(0.8rem, 2.5vw, 1rem)' }}>
-            Member Tier: <span style={{ fontWeight: 'bold' }}>BRONZE I</span>{' '}
+            Member Tier:{' '}
+            <span style={{ fontWeight: 'bold' }}>{getTier(userData.memberEventsCount)}</span>{' '}
             <span style={{ color: '#F3C969', fontWeight: 'bold' }}>|</span> Point Balance:{' '}
             <span style={{ fontWeight: 'bold' }}>{userData.memberPoints}</span>
           </p>
