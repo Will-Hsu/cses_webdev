@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 //import { AuthContext } from '../../context/AuthContext';
 //import { useNavigate } from 'react-router-dom';
@@ -28,6 +28,7 @@ import prize from '../../images/gift.png'
 import smallPrize from '../../images/rewardsImages/small_gift.png'
 import medPrize from '../../images/rewardsImages/med_gift.png'
 import bigPrize from '../../images/rewardsImages/big_gift.png'
+import ConfirmationDialog from './ConfirmationDialog';
 
 
 interface RewardsProp {
@@ -42,6 +43,29 @@ const RewardsMenu = (userData: RewardsProp) => {
     const smallPrizePoints = 500;
     const mediumPrizePoints = 1250;
     const largePrizePoints = 2500;
+    const [confirmationOpen, setConfirmationOpen] = useState(false);
+    const [selectedPrize, setSelectedPrize] = useState('');
+
+    const openConfirmationDialog = (prizeType: string) => {
+      setSelectedPrize(prizeType);
+      setConfirmationOpen(true);
+    };
+
+    const closeConfirmationDialog = () => {
+      setSelectedPrize('');
+      setConfirmationOpen(false);
+    };
+
+    const pointsForPrize = (prizeType: string) => {
+      switch (prizeType) {
+        case 'small':
+          return 500;
+        case 'medium':
+          return 1250;
+        case 'large':
+          return 2500;
+      }
+    };
 
     const redeemSmallPrize = async () => {
       try {
@@ -87,7 +111,11 @@ const RewardsMenu = (userData: RewardsProp) => {
             boxShadow: '0 0 20px 5px rgba(52, 152, 219, 0.7)',
           }: 'none', 
           filter: userData.points >= smallPrizePoints ? 'grayscale(0%)': 'grayscale(100%)',
-          }} onClick={() => redeemSmallPrize()}>
+          }} onClick={() => {
+            if (userData.points >= smallPrizePoints) {
+              openConfirmationDialog('small');
+            }
+          }}>
           <Box>
           <img src={smallPrize} alt="img" style={{ width: '70px', height: '70px' }} />
           </Box>
@@ -122,7 +150,11 @@ const RewardsMenu = (userData: RewardsProp) => {
             boxShadow: '0 0 20px 5px rgba(52, 152, 219, 0.7)',
           }: 'none', 
           filter: userData.points >= mediumPrizePoints ? 'grayscale(0%)': 'grayscale(100%)',
-          }} onClick={() => redeemMediumPrize()}>
+          }} onClick={() => {
+            if (userData.points >= mediumPrizePoints) {
+              openConfirmationDialog('medium');
+            }
+          }}>
           <Box>
           <img src={medPrize} alt="img" style={{ width: '80px', height: '92px' }} />
           </Box>
@@ -157,7 +189,11 @@ const RewardsMenu = (userData: RewardsProp) => {
             boxShadow: '0 0 20px 5px rgba(52, 152, 219, 0.7)',
           }: 'none', 
           filter: userData.points >= largePrizePoints ? 'grayscale(0%)': 'grayscale(100%)',
-          }} onClick={() => redeemLargePrize()}>
+          }} onClick={() => {
+            if (userData.points >= largePrizePoints) {
+              openConfirmationDialog('large');
+            }
+          }}>
           <Box>
           <img src={bigPrize} alt="img" style={{ width: '100px', height: '113px' }} />
           </Box>
@@ -186,10 +222,27 @@ const RewardsMenu = (userData: RewardsProp) => {
             2500 Points
           </Box>
         </Button>
-       
       </Box>
 
-      </Container>
+      {confirmationOpen && selectedPrize && (
+        <ConfirmationDialog
+          open={confirmationOpen}
+          handleClose={closeConfirmationDialog}
+          handleConfirm={() => {
+            if (selectedPrize === 'small') {
+              redeemSmallPrize();
+            } else if (selectedPrize === 'medium') {
+              redeemMediumPrize();
+            } else if (selectedPrize === 'large') {
+              redeemLargePrize();
+            }
+            closeConfirmationDialog(); 
+          }}
+          title="Confirm Prize Redemption"
+          message={`Are you sure you want to redeem the ${selectedPrize} prize (${pointsForPrize(selectedPrize)} points)?`}
+        />
+      )}
+    </Container>
   );
     
   };
