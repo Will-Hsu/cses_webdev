@@ -1,18 +1,24 @@
 import React from 'react';
 import { Container, Grid, Typography, Link, Divider, useTheme } from '@mui/material';
+import InstagramIcon from '../../images/instagram-icon.svg'
+import FacebookIcon from '../../images/facebook-icon.svg';
+import LinkedInIcon from '../../images/linkedin-icon.svg';
+import DiscordIcon from '../../images/discord-icon.svg';
+import LinktreeIcon from '../../images/linktree-icon.svg';
 import csesLogo from '../../images/logo.svg';
 import { footerStyles } from './styles';
 import Forms from './Forms';
 
 const links = [
-  { text: 'INSTAGRAM', link: 'https://www.instagram.com/cses_ucsd/' },
-  { text: 'FACEBOOK', link: 'https://www.facebook.com/csesucsd' },
-  { text: 'LINKEDIN', link: 'https://www.linkedin.com/in/csesucsd/' },
-  { text: 'LINKTREE', link: 'https://linktr.ee/csesucsd' },
-  { text: 'DISCORD', link: 'https://discord.gg/ury4n5sA' },
-];
+  { logo: InstagramIcon, link: 'https://www.instagram.com/cses_ucsd/'},
+  { logo: FacebookIcon, link: 'https://www.facebook.com/csesucsd'},
+  { logo: LinkedInIcon, link: 'https://www.linkedin.com/in/csesucsd/'},
+  { logo: DiscordIcon, link: 'https://discord.gg/vd9aFu4V'},
+  { logo: LinktreeIcon, link: 'https://linktr.ee/csesucsd'},
+]
 
-const contact = ['UC San Diego', '9500 Gilman Dr.', 'La Jolla', 'CA 92093'];
+const address = ['UC San Diego', '9500 Gilman Dr. La Jolla, CA 92093'];
+const contact = ['(862) 223-9756', 'cses@ucsd.edu'];
 
 const Footer = () => {
   const theme = useTheme();
@@ -22,29 +28,36 @@ const Footer = () => {
       <Grid container spacing={2}>
         <Grid item sx={{ marginRight: 'auto' }}>
           <a href="/">
-            <img src={csesLogo} alt="logo" style={{ height: '80px', margin: '20px' }} />
+            <img src={csesLogo} alt="logo" style={{ height: '80px' }} />
           </a>
-          <Grid container spacing={2} sx={{ margin: '10px' }}>
-            <Grid item sx={{ marginRight: '50px' }}>
-              {links.map(({ text, link }, id) => (
-                <Typography key={id} sx={{ textAlign: 'center', marginBottom: '15px' }}>
-                  <Link href={link} sx={styles.text}>
-                    {text}
-                  </Link>
+          <Grid container spacing={ 4 }
+            sx={{ 
+              margin: '10px',
+              display: 'flex', 
+              justifyContent: 'space-between',
+              alignItems: 'center', 
+              marginTop: '40px',
+              marginLeft: '0'
+            }}>
+            {links.map(({logo, link}, id) => (
+              <Link href={link} target='_blank' rel='noopener noreferrer'>
+                <img src={logo} alt='logo' style={{ maxWidth: '50px', maxHeight: '50px' }}/> 
+              </Link>
+            ))} 
+          </Grid>
+          <Grid item sx={{ marginTop: '40px' }}>
+              {address.map((text, id) => (
+                <Typography key={id} sx={styles.text}>
+                  {text}
                 </Typography>
               ))}
-            </Grid>
-            <Grid item>
+          </Grid>
+          <Grid item sx={{ marginTop: '40px' }}>
               {contact.map((text, id) => (
                 <Typography key={id} sx={styles.text}>
                   {text}
                 </Typography>
               ))}
-              <Typography sx={styles.text} style={{ marginTop: '60px' }}></Typography>
-              <Link sx={styles.text} href="mailto:cses@ucsd.edu">
-                cses@ucsd.edu
-              </Link>
-            </Grid>
           </Grid>
         </Grid>
         <Grid item sx={{ margin: '20px' }}>
