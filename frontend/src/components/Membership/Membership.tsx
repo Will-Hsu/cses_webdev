@@ -1,5 +1,15 @@
 import { useContext, useState, useEffect } from 'react';
-import { useMediaQuery, Typography, TextField, useTheme, Button } from '@mui/material';
+import {
+  useMediaQuery,
+  Typography,
+  TextField,
+  useTheme,
+  Button,
+  Collapse,
+  IconButton,
+  Alert,
+} from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import { AuthContext } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { User } from '../../utils/types';
@@ -9,7 +19,7 @@ import MemberProfile from '../MemberProfile/MemberProfile';
 import EventsDashboard from './EventsDashboard';
 import RewardsMenu from './RewardsMenu';
 import axios from 'axios';
-import { userInfoAPI, topMembersAPI } from '../../api';
+import { userInfoAPI, topMembersAPI, addEvent } from '../../api';
 import { membershipStyles } from './styles';
 
 interface Event {
@@ -44,12 +54,36 @@ const Membership = () => {
   const [isCodeVisible, setIsCodeVisible] = useState(true);
   const theme = useTheme();
 
-  const handleVerifyCodeClick = () => {
-    console.log('Verification Code:', verificationCode);
-    setIsCodeVisible(false);
-    setVerificationCode('');
+  const [showError, setShowError] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  const alertCloseBtn = (func: any) => {
+    return (
+      <IconButton aria-label="close" size="small" onClick={() => func(false)}>
+        <CloseIcon fontSize="inherit" />
+      </IconButton>
+    );
   };
 
+  const handleVerifyCodeClick = () => {
+    addEvent(userData?.email, verificationCode)
+      .then(() => {
+        setIsCodeVisible(false);
+        setVerificationCode('');
+        setShowSuccess(true);
+        setTimeout(function () {
+          setShowSuccess(false);
+        }, 5000);
+        console.log('good code');
+      })
+      .catch((error) => {
+        setIsCodeVisible(false);
+        setVerificationCode('');
+        setShowError(true);
+        console.log('bad code: ', error);
+      });
+    console.log('Verification Code:', verificationCode, isCodeVisible);
+  };
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -108,43 +142,83 @@ const Membership = () => {
           margin: '10% 0',
         }}
       >
-      
-      <div style={{ display: 'flex', alignItems: 'flex-start', flexDirection: isiPad ? 'column': 'row' }}>
-        <div style={{ flex: 1 }}>
-          <div>
-            <Typography sx={{...isMobile ? styles.eventsAttendedTitleMobile : styles.eventsAttendedTitle, marginLeft: isMobile ? '18%' : '23%'}}>
-              EVENT CHECK-IN
-            </Typography>
-            <TextField
-              sx={{
-                ...styles.textfield,
-                width: '35%',
-                marginLeft: isMobile ? '18%' : '23%',
-                marginBottom: '100px',
-                [theme.breakpoints.down('sm')]: {
-                  width: '40%',
-                },
-              }}
-              size="small"
-              placeholder={'6 Digit Code'}
-              value={verificationCode}
-              onChange={(e) => setVerificationCode(e.target.value)}
-            />
-            <Button
-              sx={{
-                ...styles.button,
-                width: '20%',
-                marginBottom: '100px',
-                [theme.breakpoints.down('sm')]: {
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'flex-start',
+            flexDirection: isiPad ? 'column' : 'row',
+          }}
+        >
+          <div style={{ flex: 1 }}>
+            <div>
+              <Typography
+                sx={{
+                  ...(isMobile ? styles.eventsAttendedTitleMobile : styles.eventsAttendedTitle),
+                  marginLeft: isMobile ? '18%' : '23%',
+                }}
+              >
+                EVENT CHECK-IN
+              </Typography>
+              <Collapse
+                in={showSuccess}
+                sx={{
+                  ...styles.textfield,
+                  marginLeft: isMobile ? '18%' : '23%',
+                  [theme.breakpoints.down('sm')]: {
+                    width: '40%',
+                  },
+                }}
+              >
+                <Alert severity="success" action={alertCloseBtn(setShowSuccess)}>
+                  Successfully checked in!
+                </Alert>
+              </Collapse>
+
+              <Collapse
+                in={showError}
+                sx={{
+                  ...styles.textfield,
+                  marginLeft: isMobile ? '18%' : '23%',
+                  [theme.breakpoints.down('sm')]: {
+                    width: '40%',
+                  },
+                }}
+              >
+                <Alert severity="error" action={alertCloseBtn(setShowError)}>
+                  Invalid event code — <strong>please re-enter a code!</strong>
+                </Alert>
+              </Collapse>
+              <TextField
+                sx={{
+                  ...styles.textfield,
+                  width: '35%',
+                  marginLeft: isMobile ? '18%' : '23%',
+                  marginBottom: '100px',
+                  [theme.breakpoints.down('sm')]: {
+                    width: '40%',
+                  },
+                }}
+                size="small"
+                placeholder={'6 Digit Code'}
+                value={verificationCode}
+                inputProps={{ maxLength: 6 }}
+                onChange={(e) => setVerificationCode(e.target.value)}
+              />
+              <Button
+                sx={{
+                  ...styles.button,
                   width: '20%',
-                },
-              }}
-              onClick={handleVerifyCodeClick}
-            >
-              Verify
-            </Button>
+                  marginBottom: '100px',
+                  [theme.breakpoints.down('sm')]: {
+                    width: '20%',
+                  },
+                }}
+                onClick={handleVerifyCodeClick}
+              >
+                Verify
+              </Button>
+            </div>
           </div>
-        </div>
 
         <div style={{ flex: 1 }}>
           {isLoggedIn && userData && <RewardsMenu email={userData.email} points={userData.points} />}

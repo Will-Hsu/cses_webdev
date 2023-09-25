@@ -31,6 +31,7 @@ import bigPrize from '../../images/rewardsImages/big_gift.png'
 import ConfirmationDialog from './ConfirmationDialog';
 
 
+
 interface RewardsProp {
   email: string;
   points: number;
@@ -97,14 +98,19 @@ const RewardsMenu = (userData: RewardsProp) => {
         console.error('Error redeeming large prize:', error);
       }
     };    
+  
 
-    return (
-      <Container maxWidth="xl" sx={styles.rewardsBody}>
-      <Typography sx={{...isMobile ? styles.eventsAttendedTitleMobile : styles.eventsAttendedTitle, marginLeft: isMobile ? '16%' : '0'}}>
+  return (
+    <Container maxWidth="xl" sx={styles.rewardsBody}>
+      <Typography
+        sx={{
+          ...(isMobile ? styles.eventsAttendedTitleMobile : styles.eventsAttendedTitle),
+          marginLeft: isMobile ? '16%' : '0',
+        }}
+      >
         REWARDS
       </Typography>
       <Box style={{ display: 'flex', flexDirection: isMobile ? 'column': 'row', alignItems: 'flex-start', marginLeft: isMobile ? '16%' : '0'}}>
-      
         <Button sx={{...styles.rewardBox, 
           cursor: userData.points >= smallPrizePoints ? 'pointer' : 'not-allowed', 
           '&:hover': userData.points >= smallPrizePoints ? {
@@ -117,11 +123,11 @@ const RewardsMenu = (userData: RewardsProp) => {
             }
           }}>
           <Box>
-          <img src={smallPrize} alt="img" style={{ width: '70px', height: '70px' }} />
+            <img src={smallPrize} alt="img" style={{ width: '70px', height: '70px' }} />
           </Box>
           <Box
             style={{
-              color: userData.points >= smallPrizePoints ? 'white': 'gray',
+              color: userData.points >= smallPrizePoints ? 'white' : 'gray',
               fontSize: '20px',
               fontFamily: 'Inter',
               fontWeight: '600',
@@ -133,7 +139,7 @@ const RewardsMenu = (userData: RewardsProp) => {
           </Box>
           <Box
             style={{
-              color: userData.points >= smallPrizePoints ? 'white': 'gray',
+              color: userData.points >= smallPrizePoints ? 'white' : 'gray',
               fontSize: '16px',
               fontFamily: 'Inter',
               fontWeight: '600',
@@ -156,11 +162,11 @@ const RewardsMenu = (userData: RewardsProp) => {
             }
           }}>
           <Box>
-          <img src={medPrize} alt="img" style={{ width: '80px', height: '92px' }} />
+            <img src={medPrize} alt="img" style={{ width: '80px', height: '92px' }} />
           </Box>
           <Box
             style={{
-              color: userData.points >= mediumPrizePoints ? 'white': 'gray',
+              color: userData.points >= mediumPrizePoints ? 'white' : 'gray',
               fontSize: '20px',
               fontFamily: 'Inter',
               fontWeight: '600',
@@ -172,7 +178,7 @@ const RewardsMenu = (userData: RewardsProp) => {
           </Box>
           <Box
             style={{
-              color: userData.points >= mediumPrizePoints ? 'white': 'gray',
+              color: userData.points >= mediumPrizePoints ? 'white' : 'gray',
               fontSize: '16px',
               fontFamily: 'Inter',
               fontWeight: '600',
@@ -195,11 +201,11 @@ const RewardsMenu = (userData: RewardsProp) => {
             }
           }}>
           <Box>
-          <img src={bigPrize} alt="img" style={{ width: '100px', height: '113px' }} />
+            <img src={bigPrize} alt="img" style={{ width: '100px', height: '113px' }} />
           </Box>
           <Box
             style={{
-              color: userData.points >= largePrizePoints ? 'white': 'gray',
+              color: userData.points >= largePrizePoints ? 'white' : 'gray',
               fontSize: '20px',
               fontFamily: 'Inter',
               fontWeight: '600',
@@ -211,7 +217,7 @@ const RewardsMenu = (userData: RewardsProp) => {
           </Box>
           <Box
             style={{
-              color: userData.points >= largePrizePoints ? 'white': 'gray',
+              color: userData.points >= largePrizePoints ? 'white' : 'gray',
               fontSize: '16px',
               fontFamily: 'Inter',
               fontWeight: '600',
@@ -223,7 +229,6 @@ const RewardsMenu = (userData: RewardsProp) => {
           </Box>
         </Button>
       </Box>
-
       {confirmationOpen && selectedPrize && (
         <ConfirmationDialog
           open={confirmationOpen}
@@ -244,10 +249,6 @@ const RewardsMenu = (userData: RewardsProp) => {
       )}
     </Container>
   );
-    
-  };
-  
+};
+
 export default RewardsMenu;
-
-
-    

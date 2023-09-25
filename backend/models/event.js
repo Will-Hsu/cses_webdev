@@ -9,6 +9,7 @@ const eventSchema = new Schema({
   description: String,
   calendar_link: { type: String, required: true },
   instagram_link: String,
+  code: { type: String },
 });
 
 // Export model
