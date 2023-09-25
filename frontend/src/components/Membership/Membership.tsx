@@ -220,10 +220,10 @@ const Membership = () => {
             </div>
           </div>
 
-          <div style={{ flex: 1 }}>
-            {isLoggedIn && userData && <RewardsMenu points={userData.points} />}
-          </div>
+        <div style={{ flex: 1 }}>
+          {isLoggedIn && userData && <RewardsMenu email={userData.email} points={userData.points} />}
         </div>
+      </div>
 
         {/* Add Events Attended + Leaderboard UI for the membership page @Brian & Eddie & Yashil --
         consider creating a separate component for this as well */}
