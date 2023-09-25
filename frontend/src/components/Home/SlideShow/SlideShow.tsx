@@ -1,6 +1,7 @@
 import React from 'react';
 import { slideShowStyles } from './styles';
 import desktop from '../../../images/desktop.png';
+import { Box } from '@mui/material';
 
 const images = require.context('../../../images/slideshowImages', true);
 const styles = slideShowStyles();
@@ -27,7 +28,13 @@ const SlideShow = () => {
   return (
     <div style={{ margin: '10px 10%', width: '80%', marginBottom: '10%' }}>
       <img src={desktop} alt="img" style={{ width: '100%', marginTop: '8%', height: 'auto' }} />
-      <div style={{ ...styles.slideshow, marginLeft: '5.3%', marginTop: '-81%' }}>
+      <Box
+        sx={{
+          ...styles.slideshow,
+          marginLeft: '5.3%',
+          marginTop: { xs: '-81.5%', sm: '-81.5%', md: '-81.5%', lg: '-81%' },
+        }}
+      >
         <div
           style={{
             whiteSpace: 'nowrap',
@@ -44,7 +51,7 @@ const SlideShow = () => {
             />
           ))}
         </div>
-      </div>
+      </Box>
     </div>
   );
 };
