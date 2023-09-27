@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, ToggleButton } from '@mui/material';
 import bgTop from '../../images/shape.svg';
 import bgBtm from '../../images/shape.svg';

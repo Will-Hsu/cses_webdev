@@ -2,6 +2,18 @@ import axios from 'axios';
 
 const API = axios.create({ baseURL: `${process.env.REACT_APP_BACKEND_URL}/api/v1` });
 
+export const addEvent = (email, sixDigitCode) => {
+  return new Promise((resolve, reject) => {
+    API.post(`/users/${email}/event/${sixDigitCode}`)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
 export const createSubscriberAPI = (newEmail) => {
   return new Promise((resolve, reject) => {
     API.post('/subscribers/create', newEmail)
@@ -118,6 +130,42 @@ export const eventDeleteAPI = (id) => {
 export const eventUpdateAPI = (id, updatedEvent) => {
   return new Promise((resolve, reject) => {
     API.put(`/event/${id}/update`, updatedEvent)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+export const prizeRedeemSmallAPI = (email) => {
+  return new Promise((resolve, reject) => {
+    API.put(`/${email}/redeemSmall`)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+export const prizeRedeemMediumAPI = (email) => {
+  return new Promise((resolve, reject) => {
+    API.put(`/${email}/redeemMedium`)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+export const prizeRedeemLargeAPI = (email) => {
+  return new Promise((resolve, reject) => {
+    API.put(`/${email}/redeemLarge`)
       .then((response) => {
         resolve(response.data);
       })
