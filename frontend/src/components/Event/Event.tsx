@@ -46,14 +46,6 @@ const EventBox = ({
   pastEvent,
 }: EventBoxProps) => {
   const styles = event_style();
-  //   const mediaQuery = window.matchMedia('(max-width: 1000px)');
-
-  //   if (mediaQuery.matches) {
-  //     styles.outerBox.width = '300px';
-  //     styles.outerBox.height = '312px';
-  //     styles.innerBox.width = '288px';
-  //     styles.innerBox.height = '296px';
-  //   }
 
   /**
    * Calculates the time in days, hours, mins, and secs by subtracting the target date, minus the curent date.
@@ -161,10 +153,6 @@ const EventBox = ({
     minutes,
   )}:${formatTime(seconds)}`.split('');
 
-  // Apply style adjustments only for screens with width less than 1000px
-  //const mediaQuery = window.matchMedia('(max-width: 1000px)');
-  //const shouldReduceSize = mediaQuery.matches;
-
   return (
     <Box style={{ display: 'flex' }}>
       <Box className="outerBox" sx={styles?.outerBox}>
@@ -172,11 +160,12 @@ const EventBox = ({
           <p
             style={{
               color: 'white',
-              fontSize: '40px',
+              fontSize: '35px',
               fontFamily: 'Chakra Petch',
               fontWeight: '600',
               marginTop: '0',
               height: '100px',
+              marginBottom: '15px',
             }}
           >
             {title}
@@ -295,7 +284,7 @@ const EventBox = ({
 
           <div
             style={{
-              marginTop: '30px',
+              marginTop: '25px',
               display: 'flex',
               flexDirection: 'column',
             }}
@@ -303,7 +292,7 @@ const EventBox = ({
             <p
               style={{
                 color: 'white',
-                fontSize: '20px',
+                fontSize: '18px',
                 fontFamily: 'Chakra Petch',
                 fontWeight: '500',
                 marginTop: '5px',
@@ -315,7 +304,7 @@ const EventBox = ({
             <p
               style={{
                 color: 'white',
-                fontSize: '20px',
+                fontSize: '18px',
                 fontFamily: 'Chakra Petch',
                 fontWeight: '500',
                 marginTop: '5px',
@@ -328,7 +317,7 @@ const EventBox = ({
             <p
               style={{
                 color: 'white',
-                fontSize: '20px',
+                fontSize: '18px',
                 fontFamily: 'Chakra Petch',
                 fontWeight: '500',
                 marginTop: '5px',

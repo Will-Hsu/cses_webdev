@@ -39,6 +39,12 @@ const Events = () => {
   const [selectedYear] = useState<number | null>(null);
   const [selectedMonth] = useState<number | null>(null);
 
+  const [displayedFutureEvents, setDisplayedFutureEvents] = useState(upcomingEvents);
+  const [displayedPastEvents, setDisplayedPastEvents] = useState(pastEvents);
+  const [isThisWeekClicked, setIsThisWeekClicked] = useState(false);
+  const [isThisMonthClicked, setIsThisMonthClicked] = useState(false);
+  const [is2023Clicked, setIs2023Clicked] = useState(false);
+
   const paginate = (
     events: Array<EventData>,
     pageNumber: number,
@@ -133,12 +139,6 @@ const Events = () => {
     fetchUpcomingEvents();
     fetchPastEvents();
   }, [selectedYear, selectedMonth, totalPagesUpcoming, totalPagesPast]);
-
-  const [displayedFutureEvents, setDisplayedFutureEvents] = useState(upcomingEvents);
-  const [displayedPastEvents, setDisplayedPastEvents] = useState(pastEvents);
-  const [isThisWeekClicked, setIsThisWeekClicked] = useState(false);
-  const [isThisMonthClicked, setIsThisMonthClicked] = useState(false);
-  const [is2023Clicked, setIs2023Clicked] = useState(false);
 
   const handleThisWeekClick = () => {
     if (isThisWeekClicked) {
@@ -276,7 +276,7 @@ const Events = () => {
             fontSize: '40px',
             fontFamily: 'Chakra Petch',
             marginLeft: '39px',
-            marginTop: '117px',
+            marginTop: '50px',
             fontWeight: '700',
           }}
         >
