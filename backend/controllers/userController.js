@@ -191,7 +191,7 @@ export const redeemSmall = asyncHandler(async (req, res) => {
 
     // Perform additional prize actions here
     await user.save();
-    await logRedeem(user._id, 'small', pointsBefore, pointsAfter);
+    await logRedeem(user._id, user.email, 'small', pointsBefore, pointsAfter);
     return res.status(200).json({ message: 'Small prize redeemed successfully ' });
   } else {
     return res.status(400).json({ message: 'Insufficient points for redemption' });
@@ -214,7 +214,7 @@ export const redeemMedium = asyncHandler(async (req, res) => {
 
     // Perform additional prize actions here
     await user.save();
-    await logRedeem(user._id, 'medium', pointsBefore, pointsAfter);
+    await logRedeem(user._id, user.email, 'medium', pointsBefore, pointsAfter);
     return res.status(200).json({ message: 'Medium prize redeemed successfully ' });
   } else {
     return res.status(400).json({ message: 'Insufficient points for redemption' });
@@ -237,7 +237,7 @@ export const redeemLarge = asyncHandler(async (req, res) => {
 
     // Perform additional prize actions here
     await user.save();
-    await logRedeem(user._id, 'large', pointsBefore, pointsAfter);
+    await logRedeem(user._id, user.email, 'large', pointsBefore, pointsAfter);
     return res.status(200).json({ message: 'Large prize redeemed successfully ' });
   } else {
     return res.status(400).json({ message: 'Insufficient points for redemption' });
@@ -263,9 +263,10 @@ function isValidEventId(eventIds) {
   );
 }
 
-async function logRedeem(userId, redeemType, pointsBefore, pointsAfter) {
+async function logRedeem(userId, userEmail, redeemType, pointsBefore, pointsAfter) {
   const redeemLog = new RedeemLog({
     userId,
+    userEmail,
     redeemType,
     timestamp: Date.now(),
     pointsBefore,
