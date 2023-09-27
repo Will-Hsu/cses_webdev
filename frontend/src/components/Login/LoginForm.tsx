@@ -11,7 +11,7 @@ const LoginForm = ({ showEmailError, login }: LoginFormProps) => {
   const styles = loginStyles();
 
   return (
-    <div style={{ marginTop: '200px', marginBottom: '100px' }}>
+    <div style={{ marginTop: '250px', marginBottom: '150px' }}>
       {showEmailError ? <Alert severity="error">Please use UCSD email</Alert> : null}
       <div style={styles.loginForm}>
         <Typography
