@@ -42,7 +42,7 @@ const Footer = () => {
             }}
           >
             {links.map(({ logo, link }, id) => (
-              <Link href={link} target="_blank" rel="noopener noreferrer">
+              <Link href={link} key={id} target="_blank" rel="noopener noreferrer">
                 <img
                   src={logo}
                   alt="logo"
