@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Grid, Typography, Link, Divider, useTheme } from '@mui/material';
-import csesLogo from '../../images/logo.svg';
+import csesLogo from '../../images/logo.png';
 import { footerStyles } from './styles';
 import Forms from './Forms';
 

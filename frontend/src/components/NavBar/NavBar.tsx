@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 import { Menu as MenuIcon, Close as CloseIcon } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
-import csesLogo from '../../images/logo.svg';
+import csesLogo from '../../images/logo.png';
 import MuiButton from '../Button/Button';
 import { navBarStyles } from './styles';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -77,7 +77,7 @@ const NavBar = () => {
       >
         <Toolbar>
           <Link to="/">
-            <img src={csesLogo} alt="logo" style={{ margin: '25px' }} />
+            <img src={csesLogo} alt="logo" style={{ margin: '25px', height: '45px' }} />
           </Link>
           <div style={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'block' } }}>
