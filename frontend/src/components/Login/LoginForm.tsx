@@ -30,9 +30,22 @@ const LoginForm = ({ showEmailError, login }: LoginFormProps) => {
           CSES Member Login
         </Typography>
         <Divider variant="middle" sx={{ bgcolor: 'white' }} />
+        <Typography
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: '5%',
+            fontFamily: 'Inter',
+            color: 'white',
+            fontSize: '10pt',
+          }}
+        >
+          Please use your UCSD email to sign in
+        </Typography>
         <Box
           sx={{
-            marginTop: '10%',
+            marginTop: '5%',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',

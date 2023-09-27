@@ -8,6 +8,7 @@ interface ButtonProps {
   onClick?: () => void;
   isLogin?: boolean;
   inactive?: boolean;
+  infocus?: boolean;
 }
 
 const Button = ({
@@ -16,8 +17,9 @@ const Button = ({
   isLogin = false,
   onClick,
   inactive = false,
+  infocus = false,
 }: ButtonProps) => {
-  const style = buttonStyles(isLogin, inactive);
+  const style = buttonStyles(isLogin, inactive, infocus);
   return (
     <MuiButton sx={style} size={size} variant="outlined" onClick={onClick}>
       {text}

@@ -1,4 +1,4 @@
-export const buttonStyles = (isLogin: boolean, inactive: boolean) => {
+export const buttonStyles = (isLogin: boolean, inactive: boolean, infocus: boolean) => {
   const commonStyles = {
     fontFamily: isLogin ? 'Inter, sans-serif' : 'Chakra Petch, sans-serif',
     fontSize: isLogin ? '20px' : 'auto',
@@ -13,9 +13,6 @@ export const buttonStyles = (isLogin: boolean, inactive: boolean) => {
       borderColor: 'white',
       backgroundColor: 'rgba(255, 255, 255, 0.2)',
     },
-    '&:focus': {
-      backgroundColor: 'rgba(255, 255, 255, 0.5)',
-    },
   };
 
   // Apply additional styles for inactive buttons
@@ -27,5 +24,15 @@ export const buttonStyles = (isLogin: boolean, inactive: boolean) => {
     };
   }
 
+  if (infocus) {
+    return {
+      ...commonStyles,
+      backgroundColor: 'rgba(255, 255, 255, 0.5)',
+      '&:hover': {
+        borderColor: 'white',
+        backgroundColor: 'rgba(255, 255, 255, 0.5)',
+      },
+    };
+  }
   return commonStyles;
 };

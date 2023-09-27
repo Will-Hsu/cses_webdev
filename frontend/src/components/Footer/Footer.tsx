@@ -13,12 +13,11 @@ const links = [
   { logo: InstagramIcon, link: 'https://www.instagram.com/cses_ucsd/' },
   { logo: FacebookIcon, link: 'https://www.facebook.com/csesucsd' },
   { logo: LinkedInIcon, link: 'https://www.linkedin.com/in/csesucsd/' },
-  { logo: DiscordIcon, link: 'https://discord.gg/vd9aFu4V' },
+  { logo: DiscordIcon, link: 'https://discord.gg/UkdACyy2h8' },
   { logo: LinktreeIcon, link: 'https://linktr.ee/csesucsd' },
 ];
 
-const address = ['UC San Diego', '9500 Gilman Dr. La Jolla, CA 92093'];
-const contact = ['(862) 223-9756', 'cses@ucsd.edu'];
+const address = ['UC San Diego', '9500 Gilman Dr.', 'La Jolla, CA 92093'];
 
 const Footer = () => {
   const theme = useTheme();
@@ -26,7 +25,7 @@ const Footer = () => {
   return (
     <Container disableGutters maxWidth={false} sx={styles.footer}>
       <Grid container spacing={2}>
-        <Grid item sx={{ marginRight: 'auto' }}>
+        <Grid item sx={{ margin: '20px', marginRight: 'auto' }}>
           <a href="/">
             <img src={csesLogo} alt="logo" style={{ height: '80px' }} />
           </a>
@@ -44,7 +43,11 @@ const Footer = () => {
           >
             {links.map(({ logo, link }, id) => (
               <Link href={link} target="_blank" rel="noopener noreferrer">
-                <img src={logo} alt="logo" style={{ maxWidth: '50px', maxHeight: '50px' }} />
+                <img
+                  src={logo}
+                  alt="logo"
+                  style={{ width: '50px', height: '50px', marginRight: '20px' }}
+                />
               </Link>
             ))}
           </Grid>
@@ -56,11 +59,11 @@ const Footer = () => {
             ))}
           </Grid>
           <Grid item sx={{ marginTop: '40px' }}>
-            {contact.map((text, id) => (
-              <Typography key={id} sx={styles.text}>
-                {text}
-              </Typography>
-            ))}
+            <Typography sx={styles.text}>
+              <Link href="mailto:cses@ucsd.edu" color="inherit">
+                cses@ucsd.edu
+              </Link>
+            </Typography>
           </Grid>
         </Grid>
         <Grid item sx={{ margin: '20px' }}>
