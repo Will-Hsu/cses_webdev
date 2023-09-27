@@ -1,36 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-//import { AuthContext } from '../../context/AuthContext';
-//import { useNavigate } from 'react-router-dom';
-//import axios from 'axios';
-//import { User } from '../../utils/types';
-import {
-    Box,
-    Button,
-    Container,
-    Typography,
-    TableContainer,
-    Table,
-    TableBody,
-    TableHead,
-    TableCell,
-    TableRow,
-    Modal,
-    TextField,
-    createTheme,
-    useMediaQuery,
-    Grid
-  } from '@mui/material';
-// import { memberProfile } from './styles';
-import LinearProgress, { LinearProgressProps } from '@mui/material/LinearProgress';
+import { Box, Button, Container, Typography, useMediaQuery } from '@mui/material';
 import { membershipStyles } from './styles';
-import prize from '../../images/gift.png'
-import smallPrize from '../../images/rewardsImages/small_gift.png'
-import medPrize from '../../images/rewardsImages/med_gift.png'
-import bigPrize from '../../images/rewardsImages/big_gift.png'
+import smallPrize from '../../images/rewardsImages/small_gift.png';
+import medPrize from '../../images/rewardsImages/med_gift.png';
+import bigPrize from '../../images/rewardsImages/big_gift.png';
 import ConfirmationDialog from './ConfirmationDialog';
-
-
 
 interface RewardsProp {
   email: string;
@@ -38,67 +13,71 @@ interface RewardsProp {
 }
 
 const RewardsMenu = (userData: RewardsProp) => {
-    const theme = createTheme();
-    const styles = membershipStyles();
-    const isMobile = useMediaQuery('(max-width: 767px)');
-    const smallPrizePoints = 500;
-    const mediumPrizePoints = 1250;
-    const largePrizePoints = 2500;
-    const [confirmationOpen, setConfirmationOpen] = useState(false);
-    const [selectedPrize, setSelectedPrize] = useState('');
+  const styles = membershipStyles();
+  const isMobile = useMediaQuery('(max-width: 767px)');
+  const smallPrizePoints = 500;
+  const mediumPrizePoints = 1250;
+  const largePrizePoints = 2500;
+  const [confirmationOpen, setConfirmationOpen] = useState(false);
+  const [selectedPrize, setSelectedPrize] = useState('');
 
-    const openConfirmationDialog = (prizeType: string) => {
-      setSelectedPrize(prizeType);
-      setConfirmationOpen(true);
-    };
+  const openConfirmationDialog = (prizeType: string) => {
+    setSelectedPrize(prizeType);
+    setConfirmationOpen(true);
+  };
 
-    const closeConfirmationDialog = () => {
-      setSelectedPrize('');
-      setConfirmationOpen(false);
-    };
+  const closeConfirmationDialog = () => {
+    setSelectedPrize('');
+    setConfirmationOpen(false);
+  };
 
-    const pointsForPrize = (prizeType: string) => {
-      switch (prizeType) {
-        case 'small':
-          return 500;
-        case 'medium':
-          return 1250;
-        case 'large':
-          return 2500;
-      }
-    };
+  const pointsForPrize = (prizeType: string) => {
+    switch (prizeType) {
+      case 'small':
+        return 500;
+      case 'medium':
+        return 1250;
+      case 'large':
+        return 2500;
+    }
+  };
 
-    const redeemSmallPrize = async () => {
-      try {
-        await axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/v1/users/${userData.email}/redeemSmall`);
-        console.log('Redeem Small Prize endpoint called');
+  const redeemSmallPrize = async () => {
+    try {
+      await axios.put(
+        `${process.env.REACT_APP_BACKEND_URL}/api/v1/users/${userData.email}/redeemSmall`,
+      );
+      console.log('Redeem Small Prize endpoint called');
 
-        window.location.reload();
-      } catch (error) {
-        console.error('Error redeeming small prize:', error);
-      }
-    };  
-    
-    const redeemMediumPrize = async () => {
-      try {
-        await axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/v1/users/${userData.email}/redeemMedium`);
-        
-        window.location.reload();
-      } catch (error) {
-        console.error('Error redeeming medium prize:', error);
-      }
-    };    
+      window.location.reload();
+    } catch (error) {
+      console.error('Error redeeming small prize:', error);
+    }
+  };
 
-    const redeemLargePrize = async () => {
-      try {
-        await axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/v1/users/${userData.email}/redeemLarge`);
-        
-        window.location.reload();
-      } catch (error) {
-        console.error('Error redeeming large prize:', error);
-      }
-    };    
-  
+  const redeemMediumPrize = async () => {
+    try {
+      await axios.put(
+        `${process.env.REACT_APP_BACKEND_URL}/api/v1/users/${userData.email}/redeemMedium`,
+      );
+
+      window.location.reload();
+    } catch (error) {
+      console.error('Error redeeming medium prize:', error);
+    }
+  };
+
+  const redeemLargePrize = async () => {
+    try {
+      await axios.put(
+        `${process.env.REACT_APP_BACKEND_URL}/api/v1/users/${userData.email}/redeemLarge`,
+      );
+
+      window.location.reload();
+    } catch (error) {
+      console.error('Error redeeming large prize:', error);
+    }
+  };
 
   return (
     <Container maxWidth="xl" sx={styles.rewardsBody}>
@@ -110,18 +89,32 @@ const RewardsMenu = (userData: RewardsProp) => {
       >
         REWARDS
       </Typography>
-      <Box style={{ display: 'flex', flexDirection: isMobile ? 'column': 'row', alignItems: 'flex-start', marginLeft: isMobile ? '16%' : '0'}}>
-        <Button sx={{...styles.rewardBox, 
-          cursor: userData.points >= smallPrizePoints ? 'pointer' : 'not-allowed', 
-          '&:hover': userData.points >= smallPrizePoints ? {
-            boxShadow: '0 0 20px 5px rgba(52, 152, 219, 0.7)',
-          }: 'none', 
-          filter: userData.points >= smallPrizePoints ? 'grayscale(0%)': 'grayscale(100%)',
-          }} onClick={() => {
+      <Box
+        style={{
+          display: 'flex',
+          flexDirection: isMobile ? 'column' : 'row',
+          alignItems: 'flex-start',
+          marginLeft: isMobile ? '16%' : '0',
+        }}
+      >
+        <Button
+          sx={{
+            ...styles.rewardBox,
+            cursor: userData.points >= smallPrizePoints ? 'pointer' : 'not-allowed',
+            '&:hover':
+              userData.points >= smallPrizePoints
+                ? {
+                    boxShadow: '0 0 20px 5px rgba(52, 152, 219, 0.7)',
+                  }
+                : 'none',
+            filter: userData.points >= smallPrizePoints ? 'grayscale(0%)' : 'grayscale(100%)',
+          }}
+          onClick={() => {
             if (userData.points >= smallPrizePoints) {
               openConfirmationDialog('small');
             }
-          }}>
+          }}
+        >
           <Box>
             <img src={smallPrize} alt="img" style={{ width: '70px', height: '70px' }} />
           </Box>
@@ -150,17 +143,24 @@ const RewardsMenu = (userData: RewardsProp) => {
             500 Points
           </Box>
         </Button>
-        <Button sx={{...styles.rewardBox, 
-          cursor: userData.points >= mediumPrizePoints ? 'pointer' : 'not-allowed', 
-          '&:hover': userData.points >= mediumPrizePoints ? {
-            boxShadow: '0 0 20px 5px rgba(52, 152, 219, 0.7)',
-          }: 'none', 
-          filter: userData.points >= mediumPrizePoints ? 'grayscale(0%)': 'grayscale(100%)',
-          }} onClick={() => {
+        <Button
+          sx={{
+            ...styles.rewardBox,
+            cursor: userData.points >= mediumPrizePoints ? 'pointer' : 'not-allowed',
+            '&:hover':
+              userData.points >= mediumPrizePoints
+                ? {
+                    boxShadow: '0 0 20px 5px rgba(52, 152, 219, 0.7)',
+                  }
+                : 'none',
+            filter: userData.points >= mediumPrizePoints ? 'grayscale(0%)' : 'grayscale(100%)',
+          }}
+          onClick={() => {
             if (userData.points >= mediumPrizePoints) {
               openConfirmationDialog('medium');
             }
-          }}>
+          }}
+        >
           <Box>
             <img src={medPrize} alt="img" style={{ width: '80px', height: '92px' }} />
           </Box>
@@ -189,17 +189,24 @@ const RewardsMenu = (userData: RewardsProp) => {
             1250 Points
           </Box>
         </Button>
-        <Button sx={{...styles.rewardBox, 
-          cursor: userData.points >= largePrizePoints ? 'pointer' : 'not-allowed', 
-          '&:hover': userData.points >= largePrizePoints ? {
-            boxShadow: '0 0 20px 5px rgba(52, 152, 219, 0.7)',
-          }: 'none', 
-          filter: userData.points >= largePrizePoints ? 'grayscale(0%)': 'grayscale(100%)',
-          }} onClick={() => {
+        <Button
+          sx={{
+            ...styles.rewardBox,
+            cursor: userData.points >= largePrizePoints ? 'pointer' : 'not-allowed',
+            '&:hover':
+              userData.points >= largePrizePoints
+                ? {
+                    boxShadow: '0 0 20px 5px rgba(52, 152, 219, 0.7)',
+                  }
+                : 'none',
+            filter: userData.points >= largePrizePoints ? 'grayscale(0%)' : 'grayscale(100%)',
+          }}
+          onClick={() => {
             if (userData.points >= largePrizePoints) {
               openConfirmationDialog('large');
             }
-          }}>
+          }}
+        >
           <Box>
             <img src={bigPrize} alt="img" style={{ width: '100px', height: '113px' }} />
           </Box>
@@ -241,10 +248,12 @@ const RewardsMenu = (userData: RewardsProp) => {
             } else if (selectedPrize === 'large') {
               redeemLargePrize();
             }
-            closeConfirmationDialog(); 
+            closeConfirmationDialog();
           }}
           title="Confirm Prize Redemption"
-          message={`Are you sure you want to redeem the ${selectedPrize} prize (${pointsForPrize(selectedPrize)} points)?`}
+          message={`Are you sure you want to redeem the ${selectedPrize} prize (${pointsForPrize(
+            selectedPrize,
+          )} points)?`}
         />
       )}
     </Container>

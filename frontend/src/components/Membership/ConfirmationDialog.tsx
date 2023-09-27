@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Button,
   Dialog,
@@ -16,7 +16,7 @@ interface ConfirmationDialogProps {
   message: string;
 }
 
-const ConfirmationDialog=(confirmationProps:ConfirmationDialogProps) => {
+const ConfirmationDialog = (confirmationProps: ConfirmationDialogProps) => {
   return (
     <Dialog open={confirmationProps.open} onClose={confirmationProps.handleClose}>
       <DialogTitle>{confirmationProps.title}</DialogTitle>
