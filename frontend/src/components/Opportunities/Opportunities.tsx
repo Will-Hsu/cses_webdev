@@ -21,7 +21,7 @@ const Opportunities = () => {
         <Typography sx={styles.title}>OPPORTUNITIES</Typography>
         <Grid container spacing={2} sx={{ justifyContent: 'center', alignItems: 'center' }}>
           <Grid item sx={{ width: '550px', marginTop: '3%' }}>
-            <img src={members} alt="members" style={{ width: '85%', height: 'auto' }} />
+            <img src={members} alt="members" style={{ width: '85%', height: 'auto', boxShadow: '12px 12px white' }} />
           </Grid>
           <Grid item sx={{ width: '550px', marginTop: '3%' }}>
             <Typography sx={styles.subtitle}>
@@ -42,7 +42,7 @@ const Opportunities = () => {
             </Typography>
           </Grid>
           <Grid item sx={{ width: '550px', marginTop: '8%' }}>
-            <img src={sponsors} alt="sponsors" style={{ width: '85%', height: 'auto' }} />
+            <img src={sponsors} alt="sponsors" style={{ width: '85%', height: 'auto', boxShadow: '12px 12px white' }} />
           </Grid>
           <Grid item sx={{ width: '550px', marginTop: '3%' }}>
             <Typography sx={styles.subtitle}>
