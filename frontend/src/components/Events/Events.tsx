@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Container, ToggleButton } from '@mui/material';
+import { Container } from '@mui/material';
 import bgTop from '../../images/shape.svg';
 import bgBtm from '../../images/shape.svg';
 import { event_style } from './styles';
 import EventBox from '../Event/Event';
 import MobileEventBox from '../Event/MobileEvent';
 import Button from '../Button/Button';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import { buttonStyles } from '../Button/styles';
 import useMediaQuery from '../../hooks/useMediaQuery';
 
 interface EventData {
@@ -40,6 +38,12 @@ const Events = () => {
   const [pastEvents, setPastEvents] = useState<EventData[]>([]);
   const [selectedYear] = useState<number | null>(null);
   const [selectedMonth] = useState<number | null>(null);
+
+  const [displayedFutureEvents, setDisplayedFutureEvents] = useState(upcomingEvents);
+  const [displayedPastEvents, setDisplayedPastEvents] = useState(pastEvents);
+  const [isThisWeekClicked, setIsThisWeekClicked] = useState(false);
+  const [isThisMonthClicked, setIsThisMonthClicked] = useState(false);
+  const [is2023Clicked, setIs2023Clicked] = useState(false);
 
   const paginate = (
     events: Array<EventData>,
@@ -91,10 +95,6 @@ const Events = () => {
 
   useEffect(() => {
     // Set media queries
-
-    // let upcomingEventsEndpoint = `http://localhost:5000/api/v1/events?type=upcoming`;
-    // let pastEventsEndpoint = `http://localhost:5000/api/v1/events`;
-
     let upcomingEventsEndpoint = `${process.env.REACT_APP_BACKEND_URL}/api/v1/events?type=upcoming`;
     let pastEventsEndpoint = `${process.env.REACT_APP_BACKEND_URL}/api/v1/events?type=past`;
 
@@ -140,12 +140,6 @@ const Events = () => {
     fetchPastEvents();
   }, [selectedYear, selectedMonth, totalPagesUpcoming, totalPagesPast]);
 
-  const [displayedFutureEvents, setDisplayedFutureEvents] = useState(upcomingEvents);
-  const [displayedPastEvents, setDisplayedPastEvents] = useState(pastEvents);
-  const [isThisWeekClicked, setIsThisWeekClicked] = useState(false);
-  const [isThisMonthClicked, setIsThisMonthClicked] = useState(false);
-  const [is2023Clicked, setIs2023Clicked] = useState(false);
-
   const handleThisWeekClick = () => {
     if (isThisWeekClicked) {
       setDisplayedFutureEvents(upcomingEvents);
@@ -179,8 +173,6 @@ const Events = () => {
           new Date(event.start_time).getTime() >= now &&
           new Date(event.start_time).getTime() <= oneMonthAfter,
       );
-
-      // console.log(thisMonthEvents);
 
       setDisplayedFutureEvents(thisMonthEvents);
       setIsThisWeekClicked(false);
@@ -284,7 +276,7 @@ const Events = () => {
             fontSize: '40px',
             fontFamily: 'Chakra Petch',
             marginLeft: '39px',
-            marginTop: '117px',
+            marginTop: '50px',
             fontWeight: '700',
           }}
         >
@@ -297,70 +289,59 @@ const Events = () => {
             display: 'flex',
             justifyContent: 'flex-start',
             marginLeft: '38px',
-            marginTop: '-20px',
+            marginTop: '-25px',
           }}
         >
-          <ToggleButtonGroup value="Timeframe" exclusive aria-label="Events Filter">
-            <ToggleButton
-              key="This Week"
-              value="This Week"
-              sx={{
-                ...buttonStyles(false, false),
-                marginRight: '0px',
-                marginLeft: '0px',
-                '&.MuiToggleButton-root.Mui-selected, &.MuiToggleButton-root.Mui-selected:hover': {
-                  backgroundColor: 'grey',
-                  color: 'white',
-                },
-              }}
-              onClick={handleThisWeekClick}
-            >
-              This Week
-            </ToggleButton>
-            <ToggleButton
-              key="This Month"
-              value="This Month"
-              sx={{
-                ...buttonStyles(false, false),
-                marginRight: '0px',
-                marginLeft: '0px',
-                '&.MuiToggleButton-root.Mui-selected, &.MuiToggleButton-root.Mui-selected:hover': {
-                  backgroundColor: 'grey',
-                  color: 'white',
-                },
-              }}
-              onClick={handleThisMonthClick}
-            >
-              This Month
-            </ToggleButton>
-          </ToggleButtonGroup>
-          {/* <Button size="medium" text="This Week" onClick={handleThisWeekClick}></Button>
-          <Button size="medium" text="This Month" onClick={handleThisMonthClick}></Button> */}
+          <Button
+            size="medium"
+            text="This Week"
+            infocus={isThisWeekClicked}
+            onClick={handleThisWeekClick}
+          ></Button>
+          <Button
+            size="medium"
+            text="This Month"
+            infocus={isThisMonthClicked}
+            onClick={handleThisMonthClick}
+          ></Button>
         </div>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
         {/* Render EventBoxes for future events */}
-        <div
-          style={{
-            ...eventsContainerStyle,
-          }}
-        >
-          {renderEventBoxes(displayedFutureEvents)}
+        <div style={{ ...eventsContainerStyle, marginTop: '20px' }}>
+          {(displayedFutureEvents.length === 0 && (
+            <div
+              style={{
+                color: 'white',
+                fontSize: '20px',
+                fontFamily: 'Chakra Petch',
+                fontWeight: '700',
+                display: 'flex',
+                flexDirection: 'row',
+                marginLeft: '39px',
+              }}
+            >
+              No upcoming events
+            </div>
+          )) ||
+            renderEventBoxes(displayedFutureEvents)}
         </div>
-        <div>
-          <p
-            style={{
-              color: 'white',
-              fontSize: '20px',
-              fontFamily: 'Chakra Petch',
-              fontWeight: '700',
-              display: 'flex',
-              flexDirection: 'row',
-              marginLeft: '39px',
-            }}
-          >
-            Page {pageNumberUpcoming} of {totalPagesUpcoming}
-          </p>
-        </div>
+
+        {displayedFutureEvents.length > 0 && (
+          <div>
+            <p
+              style={{
+                color: 'white',
+                fontSize: '20px',
+                fontFamily: 'Chakra Petch',
+                fontWeight: '700',
+                display: 'flex',
+                flexDirection: 'row',
+                marginLeft: '39px',
+              }}
+            >
+              Page {pageNumberUpcoming} of {totalPagesUpcoming}
+            </p>
+          </div>
+        )}
         {totalPagesUpcoming > 1 && (
           <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
             <Button
@@ -427,14 +408,12 @@ const Events = () => {
             display: 'flex',
             justifyContent: 'flex-start',
             marginLeft: '30px',
-            marginTop: '-20px',
+            marginTop: '-25px',
           }}
         >
-          <Button size="medium" text="2023" onClick={handle2023}></Button>
+          <Button size="medium" text="2023" infocus={is2023Clicked} onClick={handle2023}></Button>
         </div>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-
-        <div style={{ ...eventsContainerStyle }}>
+        <div style={{ ...eventsContainerStyle, marginTop: '20px' }}>
           {(displayedPastEvents.length === 0 && (
             <div
               style={{
@@ -447,7 +426,7 @@ const Events = () => {
                 marginLeft: '39px',
               }}
             >
-              No events found
+              No past events
             </div>
           )) ||
             renderPastEventBoxes(displayedPastEvents)}

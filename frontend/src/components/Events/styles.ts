@@ -6,10 +6,10 @@ export const event_style = () => ({
     scale: '120%',
     top: '0%',
     marginTop: '-10%',
-    opacity: '0.7',
+    opacity: '0.5',
   },
   bg2: {
-    opacity: '0.7',
+    opacity: '0.5',
     width: '100%',
     scale: '120%',
     transform: 'scaleX(-1) scaleY(-1)',
