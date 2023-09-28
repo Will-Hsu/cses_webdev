@@ -26,7 +26,8 @@ const About = () => {
           <img src={bgBtm} alt="bg2" style={{ ...styles.bg2, position: 'absolute' }} />
         </Box>
         <Container maxWidth="xl" sx={styles.body}>
-          <Grid container sx={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
+          <Box sx={{backgroundColor: 'rgba(0,0,0,0.5)', maxWidth: '90%', margin: '0 auto'}}>
+          <Grid container sx={{ marginTop: '7%', paddingTop: '3%', display: 'flex', justifyContent: 'center'}}>
             <Grid
               item
               sm={6}
@@ -46,9 +47,9 @@ const About = () => {
                 marginTop: '1%',
               }}
             >
-              <img src={about1} alt="img" style={{ maxWidth: '130%', height: 'auto' }} />
+              <img src={about1} alt="img" style={{ maxWidth: '130%', height: 'auto', borderRadius: '10px', boxShadow: '10px 10px white'}} />
             </Grid>
-            <Grid item sm={6} md={5} lg={5}>
+            <Grid item sm={6} md={5} lg={6}>
               <Box
                 sx={{
                   color: 'white',
@@ -75,6 +76,7 @@ const About = () => {
               </Box>
             </Grid>
           </Grid>
+          </Box>
           <h1
             style={{
               color: 'white',
@@ -94,7 +96,7 @@ const About = () => {
               lg={3}
               sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
             >
-              <img src={books} alt="img" style={{ width: '80%' }} />
+              <img src={books} alt="img" style={{ width: '80%'}} />
             </Grid>
             <Grid item sm={5} lg={5}>
               <Box
@@ -161,7 +163,7 @@ const About = () => {
               lg={3}
               sx={{ display: 'flex', alignItems: 'center', marginRight: '3%' }}
             >
-              <img src={about2} alt="img" style={{ maxWidth: '100%', height: 'auto' }} />
+              <img src={about2} alt="img" style={{ maxWidth: '100%', height: 'auto', borderRadius: '10px', boxShadow: '12px 12px white'}} />
             </Grid>
             <Grid item sm={5} lg={5}>
               <Box
@@ -231,9 +233,9 @@ const About = () => {
                 item
                 sm={4}
                 lg={3}
-                sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}
+                sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end'}}
               >
-                <img src={about3} alt="img" style={{ maxWidth: '100%', height: 'auto' }} />
+                <img src={about3} alt="img" style={{ maxWidth: '100%', height: 'auto', borderRadius: '10px', boxShadow: '10px 10px white'}} />
               </Grid>
             </Grid>
           )}
@@ -241,7 +243,7 @@ const About = () => {
           {isSmallScreen && (
             <Grid container sx={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
               <Grid item sm={5} lg={3}>
-                <img src={about3} alt="img" style={{ maxWidth: '100%', height: 'auto' }} />
+                <img src={about3} alt="img" style={{ maxWidth: '100%', height: 'auto', borderRadius: '10px', boxShadow: '10px 10px white'}} />
               </Grid>
               <Grid item sm={6} lg={5}>
                 <Box sx={{ color: 'white', textAlign: { lg: 'left', sm: 'center', xs: 'center' } }}>
