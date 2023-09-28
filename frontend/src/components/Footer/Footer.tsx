@@ -41,7 +41,14 @@ const Footer = () => {
             }}>
             {links.map(({logo, link}, id) => (
               <Link href={link} target='_blank' rel='noopener noreferrer'>
-                <img src={logo} alt='logo' style={{ maxWidth: '50px', maxHeight: '50px' }}/> 
+                <img 
+                  src={logo} 
+                  alt='logo' 
+                  style={{ 
+                    maxWidth: '50px', 
+                    maxHeight: '50px' 
+                  }}
+                /> 
               </Link>
             ))} 
           </Grid>
@@ -60,7 +67,7 @@ const Footer = () => {
               ))}
           </Grid>
         </Grid>
-        <Grid item sx={{ margin: '20px' }}>
+        <Grid item sx={{ margin: '20px', marginLeft: 0 }}>
           <Forms />
         </Grid>
       </Grid>
