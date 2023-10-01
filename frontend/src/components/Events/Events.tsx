@@ -272,27 +272,29 @@ const Events = () => {
         </div>
 
         {/* Buttons for filtering events */}
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'flex-start',
-            marginLeft: '38px',
-            marginTop: '-25px',
-          }}
-        >
-          <Button
-            size="medium"
-            text="This Week"
-            infocus={isThisWeekClicked}
-            onClick={handleThisWeekClick}
-          ></Button>
-          <Button
-            size="medium"
-            text="This Month"
-            infocus={isThisMonthClicked}
-            onClick={handleThisMonthClick}
-          ></Button>
-        </div>
+        {displayedFutureEvents.length > 0 && (
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'flex-start',
+              marginLeft: '38px',
+              marginTop: '-25px',
+            }}
+          >
+            <Button
+              size="medium"
+              text="This Week"
+              infocus={isThisWeekClicked}
+              onClick={handleThisWeekClick}
+            ></Button>
+            <Button
+              size="medium"
+              text="This Month"
+              infocus={isThisMonthClicked}
+              onClick={handleThisMonthClick}
+            ></Button>
+          </div>
+        )}
         {/* Render EventBoxes for future events */}
         <div style={{ ...eventsContainerStyle, marginTop: '20px' }}>
           {(displayedFutureEvents.length === 0 && (
@@ -391,16 +393,18 @@ const Events = () => {
           <h2 id="pastEventsTitle">PAST EVENTS</h2>
         </div>
         {/* Buttons for filtering past events */}
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'flex-start',
-            marginLeft: '30px',
-            marginTop: '-25px',
-          }}
-        >
-          <Button size="medium" text="2023" infocus={is2023Clicked} onClick={handle2023}></Button>
-        </div>
+        {totalPagesPast > 0 && (
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'flex-start',
+              marginLeft: '30px',
+              marginTop: '-25px',
+            }}
+          >
+            <Button size="medium" text="2023" infocus={is2023Clicked} onClick={handle2023}></Button>
+          </div>
+        )}
         <div style={{ ...eventsContainerStyle, marginTop: '20px' }}>
           {(displayedPastEvents.length === 0 && (
             <div
@@ -419,21 +423,23 @@ const Events = () => {
           )) ||
             renderPastEventBoxes(displayedPastEvents)}
         </div>
-        <div>
-          <p
-            style={{
-              color: 'white',
-              fontSize: '20px',
-              fontFamily: 'Chakra Petch',
-              fontWeight: '700',
-              display: 'flex',
-              flexDirection: 'row',
-              marginLeft: '39px',
-            }}
-          >
-            Page {pageNumberPast} of {totalPagesPast}
-          </p>
-        </div>
+        {totalPagesPast > 0 && (
+          <div>
+            <p
+              style={{
+                color: 'white',
+                fontSize: '20px',
+                fontFamily: 'Chakra Petch',
+                fontWeight: '700',
+                display: 'flex',
+                flexDirection: 'row',
+                marginLeft: '39px',
+              }}
+            >
+              Page {pageNumberPast} of {totalPagesPast}
+            </p>
+          </div>
+        )}
         {totalPagesPast > 1 && (
           <div
             style={{
