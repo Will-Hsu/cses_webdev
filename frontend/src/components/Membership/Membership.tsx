@@ -133,6 +133,8 @@ const Membership = () => {
         />
       )}
 
+      {isAdmin && <EventsDashboard />}
+
       <div
         style={{
           color: 'white',
@@ -233,7 +235,6 @@ const Membership = () => {
         {isLoggedIn && rankings.length >= 3 && userData && (
           <LeaderBoard rankings={rankings} myPoint={userData.points} />
         )}
-        {isAdmin && <EventsDashboard />}
       </div>
     </div>
   );

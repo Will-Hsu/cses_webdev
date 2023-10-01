@@ -264,9 +264,9 @@ const DashBoard = () => {
   };
 
   return (
-    <Container style={{ background: 'white' }}>
+    <Container style={{ background: 'white', marginTop: '15%' }}>
       <Typography variant="h3" gutterBottom>
-        Events Dashboard
+        Admin Events Dashboard
       </Typography>
 
       <div style={{ display: 'flex', flexDirection: 'row', gap: '20px' }}>
