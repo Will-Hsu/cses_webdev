@@ -7,6 +7,7 @@ import EventBox from '../Event/Event';
 import MobileEventBox from '../Event/MobileEvent';
 import Button from '../Button/Button';
 import useMediaQuery from '../../hooks/useMediaQuery';
+import { CircularProgress } from '@mui/material';
 
 interface EventData {
   calendar_link: string;
@@ -44,6 +45,8 @@ const Events = () => {
   const [isThisWeekClicked, setIsThisWeekClicked] = useState(false);
   const [isThisMonthClicked, setIsThisMonthClicked] = useState(false);
   const [is2023Clicked, setIs2023Clicked] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(true);
 
   const paginate = (
     events: Array<EventData>,
@@ -122,8 +125,17 @@ const Events = () => {
       }
     };
 
-    fetchUpcomingEvents();
-    fetchPastEvents();
+    async function fetchData() {
+      try {
+        await Promise.all([fetchUpcomingEvents(), fetchPastEvents()]);
+        setIsLoading(false);
+      } catch (error) {
+        console.error(error);
+        setIsLoading(false);
+      }
+    }
+
+    fetchData();
   }, [selectedYear, selectedMonth, totalPagesUpcoming, totalPagesPast]);
 
   const handleThisWeekClick = () => {
@@ -271,6 +283,12 @@ const Events = () => {
           <h2 id="eventsTitle">EVENTS</h2>
         </div>
 
+        {isLoading && (
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <CircularProgress size="3em" style={{ color: 'white' }} />
+          </div>
+        )}
+
         {/* Buttons for filtering events */}
         {displayedFutureEvents.length > 0 && (
           <div
@@ -297,7 +315,7 @@ const Events = () => {
         )}
         {/* Render EventBoxes for future events */}
         <div style={{ ...eventsContainerStyle, marginTop: '20px' }}>
-          {(displayedFutureEvents.length === 0 && (
+          {(displayedFutureEvents.length === 0 && !isLoading && (
             <div
               style={{
                 color: 'white',
@@ -392,8 +410,14 @@ const Events = () => {
         >
           <h2 id="pastEventsTitle">PAST EVENTS</h2>
         </div>
+
+        {isLoading && (
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <CircularProgress size="3em" style={{ color: 'white' }} />
+          </div>
+        )}
         {/* Buttons for filtering past events */}
-        {totalPagesPast > 0 && (
+        {displayedPastEvents.length > 0 && (
           <div
             style={{
               display: 'flex',
@@ -406,7 +430,7 @@ const Events = () => {
           </div>
         )}
         <div style={{ ...eventsContainerStyle, marginTop: '20px' }}>
-          {(displayedPastEvents.length === 0 && (
+          {(displayedPastEvents.length === 0 && !isLoading && (
             <div
               style={{
                 color: 'white',
@@ -423,7 +447,7 @@ const Events = () => {
           )) ||
             renderPastEventBoxes(displayedPastEvents)}
         </div>
-        {totalPagesPast > 0 && (
+        {displayedPastEvents.length > 0 && (
           <div>
             <p
               style={{
