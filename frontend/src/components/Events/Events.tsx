@@ -314,7 +314,7 @@ const Events = () => {
           </div>
         )}
         {/* Render EventBoxes for future events */}
-        <div style={{ ...eventsContainerStyle, marginTop: '20px' }}>
+        <div style={{ ...eventsContainerStyle, marginTop: '20px', marginLeft: '39px' }}>
           {(displayedFutureEvents.length === 0 && !isLoading && (
             <div
               style={{
