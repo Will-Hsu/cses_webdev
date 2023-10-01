@@ -158,8 +158,6 @@ export const eventCreate = [
           // Ensure it's a 6-digit number by padding with zeros if needed
           const sixDigit = String(sixDigitCode).padStart(6, '0');
 
-          console.log(sixDigit);
-
           Event.updateOne({ _id: d._id }, { code: sixDigit })
             .then(() => res.json({ message: 'Successful', id: d._id, code: sixDigit }))
             .catch(() => res.status(500).json({ message: 'Internal server error 1' }));

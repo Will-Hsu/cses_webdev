@@ -327,11 +327,30 @@ const EventBox = ({
               {location}
             </p>
 
-            {instagram_link !== '' && (
-              <a href={instagram_link} style={{ marginLeft: '280px', marginTop: '-50px' }}>
+            <div style={{ display: 'flex', marginLeft: '280px', marginTop: '-35px' }}>
+              {instagram_link !== '' && (
+                <a href={instagram_link}>
+                  <img
+                    src={instagramIcon}
+                    alt="Instagram Icon"
+                    style={{
+                      width: '30px',
+                      height: '30px',
+                      filter: 'grayscale(100%)',
+                      transition: 'filter 0.3s',
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.filter = 'grayscale(0%)')}
+                    onMouseLeave={(e) => (e.currentTarget.style.filter = 'grayscale(100%)')}
+                  />
+                </a>
+              )}
+              <a
+                href={calendar_link}
+                style={{ marginLeft: instagram_link === '' ? '40px' : '10px' }}
+              >
                 <img
-                  src={instagramIcon}
-                  alt="Instagram Icon"
+                  src={calendarIcon}
+                  alt="Calendar Icon"
                   style={{
                     width: '30px',
                     height: '30px',
@@ -342,21 +361,7 @@ const EventBox = ({
                   onMouseLeave={(e) => (e.currentTarget.style.filter = 'grayscale(100%)')}
                 />
               </a>
-            )}
-            <a href={calendar_link} style={{ marginLeft: '325px', marginTop: '-35px' }}>
-              <img
-                src={calendarIcon}
-                alt="Calendar Icon"
-                style={{
-                  width: '30px',
-                  height: '30px',
-                  filter: 'grayscale(100%)',
-                  transition: 'filter 0.3s',
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.filter = 'grayscale(0%)')}
-                onMouseLeave={(e) => (e.currentTarget.style.filter = 'grayscale(100%)')}
-              />
-            </a>
+            </div>
           </div>
         </div>
       </Box>

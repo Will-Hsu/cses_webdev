@@ -100,13 +100,6 @@ const Events = () => {
 
     const fetchUpcomingEvents = async () => {
       try {
-        if (selectedYear) {
-          upcomingEventsEndpoint += `&year=${selectedYear}`;
-        }
-        if (selectedMonth) {
-          upcomingEventsEndpoint += `&month=${selectedMonth}`;
-        }
-
         const response = await fetch(upcomingEventsEndpoint);
         const data = await response.json();
         setTotalPagesUpcoming(Math.ceil(data.length / 6));
@@ -119,13 +112,6 @@ const Events = () => {
 
     const fetchPastEvents = async () => {
       try {
-        if (selectedYear) {
-          pastEventsEndpoint += `&year=${selectedYear}`;
-        }
-        if (selectedMonth) {
-          pastEventsEndpoint += `&month=${selectedMonth}`;
-        }
-
         const response = await fetch(pastEventsEndpoint);
         const data = await response.json();
         setTotalPagesPast(Math.ceil(data.length / 6));
@@ -184,6 +170,7 @@ const Events = () => {
     if (is2023Clicked) {
       setDisplayedPastEvents(pastEvents);
       setIs2023Clicked(false);
+      paginate(pastEvents, 1, totalPagesPast, 'past');
     } else {
       const year2023Events = pastEvents.filter((event) => {
         const endDate = new Date(event.end_time);
@@ -192,6 +179,7 @@ const Events = () => {
 
       setDisplayedPastEvents(year2023Events);
       setIs2023Clicked(true);
+      paginate(pastEvents, 1, totalPagesPast, 'past');
     }
   };
 
