@@ -10,6 +10,7 @@ export const event_style = () => ({
     padding: '0px 10px 15px 15px',
     '&:hover': {
       boxShadow: '0 0 20px 5px rgba(52, 152, 219, 0.7)',
+      backgroundColor: '#E8FBFF',
     },
   },
   innerBox: {
@@ -17,7 +18,7 @@ export const event_style = () => ({
     width: '350px',
     marginTop: '5px',
     borderTopRightRadius: '40px',
-    backgroundColor: 'black',
+    background: 'linear-gradient(45deg, rgba(32,42,68) 0%, transparent 100%), black',
     color: 'white',
   },
   container: {

@@ -7,6 +7,7 @@ import EventBox from '../Event/Event';
 import MobileEventBox from '../Event/MobileEvent';
 import Button from '../Button/Button';
 import useMediaQuery from '../../hooks/useMediaQuery';
+import { CircularProgress } from '@mui/material';
 
 interface EventData {
   calendar_link: string;
@@ -44,6 +45,8 @@ const Events = () => {
   const [isThisWeekClicked, setIsThisWeekClicked] = useState(false);
   const [isThisMonthClicked, setIsThisMonthClicked] = useState(false);
   const [is2023Clicked, setIs2023Clicked] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(true);
 
   const paginate = (
     events: Array<EventData>,
@@ -100,13 +103,6 @@ const Events = () => {
 
     const fetchUpcomingEvents = async () => {
       try {
-        if (selectedYear) {
-          upcomingEventsEndpoint += `&year=${selectedYear}`;
-        }
-        if (selectedMonth) {
-          upcomingEventsEndpoint += `&month=${selectedMonth}`;
-        }
-
         const response = await fetch(upcomingEventsEndpoint);
         const data = await response.json();
         setTotalPagesUpcoming(Math.ceil(data.length / 6));
@@ -119,13 +115,6 @@ const Events = () => {
 
     const fetchPastEvents = async () => {
       try {
-        if (selectedYear) {
-          pastEventsEndpoint += `&year=${selectedYear}`;
-        }
-        if (selectedMonth) {
-          pastEventsEndpoint += `&month=${selectedMonth}`;
-        }
-
         const response = await fetch(pastEventsEndpoint);
         const data = await response.json();
         setTotalPagesPast(Math.ceil(data.length / 6));
@@ -136,8 +125,17 @@ const Events = () => {
       }
     };
 
-    fetchUpcomingEvents();
-    fetchPastEvents();
+    async function fetchData() {
+      try {
+        await Promise.all([fetchUpcomingEvents(), fetchPastEvents()]);
+        setIsLoading(false);
+      } catch (error) {
+        console.error(error);
+        setIsLoading(false);
+      }
+    }
+
+    fetchData();
   }, [selectedYear, selectedMonth, totalPagesUpcoming, totalPagesPast]);
 
   const handleThisWeekClick = () => {
@@ -184,6 +182,7 @@ const Events = () => {
     if (is2023Clicked) {
       setDisplayedPastEvents(pastEvents);
       setIs2023Clicked(false);
+      paginate(pastEvents, 1, totalPagesPast, 'past');
     } else {
       const year2023Events = pastEvents.filter((event) => {
         const endDate = new Date(event.end_time);
@@ -192,6 +191,7 @@ const Events = () => {
 
       setDisplayedPastEvents(year2023Events);
       setIs2023Clicked(true);
+      paginate(pastEvents, 1, totalPagesPast, 'past');
     }
   };
 
@@ -283,31 +283,39 @@ const Events = () => {
           <h2 id="eventsTitle">EVENTS</h2>
         </div>
 
+        {isLoading && (
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <CircularProgress size="3em" style={{ color: 'white' }} />
+          </div>
+        )}
+
         {/* Buttons for filtering events */}
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'flex-start',
-            marginLeft: '38px',
-            marginTop: '-25px',
-          }}
-        >
-          <Button
-            size="medium"
-            text="This Week"
-            infocus={isThisWeekClicked}
-            onClick={handleThisWeekClick}
-          ></Button>
-          <Button
-            size="medium"
-            text="This Month"
-            infocus={isThisMonthClicked}
-            onClick={handleThisMonthClick}
-          ></Button>
-        </div>
+        {displayedFutureEvents.length > 0 && (
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'flex-start',
+              marginLeft: '38px',
+              marginTop: '-25px',
+            }}
+          >
+            <Button
+              size="medium"
+              text="This Week"
+              infocus={isThisWeekClicked}
+              onClick={handleThisWeekClick}
+            ></Button>
+            <Button
+              size="medium"
+              text="This Month"
+              infocus={isThisMonthClicked}
+              onClick={handleThisMonthClick}
+            ></Button>
+          </div>
+        )}
         {/* Render EventBoxes for future events */}
-        <div style={{ ...eventsContainerStyle, marginTop: '20px' }}>
-          {(displayedFutureEvents.length === 0 && (
+        <div style={{ ...eventsContainerStyle, marginTop: '20px', marginLeft: '39px' }}>
+          {(displayedFutureEvents.length === 0 && !isLoading && (
             <div
               style={{
                 color: 'white',
@@ -402,19 +410,27 @@ const Events = () => {
         >
           <h2 id="pastEventsTitle">PAST EVENTS</h2>
         </div>
+
+        {isLoading && (
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <CircularProgress size="3em" style={{ color: 'white' }} />
+          </div>
+        )}
         {/* Buttons for filtering past events */}
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'flex-start',
-            marginLeft: '30px',
-            marginTop: '-25px',
-          }}
-        >
-          <Button size="medium" text="2023" infocus={is2023Clicked} onClick={handle2023}></Button>
-        </div>
+        {displayedPastEvents.length > 0 && (
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'flex-start',
+              marginLeft: '30px',
+              marginTop: '-25px',
+            }}
+          >
+            <Button size="medium" text="2023" infocus={is2023Clicked} onClick={handle2023}></Button>
+          </div>
+        )}
         <div style={{ ...eventsContainerStyle, marginTop: '20px' }}>
-          {(displayedPastEvents.length === 0 && (
+          {(displayedPastEvents.length === 0 && !isLoading && (
             <div
               style={{
                 color: 'white',
@@ -431,21 +447,23 @@ const Events = () => {
           )) ||
             renderPastEventBoxes(displayedPastEvents)}
         </div>
-        <div>
-          <p
-            style={{
-              color: 'white',
-              fontSize: '20px',
-              fontFamily: 'Chakra Petch',
-              fontWeight: '700',
-              display: 'flex',
-              flexDirection: 'row',
-              marginLeft: '39px',
-            }}
-          >
-            Page {pageNumberPast} of {totalPagesPast}
-          </p>
-        </div>
+        {displayedPastEvents.length > 0 && (
+          <div>
+            <p
+              style={{
+                color: 'white',
+                fontSize: '20px',
+                fontFamily: 'Chakra Petch',
+                fontWeight: '700',
+                display: 'flex',
+                flexDirection: 'row',
+                marginLeft: '39px',
+              }}
+            >
+              Page {pageNumberPast} of {totalPagesPast}
+            </p>
+          </div>
+        )}
         {totalPagesPast > 1 && (
           <div
             style={{

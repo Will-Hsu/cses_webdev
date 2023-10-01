@@ -32,19 +32,17 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <Container
-        maxWidth="xl"
-        sx={{
-          background: 'linear-gradient(to bottom, black 0%, #2F56BC 50%, black 100%)',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        {renderContent({ name: user.name, email: user.email, login })}
-      </Container>
-    </div>
+    <Container
+      maxWidth={false}
+      sx={{
+        background: 'linear-gradient(to bottom, black 0%, #2F56BC 50%, black 100%)',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      {renderContent({ name: user.name, email: user.email, login })}
+    </Container>
   );
 };
 
