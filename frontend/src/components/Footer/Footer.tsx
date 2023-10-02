@@ -24,10 +24,10 @@ const Footer = () => {
   const styles = footerStyles(theme);
   return (
     <Container disableGutters maxWidth={false} sx={styles.footer}>
-      <Grid container spacing={2}>
+      <Grid container>
         <Grid item sx={{ margin: '20px', marginRight: 'auto' }}>
           <a href="/">
-            <img src={csesLogo} alt="logo" style={{ height: '80px' }} />
+            <img src={csesLogo} alt="logo" style={{ height: 'clamp(45px, 10vw, 80px)' }} />
           </a>
           <Grid
             container
@@ -46,19 +46,23 @@ const Footer = () => {
                 <img
                   src={logo}
                   alt="logo"
-                  style={{ width: '50px', height: '50px', marginRight: '20px' }}
+                  style={{
+                    width: 'clamp(30px, 10vw, 50px)',
+                    height: 'clamp(30px, 10vw, 50px)',
+                    marginRight: 'clamp(10px, 5vw, 20px)',
+                  }}
                 />
               </Link>
             ))}
           </Grid>
-          <Grid item sx={{ marginTop: '40px' }}>
+          <Grid item sx={{ marginTop: 'clamp(20px, 5vw, 40px)' }}>
             {address.map((text, id) => (
               <Typography key={id} sx={styles.text}>
                 {text}
               </Typography>
             ))}
           </Grid>
-          <Grid item sx={{ marginTop: '40px' }}>
+          <Grid item sx={{ marginTop: 'clamp(20px, 5vw, 40px)' }}>
             <Typography sx={styles.text}>
               <Link href="mailto:cses@ucsd.edu" color="inherit">
                 cses@ucsd.edu
