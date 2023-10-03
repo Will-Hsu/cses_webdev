@@ -289,12 +289,6 @@ const Events = () => {
           </div>
         )}
 
-        {isLoading && (
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <CircularProgress size="3em" style={{ color: 'white' }} />
-          </div>
-        )}
-
         {/* Buttons for filtering events */}
         {displayedFutureEvents.length > 0 && (
           <div
