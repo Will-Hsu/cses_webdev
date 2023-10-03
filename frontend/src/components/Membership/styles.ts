@@ -27,30 +27,11 @@ export const membershipStyles = () => ({
 
   eventsAttendedTitle: {
     fontWeight: 'bold',
-    fontFamily: 'Chakra Petch, sans-serif',
+    fontFamily: 'Chakra Petch',
     color: 'white',
-    fontSize: '65px',
+    fontSize: 'clamp(32px, 5vw, 65px)',
     marginTop: '20px',
     marginBottom: '10px',
-    // [theme.breakpoints.down('md')]: {
-    //   fontSize: '45px',
-    //   marginTop: '30px',
-    //   marginBottom: '10px',
-    // },
-  },
-
-  eventsAttendedTitleMobile: {
-    fontWeight: 'bold',
-    fontFamily: 'Chakra Petch, sans-serif',
-    color: 'white',
-    fontSize: '45px',
-    marginTop: '20px',
-    marginBottom: '10px',
-    // [theme.breakpoints.down('md')]: {
-    //   fontSize: '45px',
-    //   marginTop: '30px',
-    //   marginBottom: '10px',
-    // },
   },
 
   eventsAttendText: {

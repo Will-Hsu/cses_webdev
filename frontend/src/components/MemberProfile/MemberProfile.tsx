@@ -92,24 +92,18 @@ const MemberProfile = (userData: MemberProfileProps) => {
         {isXsScreen ? (
           <Grid item xs={12}>
             <Avatar
-              alt="Dog"
               src={userData.memberPicture}
               sx={{ width: 180, height: 180, margin: '0 auto' }}
             />
           </Grid>
         ) : (
           <Grid item xs={12} sm={4.5} lg={2.7}>
-            <Avatar
-              alt="Dog"
-              //src="https://img.freepik.com/free-photo/puppy-that-is-walking-snow_1340-37228.jpg"
-              src={userData.memberPicture}
-              sx={{ width: 250, height: 250 }}
-            />
+            <Avatar src={userData.memberPicture} sx={{ width: 250, height: 250 }} />
           </Grid>
         )}
         <div>
-          <p
-            style={{
+          <Typography
+            sx={{
               fontWeight: 'bold',
               fontSize: 'clamp(1.2rem, 2.5vw, 2rem)',
               margin: '0',
@@ -117,9 +111,9 @@ const MemberProfile = (userData: MemberProfileProps) => {
             }}
           >
             Welcome Back,
-          </p>
-          <p
-            style={{
+          </Typography>
+          <Typography
+            sx={{
               fontWeight: 'bold',
               fontSize: 'clamp(1.2rem, 2.5vw, 2rem)',
               margin: '0',
@@ -127,9 +121,9 @@ const MemberProfile = (userData: MemberProfileProps) => {
             }}
           >
             {userData.memberName}
-          </p>
+          </Typography>
           <Box
-            sx={{ width: '110%' }}
+            sx={{ width: '100%' }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >

@@ -19,13 +19,9 @@ export interface EventsAttendedProps {
 const EventsAttended = ({ eventsAttended }: EventsAttendedProps) => {
   const styles = membershipStyles();
 
-  const isMobile = useMediaQuery('(max-width: 767px)');
-
   return (
     <Container sx={styles.eventsAttendedBody}>
-      <Typography sx={isMobile ? styles.eventsAttendedTitleMobile : styles.eventsAttendedTitle}>
-        EVENTS ATTENDED
-      </Typography>
+      <h1 style={styles.eventsAttendedTitle}>EVENTS ATTENDED</h1>
 
       <div style={{ display: 'flex', alignItems: 'center', marginBottom: '60px' }}>
         <img
@@ -33,7 +29,7 @@ const EventsAttended = ({ eventsAttended }: EventsAttendedProps) => {
           alt="Events Attended Alert"
           width="32"
           height="32"
-          style={{ marginRight: '10px' }}
+          style={{ marginRight: '20px' }}
         />
         <Typography variant="subtitle1" sx={styles.eventsAttendText}>
           {eventsAttended.length === 0 && (

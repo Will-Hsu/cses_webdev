@@ -159,16 +159,16 @@ const Membership = () => {
             flexDirection: isiPad ? 'column' : 'row',
           }}
         >
-          <div style={{ flex: 1 }}>
+          <div>
             <div>
-              <Typography
-                sx={{
-                  ...(isMobile ? styles.eventsAttendedTitleMobile : styles.eventsAttendedTitle),
+              <h1
+                style={{
+                  ...styles.eventsAttendedTitle,
                   marginLeft: isMobile ? '18%' : '23%',
                 }}
               >
                 EVENT CHECK-IN
-              </Typography>
+              </h1>
               <Collapse
                 in={showSuccess}
                 sx={{
@@ -230,7 +230,7 @@ const Membership = () => {
             </div>
           </div>
 
-          <div style={{ flex: 1 }}>
+          <div>
             {isLoggedIn && userData && (
               <RewardsMenu email={userData.email} points={userData.points} />
             )}
