@@ -145,7 +145,7 @@ const MeetTheTeam = () => {
           sx={{
             ...styles.mainTitleBottom,
             textAlign: 'center',
-            fontSize: 'clamp(50px, 8vw, 60px)',
+            fontSize: 'clamp(32px, 8vw, 65px)',
           }}
         >
           MEET THE TEAM!

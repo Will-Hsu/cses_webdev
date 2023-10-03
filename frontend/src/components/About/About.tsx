@@ -26,56 +26,68 @@ const About = () => {
           <img src={bgBtm} alt="bg2" style={{ ...styles.bg2, position: 'absolute' }} />
         </Box>
         <Container maxWidth="xl" sx={styles.body}>
-          <Box sx={{backgroundColor: 'rgba(0,0,0,0.5)', maxWidth: '90%', margin: '0 auto'}}>
-          <Grid container sx={{ marginTop: '7%', paddingTop: '3%', display: 'flex', justifyContent: 'center'}}>
+          <Box sx={{ backgroundColor: 'rgba(0,0,0,0.5)', maxWidth: '90%', margin: '0 auto' }}>
             <Grid
-              item
-              sm={6}
-              md={4}
-              lg={3}
-              sx={{
-                paddingRight: {
-                  xs: '0%',
-                  sm: '5%',
-                },
-                textAlign: 'right',
-                marginBottom: '5%',
-                marginRight: '2%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginTop: '1%',
-              }}
+              container
+              sx={{ marginTop: '7%', paddingTop: '3%', display: 'flex', justifyContent: 'center' }}
             >
-              <img src={about1} alt="img" style={{ maxWidth: '130%', height: 'auto', borderRadius: '10px', boxShadow: '10px 10px white'}} />
-            </Grid>
-            <Grid item sm={6} md={5} lg={6}>
-              <Box
+              <Grid
+                item
+                sm={6}
+                md={4}
+                lg={3}
                 sx={{
-                  color: 'white',
-                  textAlign: { lg: 'left', sm: 'left', xs: 'center' },
-                  fontSize: '1em',
+                  paddingRight: {
+                    xs: '0%',
+                    sm: '5%',
+                  },
+                  textAlign: 'right',
+                  marginBottom: '5%',
+                  marginRight: '2%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginTop: '1%',
                 }}
               >
-                <h1
+                <img
+                  src={about1}
+                  alt="img"
                   style={{
-                    fontFamily: 'Chakra Petch',
-                    fontSize: 'clamp(50px, 8vw, 60px)',
-                    fontWeight: '700',
-                    marginTop: '0',
+                    maxWidth: '130%',
+                    height: 'auto',
+                    borderRadius: '10px',
+                    boxShadow: '10px 10px white',
+                  }}
+                />
+              </Grid>
+              <Grid item sm={6} md={5} lg={6}>
+                <Box
+                  sx={{
+                    color: 'white',
+                    textAlign: { lg: 'left', sm: 'left', xs: 'center' },
+                    fontSize: '1em',
                   }}
                 >
-                  WHAT IS CSES?
-                </h1>
+                  <h1
+                    style={{
+                      fontFamily: 'Chakra Petch',
+                      fontSize: 'clamp(32px, 8vw, 65px)',
+                      fontWeight: '700',
+                      marginTop: '0',
+                    }}
+                  >
+                    WHAT IS CSES?
+                  </h1>
 
-                <p style={{ color: 'white', fontSize: '20px', width: '90%' }}>
-                  CSES is the Computer Science and Engineering Society at UCSD that focuses on the
-                  professional development of CSE students and students interested in computing
-                  through various programs and career development events.
-                </p>
-              </Box>
+                  <p style={{ color: 'white', fontSize: 'clamp(15px, 3vw, 20px)' }}>
+                    CSES is the Computer Science and Engineering Society at UCSD that focuses on the
+                    professional development of CSE students and students interested in computing
+                    through various programs and career development events.
+                  </p>
+                </Box>
+              </Grid>
             </Grid>
-          </Grid>
           </Box>
           <h1
             style={{
@@ -83,7 +95,7 @@ const About = () => {
               marginTop: '10%',
               textAlign: 'center',
               fontFamily: 'Chakra Petch',
-              fontSize: 'clamp(50px, 8vw, 60px)',
+              fontSize: 'clamp(32px, 8vw, 65px)',
               fontWeight: '700',
             }}
           >
@@ -96,7 +108,7 @@ const About = () => {
               lg={3}
               sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
             >
-              <img src={books} alt="img" style={{ width: '80%'}} />
+              <img src={books} alt="img" style={{ width: '80%' }} />
             </Grid>
             <Grid item sm={5} lg={5}>
               <Box
@@ -106,7 +118,7 @@ const About = () => {
                 }}
               >
                 <h1>Our History</h1>
-                <p style={{ color: 'white', fontSize: '20px' }}>
+                <p style={{ color: 'white', fontSize: 'clamp(15px, 3vw, 20px)' }}>
                   CSES was the first CSE organization at UCSD starting nearly twenty years ago, and
                   we have innovated over the years to stay relevant in serving the CSE community. We
                   aim to continue innovating and improving, so we could continue to serve this
@@ -121,7 +133,7 @@ const About = () => {
                 <Box sx={{ color: 'white', marginBottom: 'auto' }}>
                   <h1>Our Future</h1>
                 </Box>
-                <p style={{ color: 'white', fontSize: '20px' }}>
+                <p style={{ color: 'white', fontSize: 'clamp(15px, 3vw, 20px)' }}>
                   Our mission statement is to help our members get professional opportunities while
                   fostering a network of individuals. We do this through quarterly career fairs,
                   programs for career development, and project opportunities to gain experience.
@@ -147,7 +159,13 @@ const About = () => {
                 <Box sx={{ color: 'white', textAlign: { lg: 'left', sm: 'center', xs: 'center' } }}>
                   <h1>Our Future</h1>
                 </Box>
-                <p style={{ color: 'white', fontSize: '20px', textAlign: 'center' }}>
+                <p
+                  style={{
+                    color: 'white',
+                    fontSize: 'clamp(15px, 3vw, 20px)',
+                    textAlign: 'center',
+                  }}
+                >
                   Our mission statement is to help our members get professional opportunities while
                   fostering a network of individuals. We do this through quarterly career fairs,
                   programs for career development, and project opportunities to gain experience.
@@ -163,7 +181,16 @@ const About = () => {
               lg={3}
               sx={{ display: 'flex', alignItems: 'center', marginRight: '3%' }}
             >
-              <img src={about2} alt="img" style={{ maxWidth: '100%', height: 'auto', borderRadius: '10px', boxShadow: '12px 12px white'}} />
+              <img
+                src={about2}
+                alt="img"
+                style={{
+                  maxWidth: '100%',
+                  height: 'auto',
+                  borderRadius: '10px',
+                  boxShadow: '12px 12px white',
+                }}
+              />
             </Grid>
             <Grid item sm={5} lg={5}>
               <Box
@@ -181,7 +208,7 @@ const About = () => {
                   textAlign: { xs: 'center', sm: 'left' }, // Center on small screens, start from top on larger screens
                 }}
               >
-                <p style={{ color: 'white', fontSize: '20px' }}>
+                <p style={{ color: 'white', fontSize: 'clamp(15px, 3vw, 20px)' }}>
                   Check out amazing events we have planned as well as the opportunities we have for
                   members.
                 </p>
@@ -210,7 +237,7 @@ const About = () => {
                   <h1>How do I join?</h1>
                 </Box>
                 <Box sx={{ color: 'white', textAlign: { lg: 'left', sm: 'left', xs: 'center' } }}>
-                  <p style={{ color: 'white', fontSize: '20px' }}>
+                  <p style={{ color: 'white', fontSize: 'clamp(15px, 3vw, 20px)' }}>
                     Check out amazing events we have planned as well as the opportunities we have
                     for members.
                   </p>
@@ -233,9 +260,18 @@ const About = () => {
                 item
                 sm={4}
                 lg={3}
-                sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end'}}
+                sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}
               >
-                <img src={about3} alt="img" style={{ maxWidth: '100%', height: 'auto', borderRadius: '10px', boxShadow: '10px 10px white'}} />
+                <img
+                  src={about3}
+                  alt="img"
+                  style={{
+                    maxWidth: '100%',
+                    height: 'auto',
+                    borderRadius: '10px',
+                    boxShadow: '10px 10px white',
+                  }}
+                />
               </Grid>
             </Grid>
           )}
@@ -243,7 +279,16 @@ const About = () => {
           {isSmallScreen && (
             <Grid container sx={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
               <Grid item sm={5} lg={3}>
-                <img src={about3} alt="img" style={{ maxWidth: '100%', height: 'auto', borderRadius: '10px', boxShadow: '10px 10px white'}} />
+                <img
+                  src={about3}
+                  alt="img"
+                  style={{
+                    maxWidth: '100%',
+                    height: 'auto',
+                    borderRadius: '10px',
+                    boxShadow: '10px 10px white',
+                  }}
+                />
               </Grid>
               <Grid item sm={6} lg={5}>
                 <Box sx={{ color: 'white', textAlign: { lg: 'left', sm: 'center', xs: 'center' } }}>
