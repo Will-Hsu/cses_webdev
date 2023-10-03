@@ -107,6 +107,7 @@ const MemberProfile = (userData: MemberProfileProps) => {
               fontWeight: 'bold',
               fontSize: 'clamp(1.2rem, 2.5vw, 2rem)',
               margin: '0',
+              textAlign: { xs: 'center', sm: 'left' },
               marginTop: '10%',
             }}
           >
@@ -117,6 +118,7 @@ const MemberProfile = (userData: MemberProfileProps) => {
               fontWeight: 'bold',
               fontSize: 'clamp(1.2rem, 2.5vw, 2rem)',
               margin: '0',
+              textAlign: { xs: 'center', sm: 'left' },
               marginBottom: '5%',
             }}
           >
@@ -157,13 +159,21 @@ const MemberProfile = (userData: MemberProfileProps) => {
             )}
           </Box>
 
-          <p style={{ fontSize: 'clamp(0.8rem, 2.5vw, 1rem)' }}>
+          <p
+            style={{
+              fontSize: 'clamp(0.8rem, 2.5vw, 1rem)',
+            }}
+          >
             Member Tier:{' '}
             <span style={{ fontWeight: 'bold' }}>{getTier(userData.memberEventsCount)}</span>{' '}
             <span style={{ color: '#F3C969', fontWeight: 'bold' }}>|</span> Point Balance:{' '}
             <span style={{ fontWeight: 'bold' }}>{userData.memberPoints}</span>
           </p>
-          <p style={{ fontSize: 'clamp(0.8rem, 2.5vw, 1rem)' }}>
+          <p
+            style={{
+              fontSize: 'clamp(0.8rem, 2.5vw, 1rem)',
+            }}
+          >
             Major: <span style={{ fontWeight: 'bold' }}>{userData.memberMajor}</span>{' '}
           </p>
         </div>
