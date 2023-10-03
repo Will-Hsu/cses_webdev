@@ -66,7 +66,11 @@ const MobileEventBox = ({ targetDate, end_time, location, start_time, title }: E
   return (
     <Box
       className="outerBox"
+<<<<<<< HEAD
       sx={{ ...styles?.outerBox, marginLeft: '0', padding: '3px', width: '250px' }}
+=======
+      sx={{ ...styles?.outerBox, marginLeft: '45px', padding: '3px', width: '250px' }}
+>>>>>>> 2841588d03bbf308287760ce3ac8ed81b2b12dc4
     >
       <div
         className="innerBox"
