@@ -1,4 +1,5 @@
 import { useContext, useState, useEffect } from 'react';
+import Confetti from 'react-confetti';
 import {
   useMediaQuery,
   Typography,
@@ -42,6 +43,7 @@ interface Ranking {
 }
 
 const Membership = () => {
+  const [showConfetti, setShowConfetti] = useState(false);
   const { user, isLoggedIn, isAdmin } = useContext(AuthContext);
   const [userData, setUserData] = useState<User | null>(null);
   const [eventsAttended, setEventsAttended] = useState<Array<Event>>([]);
@@ -71,9 +73,14 @@ const Membership = () => {
         setIsCodeVisible(false);
         setVerificationCode('');
         setShowSuccess(true);
+
+        setShowConfetti(true);
+
         setTimeout(function () {
           setShowSuccess(false);
+          setShowConfetti(false);
         }, 5000);
+
         console.log('good code');
       })
       .catch((error) => {
@@ -123,6 +130,7 @@ const Membership = () => {
           'linear-gradient(to bottom, black 0%, #2F56BC 35%, #162756 50%, #2F56BC 70%, black 100%)',
       }}
     >
+      {showConfetti && <Confetti />}
       {userData && (
         <MemberProfile
           memberName={userData.name}
