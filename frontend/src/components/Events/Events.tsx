@@ -200,31 +200,35 @@ const Events = () => {
     return events.map((eventData) => {
       if (isMobile) {
         return (
-          <MobileEventBox
-            title={eventData.title}
-            targetDate={new Date(eventData.end_time)}
-            location={eventData.location}
-            end_time={eventData.end_time}
-            start_time={eventData.start_time}
-            _id={eventData._id}
-            pastEvent
-          />
-        );
-      } else {
-        return (
-          <React.Fragment key={eventData._id}>
-            <EventBox
+          <div style={{ ...eventsContainerStyle, marginTop: '10px' }}>
+            <MobileEventBox
               title={eventData.title}
               targetDate={new Date(eventData.end_time)}
               location={eventData.location}
-              calendar_link={eventData.calendar_link}
-              description={eventData.description}
               end_time={eventData.end_time}
-              instagram_link={eventData.instagram_link}
               start_time={eventData.start_time}
               _id={eventData._id}
+              pastEvent
             />
-          </React.Fragment>
+          </div>
+        );
+      } else {
+        return (
+          <div style={{ ...eventsContainerStyle, marginTop: '20px', marginLeft: '39px' }}>
+            <React.Fragment key={eventData._id}>
+              <EventBox
+                title={eventData.title}
+                targetDate={new Date(eventData.end_time)}
+                location={eventData.location}
+                calendar_link={eventData.calendar_link}
+                description={eventData.description}
+                end_time={eventData.end_time}
+                instagram_link={eventData.instagram_link}
+                start_time={eventData.start_time}
+                _id={eventData._id}
+              />
+            </React.Fragment>
+          </div>
         );
       }
     });
@@ -289,12 +293,6 @@ const Events = () => {
           </div>
         )}
 
-        {isLoading && (
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <CircularProgress size="3em" style={{ color: 'white' }} />
-          </div>
-        )}
-
         {/* Buttons for filtering events */}
         {displayedFutureEvents.length > 0 && (
           <div
@@ -320,31 +318,29 @@ const Events = () => {
           </div>
         )}
         {/* Render EventBoxes for future events */}
-        <div style={{ ...eventsContainerStyle, marginTop: '20px', marginLeft: '39px' }}>
-          {(displayedFutureEvents.length === 0 && !isLoading && (
-            <div
-              style={{
-                color: 'white',
-                fontSize: '20px',
-                fontFamily: 'Chakra Petch',
-                fontWeight: '700',
-                display: 'flex',
-                flexDirection: 'row',
-                marginLeft: '39px',
-              }}
-            >
-              No upcoming events
-            </div>
-          )) ||
-            renderEventBoxes(displayedFutureEvents)}
-        </div>
+        {(displayedFutureEvents.length === 0 && !isLoading && (
+          <div
+            style={{
+              color: 'white',
+              fontSize: '20px',
+              fontFamily: 'Chakra Petch',
+              fontWeight: '700',
+              display: 'flex',
+              flexDirection: 'row',
+              marginLeft: '39px',
+            }}
+          >
+            No upcoming events
+          </div>
+        )) ||
+          renderEventBoxes(displayedFutureEvents)}
 
         {displayedFutureEvents.length > 0 && (
           <div>
             <p
               style={{
                 color: 'white',
-                fontSize: '20px',
+                fontSize: 'clamp(15px, 3vw, 20px)',
                 fontFamily: 'Chakra Petch',
                 fontWeight: '700',
                 display: 'flex',
@@ -458,7 +454,7 @@ const Events = () => {
             <p
               style={{
                 color: 'white',
-                fontSize: '20px',
+                fontSize: 'clamp(15px, 3vw, 20px)',
                 fontFamily: 'Chakra Petch',
                 fontWeight: '700',
                 display: 'flex',
