@@ -20,7 +20,11 @@ const Opportunities = () => {
         <Typography sx={styles.title}>OPPORTUNITIES</Typography>
         <Grid container spacing={2} sx={{ justifyContent: 'center', alignItems: 'center' }}>
           <Grid item sx={{ width: '550px', marginTop: '3%' }}>
-            <img src={members} alt="members" style={{ width: '85%', height: 'auto', boxShadow: '12px 12px white' }} />
+            <img
+              src={members}
+              alt="members"
+              style={{ width: '85%', height: 'auto', boxShadow: '12px 12px white' }}
+            />
           </Grid>
           <Grid item sx={{ width: '550px', marginTop: '3%' }}>
             <Typography sx={styles.subtitle}>
@@ -41,7 +45,11 @@ const Opportunities = () => {
             </Typography>
           </Grid>
           <Grid item sx={{ width: '550px', marginTop: '8%' }}>
-            <img src={sponsors} alt="sponsors" style={{ width: '85%', height: 'auto', boxShadow: '12px 12px white' }} />
+            <img
+              src={sponsors}
+              alt="sponsors"
+              style={{ width: '85%', height: 'auto', boxShadow: '12px 12px white' }}
+            />
           </Grid>
           <Grid item sx={{ width: '550px', marginTop: '3%' }}>
             <Typography sx={styles.subtitle}>
@@ -57,10 +65,6 @@ const Opportunities = () => {
               </Link>
               .
             </Typography>
-            {/*<Button
-              size="medium"
-              text="See Opportunities ->"
-              onClick={() => console.log('click')}></Button>*/}
           </Grid>
         </Grid>
         <Typography align="center" sx={{ ...styles.subtitle, margin: '60px 0% 50px 0%' }}>
@@ -69,10 +73,10 @@ const Opportunities = () => {
 
         <Box display="flex" flexDirection="column" alignItems="center">
           <a href="https://cse.ucsd.edu/" style={styles.link}>
-            <img src={sponsor} alt="sponsor" style={{ height: '100px' }} />
+            <img src={sponsor} alt="sponsor" style={{ height: 'clamp(60px, 10vw, 100px)' }} />
           </a>
           <a href="https://as.ucsd.edu/" style={styles.link}>
-            <img src={sponsor2} alt="sponsor2" style={{ height: '200px' }} />
+            <img src={sponsor2} alt="sponsor2" style={{ height: 'clamp(120px, 10vw, 200px)' }} />
           </a>
         </Box>
       </Container>

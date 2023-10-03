@@ -200,7 +200,7 @@ const Events = () => {
     return events.map((eventData) => {
       if (isMobile) {
         return (
-          <div style={{ ...eventsContainerStyle, marginTop: '10px' }}>
+          <div style={{ ...eventsContainerStyle, marginTop: '10px', marginLeft: '45px' }}>
             <MobileEventBox
               title={eventData.title}
               targetDate={new Date(eventData.end_time)}
