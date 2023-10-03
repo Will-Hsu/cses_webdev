@@ -17,14 +17,13 @@ const LoginForm = ({ showEmailError, login }: LoginFormProps) => {
         <Typography
           variant="h4"
           sx={{
-            display: 'flex',
-            justifyContent: 'center',
             alignItems: 'center',
             marginTop: '10%',
             marginBottom: '5%',
             fontWeight: 'bold',
             fontFamily: 'Chakra Petch',
             color: 'white',
+            textAlign: 'center',
           }}
         >
           CSES Member Login
@@ -38,7 +37,7 @@ const LoginForm = ({ showEmailError, login }: LoginFormProps) => {
             marginTop: '5%',
             fontFamily: 'Inter',
             color: 'white',
-            fontSize: '10pt',
+            fontSize: 'clamp(8pt, 1vw, 10pt)',
           }}
         >
           Please use your UCSD email to sign in
