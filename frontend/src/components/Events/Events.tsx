@@ -270,18 +270,24 @@ const Events = () => {
       <img src={bgTop} alt="bg1" style={{ ...styles.bg1, position: 'absolute' }} />
       <img src={bgBtm} alt="bg2" style={{ ...styles.bg2, position: 'absolute' }} />
       <Container maxWidth="xl" sx={styles.body}>
-        <div
+        <h1
           style={{
             color: 'white',
-            fontSize: '40px',
-            fontFamily: 'Chakra Petch',
             marginLeft: '39px',
             marginTop: '50px',
+            fontFamily: 'Chakra Petch',
+            fontSize: 'clamp(32px, 8vw, 65px)',
             fontWeight: '700',
           }}
         >
-          <h2 id="eventsTitle">EVENTS</h2>
-        </div>
+          EVENTS
+        </h1>
+
+        {isLoading && (
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <CircularProgress size="3em" style={{ color: 'white' }} />
+          </div>
+        )}
 
         {isLoading && (
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -398,18 +404,18 @@ const Events = () => {
         )}
 
         {/* Render EventBoxes for past events */}
-        <div
+        <h1
           style={{
             color: 'white',
-            fontSize: '40px',
-            fontFamily: 'Chakra Petch',
             marginLeft: '39px',
             marginTop: '117px',
+            fontFamily: 'Chakra Petch',
+            fontSize: 'clamp(32px, 8vw, 65px)',
             fontWeight: '700',
           }}
         >
-          <h2 id="pastEventsTitle">PAST EVENTS</h2>
-        </div>
+          PAST EVENTS
+        </h1>
 
         {isLoading && (
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>

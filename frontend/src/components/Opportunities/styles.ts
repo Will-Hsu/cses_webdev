@@ -23,31 +23,20 @@ export const opportunitiesStyles = (theme: any) => ({
     fontWeight: 'bold',
     fontFamily: 'Chakra Petch, sans-serif',
     color: 'white',
-    fontSize: '65px',
+    fontSize: 'clamp(32px, 8vw, 65px)',
     marginTop: '50px',
     marginBottom: '30px',
-    [theme.breakpoints.down('md')]: {
-      fontSize: '45px',
-      marginTop: '30px',
-      marginBottom: '10px',
-    },
   },
   test: {
     fontFamily: 'Inter, sans-serif',
     color: 'white',
-    fontSize: '20px',
-    [theme.breakpoints.down('md')]: {
-      fontSize: '20px',
-    },
+    fontSize: 'clamp(15px, 3vw, 20px)',
   },
   subtitle: {
     fontWeight: 'bold',
     fontFamily: 'Inter, sans-serif',
     color: 'white',
-    fontSize: '48px',
-    [theme.breakpoints.down('md')]: {
-      fontSize: '35px',
-    },
+    fontSize: 'clamp(35px, 3vw, 48px)',
   },
   greyBox: { width: '300px', height: '150px', backgroundColor: 'grey', margin: '1%' },
   sponsor: {
