@@ -94,7 +94,7 @@ const Forms = () => {
   };
 
   return (
-    <div style={{ maxWidth: '530px' }}>
+    <div style={{ maxWidth: '530px', padding: '0' }}>
       <Typography sx={styles.title}>Subscribe to our newsletter!</Typography>
 
       <Collapse in={showSuccess}>

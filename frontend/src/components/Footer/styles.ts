@@ -11,7 +11,7 @@ export const footerStyles = (theme: Theme) => ({
   },
   text: {
     fontFamily: 'Inter, sans-serif',
-    fontSize: '20px',
+    fontSize: 'clamp(10px, 4vw, 20px)',
     textDecoration: 'none',
     color: 'white',
   },
@@ -21,7 +21,7 @@ export const footerStyles = (theme: Theme) => ({
   },
   footerNote: {
     fontFamily: 'Inter, sans-serif',
-    fontSize: '18px',
+    fontSize: 'clamp(10px, 4vw, 18px)',
     color: 'white',
   },
   button: {
@@ -54,7 +54,7 @@ export const footerStyles = (theme: Theme) => ({
     fontWeight: 'bold',
     fontFamily: 'Chakra Petch, sans-serif',
     color: 'white',
-    fontSize: '25px',
-    marginTop: '15px',
+    fontSize: 'clamp(20px, 5vw, 25px)',
+    marginTop: 'clamp(5px, 1vw, 15px)',
   },
 });

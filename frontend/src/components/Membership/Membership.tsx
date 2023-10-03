@@ -133,6 +133,8 @@ const Membership = () => {
         />
       )}
 
+      {isAdmin && <EventsDashboard />}
+
       <div
         style={{
           color: 'white',
@@ -220,18 +222,19 @@ const Membership = () => {
             </div>
           </div>
 
-        <div style={{ flex: 1 }}>
-          {isLoggedIn && userData && <RewardsMenu email={userData.email} points={userData.points} />}
+          <div style={{ flex: 1 }}>
+            {isLoggedIn && userData && (
+              <RewardsMenu email={userData.email} points={userData.points} />
+            )}
+          </div>
         </div>
-      </div>
 
         {/* Add Events Attended + Leaderboard UI for the membership page @Brian & Eddie & Yashil --
         consider creating a separate component for this as well */}
         {isLoggedIn && userData && <EventsAttended eventsAttended={eventsAttended} />}
-        {isLoggedIn && rankings.length > 0 && userData && (
+        {isLoggedIn && rankings.length >= 3 && userData && (
           <LeaderBoard rankings={rankings} myPoint={userData.points} />
         )}
-        {isAdmin && <EventsDashboard />}
       </div>
     </div>
   );
