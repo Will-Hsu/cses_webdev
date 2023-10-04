@@ -170,8 +170,8 @@ const MemberProfile = (userData: MemberProfileProps) => {
           >
             Member Tier:{' '}
             <span style={{ fontWeight: 'bold' }}>{getTier(userData.memberEventsCount)}</span>{' '}
-            <span style={{ color: '#F3C969', fontWeight: 'bold' }}>|</span> Point Balance:{' '}
-            <span style={{ fontWeight: 'bold' }}>{userData.memberPoints}</span>
+            <span style={{ color: '#F3C969', fontWeight: 'bold', margin: '0 5px' }}>|</span> Point
+            Balance: <span style={{ fontWeight: 'bold' }}>{userData.memberPoints}</span>
           </p>
           <p
             style={{

@@ -19,7 +19,6 @@ export const membershipStyles = (isMobile?: boolean) => ({
   },
 
   eventsAttendedBody: {
-    marginLeft: isMobile ? '0%' : '10%',
     position: 'relative',
     width: '90%',
     marginBottom: '100px',
@@ -29,7 +28,7 @@ export const membershipStyles = (isMobile?: boolean) => ({
     fontWeight: 'bold',
     fontFamily: 'Chakra Petch',
     color: 'white',
-    fontSize: 'clamp(32px, 5vw, 65px)',
+    fontSize: 'clamp(32px, 5vw, 60px)',
     marginTop: '20px',
     marginBottom: '10px',
   },
@@ -81,9 +80,9 @@ export const membershipStyles = (isMobile?: boolean) => ({
     display: 'flex',
     margin: '0',
     marginRight: '1%',
-    width: 'clamp(100px, 8vw, 200px)',
-    height: 'clamp(150px, 8vw, 230px)',
-    padding: 'clamp(0px, 1vw, 20px)',
+    width: '200px',
+    height: '230px',
+    padding: '20px 20px 20px 20px',
   },
 
   textfield: {

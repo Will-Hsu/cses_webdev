@@ -8,6 +8,7 @@ import {
   Collapse,
   IconButton,
   Alert,
+  Container,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { AuthContext } from '../../context/AuthContext';
@@ -72,6 +73,10 @@ const Membership = () => {
         setIsCodeVisible(false);
         setVerificationCode('');
         setShowSuccess(true);
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth', // You can use 'auto' for an instant scroll
+        });
 
         setShowConfetti(true);
 
@@ -145,6 +150,8 @@ const Membership = () => {
 
       <div
         style={{
+          justifyContent: 'center',
+          alignItems: 'center',
           color: 'white',
           position: 'relative',
           top: '93px',
@@ -153,7 +160,7 @@ const Membership = () => {
         }}
       >
         {userData && (
-          <div
+          <Container
             style={{
               display: 'flex',
               alignItems: 'flex-start',
@@ -162,39 +169,14 @@ const Membership = () => {
           >
             <div>
               <div>
-                <h1
-                  style={{
-                    ...styles.eventsAttendedTitle,
-                    marginLeft: isMobile ? '18%' : '23%',
-                  }}
-                >
-                  EVENT CHECK-IN
-                </h1>
-                <Collapse
-                  in={showSuccess}
-                  sx={{
-                    ...styles.textfield,
-                    marginLeft: isMobile ? '18%' : '23%',
-                    [theme.breakpoints.down('sm')]: {
-                      width: '40%',
-                    },
-                  }}
-                >
+                <h1 style={styles.eventsAttendedTitle}>EVENT CHECK-IN</h1>
+                <Collapse in={showSuccess} sx={styles.textfield}>
                   <Alert severity="success" action={alertCloseBtn(setShowSuccess)}>
                     Successfully checked in!
                   </Alert>
                 </Collapse>
 
-                <Collapse
-                  in={showError}
-                  sx={{
-                    ...styles.textfield,
-                    marginLeft: isMobile ? '18%' : '23%',
-                    [theme.breakpoints.down('sm')]: {
-                      width: '40%',
-                    },
-                  }}
-                >
+                <Collapse in={showError} sx={styles.textfield}>
                   <Alert severity="error" action={alertCloseBtn(setShowError)}>
                     Invalid event code — <strong>please re-enter a code!</strong>
                   </Alert>
@@ -202,12 +184,7 @@ const Membership = () => {
                 <TextField
                   sx={{
                     ...styles.textfield,
-                    width: '35%',
-                    marginLeft: isMobile ? '18%' : '23%',
-                    marginBottom: '100px',
-                    [theme.breakpoints.down('sm')]: {
-                      width: '40%',
-                    },
+                    width: '70%',
                   }}
                   size="small"
                   placeholder={'6 Digit Code'}
@@ -220,9 +197,6 @@ const Membership = () => {
                     ...styles.button,
                     width: '20%',
                     marginBottom: '100px',
-                    [theme.breakpoints.down('sm')]: {
-                      width: '20%',
-                    },
                   }}
                   onClick={handleVerifyCodeClick}
                 >
@@ -236,7 +210,7 @@ const Membership = () => {
                 <RewardsMenu email={userData.email} points={userData.points} />
               )}
             </div>
-          </div>
+          </Container>
         )}
 
         {/* Add Events Attended + Leaderboard UI for the membership page @Brian & Eddie & Yashil --
