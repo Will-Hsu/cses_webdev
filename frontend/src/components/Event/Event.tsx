@@ -160,7 +160,7 @@ const EventBox = ({
           <p
             style={{
               color: 'white',
-              fontSize: 'clamp(25px, 3.5vw, 35px)',
+              fontSize: 'clamp(25px, 2vw, 35px)',
               fontFamily: 'Chakra Petch',
               fontWeight: '600',
               marginTop: '0',
