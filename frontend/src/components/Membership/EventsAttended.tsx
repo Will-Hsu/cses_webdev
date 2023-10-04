@@ -1,7 +1,9 @@
-import { Container, Typography, useMediaQuery } from '@mui/material';
+import useMediaQuery from '../../hooks/useMediaQuery';
+import { Container, Typography } from '@mui/material';
 import EventBox from '../Event/Event';
 import { membershipStyles } from './styles';
 import alertLogo from '../../images/events-attended-alert.svg';
+import MobileEventBox from '../Event/MobileEvent';
 
 export interface EventsAttendedProps {
   eventsAttended: Array<{
@@ -18,6 +20,7 @@ export interface EventsAttendedProps {
 
 const EventsAttended = ({ eventsAttended }: EventsAttendedProps) => {
   const styles = membershipStyles();
+  const isMobile = useMediaQuery('(max-width: 767px)');
 
   return (
     <Container sx={styles.eventsAttendedBody}>
@@ -47,22 +50,40 @@ const EventsAttended = ({ eventsAttended }: EventsAttendedProps) => {
         </Typography>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'row', gap: '40px', overflow: 'scroll' }}>
-        {eventsAttended.map((event) => (
-          <EventBox
-            title={event.title}
-            targetDate={new Date(event.start_time)}
-            location={event.location}
-            calendar_link={event.calendar_link}
-            description={event.description}
-            end_time={event.end_time}
-            instagram_link={event.instagram_link}
-            start_time={event.start_time}
-            _id={event._id}
-            pastEvent
-          />
-        ))}
-      </div>
+      {!isMobile && (
+        <div style={{ display: 'flex', flexDirection: 'row', gap: '40px', overflow: 'scroll' }}>
+          {eventsAttended.map((event) => (
+            <EventBox
+              title={event.title}
+              targetDate={new Date(event.start_time)}
+              location={event.location}
+              calendar_link={event.calendar_link}
+              description={event.description}
+              end_time={event.end_time}
+              instagram_link={event.instagram_link}
+              start_time={event.start_time}
+              _id={event._id}
+              pastEvent
+            />
+          ))}
+        </div>
+      )}
+
+      {isMobile && (
+        <div style={{ display: 'flex', flexDirection: 'row', gap: '40px', overflow: 'scroll' }}>
+          {eventsAttended.map((event) => (
+            <MobileEventBox
+              title={event.title}
+              targetDate={new Date(event.start_time)}
+              location={event.location}
+              end_time={event.end_time}
+              start_time={event.start_time}
+              _id={event._id}
+              pastEvent
+            />
+          ))}
+        </div>
+      )}
     </Container>
   );
 };

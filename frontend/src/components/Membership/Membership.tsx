@@ -2,7 +2,6 @@ import { useContext, useState, useEffect } from 'react';
 import Confetti from 'react-confetti';
 import {
   useMediaQuery,
-  Typography,
   TextField,
   useTheme,
   Button,
@@ -15,7 +14,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { User } from '../../utils/types';
 import EventsAttended from './EventsAttended';
-import LeaderBoard from './LeaderBoard';
+// import LeaderBoard from './LeaderBoard';
 import MemberProfile from '../MemberProfile/MemberProfile';
 import EventsDashboard from './EventsDashboard';
 import RewardsMenu from './RewardsMenu';
@@ -79,6 +78,7 @@ const Membership = () => {
         setTimeout(function () {
           setShowSuccess(false);
           setShowConfetti(false);
+          window.location.reload();
         }, 5000);
 
         console.log('good code');
@@ -110,7 +110,7 @@ const Membership = () => {
     };
 
     fetchUserData();
-  }, [isLoggedIn, user.email, navigate]);
+  }, [isLoggedIn, user.email, navigate, showConfetti]);
 
   useEffect(() => {
     const updateEvents = async () => {
@@ -152,97 +152,99 @@ const Membership = () => {
           margin: '10% 0',
         }}
       >
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'flex-start',
-            flexDirection: isiPad ? 'column' : 'row',
-          }}
-        >
-          <div>
+        {userData && (
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'flex-start',
+              flexDirection: isiPad ? 'column' : 'row',
+            }}
+          >
             <div>
-              <h1
-                style={{
-                  ...styles.eventsAttendedTitle,
-                  marginLeft: isMobile ? '18%' : '23%',
-                }}
-              >
-                EVENT CHECK-IN
-              </h1>
-              <Collapse
-                in={showSuccess}
-                sx={{
-                  ...styles.textfield,
-                  marginLeft: isMobile ? '18%' : '23%',
-                  [theme.breakpoints.down('sm')]: {
-                    width: '40%',
-                  },
-                }}
-              >
-                <Alert severity="success" action={alertCloseBtn(setShowSuccess)}>
-                  Successfully checked in!
-                </Alert>
-              </Collapse>
+              <div>
+                <h1
+                  style={{
+                    ...styles.eventsAttendedTitle,
+                    marginLeft: isMobile ? '18%' : '23%',
+                  }}
+                >
+                  EVENT CHECK-IN
+                </h1>
+                <Collapse
+                  in={showSuccess}
+                  sx={{
+                    ...styles.textfield,
+                    marginLeft: isMobile ? '18%' : '23%',
+                    [theme.breakpoints.down('sm')]: {
+                      width: '40%',
+                    },
+                  }}
+                >
+                  <Alert severity="success" action={alertCloseBtn(setShowSuccess)}>
+                    Successfully checked in!
+                  </Alert>
+                </Collapse>
 
-              <Collapse
-                in={showError}
-                sx={{
-                  ...styles.textfield,
-                  marginLeft: isMobile ? '18%' : '23%',
-                  [theme.breakpoints.down('sm')]: {
-                    width: '40%',
-                  },
-                }}
-              >
-                <Alert severity="error" action={alertCloseBtn(setShowError)}>
-                  Invalid event code — <strong>please re-enter a code!</strong>
-                </Alert>
-              </Collapse>
-              <TextField
-                sx={{
-                  ...styles.textfield,
-                  width: '35%',
-                  marginLeft: isMobile ? '18%' : '23%',
-                  marginBottom: '100px',
-                  [theme.breakpoints.down('sm')]: {
-                    width: '40%',
-                  },
-                }}
-                size="small"
-                placeholder={'6 Digit Code'}
-                value={verificationCode}
-                inputProps={{ maxLength: 6 }}
-                onChange={(e) => setVerificationCode(e.target.value)}
-              />
-              <Button
-                sx={{
-                  ...styles.button,
-                  width: '20%',
-                  marginBottom: '100px',
-                  [theme.breakpoints.down('sm')]: {
+                <Collapse
+                  in={showError}
+                  sx={{
+                    ...styles.textfield,
+                    marginLeft: isMobile ? '18%' : '23%',
+                    [theme.breakpoints.down('sm')]: {
+                      width: '40%',
+                    },
+                  }}
+                >
+                  <Alert severity="error" action={alertCloseBtn(setShowError)}>
+                    Invalid event code — <strong>please re-enter a code!</strong>
+                  </Alert>
+                </Collapse>
+                <TextField
+                  sx={{
+                    ...styles.textfield,
+                    width: '35%',
+                    marginLeft: isMobile ? '18%' : '23%',
+                    marginBottom: '100px',
+                    [theme.breakpoints.down('sm')]: {
+                      width: '40%',
+                    },
+                  }}
+                  size="small"
+                  placeholder={'6 Digit Code'}
+                  value={verificationCode}
+                  inputProps={{ maxLength: 6 }}
+                  onChange={(e) => setVerificationCode(e.target.value)}
+                />
+                <Button
+                  sx={{
+                    ...styles.button,
                     width: '20%',
-                  },
-                }}
-                onClick={handleVerifyCodeClick}
-              >
-                Verify
-              </Button>
+                    marginBottom: '100px',
+                    [theme.breakpoints.down('sm')]: {
+                      width: '20%',
+                    },
+                  }}
+                  onClick={handleVerifyCodeClick}
+                >
+                  Verify
+                </Button>
+              </div>
+            </div>
+
+            <div>
+              {isLoggedIn && userData && (
+                <RewardsMenu email={userData.email} points={userData.points} />
+              )}
             </div>
           </div>
-
-          <div>
-            {isLoggedIn && userData && (
-              <RewardsMenu email={userData.email} points={userData.points} />
-            )}
-          </div>
-        </div>
+        )}
 
         {/* Add Events Attended + Leaderboard UI for the membership page @Brian & Eddie & Yashil --
         consider creating a separate component for this as well */}
         {isLoggedIn && userData && <EventsAttended eventsAttended={eventsAttended} />}
-        {isLoggedIn && rankings.length >= 3 && userData && (
+        {/*isLoggedIn && rankings.length >= 3 && userData && (
           <LeaderBoard rankings={rankings} myPoint={userData.points} />
-        )}
+        )*/}
       </div>
     </div>
   );
