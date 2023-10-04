@@ -14,7 +14,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { User } from '../../utils/types';
 import EventsAttended from './EventsAttended';
-// import LeaderBoard from './LeaderBoard';
+import LeaderBoard from './LeaderBoard';
 import MemberProfile from '../MemberProfile/MemberProfile';
 import EventsDashboard from './EventsDashboard';
 import RewardsMenu from './RewardsMenu';
@@ -50,7 +50,7 @@ const Membership = () => {
   const navigate = useNavigate();
   const isMobile = useMediaQuery('(max-width: 767px)');
   const isiPad = useMediaQuery('(max-width: 890px)');
-  const styles = membershipStyles();
+  const styles = membershipStyles(isMobile);
   const [verificationCode, setVerificationCode] = useState('');
   const [isCodeVisible, setIsCodeVisible] = useState(true);
   const theme = useTheme();
@@ -232,7 +232,7 @@ const Membership = () => {
             </div>
 
             <div>
-              {isLoggedIn && userData && (
+              {isLoggedIn && userData && !isMobile && (
                 <RewardsMenu email={userData.email} points={userData.points} />
               )}
             </div>
@@ -242,9 +242,9 @@ const Membership = () => {
         {/* Add Events Attended + Leaderboard UI for the membership page @Brian & Eddie & Yashil --
         consider creating a separate component for this as well */}
         {isLoggedIn && userData && <EventsAttended eventsAttended={eventsAttended} />}
-        {/*isLoggedIn && rankings.length >= 3 && userData && (
+        {isLoggedIn && !isMobile && userData && rankings.length >= 3 && userData && (
           <LeaderBoard rankings={rankings} myPoint={userData.points} />
-        )*/}
+        )}
       </div>
     </div>
   );

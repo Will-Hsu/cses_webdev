@@ -125,7 +125,9 @@ const MemberProfile = (userData: MemberProfileProps) => {
             {userData.memberName}
           </Typography>
           <Box
-            sx={{ width: '100%' }}
+            sx={{
+              width: '100%',
+            }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
@@ -161,6 +163,8 @@ const MemberProfile = (userData: MemberProfileProps) => {
 
           <p
             style={{
+              display: 'flex', // added
+              justifyContent: 'center', // added
               fontSize: 'clamp(0.8rem, 2.5vw, 1rem)',
             }}
           >
@@ -171,6 +175,8 @@ const MemberProfile = (userData: MemberProfileProps) => {
           </p>
           <p
             style={{
+              display: 'flex', // added
+              justifyContent: 'center', // added
               fontSize: 'clamp(0.8rem, 2.5vw, 1rem)',
             }}
           >

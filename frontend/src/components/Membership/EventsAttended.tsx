@@ -19,8 +19,8 @@ export interface EventsAttendedProps {
 }
 
 const EventsAttended = ({ eventsAttended }: EventsAttendedProps) => {
-  const styles = membershipStyles();
   const isMobile = useMediaQuery('(max-width: 767px)');
+  const styles = membershipStyles(isMobile);
 
   return (
     <Container sx={styles.eventsAttendedBody}>
