@@ -1,13 +1,14 @@
 import { useContext, useState, useEffect } from 'react';
+import Confetti from 'react-confetti';
 import {
   useMediaQuery,
-  Typography,
   TextField,
   useTheme,
   Button,
   Collapse,
   IconButton,
   Alert,
+  Container,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { AuthContext } from '../../context/AuthContext';
@@ -21,6 +22,7 @@ import RewardsMenu from './RewardsMenu';
 import axios from 'axios';
 import { userInfoAPI, topMembersAPI, addEvent } from '../../api';
 import { membershipStyles } from './styles';
+import { textAlign } from '@mui/system';
 
 interface Event {
   _id: string;
@@ -42,6 +44,7 @@ interface Ranking {
 }
 
 const Membership = () => {
+  const [showConfetti, setShowConfetti] = useState(false);
   const { user, isLoggedIn, isAdmin } = useContext(AuthContext);
   const [userData, setUserData] = useState<User | null>(null);
   const [eventsAttended, setEventsAttended] = useState<Array<Event>>([]);
@@ -49,7 +52,7 @@ const Membership = () => {
   const navigate = useNavigate();
   const isMobile = useMediaQuery('(max-width: 767px)');
   const isiPad = useMediaQuery('(max-width: 890px)');
-  const styles = membershipStyles();
+  const styles = membershipStyles(isMobile);
   const [verificationCode, setVerificationCode] = useState('');
   const [isCodeVisible, setIsCodeVisible] = useState(true);
   const theme = useTheme();
@@ -71,9 +74,19 @@ const Membership = () => {
         setIsCodeVisible(false);
         setVerificationCode('');
         setShowSuccess(true);
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth', // You can use 'auto' for an instant scroll
+        });
+
+        setShowConfetti(true);
+
         setTimeout(function () {
           setShowSuccess(false);
+          setShowConfetti(false);
+          window.location.reload();
         }, 5000);
+
         console.log('good code');
       })
       .catch((error) => {
@@ -103,7 +116,7 @@ const Membership = () => {
     };
 
     fetchUserData();
-  }, [isLoggedIn, user.email, navigate]);
+  }, [isLoggedIn, user.email, navigate, showConfetti]);
 
   useEffect(() => {
     const updateEvents = async () => {
@@ -123,6 +136,7 @@ const Membership = () => {
           'linear-gradient(to bottom, black 0%, #2F56BC 35%, #162756 50%, #2F56BC 70%, black 100%)',
       }}
     >
+      {showConfetti && <Confetti />}
       {userData && (
         <MemberProfile
           memberName={userData.name}
@@ -137,6 +151,8 @@ const Membership = () => {
 
       <div
         style={{
+          justifyContent: 'center',
+          alignItems: 'center',
           color: 'white',
           position: 'relative',
           top: '93px',
@@ -144,95 +160,66 @@ const Membership = () => {
           margin: '10% 0',
         }}
       >
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'flex-start',
-            flexDirection: isiPad ? 'column' : 'row',
-          }}
-        >
-          <div style={{ flex: 1 }}>
+        {userData && (
+          <Container
+            style={{
+              display: 'flex',
+              alignItems: 'flex-start',
+              flexDirection: isiPad ? 'column' : 'row',
+            }}
+          >
             <div>
-              <Typography
-                sx={{
-                  ...(isMobile ? styles.eventsAttendedTitleMobile : styles.eventsAttendedTitle),
-                  marginLeft: isMobile ? '18%' : '23%',
-                }}
-              >
-                EVENT CHECK-IN
-              </Typography>
-              <Collapse
-                in={showSuccess}
-                sx={{
-                  ...styles.textfield,
-                  marginLeft: isMobile ? '18%' : '23%',
-                  [theme.breakpoints.down('sm')]: {
-                    width: '40%',
-                  },
-                }}
-              >
-                <Alert severity="success" action={alertCloseBtn(setShowSuccess)}>
-                  Successfully checked in!
-                </Alert>
-              </Collapse>
+              <div>
+                <h1 style={{ ...styles.eventsAttendedTitle, textAlign: 'center' }}>
+                  EVENT CHECK-IN
+                </h1>
+                <Collapse in={showSuccess} sx={styles.textfield}>
+                  <Alert severity="success" action={alertCloseBtn(setShowSuccess)}>
+                    Successfully checked in!
+                  </Alert>
+                </Collapse>
 
-              <Collapse
-                in={showError}
-                sx={{
-                  ...styles.textfield,
-                  marginLeft: isMobile ? '18%' : '23%',
-                  [theme.breakpoints.down('sm')]: {
-                    width: '40%',
-                  },
-                }}
-              >
-                <Alert severity="error" action={alertCloseBtn(setShowError)}>
-                  Invalid event code — <strong>please re-enter a code!</strong>
-                </Alert>
-              </Collapse>
-              <TextField
-                sx={{
-                  ...styles.textfield,
-                  width: '35%',
-                  marginLeft: isMobile ? '18%' : '23%',
-                  marginBottom: '100px',
-                  [theme.breakpoints.down('sm')]: {
-                    width: '40%',
-                  },
-                }}
-                size="small"
-                placeholder={'6 Digit Code'}
-                value={verificationCode}
-                inputProps={{ maxLength: 6 }}
-                onChange={(e) => setVerificationCode(e.target.value)}
-              />
-              <Button
-                sx={{
-                  ...styles.button,
-                  width: '20%',
-                  marginBottom: '100px',
-                  [theme.breakpoints.down('sm')]: {
+                <Collapse in={showError} sx={styles.textfield}>
+                  <Alert severity="error" action={alertCloseBtn(setShowError)}>
+                    Invalid event code — <strong>please re-enter a code!</strong>
+                  </Alert>
+                </Collapse>
+                <TextField
+                  sx={{
+                    ...styles.textfield,
+                    width: '65%',
+                  }}
+                  size="small"
+                  placeholder={'6 Digit Code'}
+                  value={verificationCode}
+                  inputProps={{ maxLength: 6 }}
+                  onChange={(e) => setVerificationCode(e.target.value)}
+                />
+                <Button
+                  sx={{
+                    ...styles.button,
                     width: '20%',
-                  },
-                }}
-                onClick={handleVerifyCodeClick}
-              >
-                Verify
-              </Button>
+                    marginBottom: '100px',
+                  }}
+                  onClick={handleVerifyCodeClick}
+                >
+                  Verify
+                </Button>
+              </div>
             </div>
-          </div>
 
-          <div style={{ flex: 1 }}>
-            {isLoggedIn && userData && (
-              <RewardsMenu email={userData.email} points={userData.points} />
-            )}
-          </div>
-        </div>
+            <div>
+              {isLoggedIn && userData && !isMobile && (
+                <RewardsMenu email={userData.email} points={userData.points} />
+              )}
+            </div>
+          </Container>
+        )}
 
         {/* Add Events Attended + Leaderboard UI for the membership page @Brian & Eddie & Yashil --
         consider creating a separate component for this as well */}
         {isLoggedIn && userData && <EventsAttended eventsAttended={eventsAttended} />}
-        {isLoggedIn && rankings.length >= 3 && userData && (
+        {isLoggedIn && !isMobile && userData && rankings.length >= 3 && userData && (
           <LeaderBoard rankings={rankings} myPoint={userData.points} />
         )}
       </div>

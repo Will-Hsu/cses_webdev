@@ -83,7 +83,7 @@ const RewardsMenu = (userData: RewardsProp) => {
     <Container maxWidth="xl" sx={styles.rewardsBody}>
       <Typography
         sx={{
-          ...(isMobile ? styles.eventsAttendedTitleMobile : styles.eventsAttendedTitle),
+          ...styles.eventsAttendedTitle,
           marginLeft: isMobile ? '16%' : '0',
         }}
       >
