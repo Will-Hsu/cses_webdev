@@ -200,35 +200,31 @@ const Events = () => {
     return events.map((eventData) => {
       if (isMobile) {
         return (
-          <div style={{ ...eventsContainerStyle, marginTop: '10px', marginLeft: '45px' }}>
-            <MobileEventBox
-              title={eventData.title}
-              targetDate={new Date(eventData.end_time)}
-              location={eventData.location}
-              end_time={eventData.end_time}
-              start_time={eventData.start_time}
-              _id={eventData._id}
-              pastEvent
-            />
-          </div>
+          <MobileEventBox
+            title={eventData.title}
+            targetDate={new Date(eventData.end_time)}
+            location={eventData.location}
+            end_time={eventData.end_time}
+            start_time={eventData.start_time}
+            _id={eventData._id}
+            pastEvent
+          />
         );
       } else {
         return (
-          <div style={{ ...eventsContainerStyle, marginTop: '20px', marginLeft: '39px' }}>
-            <React.Fragment key={eventData._id}>
-              <EventBox
-                title={eventData.title}
-                targetDate={new Date(eventData.end_time)}
-                location={eventData.location}
-                calendar_link={eventData.calendar_link}
-                description={eventData.description}
-                end_time={eventData.end_time}
-                instagram_link={eventData.instagram_link}
-                start_time={eventData.start_time}
-                _id={eventData._id}
-              />
-            </React.Fragment>
-          </div>
+          <React.Fragment key={eventData._id}>
+            <EventBox
+              title={eventData.title}
+              targetDate={new Date(eventData.end_time)}
+              location={eventData.location}
+              calendar_link={eventData.calendar_link}
+              description={eventData.description}
+              end_time={eventData.end_time}
+              instagram_link={eventData.instagram_link}
+              start_time={eventData.start_time}
+              _id={eventData._id}
+            />
+          </React.Fragment>
         );
       }
     });
@@ -318,22 +314,24 @@ const Events = () => {
           </div>
         )}
         {/* Render EventBoxes for future events */}
-        {(displayedFutureEvents.length === 0 && !isLoading && (
-          <div
-            style={{
-              color: 'white',
-              fontSize: '20px',
-              fontFamily: 'Chakra Petch',
-              fontWeight: '700',
-              display: 'flex',
-              flexDirection: 'row',
-              marginLeft: '39px',
-            }}
-          >
-            No upcoming events
-          </div>
-        )) ||
-          renderEventBoxes(displayedFutureEvents)}
+        <div style={{ ...eventsContainerStyle, marginTop: '20px' }}>
+          {(displayedFutureEvents.length === 0 && (
+            <div
+              style={{
+                color: 'white',
+                fontSize: '20px',
+                fontFamily: 'Chakra Petch',
+                fontWeight: '700',
+                display: 'flex',
+                flexDirection: 'row',
+                marginLeft: '39px',
+              }}
+            >
+              No upcoming events
+            </div>
+          )) ||
+            renderEventBoxes(displayedFutureEvents)}
+        </div>
 
         {displayedFutureEvents.length > 0 && (
           <div>
