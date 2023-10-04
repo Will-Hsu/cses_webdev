@@ -22,6 +22,7 @@ import RewardsMenu from './RewardsMenu';
 import axios from 'axios';
 import { userInfoAPI, topMembersAPI, addEvent } from '../../api';
 import { membershipStyles } from './styles';
+import { textAlign } from '@mui/system';
 
 interface Event {
   _id: string;
@@ -169,7 +170,9 @@ const Membership = () => {
           >
             <div>
               <div>
-                <h1 style={styles.eventsAttendedTitle}>EVENT CHECK-IN</h1>
+                <h1 style={{ ...styles.eventsAttendedTitle, textAlign: 'center' }}>
+                  EVENT CHECK-IN
+                </h1>
                 <Collapse in={showSuccess} sx={styles.textfield}>
                   <Alert severity="success" action={alertCloseBtn(setShowSuccess)}>
                     Successfully checked in!
@@ -184,7 +187,7 @@ const Membership = () => {
                 <TextField
                   sx={{
                     ...styles.textfield,
-                    width: '70%',
+                    width: '65%',
                   }}
                   size="small"
                   placeholder={'6 Digit Code'}
