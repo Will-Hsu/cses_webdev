@@ -12,6 +12,8 @@ router.get('/events', eventController.eventList);
 // GET request for one Event.
 router.get('/event/:id', eventController.eventDetail);
 
+router.get('/eventAttendance/:id', eventController.eventAttendance);
+
 // POST request for creating Event.
 router.post('/event/create', eventController.eventCreate);
 

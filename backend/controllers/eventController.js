@@ -3,6 +3,7 @@ import asyncHandler from 'express-async-handler';
 import { body, param, validationResult } from 'express-validator';
 import crypto from 'crypto';
 import validator from 'validator';
+import User from '../models/user.js';
 
 // Display list of all Events.
 export const eventList = asyncHandler(async (req, res) => {
@@ -89,6 +90,20 @@ export const eventDetail = asyncHandler(async (req, res) => {
     }
   } catch (error) {
     res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+// Display detail for a specific Event.
+export const eventAttendance = asyncHandler(async (req, res) => {
+  const eventId = req.params.id;
+
+  // Query database for event with given ID
+  try {
+    const users = await User.find({ eventsAttended: eventId }, 'name email -_id').exec();
+
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ message: 'Internal server error', error });
   }
 });
 
@@ -278,4 +293,5 @@ export default {
   eventCreate,
   eventDelete,
   eventUpdate,
+  eventAttendance,
 };
