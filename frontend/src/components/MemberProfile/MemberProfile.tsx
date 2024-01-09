@@ -82,7 +82,7 @@ const MemberProfile = (userData: MemberProfileProps) => {
         style={{
           textAlign: 'center',
           fontFamily: 'Chakra Petch',
-          fontSize: 'clamp(3rem, 5vw, 4.5rem)',
+          fontSize: 'clamp(32px, 8vw, 65px)',
           marginTop: '8%',
         }}
       >
@@ -92,44 +92,42 @@ const MemberProfile = (userData: MemberProfileProps) => {
         {isXsScreen ? (
           <Grid item xs={12}>
             <Avatar
-              alt="Dog"
               src={userData.memberPicture}
               sx={{ width: 180, height: 180, margin: '0 auto' }}
             />
           </Grid>
         ) : (
           <Grid item xs={12} sm={4.5} lg={2.7}>
-            <Avatar
-              alt="Dog"
-              //src="https://img.freepik.com/free-photo/puppy-that-is-walking-snow_1340-37228.jpg"
-              src={userData.memberPicture}
-              sx={{ width: 250, height: 250 }}
-            />
+            <Avatar src={userData.memberPicture} sx={{ width: 250, height: 250 }} />
           </Grid>
         )}
         <div>
-          <p
-            style={{
+          <Typography
+            sx={{
               fontWeight: 'bold',
               fontSize: 'clamp(1.2rem, 2.5vw, 2rem)',
               margin: '0',
+              textAlign: { xs: 'center', sm: 'left' },
               marginTop: '10%',
             }}
           >
             Welcome Back,
-          </p>
-          <p
-            style={{
+          </Typography>
+          <Typography
+            sx={{
               fontWeight: 'bold',
               fontSize: 'clamp(1.2rem, 2.5vw, 2rem)',
               margin: '0',
+              textAlign: { xs: 'center', sm: 'left' },
               marginBottom: '5%',
             }}
           >
             {userData.memberName}
-          </p>
+          </Typography>
           <Box
-            sx={{ width: '110%' }}
+            sx={{
+              width: '100%',
+            }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
@@ -163,13 +161,25 @@ const MemberProfile = (userData: MemberProfileProps) => {
             )}
           </Box>
 
-          <p style={{ fontSize: 'clamp(0.8rem, 2.5vw, 1rem)' }}>
+          <p
+            style={{
+              display: 'flex', // added
+              justifyContent: 'center', // added
+              fontSize: 'clamp(0.8rem, 2.5vw, 1rem)',
+            }}
+          >
             Member Tier:{' '}
             <span style={{ fontWeight: 'bold' }}>{getTier(userData.memberEventsCount)}</span>{' '}
-            <span style={{ color: '#F3C969', fontWeight: 'bold' }}>|</span> Point Balance:{' '}
-            <span style={{ fontWeight: 'bold' }}>{userData.memberPoints}</span>
+            <span style={{ color: '#F3C969', fontWeight: 'bold', margin: '0 5px' }}>|</span> Point
+            Balance: <span style={{ fontWeight: 'bold' }}>{userData.memberPoints}</span>
           </p>
-          <p style={{ fontSize: 'clamp(0.8rem, 2.5vw, 1rem)' }}>
+          <p
+            style={{
+              display: 'flex', // added
+              justifyContent: 'center', // added
+              fontSize: 'clamp(0.8rem, 2.5vw, 1rem)',
+            }}
+          >
             Major: <span style={{ fontWeight: 'bold' }}>{userData.memberMajor}</span>{' '}
           </p>
         </div>

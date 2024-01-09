@@ -77,7 +77,11 @@ const NavBar = () => {
       >
         <Toolbar>
           <Link to="/">
-            <img src={csesLogo} alt="logo" style={{ margin: '25px', height: '45px' }} />
+            <img
+              src={csesLogo}
+              alt="logo"
+              style={{ margin: 'clamp(20px, 4vw, 25px)', height: '45px' }}
+            />
           </Link>
           <div style={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'block' } }}>

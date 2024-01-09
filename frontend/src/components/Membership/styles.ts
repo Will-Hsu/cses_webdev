@@ -1,4 +1,4 @@
-export const membershipStyles = () => ({
+export const membershipStyles = (isMobile?: boolean) => ({
   name: {
     width: 300,
     height: 300,
@@ -19,7 +19,6 @@ export const membershipStyles = () => ({
   },
 
   eventsAttendedBody: {
-    marginLeft: '10%',
     position: 'relative',
     width: '90%',
     marginBottom: '100px',
@@ -27,35 +26,16 @@ export const membershipStyles = () => ({
 
   eventsAttendedTitle: {
     fontWeight: 'bold',
-    fontFamily: 'Chakra Petch, sans-serif',
+    fontFamily: 'Chakra Petch',
     color: 'white',
-    fontSize: '65px',
+    fontSize: 'clamp(32px, 5vw, 60px)',
     marginTop: '20px',
     marginBottom: '10px',
-    // [theme.breakpoints.down('md')]: {
-    //   fontSize: '45px',
-    //   marginTop: '30px',
-    //   marginBottom: '10px',
-    // },
-  },
-
-  eventsAttendedTitleMobile: {
-    fontWeight: 'bold',
-    fontFamily: 'Chakra Petch, sans-serif',
-    color: 'white',
-    fontSize: '45px',
-    marginTop: '20px',
-    marginBottom: '10px',
-    // [theme.breakpoints.down('md')]: {
-    //   fontSize: '45px',
-    //   marginTop: '30px',
-    //   marginBottom: '10px',
-    // },
   },
 
   eventsAttendText: {
     fontFamily: 'Inter, sans-serif',
-    fontSize: '22px',
+    fontSize: 'clamp(15px, 4vw, 22px)',
   },
 
   leaderBoardBody: {

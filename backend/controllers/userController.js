@@ -178,7 +178,8 @@ export const userEventsUpdate = asyncHandler(async (req, res) => {
     const currentTime = new Date();
 
     // Check if the event has already started
-    if (currentTime < event.start_time) {
+    // hack for GBM
+    if (code !== '996913' && currentTime < event.start_time) {
       return res.status(400).json({ message: 'Event has not started' });
     }
 

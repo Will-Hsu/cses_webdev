@@ -113,6 +113,8 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
           // set logged in to true
           setIsLoggedIn(true);
           console.log('New User Successfully Logged In');
+          // cheat fix for now
+          window.location.reload();
           navigate('/membership');
         })
         .catch((error) => {
