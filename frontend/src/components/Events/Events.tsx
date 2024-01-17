@@ -75,6 +75,8 @@ const Events = () => {
     // if desktop view set styles for desktop
     eventsContainerStyle.maxWidth = '100vw';
     eventsContainerStyle.overflowX = 'hidden';
+    eventsContainerStyle.alignItems = 'center';
+    eventsContainerStyle.justifyContent = 'center';
     eventsContainerStyle.flexWrap = 'wrap' as 'wrap';
   }
 
@@ -82,15 +84,17 @@ const Events = () => {
     // if ipad view set styles for ipad
     eventsContainerStyle.maxWidth = '100vw';
     eventsContainerStyle.overflowX = 'hidden';
+    eventsContainerStyle.alignItems = 'center';
+    eventsContainerStyle.justifyContent = 'center';
     eventsContainerStyle.flexWrap = 'wrap' as 'wrap';
   }
 
   if (isMobile) {
     // if mobile view set styles for mobile
-    eventsContainerStyle.maxWidth = '100vw';
+    eventsContainerStyle.maxWidth = '250px';
     eventsContainerStyle.width = '100%'; // Set width to 100% of the parent container
     eventsContainerStyle.padding = '0'; // Remove any padding
-    eventsContainerStyle.margin = '0'; // Remove any margin
+    eventsContainerStyle.margin = 'auto'; // Remove any margin
     eventsContainerStyle.overflowX = 'auto';
     eventsContainerStyle.overflowY = 'auto';
     eventsContainerStyle.flexWrap = 'wrap' as 'wrap';
@@ -343,7 +347,8 @@ const Events = () => {
                 fontWeight: '700',
                 display: 'flex',
                 flexDirection: 'row',
-                marginLeft: '39px',
+                alignItems: 'center',
+                justifyContent: 'center'
               }}
             >
               Page {pageNumberUpcoming} of {totalPagesUpcoming}
@@ -457,7 +462,8 @@ const Events = () => {
                 fontWeight: '700',
                 display: 'flex',
                 flexDirection: 'row',
-                marginLeft: '39px',
+                alignItems: 'center',
+                justifyContent: 'center'
               }}
             >
               Page {pageNumberPast} of {totalPagesPast}
