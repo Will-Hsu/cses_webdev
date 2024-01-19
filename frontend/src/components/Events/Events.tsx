@@ -429,6 +429,7 @@ const Events = () => {
               justifyContent: 'flex-start',
               marginLeft: '30px',
               marginTop: '-25px',
+              marginBottom: '2.5%'
             }}
           >
             <Button size="medium" text="2023" infocus={is2023Clicked} onClick={handle2023}></Button>
