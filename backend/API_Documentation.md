@@ -378,4 +378,63 @@ Jump to: [userCreate](#usercreate), [getUserInfo](#getuserinfo), [userCheck](#us
 
 # event
 
+The base API url for event routes is just the base url: http://localhost:5000/api/v1
+
+Jump to: [eventList](#eventlist), 
+### eventList
+
+| **url** | **Method** | **Description**                                        | **Associated Method** |
+|---------|------------|--------------------------------------------------------|-----------------------|
+| /events | GET        | This method retrieves a list of all events in the database, sorted by start time | ```eventList```     |
+
+### Parameters:
+| Name                 | Data Type  | Required/Optional | Description                         |
+|----------------------|------------|-------------------|-------------------------------------|
+| type                 | string     | optional          | "past" or "upcoming"                     |
+| month                  | integer     | optional          | Specific month to pull events from  |
+| expectedGraduationYear | integer    | optional          | Specific year to pull events from |
+
+### Example Body:
+```json
+{
+    "type": "past",
+    "month": 10,
+    "year": 2023
+}
+```
+
+Note: year and month can be used with or without each other - for example, you could have month only, year only, or month and year
+
+### Responses:
+```200``` - Successful retrieval
+```json
+[
+    {
+        "_id": "651204846df7ac7df979137e",
+        "title": "Event 1",
+        "start_time": "2023-10-05T00:30:00.000Z",
+        "end_time": "2023-10-05T02:00:00.000Z",
+        "location": "PC Forum (4th Floor PC)",
+        "major_event": true,
+        "description": "",
+        "calendar_link": "https://calendar.google.com/calendar/event1",
+        "instagram_link": "https://www.instagram.com/p/Cxo_4ihLyCg/?igshid=MzRlODBiNWFlZA==",
+        "code": "996913"
+    },
+    {
+        "_id": "652d6863bfb5eac8e9798642",
+        "title": "CSES Innovate x WIC Startup Founder Panel",
+        "start_time": "2023-10-17T00:00:00.000Z",
+        "end_time": "2023-10-17T02:00:00.000Z",
+        "location": "CSE 1202",
+        "major_event": true,
+        "calendar_link": "https://calendar.google.com/calendar/event2",
+        "instagram_link": "",
+        "code": "083961"
+    }
+]
+```
+
+
+
 # subscription
