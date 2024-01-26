@@ -19,7 +19,7 @@ Jump to: [userCreate](#usercreate), [getUserInfo](#getuserinfo), [userCheck](#us
 |---------|------------|---------------------------------|-----------------------|
 | /create | POST       | This method creates a new user. | ```userCreate```      |
 
-### Parameters:
+### Body:
 | Name                 | Data Type  | Required/Optional | Description                         |
 |----------------------|------------|-------------------|-------------------------------------|
 | name                 | string     | required          | The user's name                     |
@@ -64,6 +64,11 @@ Jump to: [userCreate](#usercreate), [getUserInfo](#getuserinfo), [userCheck](#us
 |---------|------------|--------------------------------------------------------|-----------------------|
 | /:email | GET        | This method retrieves stored information about a user. | ```getUserInfo```     |
 
+### Parameters:
+| Name                 | Data Type  | Required/Optional | Description                         |
+|----------------------|------------|-------------------|-------------------------------------|
+| email                 | string     | required          | The user's email                     |
+
 ### Responses:
 ```200``` - Successful request  
 ```json
@@ -91,7 +96,7 @@ Jump to: [userCreate](#usercreate), [getUserInfo](#getuserinfo), [userCheck](#us
 |---------|------------|--------------------------------------------------------|-----------------------|
 | /check | POST        | This method checks if a user exists in the database. | ```userCheck```     |
 
-### Parameters:
+### Body:
 | Name                 | Data Type  | Required/Optional | Description                         |
 |----------------------|------------|-------------------|-------------------------------------|
 | email                | string     | required          | The user's email                    |
@@ -134,6 +139,11 @@ Jump to: [userCreate](#usercreate), [getUserInfo](#getuserinfo), [userCheck](#us
 | /:email | PUT        | This method updates a user's information. | ```userUpdate```     |
 
 ### Parameters:
+| Name                 | Data Type  | Required/Optional | Description                         |
+|----------------------|------------|-------------------|-------------------------------------|
+| email                 | string     | required          | The user's email                     |
+
+### Body:
 | Name                 | Data Type  | Required/Optional | Description                         |
 |----------------------|------------|-------------------|-------------------------------------|
 | name                 | string     | optional          | The user's updated name                     |
@@ -194,6 +204,11 @@ Jump to: [userCreate](#usercreate), [getUserInfo](#getuserinfo), [userCheck](#us
 |---------|------------|--------------------------------------------------------|-----------------------|
 | /:email | DELETE     | This method deletes a user. | ```userDelete```     |
 
+### Parameters:
+| Name                 | Data Type  | Required/Optional | Description                         |
+|----------------------|------------|-------------------|-------------------------------------|
+| email                 | string     | required          | The user's email                     |
+
 ### Responses:
 ```200``` - Successful deletion
 ```json
@@ -213,6 +228,12 @@ Jump to: [userCreate](#usercreate), [getUserInfo](#getuserinfo), [userCheck](#us
 | **url** | **Method** | **Description**                                        | **Associated Method** |
 |---------|------------|--------------------------------------------------------|-----------------------|
 | /:email/event/:code | POST        | This method updates a user's information. | ```userEventsUpdate```     |
+
+### Parameters:
+| Name                 | Data Type  | Required/Optional | Description                         |
+|----------------------|------------|-------------------|-------------------------------------|
+| email                 | string     | required          | The user's email                     |
+| code                 | string     | required          | The code for the event                     |
 
 ### Responses:
 ```200``` - Successful update
@@ -258,6 +279,11 @@ Jump to: [userCreate](#usercreate), [getUserInfo](#getuserinfo), [userCheck](#us
 |---------|------------|--------------------------------------------------------|-----------------------|
 | /:email/redeemSmall | PUT        | This method allows a user to redeem a small prize. | ```redeemSmall```     |
 
+### Parameters:
+| Name                 | Data Type  | Required/Optional | Description                         |
+|----------------------|------------|-------------------|-------------------------------------|
+| email                 | string     | required          | The user's email                     |
+
 ### Responses:
 ```200``` - Successful redemption
 ```json
@@ -284,6 +310,11 @@ Jump to: [userCreate](#usercreate), [getUserInfo](#getuserinfo), [userCheck](#us
 |---------|------------|--------------------------------------------------------|-----------------------|
 | /:email/redeemMedium | PUT        | This method allows a user to redeem a medium prize. | ```redeemMedium```     |
 
+### Parameters:
+| Name                 | Data Type  | Required/Optional | Description                         |
+|----------------------|------------|-------------------|-------------------------------------|
+| email                 | string     | required          | The user's email                     |
+
 ### Responses:
 ```200``` - Successful redemption
 ```json
@@ -309,6 +340,11 @@ Jump to: [userCreate](#usercreate), [getUserInfo](#getuserinfo), [userCheck](#us
 | **url** | **Method** | **Description**                                        | **Associated Method** |
 |---------|------------|--------------------------------------------------------|-----------------------|
 | /:email/redeemLarge | PUT        | This method allows a user to redeem a large prize. | ```redeemLarge```     |
+
+### Parameters:
+| Name                 | Data Type  | Required/Optional | Description                         |
+|----------------------|------------|-------------------|-------------------------------------|
+| email                 | string     | required          | The user's email                     |
 
 ### Responses:
 ```200``` - Successful redemption
@@ -380,14 +416,15 @@ Jump to: [userCreate](#usercreate), [getUserInfo](#getuserinfo), [userCheck](#us
 
 The base API url for event routes is just the base url: http://localhost:5000/api/v1
 
-Jump to: [eventList](#eventlist), 
+Jump to: [eventList](#eventlist), [eventDetail](#eventdetail), [eventCreate](#eventcreate), [eventUpdate](#eventupdate), [eventDelete](#eventdelete)
+
 ### eventList
 
 | **url** | **Method** | **Description**                                        | **Associated Method** |
 |---------|------------|--------------------------------------------------------|-----------------------|
 | /events | GET        | This method retrieves a list of all events in the database, sorted by start time | ```eventList```     |
 
-### Parameters:
+### Body:
 | Name                 | Data Type  | Required/Optional | Description                         |
 |----------------------|------------|-------------------|-------------------------------------|
 | type                 | string     | optional          | "past" or "upcoming"                     |
@@ -435,6 +472,212 @@ Note: year and month can be used with or without each other - for example, you c
 ]
 ```
 
+### eventDetail
 
+| **url** | **Method** | **Description**                                        | **Associated Method** |
+|---------|------------|--------------------------------------------------------|-----------------------|
+| /event/:id | GET        | This method retrieves the details of a specified event. | ```eventDetail```     |
+
+### Parameters:
+| Name                 | Data Type  | Required/Optional | Description                         |
+|----------------------|------------|-------------------|-------------------------------------|
+| id                 | string     | required          | Event id (must be valid MongoId)                     |
+
+### Responses:
+```200``` - Successful retrieval
+```json
+{
+    "_id": "65b2fff8ec351932f7ff9d3a",
+    "title": "test",
+    "start_time": "2024-01-25T08:00:00.000Z",
+    "end_time": "2024-01-26T08:00:00.000Z",
+    "location": "test",
+    "major_event": false,
+    "description": "test",
+    "calendar_link": "https://calendar.com/test",
+    "instagram_link": "https://instagram.com/test",
+    "__v": 0,
+    "code": "925318"
+}
+```
+```404``` - Error (event not found)
+```json
+{
+    "message": "Event not found"
+}
+```
+
+### eventCreate
+
+| **url** | **Method** | **Description**                                        | **Associated Method** |
+|---------|------------|--------------------------------------------------------|-----------------------|
+| /event/create | POST        | This method adds an event to the database | ```eventCreate```     |
+
+### Body:
+| Name                 | Data Type  | Required/Optional | Description                         |
+|----------------------|------------|-------------------|-------------------------------------|
+| title                 | string     | required          | Name of event                    |
+| start_time                  | date     | required          | Time that event will start  |
+| end_time | integer    | date          | required          | Time that event will end |
+| location | integer    | string          | required          | Location of event |
+| major_event | integer    | boolean          | required          | true if major, false if minor |
+| description | integer    | string          | optional          | Description of event |
+| calendar_link | integer    | string          | required          | Event calendar link |
+| instagram_link | integer    | string          | optional          | Event instagram link |
+
+### Example Body:
+```json
+{   
+    "title": "test",
+    "start_time": "2024-01-25T08:00:00.000Z",
+    "end_time": "2024-01-26T08:00:00.000Z",
+    "location": "123 test st",
+    "major_event": false,
+    "description": "test event",
+    "calendar_link": "https://calendar.com/test",
+    "instagram_link": "https://instagram.com/test",
+}
+```
+
+### Responses:
+```200``` - Successful creation
+```json
+{
+    "message": "Successful",
+    "id": "65b3022aec351932f7ff9d3f",
+    "code": "857819"
+}
+```
+```400``` - Errors exist in request body
+```json
+{
+    "message": "Failed",
+    "errors": [
+        {
+            "type": "field",
+            "value": "2024-",
+            "msg": "Start time must be a valid date.",
+            "path": "start_time",
+            "location": "body"
+        },
+        {
+            "type": "field",
+            "value": "https://calend",
+            "msg": "Calendar link must be a valid URL.",
+            "path": "calendar_link",
+            "location": "body"
+        }
+    ]
+}
+```
+
+### eventUpdate
+
+| **url** | **Method** | **Description**                                        | **Associated Method** |
+|---------|------------|--------------------------------------------------------|-----------------------|
+| /event/:id/update | PUT        | This method updates an event in the database | ```eventUpdate```     |
+
+### Parameters:
+| Name                 | Data Type  | Required/Optional | Description                         |
+|----------------------|------------|-------------------|-------------------------------------|
+| id                 | string     | required          | Event id (must be valid MongoId)                     |
+
+### Body:
+| Name                 | Data Type  | Required/Optional | Description                         |
+|----------------------|------------|-------------------|-------------------------------------|
+| title                 | string     | optional          | Name of event                    |
+| start_time                  | date     | optional          | Time that event will start  |
+| end_time | integer    | date          | optional          | Time that event will end |
+| location | integer    | string          | optional          | Location of event |
+| major_event | integer    | boolean          | optional          | true if major, false if minor |
+| description | integer    | string          | optional          | Description of event |
+| calendar_link | integer    | string          | optional          | Event calendar link |
+| instagram_link | integer    | string          | optional          | Event instagram link |
+
+### Example Body:
+```json
+{   
+    "title": "make event longer and more important",
+    "end_time": "2024-01-26T10:00:00.000Z",
+    "major_event": true,
+    "calendar_link": "https://calendar.com/test_updated"
+}
+```
+
+### Responses:
+```200``` - Successful update
+```json
+{
+    "message": "Successful"
+}
+```
+```400``` - Errors exist in request body
+```json
+{
+    "message": "Failed",
+    "errors": [
+        {
+            "type": "field",
+            "value": "2024-",
+            "msg": "Start time must be a valid date.",
+            "path": "start_time",
+            "location": "body"
+        },
+        {
+            "type": "field",
+            "value": "https://calend",
+            "msg": "Calendar link must be a valid URL.",
+            "path": "calendar_link",
+            "location": "body"
+        }
+    ]
+}
+```
+```404``` - Error (Event not found)
+```json
+{
+    "message": "Event not found"
+}
+```
+
+### eventDelete
+
+| **url** | **Method** | **Description**                                        | **Associated Method** |
+|---------|------------|--------------------------------------------------------|-----------------------|
+| /event/:id/delete | DELETE        | This method deletes an event in the database | ```eventDelete```     |
+
+### Parameters:
+| Name                 | Data Type  | Required/Optional | Description                         |
+|----------------------|------------|-------------------|-------------------------------------|
+| id                 | string     | required          | Event id (must be valid MongoId)                     |
+
+### Responses:
+```200``` - Successful update
+```json
+{
+    "message": "Successful"
+}
+```
+```400``` - Errors exist in request body
+```json
+{
+    "message": "Failed",
+    "errors": [
+        {
+            "type": "field",
+            "value": "65b3022aec351937ff9d3a",
+            "msg": "ID must be a valid ID.",
+            "path": "id",
+            "location": "params"
+        }
+    ]
+}
+```
+```404``` - Error (Event not found)
+```json
+{
+    "message": "Event not found"
+}
+```
 
 # subscription
