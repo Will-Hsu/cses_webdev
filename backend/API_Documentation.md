@@ -418,7 +418,7 @@ The base API url for event routes is just the base url: http://localhost:5000/ap
 
 Jump to: [eventList](#eventlist), [eventDetail](#eventdetail), [eventCreate](#eventcreate), [eventUpdate](#eventupdate), [eventDelete](#eventdelete)
 
-### eventList
+## eventList
 
 | **url** | **Method** | **Description**                                        | **Associated Method** |
 |---------|------------|--------------------------------------------------------|-----------------------|
@@ -472,7 +472,7 @@ Note: year and month can be used with or without each other - for example, you c
 ]
 ```
 
-### eventDetail
+## eventDetail
 
 | **url** | **Method** | **Description**                                        | **Associated Method** |
 |---------|------------|--------------------------------------------------------|-----------------------|
@@ -507,7 +507,7 @@ Note: year and month can be used with or without each other - for example, you c
 }
 ```
 
-### eventCreate
+## eventCreate
 
 | **url** | **Method** | **Description**                                        | **Associated Method** |
 |---------|------------|--------------------------------------------------------|-----------------------|
@@ -571,7 +571,7 @@ Note: year and month can be used with or without each other - for example, you c
 }
 ```
 
-### eventUpdate
+## eventUpdate
 
 | **url** | **Method** | **Description**                                        | **Associated Method** |
 |---------|------------|--------------------------------------------------------|-----------------------|
@@ -640,7 +640,7 @@ Note: year and month can be used with or without each other - for example, you c
 }
 ```
 
-### eventDelete
+## eventDelete
 
 | **url** | **Method** | **Description**                                        | **Associated Method** |
 |---------|------------|--------------------------------------------------------|-----------------------|
@@ -682,12 +682,11 @@ Note: year and month can be used with or without each other - for example, you c
 
 # subscription
 
-Jump to: [getEmails](#getEmails), [createEmail](#createEmail), [deleteEmail](#deleteEmail)
+Jump to: [getEmails](#getemails), [createEmail](#createemail), [deleteEmail](#deleteemail)
 
 The base API url for event routes is just the base url: http://localhost:5000/api/v1
 
-Jump to: [getEmails](#getEmails), 
-### getEmails
+## getEmails
 | **url** | **Method** | **Description**                                        | **Associated Method** |
 |---------|------------|--------------------------------------------------------|-----------------------|
 | / | GET        | This method retrieves the user's email to be subscribed.  | ```getEmails```     |
@@ -702,8 +701,7 @@ Jump to: [getEmails](#getEmails),
 ```404``` - Error 
 
 
-Jump to: [createEmail](#createEmail), 
-### createEmail
+## createEmail
 | **url** | **Method** | **Description**                                        | **Associated Method** |
 |---------|------------|--------------------------------------------------------|-----------------------|
 | /create | POST        | This method creates the user's email to be subscribed.  | ```createEmail```     |
@@ -722,8 +720,7 @@ Jump to: [createEmail](#createEmail),
 }
 ```
 
-Jump to: [deleteEmail](#deleteEmail), 
-### deleteEmail
+## deleteEmail
 
 | **url** | **Method** | **Description**                                        | **Associated Method** |
 |---------|------------|--------------------------------------------------------|-----------------------|
@@ -732,7 +729,7 @@ Jump to: [deleteEmail](#deleteEmail),
 ### Parameters:
 | Name                 | Data Type  | Required/Optional | Description                         |
 |----------------------|------------|-------------------|-------------------------------------|
-| email                 | string     | required          | emails to be deleted               |
+| email                 | string     | required          | email to be deleted               |
 
 ### Responses:
 ```200``` - Successful request  
