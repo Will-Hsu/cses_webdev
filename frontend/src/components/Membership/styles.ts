@@ -66,6 +66,29 @@ export const membershipStyles = (isMobile?: boolean) => ({
     fontSize: '20px',
   },
 
+  leaderBoardMobileRanking: {
+    fontWeight: 900,
+    marginRight: '15px',
+    fontFamily: 'Inter, sans-serif',
+    fontSize: '30px',
+    color: '#F3C969',
+    minWidth: '25px'
+  },
+
+  rankingMobilePoints: {
+    fontWeight: 700,
+    fontFamily: 'Inter, sans-serif',
+    fontSize: '18px',
+    width: 'fit-content',
+  },
+
+  rankingMobileName: {
+    fontWeight: 500,
+    fontFamily: 'Inter, sans-serif',
+    borderBottom: '3px solid #F3C969',
+    fontSize: '19px',
+  },
+
   rewardsBody: {
     position: 'relative',
     width: '80%',
