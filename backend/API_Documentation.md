@@ -681,3 +681,75 @@ Note: year and month can be used with or without each other - for example, you c
 ```
 
 # subscription
+
+Jump to: [getEmails](#getEmails), [createEmail](#createEmail), [deleteEmail](#deleteEmail)
+
+The base API url for event routes is just the base url: http://localhost:5000/api/v1
+
+Jump to: [getEmails](#getEmails), 
+### getEmails
+| **url** | **Method** | **Description**                                        | **Associated Method** |
+|---------|------------|--------------------------------------------------------|-----------------------|
+| / | GET        | This method retrieves the user's email to be subscribed.  | ```getEmails```     |
+
+### Responses:
+```200``` - Successful request  
+```json
+{
+    "email" : "johndoe@ucsd.edu"
+}
+```
+```404``` - Error 
+
+
+Jump to: [createEmail](#createEmail), 
+### createEmail
+| **url** | **Method** | **Description**                                        | **Associated Method** |
+|---------|------------|--------------------------------------------------------|-----------------------|
+| /create | POST        | This method creates the user's email to be subscribed.  | ```createEmail```     |
+
+### Responses:
+```201``` - Successful request  
+```json
+{
+    "email" : "johndoe@ucsd.edu"
+}
+```
+```409``` - Error 
+```json
+{
+    "message": "email can not be added"
+}
+```
+
+Jump to: [deleteEmail](#deleteEmail), 
+### deleteEmail
+
+| **url** | **Method** | **Description**                                        | **Associated Method** |
+|---------|------------|--------------------------------------------------------|-----------------------|
+| /:email/delete | DELETE        | This method deletes the user's email in the subscription database.  | ```deleteEmail```     |
+
+### Parameters:
+| Name                 | Data Type  | Required/Optional | Description                         |
+|----------------------|------------|-------------------|-------------------------------------|
+| email                 | string     | required          | emails to be deleted               |
+
+### Responses:
+```200``` - Successful request  
+```json
+{
+    "message" : "Subscriber deleted successfully"
+}
+```
+```404``` - Error 
+```json
+{
+    "message": "Subscriber not found"
+}
+```
+```500``` - Error 
+```json
+{
+    "message": "An error occurred while deleting the subscriber"
+}
+```
