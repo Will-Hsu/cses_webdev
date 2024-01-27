@@ -11,6 +11,10 @@ import {
   TableRow,
   Modal,
   TextField,
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl,
 } from '@mui/material';
 import dayjs, { Dayjs } from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -24,6 +28,7 @@ interface Event {
   start_time: string;
   end_time: string;
   location: string;
+  major_event: boolean;
   description: string;
   calendar_link: string;
   instagram_link: string;
@@ -63,6 +68,7 @@ const EventRow = ({
       <TableCell>{new Date(event.start_time).toLocaleString()}</TableCell>
       <TableCell>{new Date(event.end_time).toLocaleString()}</TableCell>
       <TableCell>{event.location}</TableCell>
+      <TableCell>{event.major_event.toString()}</TableCell>
       <TableCell>{event.description}</TableCell>
       <TableCell>{event.calendar_link}</TableCell>
       <TableCell>{event.instagram_link}</TableCell>
@@ -135,6 +141,21 @@ const EventRow = ({
               required
               helperText="Please enter the location of the event"
             />
+            <FormControl sx={{ minWidth: 100 }}>
+              <InputLabel id="major-event-label">Major Event</InputLabel>
+              <Select
+                labelId="major-event-label"
+                id="major_event"
+                value={editedEvent.major_event}
+                onChange={(e) => setEditedEvent({ ...editedEvent, major_event: e.target.value === "true" })}
+                label="Major event"
+                required
+                sx={{ maxHeight: 35 }}
+              > 
+                <MenuItem value={"true"}>True</MenuItem>
+                <MenuItem value={"false"}>False</MenuItem>
+              </Select>
+            </FormControl>
             <TextField
               label="Calendar Link"
               id="calendar_link"
@@ -202,6 +223,7 @@ const DashBoard = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
+  const [majorEvent, setMajorEvent] = useState(false);
   const [calendarLink, setCalendarLink] = useState<String>();
   const [instagramLink, setInstagramLink] = useState<String>();
   const [startTime, setStartTime] = useState<Dayjs | null>(null);
@@ -225,6 +247,7 @@ const DashBoard = () => {
       title,
       description,
       location,
+      major_event: majorEvent,
       calendar_link: calendarLink,
       instagram_link: instagramLink,
       start_time: startTime.toISOString(),
@@ -327,6 +350,21 @@ const DashBoard = () => {
               required
               helperText="Please enter the location of the event"
             />
+            <FormControl sx={{ minWidth: 100 }}>
+              <InputLabel id="major-event-label">Major Event</InputLabel>
+              <Select
+                labelId="major-event-label"
+                id="major_event"
+                value={majorEvent}
+                onChange={(e) => setMajorEvent(e.target.value === "true")}
+                label="Major event"
+                required
+                sx={{ maxHeight: 35 }}
+              > 
+                <MenuItem value={"true"}>True</MenuItem>
+                <MenuItem value={"false"}>False</MenuItem>
+              </Select>
+            </FormControl>
             <TextField
               label="Calendar Link"
               id="calendar_link"
@@ -366,6 +404,7 @@ const DashBoard = () => {
               <TableCell>Start Time</TableCell>
               <TableCell>End Time</TableCell>
               <TableCell>Location</TableCell>
+              <TableCell>Major Event</TableCell>
               <TableCell>Description</TableCell>
               <TableCell>Calendar Link</TableCell>
               <TableCell>Instagram Link</TableCell>

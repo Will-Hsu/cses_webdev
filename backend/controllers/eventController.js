@@ -114,7 +114,7 @@ export const eventCreate = [
     .withMessage('End time must be a valid date.')
     .toDate(),
   body('location').trim().isLength({ min: 1 }).withMessage('Location must be specified.'),
-  body('major_event').isBoolean().withMessage('Event must be major or minor.'),
+  body('major_event').isBoolean().withMessage('Major event must be a boolean.'),
   body('description').optional().trim(),
   body('calendar_link')
     .trim()
@@ -125,7 +125,6 @@ export const eventCreate = [
   body('instagram_link')
     .trim()
     .custom((url) => {
-      console.log(url);
       if (url === '' || validator.isURL(url, { require_protocol: true })) {
         return true;
       }
@@ -230,10 +229,7 @@ export const eventUpdate = [
     .toDate()
     .withMessage('End time must be a valid date.'),
   body('location').optional().trim(),
-  body('major_event')
-    .optional()
-    .isBoolean()
-    .withMessage('Major event must be either true or false.'),
+  body('major_event').optional().isBoolean().withMessage('Major event must be a boolean.'),
   body('description').optional().trim(),
   body('calendar_link')
     .optional()
