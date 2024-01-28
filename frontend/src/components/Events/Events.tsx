@@ -75,8 +75,6 @@ const Events = () => {
     // if desktop view set styles for desktop
     eventsContainerStyle.maxWidth = '100vw';
     eventsContainerStyle.overflowX = 'hidden';
-    eventsContainerStyle.alignItems = 'center';
-    eventsContainerStyle.justifyContent = 'center';
     eventsContainerStyle.flexWrap = 'wrap' as 'wrap';
   }
 
@@ -347,8 +345,9 @@ const Events = () => {
                 fontWeight: '700',
                 display: 'flex',
                 flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'center'
+                marginLeft: isDesktop ? '39px' : '',
+                alignItems: isDesktop ? '' : 'center',
+                justifyContent: isDesktop ? '' : 'center'
               }}
             >
               Page {pageNumberUpcoming} of {totalPagesUpcoming}
@@ -429,7 +428,6 @@ const Events = () => {
               justifyContent: 'flex-start',
               marginLeft: '30px',
               marginTop: '-25px',
-              marginBottom: '2.6%'
             }}
           >
             <Button size="medium" text="2023" infocus={is2023Clicked} onClick={handle2023}></Button>
@@ -463,8 +461,9 @@ const Events = () => {
                 fontWeight: '700',
                 display: 'flex',
                 flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'center'
+                marginLeft: isDesktop ? '39px' : '',
+                alignItems: isDesktop ? '': 'center',
+                justifyContent: isDesktop ? '' : 'center'
               }}
             >
               Page {pageNumberPast} of {totalPagesPast}
