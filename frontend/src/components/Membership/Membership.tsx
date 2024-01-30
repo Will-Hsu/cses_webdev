@@ -219,7 +219,7 @@ const Membership = () => {
         {/* Add Events Attended + Leaderboard UI for the membership page @Brian & Eddie & Yashil --
         consider creating a separate component for this as well */}
         {isLoggedIn && userData && <EventsAttended eventsAttended={eventsAttended} />}
-        {isLoggedIn && !isMobile && userData && rankings.length >= 3 && userData && (
+        {isLoggedIn && userData && rankings.length >= 3 && userData && (
           <LeaderBoard rankings={rankings} myPoint={userData.points} />
         )}
       </div>
