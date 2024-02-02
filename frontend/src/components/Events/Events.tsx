@@ -37,8 +37,10 @@ const Events = () => {
 
   const [upcomingEvents, setUpcomingEvents] = useState<EventData[]>([]);
   const [pastEvents, setPastEvents] = useState<EventData[]>([]);
-  const [selectedYear] = useState<number | null>(null);
+  const [selectedYear, setSelectedYear] = useState<number | null>(null);
   const [selectedMonth] = useState<number | null>(null);
+  const [pastEventYears, setPastEventYears] = useState(new Set<number>());
+
 
   const [displayedFutureEvents, setDisplayedFutureEvents] = useState(upcomingEvents);
   const [displayedPastEvents, setDisplayedPastEvents] = useState(pastEvents);
@@ -75,8 +77,6 @@ const Events = () => {
     // if desktop view set styles for desktop
     eventsContainerStyle.maxWidth = '100vw';
     eventsContainerStyle.overflowX = 'hidden';
-    eventsContainerStyle.alignItems = 'center';
-    eventsContainerStyle.justifyContent = 'center';
     eventsContainerStyle.flexWrap = 'wrap' as 'wrap';
   }
 
@@ -123,6 +123,11 @@ const Events = () => {
         const data = await response.json();
         setTotalPagesPast(Math.ceil(data.length / 6));
         setPastEvents(data);
+
+        // Extract years from past events
+        const years = new Set<number>(data.map((event: EventData) => new Date(event.end_time).getFullYear()));
+        setPastEventYears(years);
+
         paginate(data, 1, totalPagesPast, 'past');
       } catch (error) {
         console.error('Error fetching past events:', error);
@@ -182,20 +187,38 @@ const Events = () => {
     }
   };
 
-  const handle2023 = () => {
-    if (is2023Clicked) {
+  // const handle2023 = () => {
+  //   if (is2023Clicked) {
+  //     setDisplayedPastEvents(pastEvents);
+  //     setIs2023Clicked(false);
+  //     paginate(pastEvents, 1, totalPagesPast, 'past');
+  //   } else {
+  //     const year2023Events = pastEvents.filter((event) => {
+  //       const endDate = new Date(event.end_time);
+  //       return endDate.getFullYear() === 2023;
+  //     });
+
+  //     setDisplayedPastEvents(year2023Events);
+  //     setIs2023Clicked(true);
+  //     paginate(pastEvents, 1, totalPagesPast, 'past');
+  //   }
+  // };
+
+  // handle year in general
+  const handleYearClick = (year: number) => {
+    if (selectedYear === year) {
       setDisplayedPastEvents(pastEvents);
-      setIs2023Clicked(false);
+      setSelectedYear(null);
       paginate(pastEvents, 1, totalPagesPast, 'past');
     } else {
-      const year2023Events = pastEvents.filter((event) => {
+      const filteredEvents = pastEvents.filter((event) => {
         const endDate = new Date(event.end_time);
-        return endDate.getFullYear() === 2023;
+        return endDate.getFullYear() === year;
       });
 
-      setDisplayedPastEvents(year2023Events);
-      setIs2023Clicked(true);
-      paginate(pastEvents, 1, totalPagesPast, 'past');
+      setDisplayedPastEvents(filteredEvents);
+      setSelectedYear(year);
+      paginate(filteredEvents, 1, totalPagesPast, 'past');
     }
   };
 
@@ -347,8 +370,9 @@ const Events = () => {
                 fontWeight: '700',
                 display: 'flex',
                 flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'center'
+                marginLeft: isDesktop ? '39px' : '',
+                alignItems: isDesktop ? '' : 'center',
+                justifyContent: isDesktop ? '' : 'center'
               }}
             >
               Page {pageNumberUpcoming} of {totalPagesUpcoming}
@@ -429,10 +453,20 @@ const Events = () => {
               justifyContent: 'flex-start',
               marginLeft: '30px',
               marginTop: '-25px',
-              marginBottom: '2.6%'
             }}
           >
-            <Button size="medium" text="2023" infocus={is2023Clicked} onClick={handle2023}></Button>
+            {/* <Button size="medium" text="2023" infocus={is2023Clicked} onClick={handle2023}></Button> */}
+            
+            {/*Buttons that handle general year */}
+            {Array.from(pastEventYears).sort().map(year => (
+              <Button
+                key={year}
+                size="medium"
+                text={year.toString()}
+                infocus={selectedYear === year}
+                onClick={() => handleYearClick(year)}
+              />
+            ))}
           </div>
         )}
         <div style={{ ...eventsContainerStyle, marginTop: '20px' }}>
@@ -463,8 +497,9 @@ const Events = () => {
                 fontWeight: '700',
                 display: 'flex',
                 flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'center'
+                marginLeft: isDesktop ? '39px' : '',
+                alignItems: isDesktop ? '': 'center',
+                justifyContent: isDesktop ? '' : 'center'
               }}
             >
               Page {pageNumberPast} of {totalPagesPast}
