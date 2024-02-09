@@ -105,6 +105,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
     setNameProfanityError(false);
     setMajorEmptyError(false);
     setGradYearEmptyError(false);
+    setProfilePictureError(null);
 
     let hasErrors = false;
 
