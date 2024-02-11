@@ -54,7 +54,7 @@ const About = () => {
                   src={about1}
                   alt="img"
                   style={{
-                    maxWidth: '130%',
+                    maxWidth: '110%',
                     height: 'auto',
                     borderRadius: '10px',
                     boxShadow: '10px 10px white',
