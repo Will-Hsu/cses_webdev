@@ -134,6 +134,7 @@ const MeetTheTeam = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const isMiddleScreen = useMediaQuery(theme.breakpoints.between('sm', 'md'));
   const isSmallScreen = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
+  const verySmallScreen = useMediaQuery('(max-width:350px')
 
   const membersPerPage = 6;
   const remainingSpots = membersPerPage - (currentCategory.members.length % membersPerPage);
@@ -183,7 +184,7 @@ const MeetTheTeam = () => {
           MEET THE TEAM!
         </Box>
       </Grid>
-      <Grid container sx={{ marginTop: '5%', display: 'flex', justifyContent: 'center' }}>
+      <Grid container sx={{ marginTop: '5%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <ToggleButtonGroup value={currentCategory.name} exclusive aria-label="Category Selection">
           {categories.map((category) => (
             <ToggleButton
@@ -197,6 +198,7 @@ const MeetTheTeam = () => {
                   backgroundColor: 'grey',
                   color: 'white',
                 },
+                fontSize: 'clamp(10px, 2vw, 15px)',
               }}
               onClick={() => {
                 handleCategoryChange(category);
@@ -298,8 +300,8 @@ const MeetTheTeam = () => {
                 >
                   <div
                     style={{
-                      width: '175px',
-                      height: '175px',
+                      width: verySmallScreen ? '120px': '140px',
+                      height: verySmallScreen ? '120px': '140px',
                       overflow: 'hidden',
                       display: 'flex',
                       justifyContent: 'center',
@@ -323,7 +325,7 @@ const MeetTheTeam = () => {
                       textAlign: 'center',
                       fontFamily: 'Inter',
                       fontWeight: '700',
-                      fontSize: '18px',
+                      fontSize: '16px',
                     }}
                   >
                     {member.name}
@@ -334,7 +336,7 @@ const MeetTheTeam = () => {
                       textAlign: 'center',
                       fontFamily: 'Inter',
                       fontWeight: '500',
-                      fontSize: '14px',
+                      fontSize: '12px',
                       marginTop: '-2%',
                     }}
                   >
