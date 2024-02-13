@@ -48,6 +48,9 @@ const Events = () => {
   const [isThisMonthClicked, setIsThisMonthClicked] = useState(false);
   const [is2023Clicked, setIs2023Clicked] = useState(false);
   const [isYearClicked, setIsYearClicked] = useState(false);
+  // add state to keep track of the total pages based on the filtered events
+  const [filteredTotalPagesPast, setFilteredTotalPagesPast] = useState(totalPagesPast);
+
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -57,15 +60,21 @@ const Events = () => {
     totalPages: number,
     type: string,
   ) => {
+    let filteredEvents = events;
+    if (type === 'past' && selectedYear !== null) {
+      // If a year filter is applied, use the filtered past events
+      filteredEvents = pastEvents.filter(event => new Date(event.end_time).getFullYear() === selectedYear);
+    }
+
     if (type === 'upcoming') {
       setPageNumberUpcoming(pageNumber);
       setDisplayedFutureEvents(
-        events.slice((pageNumber - 1) * eventsPerPage, pageNumber * eventsPerPage),
+        filteredEvents.slice((pageNumber - 1) * eventsPerPage, pageNumber * eventsPerPage),
       );
     } else {
       setPageNumberPast(pageNumber);
       setDisplayedPastEvents(
-        events.slice((pageNumber - 1) * eventsPerPage, pageNumber * eventsPerPage),
+        filteredEvents.slice((pageNumber - 1) * eventsPerPage, pageNumber * eventsPerPage),
       );
     }
   };
@@ -188,41 +197,36 @@ const Events = () => {
     }
   };
 
-  // const handle2023 = () => {
-  //   if (is2023Clicked) {
-  //     setDisplayedPastEvents(pastEvents);
-  //     setIs2023Clicked(false);
-  //     paginate(pastEvents, 1, totalPagesPast, 'past');
-  //   } else {
-  //     const year2023Events = pastEvents.filter((event) => {
-  //       const endDate = new Date(event.end_time);
-  //       return endDate.getFullYear() === 2023;
-  //     });
-
-  //     setDisplayedPastEvents(year2023Events);
-  //     setIs2023Clicked(true);
-  //     paginate(pastEvents, 1, totalPagesPast, 'past');
-  //   }
-  // };
-
-  // handle year in general
   const handleYearClick = (year: number) => {
     if (selectedYear === year) {
-      setDisplayedPastEvents(pastEvents);
-      setSelectedYear(null);
-      paginate(pastEvents, 1, totalPagesPast, 'past');
+      setSelectedYear(null); 
     } else {
-      const filteredEvents = pastEvents.filter((event) => {
-        const endDate = new Date(event.end_time);
-        return endDate.getFullYear() === year;
-      });
-
-      setDisplayedPastEvents(filteredEvents);
-      setSelectedYear(year);
-      paginate(filteredEvents, 1, totalPagesPast, 'past');
+      setSelectedYear(year); 
     }
   };
-
+  
+  useEffect(() => {
+    // Filter events based on selected year
+    const filterEventsByYear = (year: number, events: EventData[]) => {
+      return events.filter((event) => {
+        const eventYear = new Date(event.end_time).getFullYear();
+        return eventYear === year;
+      });
+    };
+  
+    if (selectedYear !== null) {
+      const filteredPastEvents = filterEventsByYear(selectedYear, pastEvents);
+      setDisplayedPastEvents(filteredPastEvents);
+      setFilteredTotalPagesPast(Math.ceil(filteredPastEvents.length / eventsPerPage));
+      paginate(filteredPastEvents, 1, totalPagesPast, 'past');
+    } else {
+      setDisplayedPastEvents(pastEvents);
+      setFilteredTotalPagesPast(Math.ceil(pastEvents.length / eventsPerPage));
+      paginate(pastEvents, 1, totalPagesPast, 'past');
+    }
+  }, [selectedYear, pastEvents]); 
+  
+  
   // Render EventBoxes using map
   const renderEventBoxes = (events: EventData[]) => {
     return events.map((eventData) => {
@@ -325,6 +329,7 @@ const Events = () => {
               justifyContent: 'flex-start',
               marginLeft: '38px',
               marginTop: '-25px',
+              marginBottom: '3%'
             }}
           >
             <Button
@@ -454,6 +459,7 @@ const Events = () => {
               justifyContent: 'flex-start',
               marginLeft: '30px',
               marginTop: '-25px',
+              marginBottom: '3%'
             }}
           >
             {/* <Button size="medium" text="2023" infocus={is2023Clicked} onClick={handle2023}></Button> */}
@@ -503,11 +509,11 @@ const Events = () => {
                 justifyContent: isDesktop ? '' : 'center'
               }}
             >
-              Page {pageNumberPast} of {totalPagesPast}
+              Page {pageNumberPast} of {filteredTotalPagesPast}
             </p>
           </div>
         )}
-        {totalPagesPast > 1 && (
+        {filteredTotalPagesPast > 1 && (
           <div
             style={{
               display: 'flex',
