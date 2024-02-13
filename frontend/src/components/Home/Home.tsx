@@ -10,6 +10,7 @@ import SlideShow from './SlideShow/SlideShow';
 import axios from 'axios';
 import useMediaQuery from '../../hooks/useMediaQuery';
 import MobileEventBox from '../Event/MobileEvent';
+import CountUp from 'react-countup';
 
 interface EventData {
   calendar_link: string;
@@ -136,7 +137,7 @@ const Home = () => {
             <Grid item xs={11} sm={2.5} md={1.8} lg={1.8}>
               <Box sx={{ ...styles.statisticContainer }}>
                 <Box sx={styles.statisticWrapper}>
-                  <Box sx={styles.statisticTitle}>{totalUsers}+</Box>
+                  <Box sx={styles.statisticTitle}><CountUp delay={0} end={totalUsers} duration={10} enableScrollSpy/>+</Box>
                   <Box sx={styles.statisticSubtitle}>Members & counting.</Box>
                 </Box>
               </Box>
@@ -144,7 +145,7 @@ const Home = () => {
             <Grid item xs={11} sm={2.5} md={1.8} lg={1.8}>
               <Box sx={styles.statisticContainer}>
                 <Box sx={styles.statisticWrapper}>
-                  <Box sx={styles.statisticTitle}>{totalEvents}+</Box>
+                  <Box sx={styles.statisticTitle}><CountUp delay={0} end={totalEvents} duration={6} enableScrollSpy/>+</Box>
                   <Box sx={styles.statisticSubtitle}>Events & counting.</Box>
                 </Box>
               </Box>

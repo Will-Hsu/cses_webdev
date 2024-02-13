@@ -36,6 +36,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
   const availableGradYears = useContext(GradYearsContext);
   const [selectedMajor, setSelectedMajor] = useState<string | null>(null);
   const [selectedGradYear, setSelectedGradYear] = useState<string | null>(null);
+  const [profilePicture, setProfilePicture] = useState<string | null>(null);
 
   const [showError, setShowError] = useState(false);
   const [nameEmptyError, setNameEmptyError] = useState(false);
@@ -43,12 +44,14 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
   const [nameProfanityError, setNameProfanityError] = useState(false);
   const [majorEmptyError, setMajorEmptyError] = useState(false);
   const [gradYearEmptyError, setGradYearEmptyError] = useState(false);
+  const [profilePictureError, setProfilePictureError] = useState<String | null>(null);
 
   const [formData, setFormData] = useState({
     name: name,
     email: email,
     major: '',
     expectedGraduateYear: 0,
+    profilePicture: profilePicture,
   });
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,6 +70,32 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
     setFormData({ ...formData, expectedGraduateYear: numValue });
   };
 
+  const onProfilePictureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+
+    if (file) {
+      if (!file.type.startsWith('image/')) {
+        setProfilePictureError('Please select a valid image file.');
+        return;
+      }
+
+      const maxSize = 8 * 1024 * 1024; // 8 MB
+      if (file.size > maxSize) {
+        setProfilePictureError('File size exceeds the limit of 8 MB.');
+        return; 
+      }
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64String = reader.result as string;
+        setProfilePicture(base64String);
+        setFormData({ ...formData, profilePicture: base64String });
+        setProfilePictureError(null);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -76,6 +105,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
     setNameProfanityError(false);
     setMajorEmptyError(false);
     setGradYearEmptyError(false);
+    setProfilePictureError(null);
 
     let hasErrors = false;
 
@@ -233,6 +263,26 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
             )}
           </>
         )}
+      </FormControl>
+      
+      <FormControl
+        fullWidth
+        variant="standard"
+        sx={styles.inputField}
+      >
+        <InputLabel
+          htmlFor="profile-picture"
+          shrink
+        >
+          Upload a Profile Picture (Optional)
+        </InputLabel>
+        <Input
+          id="profile-picture"
+          name="profilePicture"
+          type="file"
+          onChange={onProfilePictureChange}
+        />
+        {profilePictureError && <p style={{ color: 'red' }}>{profilePictureError}</p>}
       </FormControl>
 
       <Box sx={{ textAlign: 'center' }}>
