@@ -47,6 +47,7 @@ const Events = () => {
   const [isThisWeekClicked, setIsThisWeekClicked] = useState(false);
   const [isThisMonthClicked, setIsThisMonthClicked] = useState(false);
   const [is2023Clicked, setIs2023Clicked] = useState(false);
+  const [isYearClicked, setIsYearClicked] = useState(false);
 
   const [isLoading, setIsLoading] = useState(true);
 
