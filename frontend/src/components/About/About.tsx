@@ -81,9 +81,9 @@ const About = () => {
                   </h1>
 
                   <p style={{ color: 'white', fontSize: 'clamp(15px, 3vw, 20px)' }}>
-                    CSES is the Computer Science and Engineering Society at UCSD that focuses on the
-                    professional development of CSE students and students interested in computing
-                    through various programs and career development events.
+                    CSES was the first CSE organization at UCSD starting over twenty years ago, and
+                    we have innovated over the years to stay relevant in serving the CSE community.
+                    We are open to all majors and indivduals who are interested in computing!
                   </p>
                 </Box>
               </Grid>
@@ -119,10 +119,10 @@ const About = () => {
               >
                 <h1>Our History</h1>
                 <p style={{ color: 'white', fontSize: 'clamp(15px, 3vw, 20px)' }}>
-                  CSES was the first CSE organization at UCSD starting nearly twenty years ago, and
-                  we have innovated over the years to stay relevant in serving the CSE community. We
-                  aim to continue innovating and improving, so we could continue to serve this
-                  community for another twenty years.
+                  Our mission statement is to help our members get professional opportunities while
+                  fostering a network of individuals. We do this through quarterly career fairs,
+                  mentorship programs for career development, and project opportunities to gain
+                  experience.
                 </p>
               </Box>
             </Grid>
@@ -174,7 +174,7 @@ const About = () => {
             </Grid>
           )}
 
-          <Grid container sx={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
+          {/* <Grid container sx={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
             <Grid
               item
               sm={4}
@@ -229,7 +229,7 @@ const About = () => {
                 </div>
               </Box>
             </Grid>
-          </Grid>
+          </Grid> */}
           {!isSmallScreen && (
             <Grid container sx={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
               <Grid item sm={5} lg={5}>
@@ -238,8 +238,11 @@ const About = () => {
                 </Box>
                 <Box sx={{ color: 'white', textAlign: { lg: 'left', sm: 'left', xs: 'center' } }}>
                   <p style={{ color: 'white', fontSize: 'clamp(15px, 3vw, 20px)' }}>
-                    Check out amazing events we have planned as well as the opportunities we have
-                    for members.
+                    To become a general member, simply sign up with your UCSD email!
+                  </p>
+                  <p style={{ color: 'white', fontSize: 'clamp(15px, 3vw, 20px)' }}>
+                    Do you want to be a part of the internal team? Become a member and follow us on
+                    our socials to be notified of when board applications open on a rolling basis.
                   </p>
                   <Box
                     sx={{
