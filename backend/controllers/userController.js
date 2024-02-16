@@ -29,13 +29,14 @@ export const userCheck = [
 ];
 
 export const userCreate = asyncHandler(async (req, res) => {
-  const { name, email, major, expectedGraduateYear } = req.body;
+  const { name, email, major, expectedGraduateYear, profilePicture } = req.body;
   const parsedGraduationYear = parseInt(expectedGraduateYear);
   const newUser = new User({
     name,
     email,
     major,
     expectedGraduationYear: parsedGraduationYear,
+    profilePicture,
   });
 
   try {
@@ -79,7 +80,7 @@ export const userUpdate = [
     .isArray()
     .custom(isValidEventId)
     .withMessage('Contains invalid event ID.'),
-  body('profilePicture').optional().isURL().withMessage('Invalid URL.'),
+  body('profilePicture').optional(),
 
   asyncHandler(async (req, res) => {
     const error = validationResult(req);

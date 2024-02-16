@@ -24,6 +24,7 @@ interface EditFormProps {
   email: string;
   major: string;
   expectedGraduationYear: number;
+  profilePicture: string,
 }
 
 // Set up profanity checker
@@ -40,17 +41,21 @@ const EditForm = () => {
   const availableGradYears = useContext(GradYearsContext);
   const [selectedMajor, setSelectedMajor] = useState<string | null>(null);
   const [selectedGradYear, setSelectedGradYear] = useState<string | null>(null);
+
   const [showError, setShowError] = useState(false);
   const [nameEmptyError, setNameEmptyError] = useState(false);
   const [nameLengthError, setNameLengthError] = useState(false);
   const [nameProfanityError, setNameProfanityError] = useState(false);
   const [majorEmptyError, setMajorEmptyError] = useState(false);
   const [gradYearEmptyError, setGradYearEmptyError] = useState(false);
+  const [profilePictureError, setProfilePictureError] = useState<string | null>(null);
+
   const [formData, setFormData] = useState<EditFormProps>({
     name: '',
     email: '',
     major: '',
     expectedGraduationYear: 0,
+    profilePicture: '',
   });
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,6 +74,31 @@ const EditForm = () => {
     setFormData({ ...formData, expectedGraduationYear: numValue });
   };
 
+  const onProfilePictureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+
+    if (file) {
+      if (!file.type.startsWith('image/')) {
+        setProfilePictureError('Please select a valid image file.');
+        return;
+      }
+
+      const maxSize = 8 * 1024 * 1024; // 8 MB
+      if (file.size > maxSize) {
+        setProfilePictureError('File size exceeds the limit of 8 MB.');
+        return; 
+      }
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64String = reader.result as string;
+        setFormData({ ...formData, profilePicture: base64String });
+        setProfilePictureError(null);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -83,6 +113,7 @@ const EditForm = () => {
               email: response.data.email,
               major: response.data.major,
               expectedGraduationYear: response.data.expectedGraduationYear,
+              profilePicture: response.data.profilePicture,
             });
             setSelectedMajor(response.data.major);
             setSelectedGradYear(String(response.data.expectedGraduationYear));
@@ -109,6 +140,7 @@ const EditForm = () => {
     setNameProfanityError(false);
     setMajorEmptyError(false);
     setGradYearEmptyError(false);
+    setProfilePictureError(null);
 
     let hasErrors = false;
 
@@ -278,6 +310,26 @@ const EditForm = () => {
                   )}
                 </>
               )}
+            </FormControl>
+            
+            <FormControl
+              fullWidth
+              variant="standard"
+              sx={styles.inputField}
+            >
+              <InputLabel
+                htmlFor="profile-picture"
+                shrink
+              >
+                Change your Profile Picture (Optional)
+              </InputLabel>
+              <Input
+                id="profile-picture"
+                name="profilePicture"
+                type="file"
+                onChange={onProfilePictureChange}
+              />
+              {profilePictureError && <p style={{ color: 'red' }}>{profilePictureError}</p>}
             </FormControl>
 
             <Box sx={{ textAlign: 'center' }}>

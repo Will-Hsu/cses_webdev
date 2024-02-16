@@ -14,7 +14,7 @@ export const loginStyles = () => ({
 
   signupForm: {
     width: 350,
-    height: 400,
+    height: 450,
     padding: '20px',
     marginY: '150px',
     borderRadius: '10px',
@@ -23,7 +23,7 @@ export const loginStyles = () => ({
 
   editForm: {
     width: 350,
-    height: 400,
+    height: 450,
     padding: '20px',
     marginY: '150px',
     marginX: 'auto',

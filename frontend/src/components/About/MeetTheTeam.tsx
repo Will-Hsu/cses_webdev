@@ -12,10 +12,10 @@ import Anuj from '../../images/meettheteamImages/anuj.jpg';
 import Sithu from '../../images/meettheteamImages/sithu.jpg';
 import Rahul from '../../images/meettheteamImages/rahul.jpg';
 import Ishika from '../../images/meettheteamImages/ishika.jpg';
-import Yashil from '../../images/meettheteamImages/yashil.jpg';
+import Yashil from '../../images/meettheteamImages/yashil vora.jpg';
 import Cassandra from '../../images/meettheteamImages/cassandra.png';
 import Sidhant from '../../images/meettheteamImages/sidhant.jpg';
-import Rachel from '../../images/meettheteamImages/rachel.jpg';
+import Rachel from '../../images/meettheteamImages/rachel paner.jpeg';
 import Christopher from '../../images/meettheteamImages/christopher.png';
 import Gaurav from '../../images/meettheteamImages/gaurav.jpg';
 import Ketan from '../../images/meettheteamImages/ketan.jpg';
@@ -35,6 +35,22 @@ import Manan from '../../images/meettheteamImages/manan.jpg';
 import Jheel from '../../images/meettheteamImages/jheel.jpg';
 import Sonia from '../../images/meettheteamImages/sonia.jpg';
 import Nishant from '../../images/meettheteamImages/nishant.jpg';
+import Jake from '../../images/meettheteamImages/jake villaseno.jpeg';
+import Jose from '../../images/meettheteamImages/josue martinez.jpeg';
+import Angelina from '../../images/meettheteamImages/angelina yee.jpg';
+import Shambhavi from '../../images/meettheteamImages/shambhavi mittal.jpg';
+import Ganesh from '../../images/meettheteamImages/ganesh kumarappan.jpg';
+import Sardor from '../../images/meettheteamImages/sardor sobirov.jpg';
+import Shreya from '../../images/meettheteamImages/shreya gupta.jpg';
+import Ryan from '../../images/meettheteamImages/ryan rickey.jpg';
+//.import Saleha from '../../images/meettheteamImages/DSC_1386 - Saleha Ahmedi.jpg';
+import Viren from '../../images/meettheteamImages/viren nathan.jpg';
+import Kevin from '../../images/meettheteamImages/kevin kim.jpeg';
+import Sofia from '../../images/meettheteamImages/sofia nguyen.png';
+import Maanasa from '../../images/meettheteamImages/maanasa prasad.png';
+import Ali from '../../images/meettheteamImages/ali alani.png';
+import Michael from '../../images/meettheteamImages/michael he.png';
+import Cole from '../../images/meettheteamImages/cole.png'
 
 const categories = [
   {
@@ -44,54 +60,69 @@ const categories = [
       { name: 'Nabil Khoury', title: 'Co-President', photo: Nabil },
       { name: 'Samvrit Srinath', title: 'Co-President', photo: Samvrit },
       { name: 'Rahul Mistry', title: 'VP Internal', photo: Rahul },
-      { name: 'Sithu Soe', title: 'VP External', photo: Sithu },
+      { name: 'Michael He', title: 'VP External', photo: Michael },
+      { name: 'Sithu Soe', title: 'VP Operations', photo: Sithu },
       { name: 'Anuj Jain', title: 'VP Finance', photo: Anuj },
+      { name: 'Maanasa Prasad', title: 'Event Director', photo: Maanasa },
+      { name: 'Ishika Agrawal', title: 'Events Director', photo: Ishika },
+      { name: 'Christopher Tams', title: 'Marketing Director', photo: Christopher },
+      { name: 'Shambhavi Mittal', title: 'PR Director', photo: Shambhavi },
       { name: 'Cassandra Ponce Maldonado', title: 'Events Chair', photo: Cassandra },
-      { name: 'Sidhant Rohatgi', title: 'Events Chair', photo: Sidhant },
-      { name: 'Christopher Tams', title: 'Marketing Chair', photo: Christopher },
-      { name: 'Nishant Begani', title: 'Marketing Chair', photo: Nishant },
-      { name: 'Ishika Agrawal', title: 'DEI Chair', photo: Ishika },
+      { name: 'Angelina Yee', title: 'Marketing Chair', photo: Angelina },
       { name: 'Rachel Paner', title: 'Design Chair', photo: Rachel },
-      { name: 'Yashil Vora', title: 'Projects Chair', photo: Yashil },
+      { name: 'Jose Martinez', title: 'Outreach Chair - Alumni', photo: Jose },
+      { name: 'Ketan Jain', title: 'Outreach Chair - Student Organizations', photo: Ketan },
+      { name: 'Cole Carter', title: 'Outreach Chair - Sponsors/Corporates', photo: Cole }
     ],
   },
   {
     id: 2,
-    name: 'CSES Officers',
-    members: [
-      { name: 'Gaurav Nair', title: 'Events Officer', photo: Gaurav },
-      { name: 'Arnav Kamdar', title: 'Events Officer', photo: shape },
-      { name: 'Anay Mulay', title: 'Events Officer', photo: Anay },
-      { name: 'Mishka Jethwani', title: 'Events Officer', photo: Mishka },
-      { name: 'Ketan Jain', title: 'Marketing Officer', photo: Ketan },
-      { name: 'Song Hee Seo (Gloria)', title: 'Marketing Officer', photo: Gloria },
-      { name: 'Vinuthna Maradana', title: 'Marketing Officer', photo: Vinuthna },
-    ],
-  },
-  {
-    id: 3,
     name: 'CSES Dev',
     members: [
       { name: 'Will Hsu', title: 'Engineering Manager', photo: Will },
       { name: 'Delvin Bajoua', title: 'Product Manager', photo: Delvin },
+      { name: 'Shreya Gupta', title: 'Development Team Chair', photo: Shreya },
+      { name: 'Hogun Kim', title: 'Project Coordinator', photo: shape },
       { name: 'Sadrac Santacruz Ibarra', title: 'Frontend Developer', photo: Sadrac },
       { name: 'Kaung Min Khant', title: 'Frontend Developer', photo: Kaung },
       { name: 'Sithu Soe', title: 'Frontend Developer', photo: Sithu },
       { name: 'Joyce Lu', title: 'Frontend Developer', photo: Joyce },
       { name: 'Eddie Ho', title: 'Backend Developer', photo: Eddie },
-      { name: 'Yashil Vora', title: 'Backend Developer', photo: Yashil },
       { name: 'Brian Liu', title: 'Backend Developer', photo: Brian },
-      { name: 'Hogun Kim', title: 'Project Coordinator', photo: shape },
+      { name: 'Ganesh Kumarappan', title: 'Backend Developer', photo: Ganesh },
+      { name: 'Sardor Sobirov', title: 'Frontend Developer', photo: Sardor },
     ],
   },
   {
-    id: 4,
+    id: 3,
     name: 'CSES WebDev',
     members: [
       { name: 'Shruti Bhamidipati', title: 'President', photo: Shruti },
       { name: 'Manan Patel', title: 'VP Finance', photo: Manan },
       { name: 'Jheel Gandhi', title: 'VP Design', photo: Jheel },
       { name: 'Sonia Fereidooni', title: 'VP Operations', photo: Sonia },
+      { name: 'Ryan Rickey', title: 'Software Team Lead', photo: Ryan },
+      { name: 'Jake Villaseno', title: 'UI/UX Designer', photo: Jake },
+      //{ name: 'Saleha Ahmedi', title: 'WebDev', photo: Saleha},
+    ],
+  },
+  {
+    id: 4,
+    name: 'CSES Open Source',
+    members: [
+      { name: 'Yashil Vora', title: 'President', photo: Yashil },
+      { name: 'Mishka Jethwani', title: 'VP Operations', photo: Mishka },
+      { name: 'Kevin Kim', title: 'Lead Software Engineer', photo: Kevin },
+      { name: 'Sofia Nguyen', title: 'UI/UX Designer', photo: Sofia },
+      { name: 'Song Hee Seo (Gloria)', title: 'Marketing Chair', photo: Gloria },
+    ],
+  },
+  {
+    id: 5,
+    name: 'CSES Innovate',
+    members: [
+      { name: 'Viren Nathan', title: 'President', photo: Viren },
+      { name: 'Ali Alani', title: 'CTO', photo: Ali },
     ],
   },
 ];
@@ -102,6 +133,8 @@ const MeetTheTeam = () => {
   const [currentCategory, setCurrentCategory] = useState(categories[0]);
   const [currentPage, setCurrentPage] = useState(1);
   const isMiddleScreen = useMediaQuery(theme.breakpoints.between('sm', 'md'));
+  const isSmallScreen = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
+  const verySmallScreen = useMediaQuery('(max-width:350px')
 
   const membersPerPage = 6;
   const remainingSpots = membersPerPage - (currentCategory.members.length % membersPerPage);
@@ -151,7 +184,7 @@ const MeetTheTeam = () => {
           MEET THE TEAM!
         </Box>
       </Grid>
-      <Grid container sx={{ marginTop: '5%', display: 'flex', justifyContent: 'center' }}>
+      <Grid container sx={{ marginTop: '5%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <ToggleButtonGroup value={currentCategory.name} exclusive aria-label="Category Selection">
           {categories.map((category) => (
             <ToggleButton
@@ -165,6 +198,7 @@ const MeetTheTeam = () => {
                   backgroundColor: 'grey',
                   color: 'white',
                 },
+                fontSize: 'clamp(10px, 2vw, 15px)',
               }}
               onClick={() => {
                 handleCategoryChange(category);
@@ -250,8 +284,76 @@ const MeetTheTeam = () => {
             ))}
           </Grid>
         )}
+        {isSmallScreen && (
+          <Grid container item xs={12} justifyContent="center">
+            {currentCategory.members
+              .slice((currentPage - 1) * 6, currentPage * 6)
+              .map((member, index) => (
+                <Grid
+                  item
+                  xs={6}
+                  sm={3.5}
+                  md={0}
+                  lg={3.1}
+                  key={index}
+                  sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+                >
+                  <div
+                    style={{
+                      width: verySmallScreen ? '120px': '140px',
+                      height: verySmallScreen ? '120px': '140px',
+                      overflow: 'hidden',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <img
+                      src={member.photo}
+                      key={member.photo}
+                      alt="img"
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                      }}
+                    />
+                  </div>
+                  <h3
+                    style={{
+                      color: 'white',
+                      textAlign: 'center',
+                      fontFamily: 'Inter',
+                      fontWeight: '700',
+                      fontSize: '16px',
+                    }}
+                  >
+                    {member.name}
+                  </h3>
+                  <h5
+                    style={{
+                      color: 'white',
+                      textAlign: 'center',
+                      fontFamily: 'Inter',
+                      fontWeight: '500',
+                      fontSize: '12px',
+                      marginTop: '-2%',
+                    }}
+                  >
+                    {member.title}
+                  </h5>
+                </Grid>
+              ))}
 
-        {!isMiddleScreen && (
+            {emptyMembers.map((member, index) => (
+              <Grid item xs={12} sm={3.5} md={3.1} key={index + currentCategory.members.length}>
+                {/* Empty placeholder, no visible content */}
+              </Grid>
+            ))}
+          </Grid>
+        )}
+
+        {!isMiddleScreen && !isSmallScreen && (
           <Grid container item xs={9} justifyContent="center">
             {currentCategory.members
               .slice((currentPage - 1) * 6, currentPage * 6)
