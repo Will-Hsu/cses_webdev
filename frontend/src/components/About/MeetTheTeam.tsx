@@ -10,7 +10,7 @@ import Nabil from '../../images/meettheteamImages/nabil.jpg';
 import Samvrit from '../../images/meettheteamImages/samvrit.jpeg';
 import Anuj from '../../images/meettheteamImages/anuj.jpg';
 import Sithu from '../../images/meettheteamImages/sithu.jpg';
-import Rahul from '../../images/meettheteamImages/rahul.jpg';
+import Rahul from '../../images/meettheteamImages/rahul.png';
 import Ishika from '../../images/meettheteamImages/ishika.jpg';
 import Yashil from '../../images/meettheteamImages/yashil vora.jpg';
 import Cassandra from '../../images/meettheteamImages/cassandra.png';
