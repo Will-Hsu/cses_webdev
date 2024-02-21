@@ -4,6 +4,8 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import connectDB from './database/connect-db.js';
 // import testDatabaseConnection from './database/db-test.js';
+import connectMailchimp from './mailchimp/connect-mailchimp.js';
+import { addContacts, getContacts } from './mailchimp/contacts.js';
 
 // import routes
 import eventRoutes from './routes/event.js';
@@ -25,6 +27,11 @@ const baseApi = '/api/v1';
 
 // Connect to MongoDB
 connectDB();
+
+// Connect to Mailchimp
+connectMailchimp();
+// addContacts();
+// getContacts();
 
 app.get('/', function (_, res) {
   res.send('CSES Web Dev Backend');

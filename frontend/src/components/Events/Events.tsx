@@ -37,14 +37,20 @@ const Events = () => {
 
   const [upcomingEvents, setUpcomingEvents] = useState<EventData[]>([]);
   const [pastEvents, setPastEvents] = useState<EventData[]>([]);
-  const [selectedYear] = useState<number | null>(null);
+  const [selectedYear, setSelectedYear] = useState<number | null>(null);
   const [selectedMonth] = useState<number | null>(null);
+  const [pastEventYears, setPastEventYears] = useState(new Set<number>());
+
 
   const [displayedFutureEvents, setDisplayedFutureEvents] = useState(upcomingEvents);
   const [displayedPastEvents, setDisplayedPastEvents] = useState(pastEvents);
   const [isThisWeekClicked, setIsThisWeekClicked] = useState(false);
   const [isThisMonthClicked, setIsThisMonthClicked] = useState(false);
   const [is2023Clicked, setIs2023Clicked] = useState(false);
+  const [isYearClicked, setIsYearClicked] = useState(false);
+  // add state to keep track of the total pages based on the filtered events
+  const [filteredTotalPagesPast, setFilteredTotalPagesPast] = useState(totalPagesPast);
+
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -54,15 +60,21 @@ const Events = () => {
     totalPages: number,
     type: string,
   ) => {
+    let filteredEvents = events;
+    if (type === 'past' && selectedYear !== null) {
+      // If a year filter is applied, use the filtered past events
+      filteredEvents = pastEvents.filter(event => new Date(event.end_time).getFullYear() === selectedYear);
+    }
+
     if (type === 'upcoming') {
       setPageNumberUpcoming(pageNumber);
       setDisplayedFutureEvents(
-        events.slice((pageNumber - 1) * eventsPerPage, pageNumber * eventsPerPage),
+        filteredEvents.slice((pageNumber - 1) * eventsPerPage, pageNumber * eventsPerPage),
       );
     } else {
       setPageNumberPast(pageNumber);
       setDisplayedPastEvents(
-        events.slice((pageNumber - 1) * eventsPerPage, pageNumber * eventsPerPage),
+        filteredEvents.slice((pageNumber - 1) * eventsPerPage, pageNumber * eventsPerPage),
       );
     }
   };
@@ -82,15 +94,17 @@ const Events = () => {
     // if ipad view set styles for ipad
     eventsContainerStyle.maxWidth = '100vw';
     eventsContainerStyle.overflowX = 'hidden';
+    eventsContainerStyle.alignItems = 'center';
+    eventsContainerStyle.justifyContent = 'center';
     eventsContainerStyle.flexWrap = 'wrap' as 'wrap';
   }
 
   if (isMobile) {
     // if mobile view set styles for mobile
-    eventsContainerStyle.maxWidth = '100vw';
+    eventsContainerStyle.maxWidth = '250px';
     eventsContainerStyle.width = '100%'; // Set width to 100% of the parent container
     eventsContainerStyle.padding = '0'; // Remove any padding
-    eventsContainerStyle.margin = '0'; // Remove any margin
+    eventsContainerStyle.margin = 'auto'; // Remove any margin
     eventsContainerStyle.overflowX = 'auto';
     eventsContainerStyle.overflowY = 'auto';
     eventsContainerStyle.flexWrap = 'wrap' as 'wrap';
@@ -119,6 +133,11 @@ const Events = () => {
         const data = await response.json();
         setTotalPagesPast(Math.ceil(data.length / 6));
         setPastEvents(data);
+
+        // Extract years from past events
+        const years = new Set<number>(data.map((event: EventData) => new Date(event.end_time).getFullYear()));
+        setPastEventYears(years);
+
         paginate(data, 1, totalPagesPast, 'past');
       } catch (error) {
         console.error('Error fetching past events:', error);
@@ -178,23 +197,36 @@ const Events = () => {
     }
   };
 
-  const handle2023 = () => {
-    if (is2023Clicked) {
-      setDisplayedPastEvents(pastEvents);
-      setIs2023Clicked(false);
-      paginate(pastEvents, 1, totalPagesPast, 'past');
+  const handleYearClick = (year: number) => {
+    if (selectedYear === year) {
+      setSelectedYear(null); 
     } else {
-      const year2023Events = pastEvents.filter((event) => {
-        const endDate = new Date(event.end_time);
-        return endDate.getFullYear() === 2023;
-      });
-
-      setDisplayedPastEvents(year2023Events);
-      setIs2023Clicked(true);
-      paginate(pastEvents, 1, totalPagesPast, 'past');
+      setSelectedYear(year); 
     }
   };
-
+  
+  useEffect(() => {
+    // Filter events based on selected year
+    const filterEventsByYear = (year: number, events: EventData[]) => {
+      return events.filter((event) => {
+        const eventYear = new Date(event.end_time).getFullYear();
+        return eventYear === year;
+      });
+    };
+  
+    if (selectedYear !== null) {
+      const filteredPastEvents = filterEventsByYear(selectedYear, pastEvents);
+      setDisplayedPastEvents(filteredPastEvents);
+      setFilteredTotalPagesPast(Math.ceil(filteredPastEvents.length / eventsPerPage));
+      paginate(filteredPastEvents, 1, totalPagesPast, 'past');
+    } else {
+      setDisplayedPastEvents(pastEvents);
+      setFilteredTotalPagesPast(Math.ceil(pastEvents.length / eventsPerPage));
+      paginate(pastEvents, 1, totalPagesPast, 'past');
+    }
+  }, [selectedYear, pastEvents]); 
+  
+  
   // Render EventBoxes using map
   const renderEventBoxes = (events: EventData[]) => {
     return events.map((eventData) => {
@@ -297,6 +329,7 @@ const Events = () => {
               justifyContent: 'flex-start',
               marginLeft: '38px',
               marginTop: '-25px',
+              marginBottom: '3%'
             }}
           >
             <Button
@@ -343,7 +376,9 @@ const Events = () => {
                 fontWeight: '700',
                 display: 'flex',
                 flexDirection: 'row',
-                marginLeft: '39px',
+                marginLeft: isDesktop ? '39px' : '',
+                alignItems: isDesktop ? '' : 'center',
+                justifyContent: isDesktop ? '' : 'center'
               }}
             >
               Page {pageNumberUpcoming} of {totalPagesUpcoming}
@@ -424,9 +459,21 @@ const Events = () => {
               justifyContent: 'flex-start',
               marginLeft: '30px',
               marginTop: '-25px',
+              marginBottom: '3%'
             }}
           >
-            <Button size="medium" text="2023" infocus={is2023Clicked} onClick={handle2023}></Button>
+            {/* <Button size="medium" text="2023" infocus={is2023Clicked} onClick={handle2023}></Button> */}
+            
+            {/*Buttons that handle general year */}
+            {Array.from(pastEventYears).sort().map(year => (
+              <Button
+                key={year}
+                size="medium"
+                text={year.toString()}
+                infocus={selectedYear === year}
+                onClick={() => handleYearClick(year)}
+              />
+            ))}
           </div>
         )}
         <div style={{ ...eventsContainerStyle, marginTop: '20px' }}>
@@ -457,14 +504,16 @@ const Events = () => {
                 fontWeight: '700',
                 display: 'flex',
                 flexDirection: 'row',
-                marginLeft: '39px',
+                marginLeft: isDesktop ? '39px' : '',
+                alignItems: isDesktop ? '': 'center',
+                justifyContent: isDesktop ? '' : 'center'
               }}
             >
-              Page {pageNumberPast} of {totalPagesPast}
+              Page {pageNumberPast} of {filteredTotalPagesPast}
             </p>
           </div>
         )}
-        {totalPagesPast > 1 && (
+        {filteredTotalPagesPast > 1 && (
           <div
             style={{
               display: 'flex',

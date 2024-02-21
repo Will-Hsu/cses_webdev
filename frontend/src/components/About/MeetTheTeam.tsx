@@ -10,7 +10,7 @@ import Nabil from '../../images/meettheteamImages/nabil.jpg';
 import Samvrit from '../../images/meettheteamImages/samvrit.jpeg';
 import Anuj from '../../images/meettheteamImages/anuj.jpg';
 import Sithu from '../../images/meettheteamImages/sithu.jpg';
-import Rahul from '../../images/meettheteamImages/rahul.jpg';
+import Rahul from '../../images/meettheteamImages/rahul.png';
 import Ishika from '../../images/meettheteamImages/ishika.jpg';
 import Yashil from '../../images/meettheteamImages/yashil vora.jpg';
 import Cassandra from '../../images/meettheteamImages/cassandra.png';
@@ -49,7 +49,8 @@ import Kevin from '../../images/meettheteamImages/kevin kim.jpeg';
 import Sofia from '../../images/meettheteamImages/sofia nguyen.png';
 import Maanasa from '../../images/meettheteamImages/maanasa prasad.png';
 import Ali from '../../images/meettheteamImages/ali alani.png';
-import Michael from '../../images/meettheteamImages/michael he.png'
+import Michael from '../../images/meettheteamImages/michael he.png';
+import Cole from '../../images/meettheteamImages/cole.png'
 
 const categories = [
   {
@@ -59,36 +60,23 @@ const categories = [
       { name: 'Nabil Khoury', title: 'Co-President', photo: Nabil },
       { name: 'Samvrit Srinath', title: 'Co-President', photo: Samvrit },
       { name: 'Rahul Mistry', title: 'VP Internal', photo: Rahul },
-      { name: 'Michael He', title: 'VP External', photo: Michael},
+      { name: 'Michael He', title: 'VP External', photo: Michael },
       { name: 'Sithu Soe', title: 'VP Operations', photo: Sithu },
       { name: 'Anuj Jain', title: 'VP Finance', photo: Anuj },
-      { name: 'Cassandra Ponce Maldonado', title: 'Events Chair', photo: Cassandra },
-      { name: 'Sidhant Rohatgi', title: 'Events Chair', photo: Sidhant },
-      { name: 'Maanasa Prasad', title: 'Event Director - External', photo: Maanasa },
-      { name: 'Christopher Tams', title: 'Marketing Chair', photo: Christopher },
-      { name: 'Nishant Begani', title: 'Marketing Chair', photo: Nishant },
-      { name: 'Angelina Yee', title: 'Marketing Chair', photo: Angelina },
+      { name: 'Maanasa Prasad', title: 'Event Director', photo: Maanasa },
+      { name: 'Ishika Agrawal', title: 'Events Director', photo: Ishika },
+      { name: 'Christopher Tams', title: 'Marketing Director', photo: Christopher },
       { name: 'Shambhavi Mittal', title: 'PR Director', photo: Shambhavi },
-      { name: 'Ishika Agrawal', title: 'DEI Chair', photo: Ishika },
+      { name: 'Cassandra Ponce Maldonado', title: 'Events Chair', photo: Cassandra },
+      { name: 'Angelina Yee', title: 'Marketing Chair', photo: Angelina },
       { name: 'Rachel Paner', title: 'Design Chair', photo: Rachel },
       { name: 'Jose Martinez', title: 'Outreach Chair - Alumni', photo: Jose },
+      { name: 'Ketan Jain', title: 'Outreach Chair - Student Organizations', photo: Ketan },
+      { name: 'Cole Carter', title: 'Outreach Chair - Sponsors/Corporates', photo: Cole }
     ],
   },
   {
     id: 2,
-    name: 'CSES Officers',
-    members: [
-      { name: 'Gaurav Nair', title: 'Events Officer', photo: Gaurav },
-      { name: 'Arnav Kamdar', title: 'Events Officer', photo: shape },
-      { name: 'Anay Mulay', title: 'Events Officer', photo: Anay },
-      { name: 'Mishka Jethwani', title: 'Events Officer', photo: Mishka },
-      { name: 'Ketan Jain', title: 'Marketing Officer', photo: Ketan },
-      { name: 'Song Hee Seo (Gloria)', title: 'Marketing Officer', photo: Gloria },
-      { name: 'Vinuthna Maradana', title: 'Marketing Officer', photo: Vinuthna },
-    ],
-  },
-  {
-    id: 3,
     name: 'CSES Dev',
     members: [
       { name: 'Will Hsu', title: 'Engineering Manager', photo: Will },
@@ -100,45 +88,43 @@ const categories = [
       { name: 'Sithu Soe', title: 'Frontend Developer', photo: Sithu },
       { name: 'Joyce Lu', title: 'Frontend Developer', photo: Joyce },
       { name: 'Eddie Ho', title: 'Backend Developer', photo: Eddie },
-      { name: 'Yashil Vora', title: 'Backend Developer', photo: Yashil },
       { name: 'Brian Liu', title: 'Backend Developer', photo: Brian },
-      { name: 'Ganesh Kumarappan', title: 'Backend Developer', photo: Ganesh},
+      { name: 'Ganesh Kumarappan', title: 'Backend Developer', photo: Ganesh },
       { name: 'Sardor Sobirov', title: 'Frontend Developer', photo: Sardor },
-
-    ], 
+    ],
   },
   {
-    id: 4,
+    id: 3,
     name: 'CSES WebDev',
     members: [
       { name: 'Shruti Bhamidipati', title: 'President', photo: Shruti },
-      { name: 'Ryan Rickey', title: 'Software Team Lead', photo: Ryan },
       { name: 'Manan Patel', title: 'VP Finance', photo: Manan },
       { name: 'Jheel Gandhi', title: 'VP Design', photo: Jheel },
       { name: 'Sonia Fereidooni', title: 'VP Operations', photo: Sonia },
-      { name: 'Jake Villaseno', title: 'UI/UX Designer', photo: Jake},
+      { name: 'Ryan Rickey', title: 'Software Team Lead', photo: Ryan },
+      { name: 'Jake Villaseno', title: 'UI/UX Designer', photo: Jake },
       //{ name: 'Saleha Ahmedi', title: 'WebDev', photo: Saleha},
     ],
   },
   {
-    id: 5,
+    id: 4,
     name: 'CSES Open Source',
     members: [
-      { name: 'Yashil Vora', title: 'President', photo: Yashil},
-      { name: 'Kevin Kim', title: 'Lead Software Engineer', photo: Kevin},
-      { name: 'Sofia Nguyen', title: 'UI/UX Designer', photo: Sofia},
-    ], 
+      { name: 'Yashil Vora', title: 'President', photo: Yashil },
+      { name: 'Mishka Jethwani', title: 'VP Operations', photo: Mishka },
+      { name: 'Kevin Kim', title: 'Lead Software Engineer', photo: Kevin },
+      { name: 'Sofia Nguyen', title: 'UI/UX Designer', photo: Sofia },
+      { name: 'Song Hee Seo (Gloria)', title: 'Marketing Chair', photo: Gloria },
+    ],
   },
   {
-    id: 6,
+    id: 5,
     name: 'CSES Innovate',
     members: [
       { name: 'Viren Nathan', title: 'President', photo: Viren },
-      { name: 'Ali Alani', title: 'CTO', photo: Ali},
-      
-    ], 
+      { name: 'Ali Alani', title: 'CTO', photo: Ali },
+    ],
   },
-  
 ];
 
 const MeetTheTeam = () => {
@@ -147,6 +133,8 @@ const MeetTheTeam = () => {
   const [currentCategory, setCurrentCategory] = useState(categories[0]);
   const [currentPage, setCurrentPage] = useState(1);
   const isMiddleScreen = useMediaQuery(theme.breakpoints.between('sm', 'md'));
+  const isSmallScreen = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
+  const verySmallScreen = useMediaQuery('(max-width:350px')
 
   const membersPerPage = 6;
   const remainingSpots = membersPerPage - (currentCategory.members.length % membersPerPage);
@@ -196,7 +184,7 @@ const MeetTheTeam = () => {
           MEET THE TEAM!
         </Box>
       </Grid>
-      <Grid container sx={{ marginTop: '5%', display: 'flex', justifyContent: 'center' }}>
+      <Grid container sx={{ marginTop: '5%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <ToggleButtonGroup value={currentCategory.name} exclusive aria-label="Category Selection">
           {categories.map((category) => (
             <ToggleButton
@@ -210,6 +198,7 @@ const MeetTheTeam = () => {
                   backgroundColor: 'grey',
                   color: 'white',
                 },
+                fontSize: 'clamp(10px, 2vw, 15px)',
               }}
               onClick={() => {
                 handleCategoryChange(category);
@@ -295,8 +284,76 @@ const MeetTheTeam = () => {
             ))}
           </Grid>
         )}
+        {isSmallScreen && (
+          <Grid container item xs={12} justifyContent="center">
+            {currentCategory.members
+              .slice((currentPage - 1) * 6, currentPage * 6)
+              .map((member, index) => (
+                <Grid
+                  item
+                  xs={6}
+                  sm={3.5}
+                  md={0}
+                  lg={3.1}
+                  key={index}
+                  sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+                >
+                  <div
+                    style={{
+                      width: verySmallScreen ? '120px': '140px',
+                      height: verySmallScreen ? '120px': '140px',
+                      overflow: 'hidden',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <img
+                      src={member.photo}
+                      key={member.photo}
+                      alt="img"
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                      }}
+                    />
+                  </div>
+                  <h3
+                    style={{
+                      color: 'white',
+                      textAlign: 'center',
+                      fontFamily: 'Inter',
+                      fontWeight: '700',
+                      fontSize: '16px',
+                    }}
+                  >
+                    {member.name}
+                  </h3>
+                  <h5
+                    style={{
+                      color: 'white',
+                      textAlign: 'center',
+                      fontFamily: 'Inter',
+                      fontWeight: '500',
+                      fontSize: '12px',
+                      marginTop: '-2%',
+                    }}
+                  >
+                    {member.title}
+                  </h5>
+                </Grid>
+              ))}
 
-        {!isMiddleScreen && (
+            {emptyMembers.map((member, index) => (
+              <Grid item xs={12} sm={3.5} md={3.1} key={index + currentCategory.members.length}>
+                {/* Empty placeholder, no visible content */}
+              </Grid>
+            ))}
+          </Grid>
+        )}
+
+        {!isMiddleScreen && !isSmallScreen && (
           <Grid container item xs={9} justifyContent="center">
             {currentCategory.members
               .slice((currentPage - 1) * 6, currentPage * 6)

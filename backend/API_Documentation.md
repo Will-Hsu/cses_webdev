@@ -1,7 +1,7 @@
 # API Endpoint Documentation
 Last updated 1/24/24
 
-Our APIs are currently split into three groups: [user](#user), [event](#event), and [subscription](subscription).
+Our APIs are currently split into three groups: [user](#user), [event](#event), and [subscription](#subscription).
 
 Each group consists of routes found in the /routes folder and each route's associated method can be found in the /controllers folder.
 
