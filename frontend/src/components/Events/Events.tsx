@@ -64,6 +64,7 @@ const Events = () => {
     if (type === 'past' && selectedYear !== null) {
       // If a year filter is applied, use the filtered past events
       filteredEvents = pastEvents.filter(event => new Date(event.end_time).getFullYear() === selectedYear);
+
     }
 
     if (type === 'upcoming') {

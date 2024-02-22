@@ -344,23 +344,25 @@ const EventBox = ({
                   />
                 </a>
               )}
-              <a
-                href={calendar_link}
-                style={{ marginLeft: instagram_link === '' ? '40px' : '10px' }}
-              >
-                <img
-                  src={calendarIcon}
-                  alt="Calendar Icon"
-                  style={{
-                    width: '30px',
-                    height: '30px',
-                    filter: 'grayscale(100%)',
-                    transition: 'filter 0.3s',
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget.style.filter = 'grayscale(0%)')}
-                  onMouseLeave={(e) => (e.currentTarget.style.filter = 'grayscale(100%)')}
-                />
-              </a>
+              
+              {calendar_link !== '' && (
+                <a 
+                  href={calendar_link}
+                  style={{ marginLeft: instagram_link === '' ? '40px' : '10px' }}>
+                  <img
+                    src={calendarIcon}
+                    alt="Calendar Icon"
+                    style={{
+                      width: '30px',
+                      height: '30px',
+                      filter: 'grayscale(100%)',
+                      transition: 'filter 0.3s',
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.filter = 'grayscale(0%)')}
+                    onMouseLeave={(e) => (e.currentTarget.style.filter = 'grayscale(100%)')}
+                  />
+                </a>
+              )}
             </div>
           </div>
         </div>
