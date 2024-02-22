@@ -66,7 +66,7 @@ const Ranking = ({ rank, name, points, profilePicture: profilePic }: RankingProp
           />
         </div>
 
-        <Typography sx={styles.rankingPoints} gutterBottom>
+        <Typography sx={{...styles.rankingPoints, borderBottom: `3px solid ${rankColor}`}} gutterBottom>
           {points} POINTS
         </Typography>
 
@@ -105,7 +105,7 @@ const Ranking = ({ rank, name, points, profilePicture: profilePic }: RankingProp
           />
         </div>
 
-        <Typography sx={{...styles.rankingPoints, fontSize: 'clamp(15px, 2vw, 22px)'}} gutterBottom>
+        <Typography sx={{...styles.rankingPoints, borderBottom: `3px solid ${rankColor}`, fontSize: 'clamp(15px, 2vw, 22px)'}} gutterBottom>
           {points} POINTS
         </Typography>
 
@@ -225,7 +225,7 @@ const LeaderBoard = ({ rankings, myPoint }: { rankings: Array<RankingProps>; myP
             gap: '35px',
           }}
         >
-          <div style={styles.leaderBoardBadge}>
+          <div style={styles.leaderBoardiPadBadge}>
             <Ranking
               rank={1}
               name={rankings[0].name}
@@ -233,7 +233,7 @@ const LeaderBoard = ({ rankings, myPoint }: { rankings: Array<RankingProps>; myP
               profilePicture={rankings[0].profilePicture}
             ></Ranking>
           </div>
-          <div style={styles.leaderBoardBadge}>
+          <div style={styles.leaderBoardiPadBadge}>
             <Ranking
               rank={2}
               name={rankings[1].name}
@@ -241,7 +241,7 @@ const LeaderBoard = ({ rankings, myPoint }: { rankings: Array<RankingProps>; myP
               profilePicture={rankings[1].profilePicture}
             ></Ranking>
           </div>
-          <div style={styles.leaderBoardBadge}>
+          <div style={styles.leaderBoardiPadBadge}>
             <Ranking
               rank={3}
               name={rankings[2].name}
@@ -249,7 +249,7 @@ const LeaderBoard = ({ rankings, myPoint }: { rankings: Array<RankingProps>; myP
               profilePicture={rankings[2].profilePicture}
             ></Ranking>
           </div>
-          <div style={styles.leaderBoardBadge}>
+          <div style={styles.leaderBoardiPadBadge}>
             <Ranking
               rank={3}
               name={rankings[2].name}
@@ -277,7 +277,6 @@ const LeaderBoard = ({ rankings, myPoint }: { rankings: Array<RankingProps>; myP
             points={rankings[0].points}
             profilePicture={rankings[0].profilePicture}
           />
-
           <Ranking
             rank={2}
             name={rankings[1].name}
