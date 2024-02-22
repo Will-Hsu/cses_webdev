@@ -1,15 +1,26 @@
-import React from 'react';
-import { Container, Typography, Grid, Link, Box, useTheme } from '@mui/material';
+import React, { useState } from 'react';
+import { Button, Container, Typography, Grid, Link, ListItem, ListItemText, Box, useTheme } from '@mui/material';
 import bg from '../../images/shape2.svg';
 import sponsor from '../../images/cseLogo.gif';
 import sponsor2 from '../../images/AS.png';
 import { opportunitiesStyles } from './styles';
 import members from '../../images/opportunitiespage/members.png';
 import sponsors from '../../images/opportunitiespage/sponsors.png';
+import { useNavigate } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 
 const Opportunities = () => {
   const theme = useTheme();
   const styles = opportunitiesStyles(theme);
+  const navigate = useNavigate();
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const clickItem = (link: string) => {
+    setIsDrawerOpen(false);
+    navigate(link);
+  };
+
+
   return (
     <div style={{ position: 'relative', overflow: 'hidden' }}>
       <Box>
@@ -32,16 +43,30 @@ const Opportunities = () => {
             </Typography>
             <Typography sx={styles.test}>
               <br />
-              Our LinkedIn network has opportunities for members from companies, alumni, and
-              professors in our network. This is an opportunity for only members. Join our{' '}
+              Our {' '}
               <Link href="https://discord.gg/vd9aFu4V" color="inherit">
-                discord
+                LinkedIn
+              </Link>{' '} network has opportunities for members from companies, alumni, and
+              professors in our network. Join our{' '}
+              <Link href="https://discord.gg/vd9aFu4V" color="inherit">
+                Discord
               </Link>{' '}
               for to learn about opportunities to get involved in the CSE Society and to stay
               updated on the events we will have! <br />
               <br />
-              To become a member, please press on the membership tab on this website and participate
-              in our events.
+              In the past, we have hosted successful career fairs with start-ups at UCSD, panels with alumni from Google and OpenAI, and hands-on workshops. We also have various leadership and project opportunities in all areas of tech, from web development entrepreneurship. <br />
+              <br />
+              Kickstart your career with CSES today!
+              <br />
+              <ListItem button key="member_login" sx={styles.listitem} onClick={() => clickItem('/')}>
+              <ListItemText
+                primary={
+                  <Typography align="center" sx={styles.button}>
+                    Become a Member
+                  </Typography>
+                }
+              />
+            </ListItem>
             </Typography>
           </Grid>
           <Grid item sx={{ width: '550px', marginTop: '8%' }}>
@@ -64,6 +89,16 @@ const Opportunities = () => {
                 cses@ucsd.edu
               </Link>
               .
+              <br />
+              <ListItem button key="opportunities" sx={styles.listitem} onClick={() => clickItem('/')}>
+              <ListItemText
+                primary={
+                  <Typography align="center" sx={styles.button}>
+                    See Opportunities -&gt;
+                  </Typography>
+                }
+              />
+            </ListItem>
             </Typography>
           </Grid>
         </Grid>

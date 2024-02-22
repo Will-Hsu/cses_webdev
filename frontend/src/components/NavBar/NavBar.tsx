@@ -35,8 +35,9 @@ const NavBar = () => {
     { text: 'About', link: '/about' },
     { text: 'Events', link: '/events' },
     { text: 'Opportunities', link: '/opportunities' },
-    { text: 'Membership', link: '/membership' },
+    
   ];
+  //{ text: 'Membership', link: '/membership' },
 
   const handleScroll = () => {
     const scrollTop = window.scrollY;

@@ -1,4 +1,17 @@
 export const opportunitiesStyles = (theme: any) => ({
+  button: {
+    fontSize: '20px',
+    color: 'white',
+    textTransform: 'none',
+    fontFamily: 'Inter, sans-serif',
+    fontWeight: 'medium',
+    margin: '10px',
+  },
+  listitem: {
+    '&:hover': {
+      background: 'rgba(255, 255, 255, 0.1)',
+    },
+  },
   bg: {
     transform: 'rotate(-140deg)',
     marginTop: '70%',
