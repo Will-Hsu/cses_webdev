@@ -1,17 +1,4 @@
 export const opportunitiesStyles = (theme: any) => ({
-  button: {
-    fontSize: '20px',
-    color: 'white',
-    textTransform: 'none',
-    fontFamily: 'Inter, sans-serif',
-    fontWeight: 'medium',
-    margin: '10px',
-  },
-  listitem: {
-    '&:hover': {
-      background: 'rgba(255, 255, 255, 0.1)',
-    },
-  },
   bg: {
     transform: 'rotate(-140deg)',
     marginTop: '70%',
@@ -43,7 +30,9 @@ export const opportunitiesStyles = (theme: any) => ({
   test: {
     fontFamily: 'Inter, sans-serif',
     color: 'white',
-    fontSize: 'clamp(15px, 3vw, 20px)',
+    fontSize: 'clamp(15px, 3vw, 16px)',
+    lineHeight: '19px',
+    textAlign: 'left'
   },
   subtitle: {
     fontWeight: 'bold',

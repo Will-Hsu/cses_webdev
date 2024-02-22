@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Button, Container, Typography, Grid, Link, ListItem, ListItemText, Box, useTheme } from '@mui/material';
+import { Container, Typography, Grid, Link, ListItem, ListItemText, Box, useTheme } from '@mui/material';
+// import Button from '../Button/Button';
+import MuiButton from '@mui/material/Button';
 import bg from '../../images/shape2.svg';
 import sponsor from '../../images/cseLogo.gif';
 import sponsor2 from '../../images/AS.png';
@@ -15,10 +17,10 @@ const Opportunities = () => {
   const navigate = useNavigate();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
-  const clickItem = (link: string) => {
-    setIsDrawerOpen(false);
-    navigate(link);
-  };
+  // const clickItem = (link: string) => {
+  //   setIsDrawerOpen(false);
+  //   navigate(link);
+  // };
 
 
   return (
@@ -37,14 +39,14 @@ const Opportunities = () => {
               style={{ width: '85%', height: 'auto', boxShadow: '12px 12px white' }}
             />
           </Grid>
-          <Grid item sx={{ width: '550px', marginTop: '3%' }}>
+          <Grid item sx={{ width: '439px', marginTop: '3%' }}>
             <Typography sx={styles.subtitle}>
               For <span style={{ fontStyle: 'italic' }}>members</span>.
             </Typography>
             <Typography sx={styles.test}>
               <br />
               Our {' '}
-              <Link href="https://discord.gg/vd9aFu4V" color="inherit">
+              <Link href="https://www.linkedin.com/in/csesucsd/" color="inherit">
                 LinkedIn
               </Link>{' '} network has opportunities for members from companies, alumni, and
               professors in our network. Join our{' '}
@@ -58,16 +60,23 @@ const Opportunities = () => {
               <br />
               Kickstart your career with CSES today!
               <br />
-              <ListItem button key="member_login" sx={styles.listitem} onClick={() => clickItem('/')}>
-              <ListItemText
-                primary={
-                  <Typography align="center" sx={styles.button}>
-                    Become a Member
-                  </Typography>
-                }
-              />
-            </ListItem>
             </Typography>
+            <Box
+                    sx={{
+                      marginLeft: '-2%',
+                      marginTop: '12%',
+                      display: 'flex',
+                      justifyContent: { xs: 'center', sm: 'left' },
+                      padding: '8px, 16px, 8px, 16px',
+                    }}
+                  >
+                    <MuiButton size="large" variant="outlined" sx={{fontSize: "21px", fontFamily:'Chakra Petch, sans-serif', fontWeight:"400", textTransform:"none", borderColor: 'white', color: 'white', padding:"auto", borderRadius: '10px', margin: '6px 8px','&:hover': {
+      borderColor: 'white',
+      backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    }}} onClick={() => navigate('/')}>
+                      Become a Member
+                    </MuiButton>
+            </Box>
           </Grid>
           <Grid item sx={{ width: '550px', marginTop: '8%' }}>
             <img
@@ -90,16 +99,24 @@ const Opportunities = () => {
               </Link>
               .
               <br />
-              <ListItem button key="opportunities" sx={styles.listitem} onClick={() => clickItem('/')}>
-              <ListItemText
-                primary={
-                  <Typography align="center" sx={styles.button}>
-                    See Opportunities -&gt;
-                  </Typography>
-                }
-              />
-            </ListItem>
+              
             </Typography>
+            <Box
+                    sx={{
+                      marginLeft: '-2%',
+                      marginTop: '12%',
+                      display: 'flex',
+                      justifyContent: { xs: 'center', sm: 'left' },
+                      padding: '8px, 16px, 8px, 16px',
+                    }}
+                  >
+                    <MuiButton size="large" variant="outlined" sx={{fontSize: "21px", fontFamily:'Chakra Petch, sans-serif', fontWeight:"400", textTransform:"none", borderColor: 'white', color: 'white', padding:"auto", borderRadius: '10px', margin: '6px 8px','&:hover': {
+      borderColor: 'white',
+      backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    }}} onClick={() => navigate('/membership')}>
+                      See Opportunities -&gt;
+                    </MuiButton>
+            </Box>
           </Grid>
         </Grid>
         <Typography align="center" sx={{ ...styles.subtitle, margin: '60px 0% 50px 0%' }}>
