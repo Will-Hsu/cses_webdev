@@ -4,6 +4,7 @@ import LinearProgress, { LinearProgressProps } from '@mui/material/LinearProgres
 
 interface MemberProfileProps {
   memberName: string;
+  memberMinor: string;
   memberMajor: string;
   memberPoints: number;
   memberPicture: string;
@@ -164,7 +165,7 @@ const MemberProfile = (userData: MemberProfileProps) => {
           <p
             style={{
               display: 'flex', // added
-              justifyContent: 'center', // added
+              justifyContent: 'left', // added
               fontSize: 'clamp(0.8rem, 2.5vw, 1rem)',
             }}
           >
@@ -176,14 +177,34 @@ const MemberProfile = (userData: MemberProfileProps) => {
           <p
             style={{
               display: 'flex', // added
-              justifyContent: 'center', // added
+              justifyContent: 'left', // added
               fontSize: 'clamp(0.8rem, 2.5vw, 1rem)',
             }}
           >
             Major: <span style={{ fontWeight: 'bold' }}>{userData.memberMajor}</span>{' '}
           </p>
+          <p
+            style={{
+              display: 'flex', // added
+              justifyContent: 'left', // added
+              fontSize: 'clamp(0.8rem, 2.5vw, 1rem)',
+            }}
+          >
+            Minor: <span style={{ fontWeight: 'bold' }}>{userData.memberMinor}</span>{' '}
+          </p>
         </div>
       </Grid>
+      <div>
+        <p
+          style={{
+            position: 'absolute',
+            fontSize: '13px',
+            marginLeft: '724px', 
+          }}
+        >
+          Get points, earn rewards, and advance to the next membership tier by attending our events!
+        </p>
+      </div>
     </div>
   );
 };

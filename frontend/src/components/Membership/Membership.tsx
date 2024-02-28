@@ -141,6 +141,7 @@ const Membership = () => {
         <MemberProfile
           memberName={userData.name}
           memberMajor={userData.major}
+          memberMinor={userData.minor}
           memberPoints={userData.points}
           memberPicture={userData.profilePicture}
           memberEventsCount={userData.eventsAttended.length}
