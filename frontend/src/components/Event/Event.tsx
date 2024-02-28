@@ -327,7 +327,7 @@ const EventBox = ({
               {location}
             </p>
 
-            <div style={{ display: 'flex', marginLeft: '280px', marginTop: '-35px' }}>
+            <div style={{ display: 'flex', marginLeft: '320px', marginTop: '-35px', marginBottom: '30px' }}>
               {instagram_link !== '' && (
                 <a href={instagram_link}>
                   <img
