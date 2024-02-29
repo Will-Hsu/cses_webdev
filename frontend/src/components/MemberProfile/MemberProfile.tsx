@@ -161,7 +161,6 @@ const MemberProfile = (userData: MemberProfileProps) => {
               </div>
             )}
           </Box>
-
           <p
             style={{
               display: 'flex', // added
@@ -181,7 +180,8 @@ const MemberProfile = (userData: MemberProfileProps) => {
               fontSize: 'clamp(0.8rem, 2.5vw, 1rem)',
             }}
           >
-            Major: <span style={{ fontWeight: 'bold' }}>{userData.memberMajor}</span>{' '}
+            Major:
+            <span style={{ fontWeight: 'bold', marginLeft: '8px' }}>{userData.memberMajor}</span>
           </p>
           <p
             style={{
@@ -190,22 +190,20 @@ const MemberProfile = (userData: MemberProfileProps) => {
               fontSize: 'clamp(0.8rem, 2.5vw, 1rem)',
             }}
           >
-            Minor: <span style={{ fontWeight: 'bold' }}>{userData.memberMinor}</span>{' '}
+            Minor: <span style={{ fontWeight: 'bold', marginLeft: '8px' }}> {userData.memberMinor}</span>{' '}
           </p>
+          <p style={{
+              display: 'flex', // added
+              justifyContent: 'left', // added
+              fontSize: '13px',
+              position: 'absolute',
+            }}>
+              Get points, earn rewards, and advance to the next membership tier by attending our events!
+            </p>
         </div>
+        
       </Grid>
-      <div>
-        <p
-          style={{
-            position: 'absolute',
-            fontSize: '13px',
-            marginLeft: '724px', 
-          }}
-        >
-          Get points, earn rewards, and advance to the next membership tier by attending our events!
-        </p>
-      </div>
-    </div>
+    </div> 
   );
 };
 
