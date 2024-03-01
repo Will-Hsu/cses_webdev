@@ -56,7 +56,7 @@ export const membershipStyles = (isMobile?: boolean) => ({
     fontWeight: 700,
     fontFamily: 'Inter, sans-serif',
     fontSize: '25px',
-    borderBottom: '3px solid #F3C969',
+    // borderBottom: '3px solid #F3C969',
     width: 'fit-content',
     color: '#000000'
   },
@@ -82,6 +82,20 @@ export const membershipStyles = (isMobile?: boolean) => ({
     width: '20%',
     // width: '230px',
     height: '400px',
+    borderRadius: '5%',
+  },
+
+  leaderBoardiPadBadge: {
+    backgroundColor: 'white',
+    width: '20%',
+    height: '350px',
+    borderRadius: '5%',
+  },
+
+  leaderBoardMobileBadge: {
+    backgroundColor: 'white',
+    width: '20%',
+    height: '350px',
     borderRadius: '5%',
   },
 
