@@ -20,7 +20,7 @@ import MemberProfile from '../MemberProfile/MemberProfile';
 import EventsDashboard from './EventsDashboard';
 import RewardsMenu from './RewardsMenu';
 import axios from 'axios';
-import { userInfoAPI, topMembersAPI, addEvent } from '../../api';
+import { userInfoAPI, topMembersAPI, addEvent, userRank } from '../../api';
 import { membershipStyles } from './styles';
 import { textAlign } from '@mui/system';
 
@@ -47,6 +47,7 @@ const Membership = () => {
   const [showConfetti, setShowConfetti] = useState(false);
   const { user, isLoggedIn, isAdmin } = useContext(AuthContext);
   const [userData, setUserData] = useState<User | null>(null);
+  const [currentUserRank, setCurrentUserRank] = useState<number | 0>(0);
   const [eventsAttended, setEventsAttended] = useState<Array<Event>>([]);
   const [rankings, setRankings] = useState<Array<Ranking>>([]);
   const navigate = useNavigate();
@@ -106,6 +107,7 @@ const Membership = () => {
             `${process.env.REACT_APP_BACKEND_URL}/api/v1/users/${user.email}`,
           );
           setUserData(response.data);
+          await userRank(user.email).then((data) => setCurrentUserRank(data));
           await topMembersAPI().then((data) => setRankings(data));
         } else if (!localStorage.getItem('token')) {
           navigate('/login');
@@ -220,7 +222,13 @@ const Membership = () => {
         consider creating a separate component for this as well */}
         {isLoggedIn && userData && <EventsAttended eventsAttended={eventsAttended} />}
         {isLoggedIn && userData && rankings.length >= 3 && userData && (
-          <LeaderBoard rankings={rankings} myPoint={userData.points} />
+          <LeaderBoard
+            rankings={rankings}
+            myPoint={userData.points}
+            myName={userData.name}
+            myProfilePicture={userData.profilePicture}
+            currentUserRank = {currentUserRank}
+          />
         )}
       </div>
     </div>

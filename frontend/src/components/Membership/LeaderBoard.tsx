@@ -16,6 +16,7 @@ const Ranking = ({ rank, name, points, profilePicture: profilePic }: RankingProp
   let width, height, rankColor;
   const isDesktop = useMediaQuery('(min-width: 1375px)');
   const isIpad = useMediaQuery('(min-width: 768px) and (max-width: 1375px)');
+  const smallTablet = useMediaQuery('(min-width: 768px) and (max-width: 1030px)');
   switch (rank) {
     case 1:
       width = '175px';
@@ -81,7 +82,11 @@ const Ranking = ({ rank, name, points, profilePicture: profilePic }: RankingProp
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <Typography
           variant="h5"
-          sx={{ ...styles.leaderBoardRanking, color: rankColor, fontSize: 'clamp(45px, 2vw, 60px)'}}
+          sx={{
+            ...styles.leaderBoardRanking,
+            color: rankColor,
+            fontSize: 'clamp(45px, 2vw, 60px)',
+          }}
           gutterBottom
         >
           {rank}
@@ -89,8 +94,8 @@ const Ranking = ({ rank, name, points, profilePicture: profilePic }: RankingProp
 
         <div
           style={{
-            width:'85%',
-            height:'auto',
+            width: smallTablet ? '120px' : '160px',
+            height: smallTablet ? '120px' : '160px',
             // borderRadius: '50%',
             // overflow: 'hidden',
             marginBottom: '8px',
@@ -99,17 +104,18 @@ const Ranking = ({ rank, name, points, profilePicture: profilePic }: RankingProp
           <img
             src={profile}
             alt="Profile"
-            width='100%'
-            height='100%'
-            style={{ objectFit: 'cover', borderRadius: '50%' }}
+            style={{ objectFit: 'cover', width: '100%', height: '100%', borderRadius: '50%' }}
           />
         </div>
 
-        <Typography sx={{...styles.rankingPoints, fontSize: 'clamp(15px, 2vw, 22px)'}} gutterBottom>
+        <Typography
+          sx={{ ...styles.rankingPoints, fontSize: 'clamp(15px, 2vw, 22px)' }}
+          gutterBottom
+        >
           {points} POINTS
         </Typography>
 
-        <Typography sx={{...styles.rankingName, fontSize: 'clamp(15px, 2vw, 20px)'}} gutterBottom>
+        <Typography sx={{ ...styles.rankingName, fontSize: 'clamp(15px, 2vw, 20px)' }} gutterBottom>
           {name}
         </Typography>
       </div>
@@ -159,9 +165,20 @@ const Ranking = ({ rank, name, points, profilePicture: profilePic }: RankingProp
   }
 };
 
-const LeaderBoard = ({ rankings, myPoint }: { rankings: Array<RankingProps>; myPoint: number }) => {
+const LeaderBoard = ({
+  rankings,
+  myPoint,
+  myName,
+  myProfilePicture,
+  currentUserRank,
+}: {
+  rankings: Array<RankingProps>;
+  myPoint: number;
+  myName: string;
+  myProfilePicture: string;
+  currentUserRank: number;
+}) => {
   const styles = membershipStyles();
-
   const isDesktop = useMediaQuery('(min-width: 1375px)');
   const isIpad = useMediaQuery('(min-width: 768px) and (max-width: 1375px)');
   const isMobile = useMediaQuery('(max-width: 767px)');
@@ -204,11 +221,11 @@ const LeaderBoard = ({ rankings, myPoint }: { rankings: Array<RankingProps>; myP
           </div>
           <div style={styles.leaderBoardBadge}>
             <Ranking
-              rank={3}
-              name={rankings[2].name}
-              points={rankings[2].points}
-              profilePicture={rankings[2].profilePicture}
-            ></Ranking>
+              rank={currentUserRank}
+              name={myName}
+              points={myPoint}
+              profilePicture={myProfilePicture}
+            />
           </div>
         </div>
       );
@@ -251,11 +268,11 @@ const LeaderBoard = ({ rankings, myPoint }: { rankings: Array<RankingProps>; myP
           </div>
           <div style={styles.leaderBoardBadge}>
             <Ranking
-              rank={3}
-              name={rankings[2].name}
-              points={rankings[2].points}
-              profilePicture={rankings[2].profilePicture}
-            ></Ranking>
+              rank={currentUserRank}
+              name={myName}
+              points={myPoint}
+              profilePicture={myProfilePicture}
+            />
           </div>
         </div>
       );
@@ -284,12 +301,17 @@ const LeaderBoard = ({ rankings, myPoint }: { rankings: Array<RankingProps>; myP
             points={rankings[1].points}
             profilePicture={rankings[1].profilePicture}
           />
-
           <Ranking
             rank={3}
             name={rankings[2].name}
             points={rankings[2].points}
             profilePicture={rankings[2].profilePicture}
+          ></Ranking>
+          <Ranking
+            rank={currentUserRank}
+            name={myName}
+            points={myPoint}
+            profilePicture={myProfilePicture}
           />
         </div>
       );
