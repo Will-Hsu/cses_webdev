@@ -1,5 +1,6 @@
 import { useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { addEvent } from '../../api';
 // import axios from 'axios';
 import SignupForm from './SignupForm';
 import LoginForm from './LoginForm';
@@ -14,6 +15,7 @@ interface RenderContentProps {
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { login, isNewUser, isUcsdEmail, isLoggedIn, user } = useContext(AuthContext);
 
   useEffect(() => {
@@ -22,6 +24,20 @@ const Login = () => {
       navigate('/membership');
     }
   }, [isLoggedIn, navigate]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const eventCode = params.get('eventCode');
+
+    if (eventCode) {
+      addEvent(user.email, eventCode).then((response) => {
+        console.log('Event added successfully:', response);
+      })
+      .catch((error) => {
+        console.error('Error adding event', error);
+      });
+    }
+  }, [location.search, user.email]);
 
   const renderContent = ({ name, email, login }: RenderContentProps) => {
     if (!isLoggedIn && !isNewUser) {
