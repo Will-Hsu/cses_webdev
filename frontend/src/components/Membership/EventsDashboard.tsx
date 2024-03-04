@@ -34,6 +34,7 @@ interface Event {
   instagram_link: string;
   _id: string;
   code: string;
+  qrCode: string;
 }
 
 const style = {
@@ -69,6 +70,9 @@ const EventRow = ({
       <TableCell>{new Date(event.end_time).toLocaleString()}</TableCell>
       <TableCell>{event.location}</TableCell>
       <TableCell>{event.major_event.toString()}</TableCell>
+      <TableCell>
+        <img src={event.qrCode} alt="No QR Code found"/>
+      </TableCell>
       <TableCell>{event.description}</TableCell>
       <TableCell>{event.calendar_link}</TableCell>
       <TableCell>{event.instagram_link}</TableCell>
@@ -405,6 +409,7 @@ const DashBoard = () => {
               <TableCell>End Time</TableCell>
               <TableCell>Location</TableCell>
               <TableCell>Major Event</TableCell>
+              <TableCell>QR Code</TableCell>
               <TableCell>Description</TableCell>
               <TableCell>Calendar Link</TableCell>
               <TableCell>Instagram Link</TableCell>
