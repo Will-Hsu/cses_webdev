@@ -10,6 +10,7 @@ const eventSchema = new Schema({
   calendar_link: { type: String, required: true },
   instagram_link: String,
   code: { type: String },
+  qrCode: { type: String },
 });
 
 // Export model

@@ -28,7 +28,7 @@ const Login = () => {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const eventCode = params.get('eventCode');
-
+    
     if (eventCode) {
       addEvent(user.email, eventCode).then((response) => {
         console.log('Event added successfully:', response);
