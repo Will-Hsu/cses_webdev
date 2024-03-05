@@ -17,6 +17,7 @@ const Ranking = ({ rank, name, points, profilePicture: profilePic }: RankingProp
   const isDesktop = useMediaQuery('(min-width: 1375px)');
   const isIpad = useMediaQuery('(min-width: 768px) and (max-width: 1375px)');
   const smallTablet = useMediaQuery('(min-width: 768px) and (max-width: 1030px)');
+  
   switch (rank) {
     case 1:
       width = '175px';
@@ -179,6 +180,7 @@ const LeaderBoard = ({
   const isDesktop = useMediaQuery('(min-width: 1375px)');
   const isIpad = useMediaQuery('(min-width: 768px) and (max-width: 1375px)');
   const isMobile = useMediaQuery('(max-width: 767px)');
+  const isCurrentUserInTop3 = rankings.some(ranking => ranking.name === myName);
 
   const orderRankings = (rankings: Array<RankingProps>) => {
     if (isDesktop) {
@@ -216,6 +218,7 @@ const LeaderBoard = ({
               profilePicture={rankings[2].profilePicture}
             ></Ranking>
           </div>
+          {!isCurrentUserInTop3 && (
           <div style={styles.leaderBoardBadge}>
             <Ranking
               rank={currentUserRank}
@@ -224,6 +227,7 @@ const LeaderBoard = ({
               profilePicture={myProfilePicture}
             />
           </div>
+        )}
         </div>
       );
     }
@@ -263,6 +267,7 @@ const LeaderBoard = ({
               profilePicture={rankings[2].profilePicture}
             ></Ranking>
           </div>
+          {!isCurrentUserInTop3 && (
           <div style={styles.leaderBoardiPadBadge}>
             <Ranking
               rank={currentUserRank}
@@ -271,6 +276,7 @@ const LeaderBoard = ({
               profilePicture={myProfilePicture}
             />
           </div>
+          )}
         </div>
       );
     }
@@ -303,12 +309,14 @@ const LeaderBoard = ({
             points={rankings[2].points}
             profilePicture={rankings[2].profilePicture}
           ></Ranking>
+          {!isCurrentUserInTop3 && (
           <Ranking
             rank={currentUserRank}
             name={myName}
             points={myPoint}
             profilePicture={myProfilePicture}
           />
+          )}
         </div>
       );
     }
