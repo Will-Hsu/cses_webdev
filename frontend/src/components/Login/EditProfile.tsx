@@ -308,6 +308,9 @@ const EditForm = () => {
                 onChange={onMinorChange}
                 renderInput={(params) => <TextField {...params} label="Minor" />}
               />
+              {!minorError && (
+                <FormHelperText id="minor-error-text">Please select your minor</FormHelperText>
+              )}
               {minorError && <p style={{ color: 'red' }}>{minorError}</p>}
             </FormControl>
 

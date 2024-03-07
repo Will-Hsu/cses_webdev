@@ -183,6 +183,7 @@ const MemberProfile = (userData: MemberProfileProps) => {
             Major:
             <span style={{ fontWeight: 'bold', marginLeft: '8px' }}>{userData.memberMajor}</span>
           </p>
+          {(userData.memberMinor != '') &&
           <p
             style={{
               display: 'flex', // added
@@ -192,6 +193,7 @@ const MemberProfile = (userData: MemberProfileProps) => {
           >
             Minor: <span style={{ fontWeight: 'bold', marginLeft: '8px' }}> {userData.memberMinor}</span>{' '}
           </p>
+          }
           <p style={{
               display: 'flex', // added
               justifyContent: 'left', // added
