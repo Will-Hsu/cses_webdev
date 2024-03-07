@@ -102,11 +102,13 @@ const NavBar = () => {
           </Box>
           {isLoggedIn && userData && (
             <div style={{ display: 'flex', alignItems: 'center', marginLeft: '10px' }}>
-              <Avatar
-                alt="Remy Sharp"
-                src={userData.profilePicture}
-                sx={{ width: 60, height: 60, marginLeft: '1%' }}
-              />
+              <Link to="/membership">
+                <Avatar
+                  alt="Remy Sharp"
+                  src={userData.profilePicture}
+                  sx={{ width: 60, height: 60, marginLeft: '1%' }}
+                />
+              </Link>
               <ProfileDropdown />
             </div>
           )}
