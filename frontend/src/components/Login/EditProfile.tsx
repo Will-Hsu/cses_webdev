@@ -15,6 +15,7 @@ import { updateUserAPI } from '../../api';
 import { loginStyles } from './styles';
 import { Profanity, ProfanityOptions } from '@2toad/profanity';
 import MajorsContext from './MajorsContext';
+import MinorsContext from './MinorsContext';
 import GradYearsContext from './GradYearsContext';
 import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext';
@@ -23,6 +24,7 @@ interface EditFormProps {
   name: string;
   email: string;
   major: string;
+  minor: string;
   expectedGraduationYear: number;
   profilePicture: string,
 }
@@ -38,8 +40,10 @@ const EditForm = () => {
   const { isLoggedIn, user } = useContext(AuthContext);
   const navigate = useNavigate();
   const availableMajors = useContext(MajorsContext);
+  const availableMinors = useContext(MinorsContext);
   const availableGradYears = useContext(GradYearsContext);
   const [selectedMajor, setSelectedMajor] = useState<string | null>(null);
+  const [selectedMinor, setSelectedMinor] = useState<string | null>(null);
   const [selectedGradYear, setSelectedGradYear] = useState<string | null>(null);
 
   const [showError, setShowError] = useState(false);
@@ -48,12 +52,14 @@ const EditForm = () => {
   const [nameProfanityError, setNameProfanityError] = useState(false);
   const [majorEmptyError, setMajorEmptyError] = useState(false);
   const [gradYearEmptyError, setGradYearEmptyError] = useState(false);
+  const [minorError, setMinorError] = useState<string | null>(null);
   const [profilePictureError, setProfilePictureError] = useState<string | null>(null);
 
   const [formData, setFormData] = useState<EditFormProps>({
     name: '',
     email: '',
     major: '',
+    minor: '',
     expectedGraduationYear: 0,
     profilePicture: '',
   });
@@ -66,6 +72,11 @@ const EditForm = () => {
   const onMajorChange = (e: React.ChangeEvent<{}>, value: string | null) => {
     setSelectedMajor(value);
     setFormData({ ...formData, major: value || '' });
+  };
+
+  const onMinorChange = (e: React.ChangeEvent<{}>, value: string | null) => {
+    setSelectedMinor(value);
+    setFormData({ ...formData, minor: value || '' });
   };
 
   const onGradYearChange = (e: React.ChangeEvent<{}>, value: string | null) => {
@@ -112,10 +123,12 @@ const EditForm = () => {
               name: response.data.name,
               email: response.data.email,
               major: response.data.major,
+              minor: response.data.minor,
               expectedGraduationYear: response.data.expectedGraduationYear,
               profilePicture: response.data.profilePicture,
             });
             setSelectedMajor(response.data.major);
+            setSelectedMinor(response.data.minor);
             setSelectedGradYear(String(response.data.expectedGraduationYear));
 
             setIsLoading(false);
@@ -141,6 +154,7 @@ const EditForm = () => {
     setMajorEmptyError(false);
     setGradYearEmptyError(false);
     setProfilePictureError(null);
+    setMinorError(null);
 
     let hasErrors = false;
 
@@ -162,6 +176,7 @@ const EditForm = () => {
       setMajorEmptyError(true);
       hasErrors = true;
     }
+
 
     // Validate graduation year
     if (!selectedGradYear) {
@@ -278,6 +293,25 @@ const EditForm = () => {
                   )}
                 </>
               )}
+            </FormControl>
+
+            <FormControl
+              fullWidth
+              required
+              variant="standard"
+              sx={styles.inputField}
+            >
+              <Autocomplete
+                id="minor"
+                options={availableMinors}
+                value={selectedMinor}
+                onChange={onMinorChange}
+                renderInput={(params) => <TextField {...params} label="Minor" />}
+              />
+              {!minorError && (
+                <FormHelperText id="minor-error-text">Please select your minor</FormHelperText>
+              )}
+              {minorError && <p style={{ color: 'red' }}>{minorError}</p>}
             </FormControl>
 
             <FormControl

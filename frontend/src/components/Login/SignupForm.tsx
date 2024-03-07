@@ -14,6 +14,7 @@ import { createUserAPI } from '../../api';
 import { loginStyles } from './styles';
 import { Profanity, ProfanityOptions } from '@2toad/profanity';
 import MajorsContext from './MajorsContext';
+import MinorsContext from './MinorsContext';
 import GradYearsContext from './GradYearsContext';
 import { AuthContext } from '../../context/AuthContext';
 
@@ -32,9 +33,11 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
   const navigate = useNavigate();
 
   const availableMajors = useContext(MajorsContext);
+  const availableMinors= useContext(MinorsContext);
   const { setIsLoggedIn } = useContext(AuthContext);
   const availableGradYears = useContext(GradYearsContext);
   const [selectedMajor, setSelectedMajor] = useState<string | null>(null);
+  const [selectedMinor, setSelectedMinor] = useState<string | null>(null);
   const [selectedGradYear, setSelectedGradYear] = useState<string | null>(null);
   const [profilePicture, setProfilePicture] = useState<string | null>(null);
 
@@ -44,11 +47,13 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
   const [nameProfanityError, setNameProfanityError] = useState(false);
   const [majorEmptyError, setMajorEmptyError] = useState(false);
   const [gradYearEmptyError, setGradYearEmptyError] = useState(false);
+  const [minorError, setMinorError] = useState<String | null>(null);
   const [profilePictureError, setProfilePictureError] = useState<String | null>(null);
 
   const [formData, setFormData] = useState({
     name: name,
     email: email,
+    minor: '',
     major: '',
     expectedGraduateYear: 0,
     profilePicture: profilePicture,
@@ -62,6 +67,10 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
   const onMajorChange = (e: React.ChangeEvent<{}>, value: string | null) => {
     setSelectedMajor(value);
     setFormData({ ...formData, major: value || '' });
+  };
+  const onMinorChange = (e: React.ChangeEvent<{}>, value: string | null) => {
+    setSelectedMinor(value);
+    setFormData({ ...formData, minor: value || '' });
   };
 
   const onGradYearChange = (e: React.ChangeEvent<{}>, value: string | null) => {
@@ -106,6 +115,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
     setMajorEmptyError(false);
     setGradYearEmptyError(false);
     setProfilePictureError(null);
+    setMinorError(null);
 
     let hasErrors = false;
 
@@ -234,7 +244,21 @@ const SignupForm: React.FC<SignupFormProps> = ({ name, email }) => {
           </>
         )}
       </FormControl>
-
+      <FormControl
+        fullWidth
+        required
+        variant="standard"
+        sx={styles.inputField}
+      >
+        <Autocomplete
+          id="minor"
+          options={availableMinors}
+          value={selectedMinor}
+          onChange={onMinorChange}
+          renderInput={(params) => <TextField {...params} label="Minor" />}
+        />
+        {minorError && <p style={{ color: 'red' }}>{minorError}</p>}
+      </FormControl>
       <FormControl
         fullWidth
         required

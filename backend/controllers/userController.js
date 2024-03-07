@@ -29,12 +29,13 @@ export const userCheck = [
 ];
 
 export const userCreate = asyncHandler(async (req, res) => {
-  const { name, email, major, expectedGraduateYear, profilePicture } = req.body;
+  const { name, email, major, expectedGraduateYear, profilePicture, minor } = req.body;
   const parsedGraduationYear = parseInt(expectedGraduateYear);
   const newUser = new User({
     name,
     email,
     major,
+    minor,
     expectedGraduationYear: parsedGraduationYear,
     profilePicture,
   });
@@ -73,6 +74,7 @@ export const userUpdate = [
     .withMessage('Invalid email.'),
   body('name').optional(),
   body('major').optional(),
+  body('minor').optional(),
   body('expectedGraduationYear').optional().isNumeric(),
   body('points').optional().isNumeric(),
   body('eventsAttended')

@@ -20,6 +20,7 @@ const RewardsMenu = (userData: RewardsProp) => {
   const largePrizePoints = 2500;
   const [confirmationOpen, setConfirmationOpen] = useState(false);
   const [selectedPrize, setSelectedPrize] = useState('');
+  const [isHovered, setIsHovered] = useState(false);
 
   const openConfirmationDialog = (prizeType: string) => {
     setSelectedPrize(prizeType);
@@ -115,8 +116,27 @@ const RewardsMenu = (userData: RewardsProp) => {
             }
           }}
         >
-          <Box>
+          <Box
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
             <img src={smallPrize} alt="img" style={{ width: '70px', height: '70px' }} />
+            {isHovered && (
+              <div
+                className="info-box"
+                style={{
+                  backgroundColor: 'white',
+                  color: 'black',
+                  padding: '3px 20px',
+                  maxWidth: '40%',
+                  borderRadius: '15px',
+                  fontSize: '12px',
+                  position: 'absolute',
+                }}
+              >
+                <p> Small Prize </p>
+              </div>
+            )}
           </Box>
           <Box
             style={{
@@ -129,6 +149,7 @@ const RewardsMenu = (userData: RewardsProp) => {
             }}
           >
             Small Prize
+            
           </Box>
           <Box
             style={{
