@@ -29,12 +29,13 @@ export const userCheck = [
 ];
 
 export const userCreate = asyncHandler(async (req, res) => {
-  const { name, email, major, expectedGraduateYear, profilePicture } = req.body;
+  const { name, email, major, expectedGraduateYear, profilePicture, minor } = req.body;
   const parsedGraduationYear = parseInt(expectedGraduateYear);
   const newUser = new User({
     name,
     email,
     major,
+    minor,
     expectedGraduationYear: parsedGraduationYear,
     profilePicture,
   });
@@ -73,6 +74,7 @@ export const userUpdate = [
     .withMessage('Invalid email.'),
   body('name').optional(),
   body('major').optional(),
+  body('minor').optional(),
   body('expectedGraduationYear').optional().isNumeric(),
   body('points').optional().isNumeric(),
   body('eventsAttended')
@@ -149,13 +151,32 @@ export const getTopMembers = asyncHandler(async (_, res) => {
       .exec();
 
     // console.log(topUsers);
-
     res.status(200).json(topUsers);
   } catch (error) {
     console.error('Error fetching user info: ', error);
     res.status(500).json({ message: 'Server error' });
   }
 });
+
+export const getUserRank = asyncHandler(async (req, res) => {
+  const { email } = req.params;
+  try {
+    // Find all users sorted by points
+    const allUsers = await User.find()
+      .sort({ points: -1 })
+      .select('name email profilePicture points')
+      .exec();
+
+    // Get the index of the current user in the sorted list
+    const currentUserIndex = allUsers.findIndex(user => user.email === email);
+
+    res.status(200).json(currentUserIndex);
+  } catch (error) {
+    console.error('Error fetching user ranks: ', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 
 // POST request for creating new event entries for a user.
 export const userEventsUpdate = asyncHandler(async (req, res) => {
@@ -298,6 +319,7 @@ export default {
   userDelete,
   userEventsUpdate,
   getTopMembers,
+  getUserRank,
   redeemSmall,
   redeemMedium,
   redeemLarge,

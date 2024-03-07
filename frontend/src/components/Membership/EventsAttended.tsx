@@ -1,5 +1,5 @@
 import useMediaQuery from '../../hooks/useMediaQuery';
-import { Container, Typography } from '@mui/material';
+import { Link, Container, Typography } from '@mui/material';
 import EventBox from '../Event/Event';
 import { membershipStyles } from './styles';
 import alertLogo from '../../images/events-attended-alert.svg';
@@ -37,7 +37,7 @@ const EventsAttended = ({ eventsAttended }: EventsAttendedProps) => {
         <Typography variant="subtitle1" sx={styles.eventsAttendText}>
           {eventsAttended.length === 0 && (
             <i>
-              Haven't attended an event yet? Let's change that!
+              Haven't attended an event yet? <Link href="/events"> Let's change that! </Link>
               {/* Attend 2 more events and reach SENIOR MEMBER status!*/}
             </i>
           )}
@@ -48,6 +48,7 @@ const EventsAttended = ({ eventsAttended }: EventsAttendedProps) => {
             </i>
           )}
         </Typography>
+
       </div>
 
       {!isMobile && (

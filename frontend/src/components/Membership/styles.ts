@@ -55,15 +55,17 @@ export const membershipStyles = (isMobile?: boolean) => ({
   rankingPoints: {
     fontWeight: 700,
     fontFamily: 'Inter, sans-serif',
-    fontSize: '35px',
-    borderBottom: '3px solid #F3C969',
+    fontSize: '25px',
+    // borderBottom: '3px solid #F3C969',
     width: 'fit-content',
+    color: '#000000'
   },
 
   rankingName: {
     fontWeight: 500,
     fontFamily: 'Inter, sans-serif',
-    fontSize: '20px',
+    fontSize: '17px',
+    color: '#000000'
   },
 
   leaderBoardMobileRanking: {
@@ -73,6 +75,28 @@ export const membershipStyles = (isMobile?: boolean) => ({
     fontSize: '30px',
     color: '#F3C969',
     minWidth: '25px'
+  },
+
+  leaderBoardBadge: {
+    backgroundColor: 'white',
+    width: '20%',
+    // width: '230px',
+    height: '400px',
+    borderRadius: '5%',
+  },
+
+  leaderBoardiPadBadge: {
+    backgroundColor: 'white',
+    width: '20%',
+    height: '350px',
+    borderRadius: '5%',
+  },
+
+  leaderBoardMobileBadge: {
+    backgroundColor: 'white',
+    width: '20%',
+    height: '350px',
+    borderRadius: '5%',
   },
 
   rankingMobilePoints: {

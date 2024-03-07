@@ -23,7 +23,7 @@ export const loginStyles = () => ({
 
   editForm: {
     width: 350,
-    height: 450,
+    height: 550,
     padding: '20px',
     marginY: '150px',
     marginX: 'auto',

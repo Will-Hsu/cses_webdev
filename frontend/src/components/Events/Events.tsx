@@ -64,6 +64,7 @@ const Events = () => {
     if (type === 'past' && selectedYear !== null) {
       // If a year filter is applied, use the filtered past events
       filteredEvents = pastEvents.filter(event => new Date(event.end_time).getFullYear() === selectedYear);
+
     }
 
     if (type === 'upcoming') {
@@ -283,10 +284,10 @@ const Events = () => {
               title={eventData.title}
               targetDate={new Date(eventData.end_time)}
               location={eventData.location}
-              calendar_link={eventData.calendar_link}
+              calendar_link=''
               description={eventData.description}
               end_time={eventData.end_time}
-              instagram_link={eventData.instagram_link}
+              instagram_link=''
               start_time={eventData.start_time}
               _id={eventData._id}
               pastEvent
