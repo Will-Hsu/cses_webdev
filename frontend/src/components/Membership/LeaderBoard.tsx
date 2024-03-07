@@ -1,4 +1,4 @@
-import { Container, Typography, useMediaQuery } from '@mui/material';
+import { Container, Grid, Typography, useMediaQuery } from '@mui/material';
 import alertLogo from '../../images/events-attended-alert.svg';
 import defaultPic from '../../images/profile.png';
 import { membershipStyles } from './styles';
@@ -13,29 +13,40 @@ interface RankingProps {
 const Ranking = ({ rank, name, points, profilePicture: profilePic }: RankingProps) => {
   const styles = membershipStyles();
   const profile = profilePic || defaultPic;
-  let width, height;
-  const isMobile = useMediaQuery('(max-width: 767px)');
+  let width, height, rankColor;
+  const isDesktop = useMediaQuery('(min-width: 1375px)');
+  const isIpad = useMediaQuery('(min-width: 768px) and (max-width: 1375px)');
+  const smallTablet = useMediaQuery('(min-width: 768px) and (max-width: 1030px)');
+  
   switch (rank) {
     case 1:
-      width = '280px';
-      height = '280px';
+      width = '175px';
+      height = '175px';
+      rankColor = '#F3C969';
       break;
     case 2:
-      width = '230px';
-      height = '230px';
+      width = '175px';
+      height = '175px';
+      rankColor = '#A6A6A6';
       break;
     case 3:
-      width = '180px';
-      height = '180px';
+      width = '175px';
+      height = '175px';
+      rankColor = '#9E7518';
       break;
     default:
-      width = '230px';
-      height = '230px';
+      width = '175px';
+      height = '175px';
+      rankColor = '#9E7518';
   }
-  if (!isMobile) {
+  if (isDesktop) {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <Typography variant="h5" sx={styles.leaderBoardRanking} gutterBottom>
+        <Typography
+          variant="h5"
+          sx={{ ...styles.leaderBoardRanking, color: rankColor }}
+          gutterBottom
+        >
           {rank}
         </Typography>
 
@@ -57,7 +68,7 @@ const Ranking = ({ rank, name, points, profilePicture: profilePic }: RankingProp
           />
         </div>
 
-        <Typography sx={styles.rankingPoints} gutterBottom>
+        <Typography sx={{...styles.rankingPoints, borderBottom: `3px solid ${rankColor}`}} gutterBottom>
           {points} POINTS
         </Typography>
 
@@ -66,9 +77,57 @@ const Ranking = ({ rank, name, points, profilePicture: profilePic }: RankingProp
         </Typography>
       </div>
     );
+  }
+  if (isIpad) {
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <Typography
+          variant="h5"
+          sx={{
+            ...styles.leaderBoardRanking,
+            color: rankColor,
+            fontSize: 'clamp(45px, 2vw, 60px)',
+          }}
+          gutterBottom
+        >
+          {rank}
+        </Typography>
+
+        <div
+          style={{
+            width: smallTablet ? '120px' : '160px',
+            height: smallTablet ? '120px' : '160px',
+            // borderRadius: '50%',
+            // overflow: 'hidden',
+            marginBottom: '8px',
+          }}
+        >
+          <img
+            src={profile}
+            alt="Profile"
+            style={{ objectFit: 'cover', width: '100%', height: '100%', borderRadius: '50%' }}
+          />
+        </div>
+
+        <Typography sx={{...styles.rankingPoints, borderBottom: `3px solid ${rankColor}`, fontSize: 'clamp(15px, 2vw, 22px)'}} gutterBottom>
+          {points} POINTS
+        </Typography>
+
+        <Typography sx={{ ...styles.rankingName, fontSize: 'clamp(15px, 2vw, 20px)' }} gutterBottom>
+          {name}
+        </Typography>
+      </div>
+    );
   } else {
     return (
-      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
         <Typography variant="h5" sx={styles.leaderBoardMobileRanking} gutterBottom>
           {rank}
         </Typography>
@@ -80,7 +139,7 @@ const Ranking = ({ rank, name, points, profilePicture: profilePic }: RankingProp
             borderRadius: '50%',
             overflow: 'hidden',
             marginBottom: '8px',
-            marginRight: '1rem'
+            marginRight: '1rem',
           }}
         >
           <img
@@ -88,24 +147,40 @@ const Ranking = ({ rank, name, points, profilePicture: profilePic }: RankingProp
             alt="Profile"
             width="100%"
             height="100%"
-            style={{ objectFit: 'cover'}}
+            style={{ objectFit: 'cover' }}
           />
         </div>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <Typography sx={styles.rankingMobileName} gutterBottom>{name}</Typography>
-          <Typography sx={styles.rankingMobilePoints} gutterBottom>{points} POINTS</Typography>
+          <Typography sx={styles.rankingMobileName} gutterBottom>
+            {name}
+          </Typography>
+          <Typography sx={styles.rankingMobilePoints} gutterBottom>
+            {points} POINTS
+          </Typography>
         </div>
       </div>
     );
   }
 };
 
-const LeaderBoard = ({ rankings, myPoint }: { rankings: Array<RankingProps>; myPoint: number }) => {
+const LeaderBoard = ({
+  rankings,
+  myPoint,
+  myName,
+  myProfilePicture,
+  currentUserRank,
+}: {
+  rankings: Array<RankingProps>;
+  myPoint: number;
+  myName: string;
+  myProfilePicture: string;
+  currentUserRank: number;
+}) => {
   const styles = membershipStyles();
-
-  const isDesktop = useMediaQuery('(min-width: 1161px)');
-  const isIpad = useMediaQuery('(min-width: 768px) and (max-width: 1160px)');
+  const isDesktop = useMediaQuery('(min-width: 1375px)');
+  const isIpad = useMediaQuery('(min-width: 768px) and (max-width: 1375px)');
   const isMobile = useMediaQuery('(max-width: 767px)');
+  const isCurrentUserInTop3 = rankings.some(ranking => ranking.name === myName);
 
   const orderRankings = (rankings: Array<RankingProps>) => {
     if (isDesktop) {
@@ -114,31 +189,45 @@ const LeaderBoard = ({ rankings, myPoint }: { rankings: Array<RankingProps>; myP
           style={{
             display: 'flex',
             flexWrap: 'wrap',
-            justifyContent: 'center',
+            justifyContent: 'start',
             alignItems: 'center',
             gap: '70px',
           }}
         >
-          <Ranking
-            rank={2}
-            name={rankings[1].name}
-            points={rankings[1].points}
-            profilePicture={rankings[1].profilePicture}
-          />
-
-          <Ranking
-            rank={1}
-            name={rankings[0].name}
-            points={rankings[0].points}
-            profilePicture={rankings[0].profilePicture}
-          />
-
-          <Ranking
-            rank={3}
-            name={rankings[2].name}
-            points={rankings[2].points}
-            profilePicture={rankings[2].profilePicture}
-          />
+          <div style={styles.leaderBoardBadge}>
+            <Ranking
+              rank={1}
+              name={rankings[0].name}
+              points={rankings[0].points}
+              profilePicture={rankings[0].profilePicture}
+            ></Ranking>
+          </div>
+          <div style={styles.leaderBoardBadge}>
+            <Ranking
+              rank={2}
+              name={rankings[1].name}
+              points={rankings[1].points}
+              profilePicture={rankings[1].profilePicture}
+            ></Ranking>
+          </div>
+          <div style={styles.leaderBoardBadge}>
+            <Ranking
+              rank={3}
+              name={rankings[2].name}
+              points={rankings[2].points}
+              profilePicture={rankings[2].profilePicture}
+            ></Ranking>
+          </div>
+          {!isCurrentUserInTop3 && (
+          <div style={styles.leaderBoardBadge}>
+            <Ranking
+              rank={currentUserRank}
+              name={myName}
+              points={myPoint}
+              profilePicture={myProfilePicture}
+            />
+          </div>
+        )}
         </div>
       );
     }
@@ -148,32 +237,46 @@ const LeaderBoard = ({ rankings, myPoint }: { rankings: Array<RankingProps>; myP
         <div
           style={{
             display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
+            flexWrap: 'wrap',
+            justifyContent: 'start',
             alignItems: 'center',
-            gap: '70px',
+            gap: '35px',
           }}
         >
-          <Ranking
-            rank={1}
-            name={rankings[0].name}
-            points={rankings[0].points}
-            profilePicture={rankings[0].profilePicture}
-          />
-
-          <Ranking
-            rank={2}
-            name={rankings[1].name}
-            points={rankings[1].points}
-            profilePicture={rankings[1].profilePicture}
-          />
-
-          <Ranking
-            rank={3}
-            name={rankings[2].name}
-            points={rankings[2].points}
-            profilePicture={rankings[2].profilePicture}
-          />
+          <div style={styles.leaderBoardiPadBadge}>
+            <Ranking
+              rank={1}
+              name={rankings[0].name}
+              points={rankings[0].points}
+              profilePicture={rankings[0].profilePicture}
+            ></Ranking>
+          </div>
+          <div style={styles.leaderBoardiPadBadge}>
+            <Ranking
+              rank={2}
+              name={rankings[1].name}
+              points={rankings[1].points}
+              profilePicture={rankings[1].profilePicture}
+            ></Ranking>
+          </div>
+          <div style={styles.leaderBoardiPadBadge}>
+            <Ranking
+              rank={3}
+              name={rankings[2].name}
+              points={rankings[2].points}
+              profilePicture={rankings[2].profilePicture}
+            ></Ranking>
+          </div>
+          {!isCurrentUserInTop3 && (
+          <div style={styles.leaderBoardiPadBadge}>
+            <Ranking
+              rank={currentUserRank}
+              name={myName}
+              points={myPoint}
+              profilePicture={myProfilePicture}
+            />
+          </div>
+          )}
         </div>
       );
     }
@@ -194,20 +297,26 @@ const LeaderBoard = ({ rankings, myPoint }: { rankings: Array<RankingProps>; myP
             points={rankings[0].points}
             profilePicture={rankings[0].profilePicture}
           />
-
           <Ranking
             rank={2}
             name={rankings[1].name}
             points={rankings[1].points}
             profilePicture={rankings[1].profilePicture}
           />
-
           <Ranking
             rank={3}
             name={rankings[2].name}
             points={rankings[2].points}
             profilePicture={rankings[2].profilePicture}
+          ></Ranking>
+          {!isCurrentUserInTop3 && (
+          <Ranking
+            rank={currentUserRank}
+            name={myName}
+            points={myPoint}
+            profilePicture={myProfilePicture}
           />
+          )}
         </div>
       );
     }

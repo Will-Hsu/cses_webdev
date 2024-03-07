@@ -91,6 +91,18 @@ export const topMembersAPI = () => {
   });
 };
 
+export const userRank = (email) => {
+  return new Promise((resolve, reject) => {
+    API.get(`/users/${email}/userRank`)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
 export const eventListAPI = () => {
   return new Promise((resolve, reject) => {
     API.get('/events')

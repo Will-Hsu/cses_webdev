@@ -10,6 +10,9 @@ import userController from '../controllers/userController.js';
 router.post('/create', userController.userCreate);
 
 // GET request for getting top performers.
+router.get('/:email/userRank', userController.getUserRank);
+
+// GET request for getting top performers.
 router.get('/topMembers', userController.getTopMembers);
 
 // GET request for getting users count.
