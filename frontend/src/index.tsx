@@ -8,6 +8,11 @@ import { AuthProvider } from './context/AuthContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID!;
+
+if(!clientId){
+  throw new Error("Client ID not found. Did you set up the enviornment files?");
+}
+
 root.render(
   <React.StrictMode>
     <GoogleOAuthProvider clientId={clientId}>
