@@ -154,7 +154,7 @@ const About = () => {
           {isSmallScreen && (
             <Grid container sx={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
               <Grid item sm={5} lg={3}>
-                <img src={lightBulb} alt="img" />
+                <img src={lightBulb} alt="img" style={{ width: '98%', height: '95%'}} />
               </Grid>
               <Grid item sm={6} lg={5}>
                 <Box sx={{ color: 'white', textAlign: { lg: 'left', sm: 'center', xs: 'center' } }}>
