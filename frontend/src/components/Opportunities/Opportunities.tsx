@@ -11,6 +11,29 @@ import sponsors from '../../images/opportunitiespage/sponsors.png';
 import { useNavigate } from 'react-router-dom';
 //import { Link } from 'react-router-dom';
 
+interface ImageWithBoxShadowProps {
+  src: string;
+  alt: string;
+  boxColor: string;
+  borderColor?: string
+  /* Optional clickable link */
+  href?: string
+}
+
+const ImageWithBoxShadow = ({ src, alt, boxColor, borderColor, href}: ImageWithBoxShadowProps) => {
+  const theme = useTheme();
+  const styles = opportunitiesStyles(theme);
+  return (
+    <a href={href} style={styles.link}>
+      <img
+        src={src}
+        alt={alt}
+        style={{ width: '85%', height: 'auto', boxShadow: `12px 12px ${boxColor}`, border: borderColor?`2px solid ${borderColor}`:``}}
+      />
+    </a>
+  );
+};
+
 const Opportunities = () => {
   const theme = useTheme();
   const styles = opportunitiesStyles(theme);
