@@ -55,14 +55,14 @@ const Opportunities = () => {
       <Container maxWidth="xl" sx={styles.body}>
         <Typography sx={styles.title}>OPPORTUNITIES</Typography>
         <Grid container spacing={2} sx={{ justifyContent: 'center', alignItems: 'center' }}>
-          <Grid item sx={{ width: '550px', marginTop: '3%' }}>
+          <Grid item xs={12} sm={6}>
             <ImageWithBoxShadow 
               src={members}
               alt='members'
               boxColor='white'
             />
           </Grid>
-          <Grid item sx={{ width: '439px', marginTop: '3%' }}>
+          <Grid item xs={12} sm={6}>
             <Typography sx={styles.subtitle}>
               For <span style={{ fontStyle: 'italic' }}>members</span>.
             </Typography>
@@ -101,14 +101,14 @@ const Opportunities = () => {
                     </MuiButton>
             </Box>
           </Grid>
-          <Grid item sx={{ width: '550px', marginTop: '8%' }}>
+          <Grid item xs={12} sm={6}>
           <ImageWithBoxShadow 
               src={sponsors}
               alt="sponsors"
               boxColor='white'
             />
           </Grid>
-          <Grid item sx={{ width: '550px', marginTop: '3%' }}>
+          <Grid item xs={12} sm={6}>
             <Typography sx={styles.subtitle}>
               For <span style={{ fontStyle: 'italic' }}>sponsors</span>.
             </Typography>
