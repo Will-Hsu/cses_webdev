@@ -146,14 +146,25 @@ const Opportunities = () => {
           Thank you to our current sponsors!
         </Typography>
 
-        <Box display="flex" flexDirection="column" alignItems="center">
-          <a href="https://cse.ucsd.edu/" style={styles.link}>
-            <img src={sponsor} alt="sponsor" style={{ height: 'clamp(60px, 10vw, 100px)' }} />
-          </a>
-          <a href="https://as.ucsd.edu/" style={styles.link}>
-            <img src={sponsor2} alt="sponsor2" style={{ height: 'clamp(120px, 10vw, 200px)' }} />
-          </a>
-        </Box>
+        <Grid container direction='column' alignItems='stretch'>
+            <Grid item pl='10%' pr='10%' >
+              <ImageWithBoxShadow 
+                src={sponsor}
+                alt='sponsor'
+                boxColor='white'
+                href='https://cse.ucsd.edu/'
+                borderColor='black'
+              />
+            </Grid>
+            <Grid item pl='30%' pr='30%'>
+              <ImageWithBoxShadow 
+                src={sponsor2}
+                alt='sponsor2'
+                boxColor='white'
+                href='https://as.ucsd.edu/'
+              />
+            </Grid>
+        </Grid>
       </Container>
     </div>
   );
