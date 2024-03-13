@@ -62,6 +62,33 @@ export const aboutStyles = () => ({
     fontWeight: 400,
     width: { xs: '300px', sm: '350px', md: '430px' },
   },
+  mainTitleTop: {
+    color: 'white',
+    fontSize: 'clamp(20px, 8vw, 65px)',
+    fontFamily: 'Chakra Petch',
+    fontWeight: 700,
+  },
+  subheadingTop: {
+    color: 'black',
+    fontSize: 'clamp(9px, 3vw, 20px)',
+    fontFamily: 'Chakra Petch',
+    fontWeight: 500,
+    margin: 0
+  },
+  communityCard: {
+    display: 'flex',
+    padding: '0 !important',
+    backgroundColor: 'white',
+    borderRadius: '10px'
+  },
+  communityCardImg: {
+    width: '197.5px',
+    height: 'auto',
+    borderRadius: '10px 0 0 10px',
+    borderColor: 'white',
+    borderWidth: '1px',
+    borderStyle: 'solid'
+  },
   mainTitleMiddle: {
     color: 'white',
     fontSize: {
