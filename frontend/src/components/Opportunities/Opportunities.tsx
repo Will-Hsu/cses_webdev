@@ -11,6 +11,29 @@ import sponsors from '../../images/opportunitiespage/sponsors.png';
 import { useNavigate } from 'react-router-dom';
 //import { Link } from 'react-router-dom';
 
+interface ImageWithBoxShadowProps {
+  src: string;
+  alt: string;
+  boxColor: string;
+  borderColor?: string
+  /* Optional clickable link */
+  href?: string
+}
+
+const ImageWithBoxShadow = ({ src, alt, boxColor, borderColor, href}: ImageWithBoxShadowProps) => {
+  const theme = useTheme();
+  const styles = opportunitiesStyles(theme);
+  return (
+    <a href={href} style={styles.link}>
+      <img
+        src={src}
+        alt={alt}
+        style={{ width: '85%', height: 'auto', boxShadow: `12px 12px ${boxColor}`, border: borderColor?`2px solid ${borderColor}`:``}}
+      />
+    </a>
+  );
+};
+
 const Opportunities = () => {
   const theme = useTheme();
   const styles = opportunitiesStyles(theme);
@@ -33,10 +56,10 @@ const Opportunities = () => {
         <Typography sx={styles.title}>OPPORTUNITIES</Typography>
         <Grid container spacing={2} sx={{ justifyContent: 'center', alignItems: 'center' }}>
           <Grid item sx={{ width: '550px', marginTop: '3%' }}>
-            <img
+            <ImageWithBoxShadow 
               src={members}
-              alt="members"
-              style={{ width: '85%', height: 'auto', boxShadow: '12px 12px white' }}
+              alt='members'
+              boxColor='white'
             />
           </Grid>
           <Grid item sx={{ width: '439px', marginTop: '3%' }}>
@@ -79,10 +102,10 @@ const Opportunities = () => {
             </Box>
           </Grid>
           <Grid item sx={{ width: '550px', marginTop: '8%' }}>
-            <img
+          <ImageWithBoxShadow 
               src={sponsors}
               alt="sponsors"
-              style={{ width: '85%', height: 'auto', boxShadow: '12px 12px white' }}
+              boxColor='white'
             />
           </Grid>
           <Grid item sx={{ width: '550px', marginTop: '3%' }}>
@@ -123,14 +146,25 @@ const Opportunities = () => {
           Thank you to our current sponsors!
         </Typography>
 
-        <Box display="flex" flexDirection="column" alignItems="center">
-          <a href="https://cse.ucsd.edu/" style={styles.link}>
-            <img src={sponsor} alt="sponsor" style={{ height: 'clamp(60px, 10vw, 100px)' }} />
-          </a>
-          <a href="https://as.ucsd.edu/" style={styles.link}>
-            <img src={sponsor2} alt="sponsor2" style={{ height: 'clamp(120px, 10vw, 200px)' }} />
-          </a>
-        </Box>
+        <Grid container direction='column' alignItems='stretch'>
+            <Grid item pl='10%' pr='10%' >
+              <ImageWithBoxShadow 
+                src={sponsor}
+                alt='sponsor'
+                boxColor='white'
+                href='https://cse.ucsd.edu/'
+                borderColor='black'
+              />
+            </Grid>
+            <Grid item pl='30%' pr='30%'>
+              <ImageWithBoxShadow 
+                src={sponsor2}
+                alt='sponsor2'
+                boxColor='white'
+                href='https://as.ucsd.edu/'
+              />
+            </Grid>
+        </Grid>
       </Container>
     </div>
   );
