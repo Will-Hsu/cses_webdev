@@ -3,6 +3,7 @@ import asyncHandler from 'express-async-handler';
 import { body, param, validationResult } from 'express-validator';
 import crypto from 'crypto';
 import validator from 'validator';
+import qr from 'qrcode';
 
 // Display list of all Events.
 export const eventList = asyncHandler(async (req, res) => {
@@ -53,6 +54,7 @@ export const eventList = asyncHandler(async (req, res) => {
         calendar_link,
         instagram_link,
         code,
+        qrCode,
       } = event;
       return {
         _id,
@@ -65,6 +67,7 @@ export const eventList = asyncHandler(async (req, res) => {
         calendar_link,
         instagram_link,
         code,
+        qrCode,
       };
     });
 
@@ -157,13 +160,17 @@ export const eventCreate = [
           // Ensure it's a 6-digit number by padding with zeros if needed
           const sixDigit = String(sixDigitCode).padStart(6, '0');
 
-          Event.updateOne({ _id: d._id }, { code: sixDigit })
-            .then(() => res.json({ message: 'Successful', id: d._id, code: sixDigit }))
-            .catch(() => res.status(500).json({ message: 'Internal server error 1' }));
-        })
-        .catch(() => res.status(500).json({ message: 'Internal server error' }));
+          // Create qr code using 6-digit code
+          const url = `https://csesucsd.com/login/?eventCode=${sixDigit}`;
+
+          qr.toDataURL(url, (err, qrCodeData) => {
+            Event.updateOne({ _id: d._id }, { code: sixDigit, qrCode: qrCodeData })
+              .then(() => res.json({ message: 'Successful', id: d._id, code: sixDigit, qrCode: qrCodeData }))
+              .catch((error) => res.status(500).json({ message: 'Internal server error', error }));
+          });
+        }).catch((error) => res.status(500).json({ message: 'Internal server error', error }));
     }
-  }),
+  })
 ];
 
 // Handle Event delete on DELETE.
