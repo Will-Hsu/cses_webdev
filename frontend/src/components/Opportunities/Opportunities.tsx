@@ -56,10 +56,10 @@ const Opportunities = () => {
         <Typography sx={styles.title}>OPPORTUNITIES</Typography>
         <Grid container spacing={2} sx={{ justifyContent: 'center', alignItems: 'center' }}>
           <Grid item sx={{ width: '550px', marginTop: '3%' }}>
-            <img
+            <ImageWithBoxShadow 
               src={members}
-              alt="members"
-              style={{ width: '85%', height: 'auto', boxShadow: '12px 12px white' }}
+              alt='members'
+              boxColor='white'
             />
           </Grid>
           <Grid item sx={{ width: '439px', marginTop: '3%' }}>
@@ -102,10 +102,10 @@ const Opportunities = () => {
             </Box>
           </Grid>
           <Grid item sx={{ width: '550px', marginTop: '8%' }}>
-            <img
+          <ImageWithBoxShadow 
               src={sponsors}
               alt="sponsors"
-              style={{ width: '85%', height: 'auto', boxShadow: '12px 12px white' }}
+              boxColor='white'
             />
           </Grid>
           <Grid item sx={{ width: '550px', marginTop: '3%' }}>
