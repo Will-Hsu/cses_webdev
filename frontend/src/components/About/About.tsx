@@ -30,36 +30,9 @@ const About = () => {
           <Box sx={{ backgroundColor: 'rgba(0,0,0,0.5)', maxWidth: '90%', margin: '0 auto' }}>
             <Grid
               container
-              sx={{ marginTop: '7%', paddingTop: '3%', display: 'flex', justifyContent: 'center' }}
-            >
-              <Grid
-                item
-                sm={6}
-                md={4}
-                lg={3}
-                sx={{
-                  paddingRight: {
-                    xs: '0%',
-                    sm: '5%',
-                  },
-                  textAlign: 'right',
-                  marginBottom: '5%',
-                  marginRight: '2%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginTop: '1%',
-                }}
-              >
-                <img
+                <ImageWithBoxShadow 
                   src={about1}
                   alt="img"
-                  style={{
-                    maxWidth: '110%',
-                    height: 'auto',
-                    borderRadius: '10px',
-                    boxShadow: '10px 10px white',
-                  }}
                 />
               </Grid>
               <Grid item sm={6} md={5} lg={6}>
@@ -231,93 +204,10 @@ const About = () => {
               </Box>
             </Grid>
           </Grid> */}
-          {!isSmallScreen && (
-            <Grid container sx={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
-              <Grid item sm={5} lg={5}>
-                <Box sx={{ color: 'white', textAlign: { md: 'left', sm: 'left', xs: 'center' } }}>
-                  <h1>How do I join?</h1>
-                </Box>
-                <Box sx={{ color: 'white', textAlign: { lg: 'left', sm: 'left', xs: 'center' } }}>
-                  <p style={{ color: 'white', fontSize: 'clamp(15px, 3vw, 20px)' }}>
-                    To become a general member, simply sign up with your UCSD email!
-                  </p>
-                  <p style={{ color: 'white', fontSize: 'clamp(15px, 3vw, 20px)' }}>
-                    Do you want to be a part of the internal team? Become a member and follow us on
-                    our socials to be notified of when board applications open on a rolling basis.
-                  </p>
-                  <Box
-                    sx={{
-                      marginLeft: '-2%',
-                      display: 'flex',
-                      justifyContent: { xs: 'center', sm: 'left' },
-                    }}
-                  >
-                    <Button
-                      size="large"
-                      text="Become a Member ->"
-                      onClick={() => navigate('/membership')}
-                    />
-                  </Box>
-                </Box>
-              </Grid>
-              <Grid
-                item
-                sm={4}
-                lg={3}
-                sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}
-              >
-                <img
-                  src={about3}
-                  alt="img"
-                  style={{
-                    maxWidth: '100%',
-                    height: 'auto',
-                    borderRadius: '10px',
-                    boxShadow: '10px 10px white',
-                  }}
-                />
-              </Grid>
-            </Grid>
-          )}
-
-          {isSmallScreen && (
-            <Grid container sx={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
-              <Grid item sm={5} lg={3}>
-                <img
-                  src={about3}
-                  alt="img"
-                  style={{
-                    maxWidth: '100%',
-                    height: 'auto',
-                    borderRadius: '10px',
-                    boxShadow: '10px 10px white',
-                  }}
-                />
-              </Grid>
-              <Grid item sm={6} lg={5}>
-                <Box sx={{ color: 'white', textAlign: { lg: 'left', sm: 'center', xs: 'center' } }}>
-                  <h1>How do I join?</h1>
-                </Box>
-                <p style={{ color: 'white', textAlign: 'center' }}>
-                  Check out amazing events we have planned as well as the opportunities we have for
-                  members.
-                </p>
-                <Box
-                  sx={{
-                    marginLeft: '-2%',
-                    display: 'flex',
-                    justifyContent: { xs: 'center', sm: 'left', lg: 'left' },
-                  }}
-                >
-                  <Button
-                    size="large"
-                    text="Become a Member ->"
-                    onClick={() => navigate('/opportunities')}
-                  />
-                </Box>
-              </Grid>
-            </Grid>
-          )}
+              <ImageWithBoxShadow 
+                src={about3}
+                alt="img"
+              />
           <Communities />
           <MeetTheTeam />
         </Container>
