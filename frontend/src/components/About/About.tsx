@@ -12,6 +12,7 @@ import Communities from './OurCommunities';
 import about1 from '../../images/aboutpage/about_1.jpg';
 import about2 from '../../images/aboutpage/about_2.jpg';
 import about3 from '../../images/aboutpage/about_3.jpg';
+import { ImageWithBoxShadow } from '../Opportunities/Opportunities';
 
 const About = () => {
   const navigate = useNavigate();
