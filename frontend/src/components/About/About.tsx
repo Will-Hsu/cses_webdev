@@ -107,35 +107,15 @@ const About = () => {
               </Box>
             </Grid>
           </Grid>
-          {!isSmallScreen && (
-            <Grid container sx={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
-              <Grid item sm={5.5} lg={5.5}>
-                <Box sx={{ color: 'white', marginBottom: 'auto' }}>
-                  <h1>Our Future</h1>
-                </Box>
-                <p style={{ color: 'white', fontSize: 'clamp(15px, 3vw, 20px)' }}>
-                  Our mission statement is to help our members get professional opportunities while
-                  fostering a network of individuals. We do this through quarterly career fairs,
-                  programs for career development, and project opportunities to gain experience.
-                </p>
-              </Grid>
-
-              <Grid
-                item
-                sm={3.5}
-                lg={2.5}
-                sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}
-              >
-                <img src={lightBulb} alt="img" style={{ marginRight: '10%', height: '75%' }} />
-              </Grid>
-            </Grid>
-          )}
-          {isSmallScreen && (
-            <Grid container sx={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
-              <Grid item sm={5} lg={3}>
-                <img src={lightBulb} alt="img" style={{ width: '98%', height: '95%'}} />
-              </Grid>
-              <Grid item sm={6} lg={5}>
+            <Grid 
+            container 
+            justifyContent='center'
+            columnSpacing={12}
+            mt={12} 
+            spacing={4}
+            direction={isSmallScreen ? 'column-reverse' : 'row'}
+            >
+              <Grid item sm={5}>
                 <Box sx={{ color: 'white', textAlign: { lg: 'left', sm: 'center', xs: 'center' } }}>
                   <h1>Our Future</h1>
                 </Box>
@@ -143,7 +123,7 @@ const About = () => {
                   style={{
                     color: 'white',
                     fontSize: 'clamp(15px, 3vw, 20px)',
-                    textAlign: 'center',
+                    textAlign: isSmallScreen? 'center' : 'left',
                   }}
                 >
                   Our mission statement is to help our members get professional opportunities while
@@ -151,8 +131,10 @@ const About = () => {
                   programs for career development, and project opportunities to gain experience.
                 </p>
               </Grid>
+              <Grid item sm={3} maxHeight={"100%"}>
+                <img src={lightBulb} alt="img" />
+              </Grid>
             </Grid>
-          )}
 
           {/* <Grid container sx={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
             <Grid
