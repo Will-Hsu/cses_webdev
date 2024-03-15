@@ -64,7 +64,6 @@ const Opportunities = () => {
             <ImageWithBoxShadow 
               src={members}
               alt='members'
-              boxColor='white'
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -110,7 +109,6 @@ const Opportunities = () => {
           <ImageWithBoxShadow 
               src={sponsors}
               alt="sponsors"
-              boxColor='white'
             />
           </Grid>
           <Grid item xs={12} sm={6}>
