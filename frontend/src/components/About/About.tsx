@@ -30,12 +30,17 @@ const About = () => {
           <Box sx={{ backgroundColor: 'rgba(0,0,0,0.5)', maxWidth: '90%', margin: '0 auto' }}>
             <Grid
               container
+              pt={4}
+              pb={2}
+              justifyContent='center'
+            >
+              <Grid item sm={6} pb={6}>
                 <ImageWithBoxShadow 
                   src={about1}
                   alt="img"
                 />
               </Grid>
-              <Grid item sm={6} md={5} lg={6}>
+              <Grid item sm={6}>
                 <Box
                   sx={{
                     color: 'white',
