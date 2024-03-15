@@ -14,13 +14,13 @@ import { useNavigate } from 'react-router-dom';
 interface ImageWithBoxShadowProps {
   src: string;
   alt: string;
-  boxColor: string;
+  boxColor?: string;
   borderColor?: string
   /* Optional clickable link */
   href?: string
 }
 
-export const ImageWithBoxShadow = ({ src, alt, boxColor, borderColor, href}: ImageWithBoxShadowProps) => {
+export const ImageWithBoxShadow = ({ src, alt, boxColor='white', borderColor, href}: ImageWithBoxShadowProps) => {
   const theme = useTheme();
   const styles = opportunitiesStyles(theme);
   return (
