@@ -20,7 +20,7 @@ interface ImageWithBoxShadowProps {
   href?: string
 }
 
-const ImageWithBoxShadow = ({ src, alt, boxColor, borderColor, href}: ImageWithBoxShadowProps) => {
+export const ImageWithBoxShadow = ({ src, alt, boxColor, borderColor, href}: ImageWithBoxShadowProps) => {
   const theme = useTheme();
   const styles = opportunitiesStyles(theme);
   return (
