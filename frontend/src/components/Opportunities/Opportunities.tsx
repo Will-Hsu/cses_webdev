@@ -28,7 +28,12 @@ export const ImageWithBoxShadow = ({ src, alt, boxColor, borderColor, href}: Ima
       <img
         src={src}
         alt={alt}
-        style={{ width: '85%', height: 'auto', boxShadow: `12px 12px ${boxColor}`, border: borderColor?`2px solid ${borderColor}`:``}}
+        style={{ 
+          width: '85%', 
+          height: 'auto', 
+          boxShadow: `12px 12px ${boxColor}`, 
+          border: borderColor?`2px solid ${borderColor}`:``
+        }}
       />
     </a>
   );
