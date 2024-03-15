@@ -243,11 +243,13 @@ const Home = () => {
                 ))}
               </div>
             )}
-            <Button
-              size="large"
-              text="See All Events ->"
-              onClick={() => navigate('/events')}
-            ></Button>
+            <div style={{ marginLeft: isMobile ? '-2%' : '-0.3%' }}> 
+              <Button
+                size="large"
+                text="See All Events ->"
+                onClick={() => navigate('/events')} 
+              ></Button>
+            </div>
           </div>
         </Container>
       </Box>
