@@ -53,8 +53,7 @@ const About = () => {
                     style={{
                       fontFamily: 'Chakra Petch',
                       fontSize: 'clamp(32px, 8vw, 65px)',
-                      fontWeight: '700',
-                      marginTop: '0',
+                      fontWeight: '700'
                     }}
                   >
                     WHAT IS CSES?
