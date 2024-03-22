@@ -107,91 +107,34 @@ const About = () => {
               </Box>
             </Grid>
           </Grid>
-            <Grid 
-            container 
-            justifyContent='center'
-            columnSpacing={12}
-            mt={12} 
-            spacing={4}
-            direction={isSmallScreen ? 'column-reverse' : 'row'}
-            >
-              <Grid item sm={5}>
-                <Box sx={{ color: 'white', textAlign: { lg: 'left', sm: 'center', xs: 'center' } }}>
-                  <h1>Our Future</h1>
-                </Box>
-                <p
-                  style={{
-                    color: 'white',
-                    fontSize: 'clamp(15px, 3vw, 20px)',
-                    textAlign: isSmallScreen? 'center' : 'left',
-                  }}
-                >
-                  Our mission statement is to help our members get professional opportunities while
-                  fostering a network of individuals. We do this through quarterly career fairs,
-                  programs for career development, and project opportunities to gain experience.
-                </p>
-              </Grid>
-              <Grid item sm={3} maxHeight={"100%"}>
-                <img src={lightBulb} alt="img" />
-              </Grid>
-            </Grid>
-
-          {/* <Grid container sx={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
-            <Grid
-              item
-              sm={4}
-              lg={3}
-              sx={{ display: 'flex', alignItems: 'center', marginRight: '3%' }}
-            >
-              <img
-                src={about2}
-                alt="img"
+          <Grid 
+          container 
+          justifyContent='center'
+          columnSpacing={12}
+          mt={12} 
+          spacing={4}
+          direction={isSmallScreen ? 'column-reverse' : 'row'}
+          >
+            <Grid item sm={5}>
+              <Box sx={{ color: 'white', textAlign: { lg: 'left', sm: 'center', xs: 'center' } }}>
+                <h1>Our Future</h1>
+              </Box>
+              <p
                 style={{
-                  maxWidth: '100%',
-                  height: 'auto',
-                  borderRadius: '10px',
-                  boxShadow: '12px 12px white',
-                }}
-              />
-            </Grid>
-            <Grid item sm={5} lg={5}>
-              <Box
-                sx={{
                   color: 'white',
-                  textAlign: { md: 'left', sm: 'left', xs: 'center' },
-                  fontSize: { xs: '0.9em', sm: '1em', lg: '1em' },
+                  fontSize: 'clamp(15px, 3vw, 20px)',
+                  textAlign: isSmallScreen? 'center' : 'left',
                 }}
               >
-                <h1>What's in store for me?</h1>
-              </Box>
-              <Box
-                sx={{
-                  display: 'flex',
-                  textAlign: { xs: 'center', sm: 'left' }, // Center on small screens, start from top on larger screens
-                }}
-              >
-                <p style={{ color: 'white', fontSize: 'clamp(15px, 3vw, 20px)' }}>
-                  Check out amazing events we have planned as well as the opportunities we have for
-                  members.
-                </p>
-              </Box>
-              <Box
-                sx={{
-                  marginLeft: '-2%',
-                  display: 'flex',
-                  justifyContent: { xs: 'center', sm: 'left', lg: 'left' },
-                }}
-              >
-                <div style={{ fontFamily: 'Chakra Petch' }}>
-                  <Button
-                    size="large"
-                    text="See Opportunities ->"
-                    onClick={() => navigate('/opportunities')}
-                  />
-                </div>
-              </Box>
+                Our mission statement is to help our members get professional opportunities while
+                fostering a network of individuals. We do this through quarterly career fairs,
+                programs for career development, and project opportunities to gain experience.
+              </p>
             </Grid>
-          </Grid> */}
+            <Grid item sm={3} maxHeight={"100%"}>
+              <img src={lightBulb} alt="img" />
+            </Grid>
+          </Grid>
           <Grid 
           container 
           justifyContent='center' 
