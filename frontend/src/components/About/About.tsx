@@ -34,14 +34,15 @@ const About = () => {
               pt={4}
               pb={2}
               justifyContent='center'
+              alignItems='center'
             >
-              <Grid item sm={6} pb={6}>
+              <Grid item sm={5} pl={{lg:'8%'}} pr={{lg:'2%'}}>
                 <ImageWithBoxShadow 
                   src={about1}
                   alt="img"
                 />
               </Grid>
-              <Grid item sm={6}>
+              <Grid item sm={7} pr={{lg: '8%'}}>
                 <Box
                   sx={{
                     color: 'white',
