@@ -1,0 +1,4 @@
+front-end: ['*/FE-*', '*/fe-*']
+back-end: ['*/BE-*', '*/be-*']
+bug: bug/*
+feature: feature/*
