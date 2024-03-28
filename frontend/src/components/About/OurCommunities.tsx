@@ -1,17 +1,13 @@
-import React from 'react';
-import { Container, Box, Link, Grid, createTheme, useMediaQuery } from '@mui/material';
+import { Container, Box, Link, Grid, useMediaQuery } from '@mui/material';
 import { aboutStyles } from './styles';
 import innovate from '../../images/ourCommunitiesImages/cses_innovate.png';
 import opensource from '../../images/ourCommunitiesImages/cses_opensource.png';
 import webdev from '../../images/ourCommunitiesImages/cses_webdev.png';
 import dev from '../../images/ourCommunitiesImages/cses_dev.png';
-import { flexbox } from '@mui/system';
 
 
 const Communities = () => {
   const styles = aboutStyles();
-  const theme = createTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const verySmallScreen = useMediaQuery('(max-width:350px')
 
   return (
