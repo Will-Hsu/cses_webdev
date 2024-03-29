@@ -91,14 +91,14 @@ const MemberProfile = (userData: MemberProfileProps) => {
       </h1>
       <Grid container justifyContent="center" alignItems="center" spacing={1}>
         {isXsScreen ? (
-          <Grid item xs={12}>
+          <Grid item xs={10}>
             <Avatar
               src={userData.memberPicture}
-              sx={{ width: 180, height: 180, margin: '0 auto' }}
+              sx={{ width: 250, height: 250, margin: '0 auto' }}
             />
           </Grid>
         ) : (
-          <Grid item xs={12} sm={4.5} lg={2.7}>
+          <Grid item xs={12} sm={5} lg={3.5}>
             <Avatar src={userData.memberPicture} sx={{ width: 250, height: 250 }} />
           </Grid>
         )}
@@ -168,10 +168,10 @@ const MemberProfile = (userData: MemberProfileProps) => {
               fontSize: 'clamp(0.8rem, 2.5vw, 1rem)',
             }}
           >
-            Member Tier:{' '}
-            <span style={{ fontWeight: 'bold' }}>{getTier(userData.memberEventsCount)}</span>{' '}
+            Member Tier:&nbsp;
+            <span style={{ fontWeight: 'bold' }}>{getTier(userData.memberEventsCount)}</span>
             <span style={{ color: '#F3C969', fontWeight: 'bold', margin: '0 5px' }}>|</span> Point
-            Balance: <span style={{ fontWeight: 'bold' }}>{userData.memberPoints}</span>
+            Balance:&nbsp;<span style={{ fontWeight: 'bold' }}>{userData.memberPoints}</span>
           </p>
           <p
             style={{
@@ -183,7 +183,7 @@ const MemberProfile = (userData: MemberProfileProps) => {
             Major:
             <span style={{ fontWeight: 'bold', marginLeft: '8px' }}>{userData.memberMajor}</span>
           </p>
-          {(userData.memberMinor != '') &&
+          {((typeof userData.memberMinor !== 'undefined')) &&
           <p
             style={{
               display: 'flex', // added
@@ -198,7 +198,7 @@ const MemberProfile = (userData: MemberProfileProps) => {
               display: 'flex', // added
               justifyContent: 'left', // added
               fontSize: '13px',
-              position: 'absolute',
+              maxWidth: '320px',
             }}>
               Get points, earn rewards, and advance to the next membership tier by attending our events!
             </p>

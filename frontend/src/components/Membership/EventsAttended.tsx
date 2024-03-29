@@ -20,13 +20,14 @@ export interface EventsAttendedProps {
 
 const EventsAttended = ({ eventsAttended }: EventsAttendedProps) => {
   const isMobile = useMediaQuery('(max-width: 767px)');
+  const isiPad = useMediaQuery('(max-width: 1000px)');
   const styles = membershipStyles(isMobile);
 
   return (
     <Container sx={styles.eventsAttendedBody}>
       <h1 style={styles.eventsAttendedTitle}>EVENTS ATTENDED</h1>
 
-      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '60px' }}>
+      <div style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '60px' }}>
         <img
           src={alertLogo}
           alt="Events Attended Alert"
@@ -37,7 +38,7 @@ const EventsAttended = ({ eventsAttended }: EventsAttendedProps) => {
         <Typography variant="subtitle1" sx={styles.eventsAttendText}>
           {eventsAttended.length === 0 && (
             <i>
-              Haven't attended an event yet? <Link href="/events"> Let's change that! </Link>
+              Haven't attended an event? <Link href="/events"> Let's change that! </Link>
               {/* Attend 2 more events and reach SENIOR MEMBER status!*/}
             </i>
           )}

@@ -15,6 +15,7 @@ interface RewardsProp {
 const RewardsMenu = (userData: RewardsProp) => {
   const styles = membershipStyles();
   const isMobile = useMediaQuery('(max-width: 767px)');
+  const isiPad = useMediaQuery('(max-width: 1000px)');
   const smallPrizePoints = 500;
   const mediumPrizePoints = 1250;
   const largePrizePoints = 2500;
@@ -81,11 +82,11 @@ const RewardsMenu = (userData: RewardsProp) => {
   };
 
   return (
-    <Container maxWidth="xl" sx={styles.rewardsBody}>
+    <Container maxWidth="xl" sx={{...styles.rewardsBody, marginLeft: isiPad ? '0' : '10%', }}>
       <Typography
         sx={{
           ...styles.eventsAttendedTitle,
-          marginLeft: isMobile ? '16%' : '0',
+          textAlign: isiPad ? 'center' : 'left'
         }}
       >
         REWARDS
@@ -94,8 +95,6 @@ const RewardsMenu = (userData: RewardsProp) => {
         style={{
           display: 'flex',
           flexDirection: isMobile ? 'column' : 'row',
-          alignItems: 'flex-start',
-          marginLeft: isMobile ? '16%' : '0',
         }}
       >
         <Button
