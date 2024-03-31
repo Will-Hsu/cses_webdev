@@ -12,7 +12,6 @@ import Communities from './OurCommunities';
 import about1 from '../../images/aboutpage/about_1.jpg';
 import about2 from '../../images/aboutpage/about_2.jpg';
 import about3 from '../../images/aboutpage/about_3.jpg';
-import { ImageWithBoxShadow } from '../Opportunities/Opportunities';
 
 const About = () => {
   const navigate = useNavigate();
@@ -31,18 +30,39 @@ const About = () => {
           <Box sx={{ backgroundColor: 'rgba(0,0,0,0.5)', maxWidth: '90%', margin: '0 auto' }}>
             <Grid
               container
-              pt={4}
-              pb={2}
-              justifyContent='center'
-              alignItems='center'
+              sx={{ marginTop: '7%', paddingTop: '3%', display: 'flex', justifyContent: 'center' }}
             >
-              <Grid item sm={5} pl={{lg:'8%'}} pr={{lg:'2%'}}>
-                <ImageWithBoxShadow 
+              <Grid
+                item
+                sm={6}
+                md={4}
+                lg={3}
+                sx={{
+                  paddingRight: {
+                    xs: '0%',
+                    sm: '5%',
+                  },
+                  textAlign: 'right',
+                  marginBottom: '5%',
+                  marginRight: '2%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginTop: '1%',
+                }}
+              >
+                <img
                   src={about1}
                   alt="img"
+                  style={{
+                    maxWidth: '110%',
+                    height: 'auto',
+                    borderRadius: '10px',
+                    boxShadow: '10px 10px white',
+                  }}
                 />
               </Grid>
-              <Grid item sm={7} pr={{lg: '8%'}}>
+              <Grid item sm={6} md={5} lg={6}>
                 <Box
                   sx={{
                     color: 'white',
@@ -54,7 +74,8 @@ const About = () => {
                     style={{
                       fontFamily: 'Chakra Petch',
                       fontSize: 'clamp(32px, 8vw, 65px)',
-                      fontWeight: '700'
+                      fontWeight: '700',
+                      marginTop: isSmallScreen ? '10%' : '0',
                     }}
                   >
                     WHAT IS CSES?
@@ -86,7 +107,7 @@ const About = () => {
               item
               sm={4}
               lg={3}
-              sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+              sx={{ display: 'flex', alignItems: 'center', justifyContent: isSmallScreen ? 'center' : 'flex-start' }}
             >
               <img src={books} alt="img" style={{ width: '80%' }} />
             </Grid>
@@ -107,44 +128,112 @@ const About = () => {
               </Box>
             </Grid>
           </Grid>
-          <Grid 
-          container 
-          justifyContent='center'
-          columnSpacing={12}
-          mt={12} 
-          spacing={4}
-          direction={isSmallScreen ? 'column-reverse' : 'row'}
-          >
-            <Grid item sm={5}>
-              <Box sx={{ color: 'white', textAlign: { lg: 'left', sm: 'center', xs: 'center' } }}>
-                <h1>Our Future</h1>
-              </Box>
-              <p
+          {!isSmallScreen && (
+            <Grid container sx={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
+              <Grid item sm={5.5} lg={5.5}>
+                <Box sx={{ color: 'white', marginBottom: 'auto' }}>
+                  <h1>Our Future</h1>
+                </Box>
+                <p style={{ color: 'white', fontSize: 'clamp(15px, 3vw, 20px)' }}>
+                  Our mission statement is to help our members get professional opportunities while
+                  fostering a network of individuals. We do this through quarterly career fairs,
+                  programs for career development, and project opportunities to gain experience.
+                </p>
+              </Grid>
+
+              <Grid
+                item
+                sm={3.5}
+                lg={2.5}
+                sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}
+              >
+                <img src={lightBulb} alt="img" style={{ marginRight: '10%', height: '75%' }} />
+              </Grid>
+            </Grid>
+          )}
+          {isSmallScreen && (
+            <Grid container sx={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
+              <Grid item sm={5} lg={3}>
+                <img src={lightBulb} alt="img" style={{ width: '98%', height: '95%'}} />
+              </Grid>
+              <Grid item sm={6} lg={5}>
+                <Box sx={{ color: 'white', textAlign: { lg: 'left', sm: 'center', xs: 'center' } }}>
+                  <h1>Our Future</h1>
+                </Box>
+                <p
+                  style={{
+                    color: 'white',
+                    fontSize: 'clamp(15px, 3vw, 20px)',
+                    textAlign: 'center',
+                  }}
+                >
+                  Our mission statement is to help our members get professional opportunities while
+                  fostering a network of individuals. We do this through quarterly career fairs,
+                  programs for career development, and project opportunities to gain experience.
+                </p>
+              </Grid>
+            </Grid>
+          )}
+
+          {/* <Grid container sx={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
+            <Grid
+              item
+              sm={4}
+              lg={3}
+              sx={{ display: 'flex', alignItems: 'center', marginRight: '3%' }}
+            >
+              <img
+                src={about2}
+                alt="img"
                 style={{
+                  maxWidth: '100%',
+                  height: 'auto',
+                  borderRadius: '10px',
+                  boxShadow: '12px 12px white',
+                }}
+              />
+            </Grid>
+            <Grid item sm={5} lg={5}>
+              <Box
+                sx={{
                   color: 'white',
-                  fontSize: 'clamp(15px, 3vw, 20px)',
-                  textAlign: isSmallScreen? 'center' : 'left',
+                  textAlign: { md: 'left', sm: 'left', xs: 'center' },
+                  fontSize: { xs: '0.9em', sm: '1em', lg: '1em' },
                 }}
               >
-                Our mission statement is to help our members get professional opportunities while
-                fostering a network of individuals. We do this through quarterly career fairs,
-                programs for career development, and project opportunities to gain experience.
-              </p>
+                <h1>What's in store for me?</h1>
+              </Box>
+              <Box
+                sx={{
+                  display: 'flex',
+                  textAlign: { xs: 'center', sm: 'left' }, // Center on small screens, start from top on larger screens
+                }}
+              >
+                <p style={{ color: 'white', fontSize: 'clamp(15px, 3vw, 20px)' }}>
+                  Check out amazing events we have planned as well as the opportunities we have for
+                  members.
+                </p>
+              </Box>
+              <Box
+                sx={{
+                  marginLeft: '-2%',
+                  display: 'flex',
+                  justifyContent: { xs: 'center', sm: 'left', lg: 'left' },
+                }}
+              >
+                <div style={{ fontFamily: 'Chakra Petch' }}>
+                  <Button
+                    size="large"
+                    text="See Opportunities ->"
+                    onClick={() => navigate('/opportunities')}
+                  />
+                </div>
+              </Box>
             </Grid>
-            <Grid item sm={3} maxHeight={"100%"}>
-              <img src={lightBulb} alt="img" />
-            </Grid>
-          </Grid>
-
-        <Container maxWidth="xl" sx={styles.body}>
-          <Box sx={{maxWidth: '90%', margin: '0 auto' }}>
-            <Grid 
-              container 
-              justifyContent='center' 
-              mt={12} mb={12} 
-              direction={isSmallScreen ? 'column-reverse' : 'row'}
-            >
-              <Grid item sm={7} pl={{lg: '8%'}}>
+          </Grid> */}
+          {!isSmallScreen && (
+            <Grid container sx={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
+              <Grid item sm={5} lg={5} sx={{ paddingRight: '4%' }}>
                 <Box sx={{ color: 'white', textAlign: { md: 'left', sm: 'left', xs: 'center' } }}>
                   <h1>How do I join?</h1>
                 </Box>
@@ -171,15 +260,67 @@ const About = () => {
                   </Box>
                 </Box>
               </Grid>
-              <Grid item sm={5} pl={{lg:'2%'}} pr={{lg:'8%'}}>
-                <ImageWithBoxShadow 
+              <Grid
+                item
+                sm={4}
+                lg={3}
+                sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}
+              >
+                <img
                   src={about3}
                   alt="img"
+                  style={{
+                    maxWidth: '100%',
+                    height: 'auto',
+                    borderRadius: '10px',
+                    boxShadow: '10px 10px white',
+                  }}
                 />
               </Grid>
             </Grid>
-          </Box>
-        </Container>
+          )}
+
+          {isSmallScreen && (
+            <Grid container sx={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
+              <Grid item sm={5} lg={3}>
+                <img
+                  src={about3}
+                  alt="img"
+                  style={{
+                    maxWidth: '100%',
+                    height: 'auto',
+                    borderRadius: '10px',
+                    boxShadow: '10px 10px white',
+                  }}
+                />
+              </Grid>
+              <Grid item sm={6} lg={5}>
+                <Box sx={{ color: 'white', marginTop: '10%', textAlign: { lg: 'left', sm: 'center', xs: 'center' } }}>
+                  <h1>How do I join?</h1>
+                </Box>
+                <p style={{ color: 'white', textAlign: 'center' }}>
+                  To become a general member, simply sign up with your UCSD email!
+                </p>
+                <p style={{ color: 'white', textAlign: 'center' }}>
+                  Do you want to be a part of the internal team? Become a member and follow us on
+                  our socials to be notified of when board applications open on a rolling basis.
+                </p>
+                <Box
+                  sx={{
+                    marginLeft: '-2%',
+                    display: 'flex',
+                    justifyContent: { xs: 'center', sm: 'left', lg: 'left' },
+                  }}
+                >
+                  <Button
+                    size="large"
+                    text="Become a Member ->"
+                    onClick={() => navigate('/opportunities')}
+                  />
+                </Box>
+              </Grid>
+            </Grid>
+          )}
           <Communities />
           <MeetTheTeam />
         </Container>

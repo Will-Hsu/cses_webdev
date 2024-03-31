@@ -217,6 +217,7 @@ const MeetTheTeam = () => {
           justifyContent: 'center',
           alignItems: 'center',
         }}
+        columnSpacing={{ xs: 1, sm: 2, md: 3 }}
       >
         {isMiddleScreen && (
           <Grid container item xs={12} justifyContent="center">
@@ -415,7 +416,7 @@ const MeetTheTeam = () => {
               ))}
 
             {emptyMembers.map((member, index) => (
-              <Grid item xs={12} sm={3.5} md={3.1} key={index + currentCategory.members.length}>
+              <Grid item xs={12} sm={3.5} md={3.1} lg={3.1} key={index + currentCategory.members.length}>
                 {/* Empty placeholder, no visible content */}
               </Grid>
             ))}
