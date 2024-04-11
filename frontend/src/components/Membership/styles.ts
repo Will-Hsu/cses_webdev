@@ -20,7 +20,7 @@ export const membershipStyles = (isMobile?: boolean) => ({
 
   eventsAttendedBody: {
     position: 'relative',
-    width: '90%',
+    width: '80%',
     marginBottom: '100px',
   },
 
@@ -65,7 +65,8 @@ export const membershipStyles = (isMobile?: boolean) => ({
     fontWeight: 500,
     fontFamily: 'Inter, sans-serif',
     fontSize: '17px',
-    color: '#000000'
+    color: '#000000',
+    textAlign: 'center'
   },
 
   leaderBoardMobileRanking: {
@@ -115,7 +116,7 @@ export const membershipStyles = (isMobile?: boolean) => ({
 
   rewardsBody: {
     position: 'relative',
-    width: '80%',
+    width: '100%',
     marginBottom: '100px',
   },
 
