@@ -52,11 +52,10 @@ const Membership = () => {
   const [rankings, setRankings] = useState<Array<Ranking>>([]);
   const navigate = useNavigate();
   const isMobile = useMediaQuery('(max-width: 767px)');
-  const isiPad = useMediaQuery('(max-width: 890px)');
+  const isiPad = useMediaQuery('(max-width: 1000px)');
   const styles = membershipStyles(isMobile);
   const [verificationCode, setVerificationCode] = useState('');
   const [isCodeVisible, setIsCodeVisible] = useState(true);
-  const theme = useTheme();
 
   const [showError, setShowError] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -166,16 +165,17 @@ const Membership = () => {
         {userData && (
           <Container
             style={{
-              display: 'flex',
-              alignItems: 'flex-start',
-              flexDirection: isiPad ? 'column' : 'row',
-            }}
-          >
+            display: 'flex',
+            alignItems: isiPad ? 'center' : 'flex-start',
+            flexDirection: isiPad ? 'column' : 'row',
+          }}>
             <div>
               <div>
                 <h1 style={{ ...styles.eventsAttendedTitle, textAlign: 'center' }}>
                   EVENT CHECK-IN
                 </h1>
+              </div>
+              <div>
                 <Collapse in={showSuccess} sx={styles.textfield}>
                   <Alert severity="success" action={alertCloseBtn(setShowSuccess)}>
                     Successfully checked in!
@@ -187,10 +187,11 @@ const Membership = () => {
                     Invalid event code — <strong>please re-enter a code!</strong>
                   </Alert>
                 </Collapse>
+              
                 <TextField
                   sx={{
                     ...styles.textfield,
-                    width: '65%',
+                    width: '70%',
                   }}
                   size="small"
                   placeholder={'6 Digit Code'}
@@ -212,7 +213,7 @@ const Membership = () => {
             </div>
 
             <div>
-              {isLoggedIn && userData && !isMobile && (
+              {isLoggedIn && userData && (
                 <RewardsMenu email={userData.email} points={userData.points} />
               )}
             </div>
