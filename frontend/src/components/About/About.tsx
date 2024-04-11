@@ -10,7 +10,6 @@ import lightBulb from '../../images/aboutlightbulb.png';
 import MeetTheTeam from './MeetTheTeam';
 import Communities from './OurCommunities';
 import about1 from '../../images/aboutpage/about_1.jpg';
-import about2 from '../../images/aboutpage/about_2.jpg';
 import about3 from '../../images/aboutpage/about_3.jpg';
 import { ImageWithBoxShadow } from '../Opportunities/Opportunities';
 
@@ -29,20 +28,11 @@ const About = () => {
         </Box>
         <Container maxWidth="xl" sx={styles.body}>
           <Box sx={{ backgroundColor: 'rgba(0,0,0,0.5)', maxWidth: '90%', margin: '0 auto' }}>
-            <Grid
-              container
-              pt={4}
-              pb={2}
-              justifyContent='center'
-              alignItems='center'
-            >
-              <Grid item sm={5} pl={{lg:'8%'}} pr={{lg:'2%'}}>
-                <ImageWithBoxShadow 
-                  src={about1}
-                  alt="img"
-                />
+            <Grid container pt={4} pb={2} justifyContent="center" alignItems="center">
+              <Grid item sm={5} pl={{ lg: '8%' }} pr={{ lg: '2%' }}>
+                <ImageWithBoxShadow src={about1} alt="img" />
               </Grid>
-              <Grid item sm={7} pr={{lg: '8%'}}>
+              <Grid item sm={7} pr={{ lg: '8%' }}>
                 <Box
                   sx={{
                     color: 'white',
@@ -54,7 +44,7 @@ const About = () => {
                     style={{
                       fontFamily: 'Chakra Petch',
                       fontSize: 'clamp(32px, 8vw, 65px)',
-                      fontWeight: '700'
+                      fontWeight: '700',
                     }}
                   >
                     WHAT IS CSES?
@@ -107,13 +97,13 @@ const About = () => {
               </Box>
             </Grid>
           </Grid>
-          <Grid 
-          container 
-          justifyContent='center'
-          columnSpacing={12}
-          mt={12} 
-          spacing={4}
-          direction={isSmallScreen ? 'column-reverse' : 'row'}
+          <Grid
+            container
+            justifyContent="center"
+            columnSpacing={12}
+            mt={12}
+            spacing={4}
+            direction={isSmallScreen ? 'column-reverse' : 'row'}
           >
             <Grid item sm={5}>
               <Box sx={{ color: 'white', textAlign: { lg: 'left', sm: 'center', xs: 'center' } }}>
@@ -123,7 +113,7 @@ const About = () => {
                 style={{
                   color: 'white',
                   fontSize: 'clamp(15px, 3vw, 20px)',
-                  textAlign: isSmallScreen? 'center' : 'left',
+                  textAlign: isSmallScreen ? 'center' : 'left',
                 }}
               >
                 Our mission statement is to help our members get professional opportunities while
@@ -131,55 +121,54 @@ const About = () => {
                 programs for career development, and project opportunities to gain experience.
               </p>
             </Grid>
-            <Grid item sm={3} maxHeight={"100%"}>
+            <Grid item sm={3} maxHeight={'100%'}>
               <img src={lightBulb} alt="img" />
             </Grid>
           </Grid>
 
-        <Container maxWidth="xl" sx={styles.body}>
-          <Box sx={{maxWidth: '90%', margin: '0 auto' }}>
-            <Grid 
-              container 
-              justifyContent='center' 
-              mt={12} mb={12} 
-              direction={isSmallScreen ? 'column-reverse' : 'row'}
-            >
-              <Grid item sm={7} pl={{lg: '8%'}}>
-                <Box sx={{ color: 'white', textAlign: { md: 'left', sm: 'left', xs: 'center' } }}>
-                  <h1>How do I join?</h1>
-                </Box>
-                <Box sx={{ color: 'white', textAlign: { lg: 'left', sm: 'left', xs: 'center' } }}>
-                  <p style={{ color: 'white', fontSize: 'clamp(15px, 3vw, 20px)' }}>
-                    To become a general member, simply sign up with your UCSD email!
-                  </p>
-                  <p style={{ color: 'white', fontSize: 'clamp(15px, 3vw, 20px)' }}>
-                    Do you want to be a part of the internal team? Become a member and follow us on
-                    our socials to be notified of when board applications open on a rolling basis.
-                  </p>
-                  <Box
-                    sx={{
-                      marginLeft: '-2%',
-                      display: 'flex',
-                      justifyContent: { xs: 'center', sm: 'left' },
-                    }}
-                  >
-                    <Button
-                      size="large"
-                      text="Become a Member ->"
-                      onClick={() => navigate('/membership')}
-                    />
+          <Container maxWidth="xl" sx={styles.body}>
+            <Box sx={{ maxWidth: '90%', margin: '0 auto' }}>
+              <Grid
+                container
+                justifyContent="center"
+                mt={12}
+                mb={12}
+                direction={isSmallScreen ? 'column-reverse' : 'row'}
+              >
+                <Grid item sm={7} pl={{ lg: '8%' }}>
+                  <Box sx={{ color: 'white', textAlign: { md: 'left', sm: 'left', xs: 'center' } }}>
+                    <h1>How do I join?</h1>
                   </Box>
-                </Box>
+                  <Box sx={{ color: 'white', textAlign: { lg: 'left', sm: 'left', xs: 'center' } }}>
+                    <p style={{ color: 'white', fontSize: 'clamp(15px, 3vw, 20px)' }}>
+                      To become a general member, simply sign up with your UCSD email!
+                    </p>
+                    <p style={{ color: 'white', fontSize: 'clamp(15px, 3vw, 20px)' }}>
+                      Do you want to be a part of the internal team? Become a member and follow us
+                      on our socials to be notified of when board applications open on a rolling
+                      basis.
+                    </p>
+                    <Box
+                      sx={{
+                        marginLeft: '-2%',
+                        display: 'flex',
+                        justifyContent: { xs: 'center', sm: 'left' },
+                      }}
+                    >
+                      <Button
+                        size="large"
+                        text="Become a Member ->"
+                        onClick={() => navigate('/membership')}
+                      />
+                    </Box>
+                  </Box>
+                </Grid>
+                <Grid item sm={5} pl={{ lg: '2%' }} pr={{ lg: '8%' }}>
+                  <ImageWithBoxShadow src={about3} alt="img" />
+                </Grid>
               </Grid>
-              <Grid item sm={5} pl={{lg:'2%'}} pr={{lg:'8%'}}>
-                <ImageWithBoxShadow 
-                  src={about3}
-                  alt="img"
-                />
-              </Grid>
-            </Grid>
-          </Box>
-        </Container>
+            </Box>
+          </Container>
           <Communities />
           <MeetTheTeam />
         </Container>
