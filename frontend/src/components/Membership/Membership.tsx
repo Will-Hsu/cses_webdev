@@ -3,7 +3,7 @@ import Confetti from 'react-confetti';
 import {
   useMediaQuery,
   TextField,
-  useTheme,
+  // useTheme,
   Button,
   Collapse,
   IconButton,
@@ -22,7 +22,7 @@ import RewardsMenu from './RewardsMenu';
 import axios from 'axios';
 import { userInfoAPI, topMembersAPI, addEvent, userRank } from '../../api';
 import { membershipStyles } from './styles';
-import { textAlign } from '@mui/system';
+// import { textAlign } from '@mui/system';
 
 interface Event {
   _id: string;
@@ -165,10 +165,11 @@ const Membership = () => {
         {userData && (
           <Container
             style={{
-            display: 'flex',
-            alignItems: isiPad ? 'center' : 'flex-start',
-            flexDirection: isiPad ? 'column' : 'row',
-          }}>
+              display: 'flex',
+              alignItems: isiPad ? 'center' : 'flex-start',
+              flexDirection: isiPad ? 'column' : 'row',
+            }}
+          >
             <div>
               <div>
                 <h1 style={{ ...styles.eventsAttendedTitle, textAlign: 'center' }}>
@@ -187,7 +188,7 @@ const Membership = () => {
                     Invalid event code — <strong>please re-enter a code!</strong>
                   </Alert>
                 </Collapse>
-              
+
                 <TextField
                   sx={{
                     ...styles.textfield,
@@ -229,7 +230,7 @@ const Membership = () => {
             myPoint={userData.points}
             myName={userData.name}
             myProfilePicture={userData.profilePicture}
-            currentUserRank = {currentUserRank}
+            currentUserRank={currentUserRank}
           />
         )}
       </div>
