@@ -20,7 +20,7 @@ export interface EventsAttendedProps {
 
 const EventsAttended = ({ eventsAttended }: EventsAttendedProps) => {
   const isMobile = useMediaQuery('(max-width: 767px)');
-  const isiPad = useMediaQuery('(max-width: 1000px)');
+  // const isiPad = useMediaQuery('(max-width: 1000px)');
   const styles = membershipStyles(isMobile);
 
   return (
@@ -49,7 +49,6 @@ const EventsAttended = ({ eventsAttended }: EventsAttendedProps) => {
             </i>
           )}
         </Typography>
-
       </div>
 
       {!isMobile && (
