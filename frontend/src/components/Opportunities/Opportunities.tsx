@@ -57,10 +57,10 @@ const Opportunities = () => {
       <Container maxWidth="xl" sx={styles.body}>
         <Typography sx={styles.title}>OPPORTUNITIES</Typography>
         <Grid container spacing={2} sx={{ justifyContent: 'center', alignItems: 'center' }}>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={12} md={6}>
             <ImageWithBoxShadow src={members} alt="members" />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={12} md={6}>
             <Typography sx={styles.subtitle}>
               For <span style={{ fontStyle: 'italic' }}>members</span>.
             </Typography>
@@ -88,8 +88,7 @@ const Opportunities = () => {
             </Typography>
             <Box
               sx={{
-                marginLeft: '-2%',
-                marginTop: '12%',
+                marginTop: '3rem',
                 display: 'flex',
                 justifyContent: { xs: 'center', sm: 'left' },
                 padding: '8px, 16px, 8px, 16px',
@@ -99,6 +98,7 @@ const Opportunities = () => {
                 size="large"
                 variant="outlined"
                 sx={{
+                  marginBottom: '2rem',
                   fontSize: '21px',
                   fontFamily: 'Chakra Petch, sans-serif',
                   fontWeight: '400',
@@ -107,7 +107,6 @@ const Opportunities = () => {
                   color: 'white',
                   padding: 'auto',
                   borderRadius: '10px',
-                  margin: '6px 8px',
                   '&:hover': {
                     borderColor: 'white',
                     backgroundColor: 'rgba(255, 255, 255, 0.2)',
@@ -119,10 +118,10 @@ const Opportunities = () => {
               </MuiButton>
             </Box>
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={12} md={6}>
             <ImageWithBoxShadow src={sponsors} alt="sponsors" />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={12} md={6}>
             <Typography sx={styles.subtitle}>
               For <span style={{ fontStyle: 'italic' }}>sponsors</span>.
             </Typography>
@@ -139,8 +138,7 @@ const Opportunities = () => {
             </Typography>
             <Box
               sx={{
-                marginLeft: '-2%',
-                marginTop: '12%',
+                marginTop: '3rem',
                 display: 'flex',
                 justifyContent: { xs: 'center', sm: 'left' },
                 padding: '8px, 16px, 8px, 16px',
@@ -158,7 +156,6 @@ const Opportunities = () => {
                   color: 'white',
                   padding: 'auto',
                   borderRadius: '10px',
-                  margin: '6px 8px',
                   '&:hover': {
                     borderColor: 'white',
                     backgroundColor: 'rgba(255, 255, 255, 0.2)',
