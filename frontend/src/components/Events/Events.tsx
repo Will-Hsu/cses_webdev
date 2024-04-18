@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 import bgTop from '../../images/shape.svg';
 import bgBtm from '../../images/shape.svg';
 import { event_style } from './styles';
@@ -95,20 +95,21 @@ const Events = () => {
     // if ipad view set styles for ipad
     eventsContainerStyle.maxWidth = '100vw';
     eventsContainerStyle.overflowX = 'hidden';
-    eventsContainerStyle.alignItems = 'center';
-    eventsContainerStyle.justifyContent = 'center';
+    eventsContainerStyle.alignItems = 'flex-start';
+    //eventsContainerStyle.justifyContent = 'center';
     eventsContainerStyle.flexWrap = 'wrap' as 'wrap';
   }
 
   if (isMobile) {
     // if mobile view set styles for mobile
-    eventsContainerStyle.maxWidth = '250px';
+    // eventsContainerStyle.maxWidth = '250px';
     eventsContainerStyle.width = '100%'; // Set width to 100% of the parent container
     eventsContainerStyle.padding = '0'; // Remove any padding
-    eventsContainerStyle.margin = 'auto'; // Remove any margin
+    // eventsContainerStyle.margin = 'auto'; // Remove any margin
     eventsContainerStyle.overflowX = 'auto';
     eventsContainerStyle.overflowY = 'auto';
     eventsContainerStyle.flexWrap = 'wrap' as 'wrap';
+    eventsContainerStyle.alignItems = 'flex-start';
   }
 
   useEffect(() => {
@@ -323,12 +324,12 @@ const Events = () => {
         )}
 
         {/* Buttons for filtering events */}
-        {displayedFutureEvents.length > 0 && (
+        {displayedFutureEvents.length >= 0 && (
           <div
             style={{
               display: 'flex',
               justifyContent: 'flex-start',
-              marginLeft: '38px',
+              marginLeft: '30px',
               marginTop: '-25px',
               marginBottom: '3%'
             }}
@@ -358,7 +359,6 @@ const Events = () => {
                 fontWeight: '700',
                 display: 'flex',
                 flexDirection: 'row',
-                marginLeft: '39px',
               }}
             >
               No upcoming events
@@ -486,8 +486,7 @@ const Events = () => {
                 fontFamily: 'Chakra Petch',
                 fontWeight: '700',
                 display: 'flex',
-                flexDirection: 'row',
-                marginLeft: '39px',
+                flexDirection: 'row'
               }}
             >
               No past events
