@@ -96,16 +96,13 @@ const Events = () => {
     eventsContainerStyle.maxWidth = '100vw';
     eventsContainerStyle.overflowX = 'hidden';
     eventsContainerStyle.alignItems = 'flex-start';
-    //eventsContainerStyle.justifyContent = 'center';
     eventsContainerStyle.flexWrap = 'wrap' as 'wrap';
   }
 
   if (isMobile) {
     // if mobile view set styles for mobile
-    // eventsContainerStyle.maxWidth = '250px';
     eventsContainerStyle.width = '100%'; // Set width to 100% of the parent container
     eventsContainerStyle.padding = '0'; // Remove any padding
-    // eventsContainerStyle.margin = 'auto'; // Remove any margin
     eventsContainerStyle.overflowX = 'auto';
     eventsContainerStyle.overflowY = 'auto';
     eventsContainerStyle.flexWrap = 'wrap' as 'wrap';
