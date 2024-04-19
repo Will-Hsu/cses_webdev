@@ -107,7 +107,7 @@ const About = () => {
             direction={isSmallScreen ? 'column-reverse' : 'row'}
           >
             <Grid item sm={5}>
-              <Box sx={{ color: 'white', textAlign: { lg: 'left', sm: 'center', xs: 'center' } }}>
+              <Box sx={{ color: 'white', textAlign: { lg: 'left', sm: 'left', xs: 'center' } }}>
                 <h1>Our Future</h1>
               </Box>
               <p
@@ -117,12 +117,10 @@ const About = () => {
                   textAlign: isSmallScreen ? 'center' : 'left',
                 }}
               >
-                Our mission statement is to help our members get professional opportunities while
-                fostering a network of individuals. We do this through quarterly career fairs,
-                programs for career development, and project opportunities to gain experience.
+                CSES was the first CSE organization at UCSD starting over twenty years ago, and we have innovated over the years to stay relevant in serving the CSE community. We are open to all majors and indivduals who are interested in computing!
               </p>
             </Grid>
-            <Grid item sm={3} maxHeight={'100%'}>
+            <Grid item sm={4} md={3} lg={3} maxHeight={'100%'}>
               <img src={lightBulb} alt="img" />
             </Grid>
           </Grid>
