@@ -90,10 +90,7 @@ const About = () => {
               >
                 <h1>Our History</h1>
                 <p style={{ color: 'white', fontSize: 'clamp(15px, 3vw, 20px)' }}>
-                  Our mission statement is to help our members get professional opportunities while
-                  fostering a network of individuals. We do this through quarterly career fairs,
-                  mentorship programs for career development, and project opportunities to gain
-                  experience.
+                  CSES was the first CSE organization at UCSD starting over twenty years ago, and we have innovated over the years to stay relevant in serving the CSE community. We are open to all majors and indivduals who are interested in computing!
                 </p>
               </Box>
             </Grid>
@@ -117,7 +114,7 @@ const About = () => {
                   textAlign: isSmallScreen ? 'center' : 'left',
                 }}
               >
-                CSES was the first CSE organization at UCSD starting over twenty years ago, and we have innovated over the years to stay relevant in serving the CSE community. We are open to all majors and indivduals who are interested in computing!
+                Our mission statement is to help our members get professional opportunities while fostering a network of individuals. We do this through quarterly career fairs, mentorship programs for career development, and project opportunities to gain experience.
               </p>
             </Grid>
             <Grid item sm={4} md={3} lg={3} maxHeight={'100%'}>
