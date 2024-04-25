@@ -46,8 +46,6 @@ const Events = () => {
   const [displayedPastEvents, setDisplayedPastEvents] = useState(pastEvents);
   const [isThisWeekClicked, setIsThisWeekClicked] = useState(false);
   const [isThisMonthClicked, setIsThisMonthClicked] = useState(false);
-  const [is2023Clicked, setIs2023Clicked] = useState(false);
-  const [isYearClicked, setIsYearClicked] = useState(false);
   // add state to keep track of the total pages based on the filtered events
   const [filteredTotalPagesPast, setFilteredTotalPagesPast] = useState(totalPagesPast);
 
@@ -300,19 +298,11 @@ const Events = () => {
     <div style={{ position: 'relative', overflow: 'hidden' }}>
       <img src={bgTop} alt="bg1" style={{ ...styles.bg1, position: 'absolute' }} />
       <img src={bgBtm} alt="bg2" style={{ ...styles.bg2, position: 'absolute' }} />
-      <Container maxWidth="xl" sx={styles.body}>
-        <h1
-          style={{
-            color: 'white',
-            marginLeft: '39px',
-            marginTop: '50px',
-            fontFamily: 'Chakra Petch',
-            fontSize: 'clamp(32px, 8vw, 65px)',
-            fontWeight: '700',
-          }}
-        >
-          EVENTS
-        </h1>
+      <Container maxWidth="xl" sx={styles.body} >
+        <Grid item mt={6} mb={2} ml={5} 
+        sx={{ color: 'white', fontFamily: 'Chakra Petch', fontSize: 'clamp(32px, 8vw, 65px)', fontWeight: '700' }}>
+        EVENTS
+      </Grid>
 
         {isLoading && (
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -322,15 +312,7 @@ const Events = () => {
 
         {/* Buttons for filtering events */}
         {displayedFutureEvents.length >= 0 && (
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'flex-start',
-              marginLeft: '30px',
-              marginTop: '-25px',
-              marginBottom: '3%'
-            }}
-          >
+          <Grid item container mb={4} ml={4} justifyContent="flex-start">
             <Button
               size="medium"
               text="This Week"
@@ -343,45 +325,24 @@ const Events = () => {
               infocus={isThisMonthClicked}
               onClick={handleThisMonthClick}
             ></Button>
-          </div>
+          </Grid>
         )}
         {/* Render EventBoxes for future events */}
         <div style={{ ...eventsContainerStyle, marginTop: '20px' }}>
           {(displayedFutureEvents.length === 0 && (
-            <div
-              style={{
-                color: 'white',
-                fontSize: '20px',
-                fontFamily: 'Chakra Petch',
-                fontWeight: '700',
-                display: 'flex',
-                flexDirection: 'row',
-              }}
-            >
+            <Grid item ml={1} 
+            sx={{ color: 'white', fontSize: 20, fontFamily: 'Chakra Petch', fontWeight: '700' }}>
               No upcoming events
-            </div>
+            </Grid>
           )) ||
             renderEventBoxes(displayedFutureEvents)}
         </div>
 
         {displayedFutureEvents.length > 0 && (
-          <div>
-            <p
-              style={{
-                color: 'white',
-                fontSize: 'clamp(15px, 3vw, 20px)',
-                fontFamily: 'Chakra Petch',
-                fontWeight: '700',
-                display: 'flex',
-                flexDirection: 'row',
-                marginLeft: isDesktop ? '39px' : '',
-                alignItems: isDesktop ? '' : 'center',
-                justifyContent: isDesktop ? '' : 'center'
-              }}
-            >
+          <Grid item mt={2} ml={5} 
+          sx={{ color: 'white', fontSize: 'clamp(15px, 3vw, 20px)', fontFamily: 'Chakra Petch', fontWeight: '700' }}>
               Page {pageNumberUpcoming} of {totalPagesUpcoming}
-            </p>
-          </div>
+          </Grid>
         )}
         {totalPagesUpcoming > 1 && (
           <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
