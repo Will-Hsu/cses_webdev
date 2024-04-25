@@ -312,7 +312,7 @@ const Events = () => {
 
         {/* Buttons for filtering events */}
         {displayedFutureEvents.length >= 0 && (
-          <Grid item container mb={4} ml={4} justifyContent="flex-start">
+          <Grid item container mb={3} ml={4} justifyContent="flex-start">
             <Button
               size="medium"
               text="This Week"
@@ -330,7 +330,7 @@ const Events = () => {
         {/* Render EventBoxes for future events */}
         <div style={{ ...eventsContainerStyle, marginTop: '20px' }}>
           {(displayedFutureEvents.length === 0 && (
-            <Grid item ml={1} 
+            <Grid item
             sx={{ color: 'white', fontSize: 20, fontFamily: 'Chakra Petch', fontWeight: '700' }}>
               No upcoming events
             </Grid>
