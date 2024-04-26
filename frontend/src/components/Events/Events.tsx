@@ -392,7 +392,7 @@ const Events = () => {
         )}
 
         {/* Render EventBoxes for past events */}
-        <Grid item mt={15} mb={5} ml={5} 
+        <Grid item mt={15} mb={2} ml={5} 
         sx={{ color: 'white', fontFamily: 'Chakra Petch', fontSize: 'clamp(32px, 8vw, 65px)', fontWeight: '700' }}>
           PAST EVENTS
         </Grid>
@@ -404,15 +404,7 @@ const Events = () => {
         )}
         {/* Buttons for filtering past events */}
         {displayedPastEvents.length > 0 && (
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'flex-start',
-              marginLeft: '30px',
-              marginTop: '-25px',
-              marginBottom: '3%'
-            }}
-          >
+          <Grid item container mb={4} ml={4} justifyContent="flex-start">
             {/* <Button size="medium" text="2023" infocus={is2023Clicked} onClick={handle2023}></Button> */}
             
             {/*Buttons that handle general year */}
@@ -425,7 +417,7 @@ const Events = () => {
                 onClick={() => handleYearClick(year)}
               />
             ))}
-          </div>
+          </Grid>
         )}
         <div style={{ ...eventsContainerStyle, marginTop: '20px' }}>
           {(displayedPastEvents.length === 0 && !isLoading && (
