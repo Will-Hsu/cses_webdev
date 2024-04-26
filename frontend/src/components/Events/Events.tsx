@@ -392,18 +392,10 @@ const Events = () => {
         )}
 
         {/* Render EventBoxes for past events */}
-        <h1
-          style={{
-            color: 'white',
-            marginLeft: '39px',
-            marginTop: '117px',
-            fontFamily: 'Chakra Petch',
-            fontSize: 'clamp(32px, 8vw, 65px)',
-            fontWeight: '700',
-          }}
-        >
+        <Grid item mt={15} mb={5} ml={5} 
+        sx={{ color: 'white', fontFamily: 'Chakra Petch', fontSize: 'clamp(32px, 8vw, 65px)', fontWeight: '700' }}>
           PAST EVENTS
-        </h1>
+        </Grid>
 
         {isLoading && (
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
