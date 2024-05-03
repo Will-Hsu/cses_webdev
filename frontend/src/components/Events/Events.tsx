@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 import bgTop from '../../images/shape.svg';
 import bgBtm from '../../images/shape.svg';
 import { event_style } from './styles';
@@ -37,17 +37,15 @@ const Events = () => {
 
   const [upcomingEvents, setUpcomingEvents] = useState<EventData[]>([]);
   const [pastEvents, setPastEvents] = useState<EventData[]>([]);
-  const [selectedYear, setSelectedYear] = useState<number | null>(null);
+  const [selectedYear, setSelectedYear] = useState<number | null>(new Date().getFullYear()); // Default to current year
   const [selectedMonth] = useState<number | null>(null);
-  const [pastEventYears, setPastEventYears] = useState(new Set<number>());
+  const [pastEventYears, setPastEventYears] = useState<number[]>([]);
 
 
   const [displayedFutureEvents, setDisplayedFutureEvents] = useState(upcomingEvents);
   const [displayedPastEvents, setDisplayedPastEvents] = useState(pastEvents);
   const [isThisWeekClicked, setIsThisWeekClicked] = useState(false);
   const [isThisMonthClicked, setIsThisMonthClicked] = useState(false);
-  const [is2023Clicked, setIs2023Clicked] = useState(false);
-  const [isYearClicked, setIsYearClicked] = useState(false);
   // add state to keep track of the total pages based on the filtered events
   const [filteredTotalPagesPast, setFilteredTotalPagesPast] = useState(totalPagesPast);
 
@@ -95,27 +93,25 @@ const Events = () => {
     // if ipad view set styles for ipad
     eventsContainerStyle.maxWidth = '100vw';
     eventsContainerStyle.overflowX = 'hidden';
-    eventsContainerStyle.alignItems = 'center';
-    eventsContainerStyle.justifyContent = 'center';
+    eventsContainerStyle.alignItems = 'flex-start';
     eventsContainerStyle.flexWrap = 'wrap' as 'wrap';
   }
 
   if (isMobile) {
     // if mobile view set styles for mobile
-    eventsContainerStyle.maxWidth = '250px';
     eventsContainerStyle.width = '100%'; // Set width to 100% of the parent container
     eventsContainerStyle.padding = '0'; // Remove any padding
-    eventsContainerStyle.margin = 'auto'; // Remove any margin
     eventsContainerStyle.overflowX = 'auto';
     eventsContainerStyle.overflowY = 'auto';
     eventsContainerStyle.flexWrap = 'wrap' as 'wrap';
+    eventsContainerStyle.alignItems = 'flex-start';
   }
 
   useEffect(() => {
     // Set media queries
     let upcomingEventsEndpoint = `${process.env.REACT_APP_BACKEND_URL}/api/v1/events?type=upcoming`;
     let pastEventsEndpoint = `${process.env.REACT_APP_BACKEND_URL}/api/v1/events?type=past`;
-
+  
     const fetchUpcomingEvents = async () => {
       try {
         const response = await fetch(upcomingEventsEndpoint);
@@ -127,24 +123,26 @@ const Events = () => {
         console.error('Error fetching upcoming events:', error);
       }
     };
-
+  
     const fetchPastEvents = async () => {
       try {
         const response = await fetch(pastEventsEndpoint);
         const data = await response.json();
         setTotalPagesPast(Math.ceil(data.length / 6));
         setPastEvents(data);
-
-        // Extract years from past events
-        const years = new Set<number>(data.map((event: EventData) => new Date(event.end_time).getFullYear()));
-        setPastEventYears(years);
-
+  
+        // Extract years from past events and sort in descending order
+        const years = Array.from(new Set(data.map((event: EventData) => new Date(event.end_time).getFullYear())))
+          .sort((a, b) => (b as number) - (a as number)); // Explicit type casting for 'a' and 'b'
+        setPastEventYears(years as number[]);
+        
+  
         paginate(data, 1, totalPagesPast, 'past');
       } catch (error) {
         console.error('Error fetching past events:', error);
       }
     };
-
+  
     async function fetchData() {
       try {
         await Promise.all([fetchUpcomingEvents(), fetchPastEvents()]);
@@ -154,9 +152,10 @@ const Events = () => {
         setIsLoading(false);
       }
     }
-
+  
     fetchData();
-  }, [selectedYear, selectedMonth, totalPagesUpcoming, totalPagesPast]);
+  }, [selectedYear, selectedMonth, totalPagesUpcoming, totalPagesPast, setTotalPagesUpcoming, setTotalPagesPast]);
+  
 
   const handleThisWeekClick = () => {
     if (isThisWeekClicked) {
@@ -302,19 +301,11 @@ const Events = () => {
     <div style={{ position: 'relative', overflow: 'hidden' }}>
       <img src={bgTop} alt="bg1" style={{ ...styles.bg1, position: 'absolute' }} />
       <img src={bgBtm} alt="bg2" style={{ ...styles.bg2, position: 'absolute' }} />
-      <Container maxWidth="xl" sx={styles.body}>
-        <h1
-          style={{
-            color: 'white',
-            marginLeft: '39px',
-            marginTop: '50px',
-            fontFamily: 'Chakra Petch',
-            fontSize: 'clamp(32px, 8vw, 65px)',
-            fontWeight: '700',
-          }}
-        >
-          EVENTS
-        </h1>
+      <Container maxWidth="xl" sx={styles.body} >
+        <Grid item mt={6} mb={2} ml={5} 
+        sx={{ color: 'white', fontFamily: 'Chakra Petch', fontSize: 'clamp(32px, 8vw, 65px)', fontWeight: '700' }}>
+        EVENTS
+      </Grid>
 
         {isLoading && (
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -323,16 +314,8 @@ const Events = () => {
         )}
 
         {/* Buttons for filtering events */}
-        {displayedFutureEvents.length > 0 && (
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'flex-start',
-              marginLeft: '38px',
-              marginTop: '-25px',
-              marginBottom: '3%'
-            }}
-          >
+        {displayedFutureEvents.length >= 0 && (
+          <Grid item container mb={3} ml={4} justifyContent="flex-start">
             <Button
               size="medium"
               text="This Week"
@@ -345,46 +328,24 @@ const Events = () => {
               infocus={isThisMonthClicked}
               onClick={handleThisMonthClick}
             ></Button>
-          </div>
+          </Grid>
         )}
         {/* Render EventBoxes for future events */}
         <div style={{ ...eventsContainerStyle, marginTop: '20px' }}>
           {(displayedFutureEvents.length === 0 && (
-            <div
-              style={{
-                color: 'white',
-                fontSize: '20px',
-                fontFamily: 'Chakra Petch',
-                fontWeight: '700',
-                display: 'flex',
-                flexDirection: 'row',
-                marginLeft: '39px',
-              }}
-            >
+            <Grid item
+            sx={{ color: 'white', fontSize: 20, fontFamily: 'Chakra Petch', fontWeight: '700' }}>
               No upcoming events
-            </div>
+            </Grid>
           )) ||
             renderEventBoxes(displayedFutureEvents)}
         </div>
 
         {displayedFutureEvents.length > 0 && (
-          <div>
-            <p
-              style={{
-                color: 'white',
-                fontSize: 'clamp(15px, 3vw, 20px)',
-                fontFamily: 'Chakra Petch',
-                fontWeight: '700',
-                display: 'flex',
-                flexDirection: 'row',
-                marginLeft: isDesktop ? '39px' : '',
-                alignItems: isDesktop ? '' : 'center',
-                justifyContent: isDesktop ? '' : 'center'
-              }}
-            >
+          <Grid item mt={2} ml={5} 
+          sx={{ color: 'white', fontSize: 'clamp(15px, 3vw, 20px)', fontFamily: 'Chakra Petch', fontWeight: '700' }}>
               Page {pageNumberUpcoming} of {totalPagesUpcoming}
-            </p>
-          </div>
+          </Grid>
         )}
         {totalPagesUpcoming > 1 && (
           <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
@@ -434,18 +395,10 @@ const Events = () => {
         )}
 
         {/* Render EventBoxes for past events */}
-        <h1
-          style={{
-            color: 'white',
-            marginLeft: '39px',
-            marginTop: '117px',
-            fontFamily: 'Chakra Petch',
-            fontSize: 'clamp(32px, 8vw, 65px)',
-            fontWeight: '700',
-          }}
-        >
+        <Grid item mt={15} mb={2} ml={5} 
+        sx={{ color: 'white', fontFamily: 'Chakra Petch', fontSize: 'clamp(32px, 8vw, 65px)', fontWeight: '700' }}>
           PAST EVENTS
-        </h1>
+        </Grid>
 
         {isLoading && (
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -454,19 +407,11 @@ const Events = () => {
         )}
         {/* Buttons for filtering past events */}
         {displayedPastEvents.length > 0 && (
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'flex-start',
-              marginLeft: '30px',
-              marginTop: '-25px',
-              marginBottom: '3%'
-            }}
-          >
+          <Grid item container mb={4} ml={4} justifyContent="flex-start">
             {/* <Button size="medium" text="2023" infocus={is2023Clicked} onClick={handle2023}></Button> */}
             
             {/*Buttons that handle general year */}
-            {Array.from(pastEventYears).sort().map(year => (
+            {Array.from(pastEventYears).sort().reverse().map(year => (
               <Button
                 key={year}
                 size="medium"
@@ -475,7 +420,7 @@ const Events = () => {
                 onClick={() => handleYearClick(year)}
               />
             ))}
-          </div>
+          </Grid>
         )}
         <div style={{ ...eventsContainerStyle, marginTop: '20px' }}>
           {(displayedPastEvents.length === 0 && !isLoading && (
@@ -486,8 +431,7 @@ const Events = () => {
                 fontFamily: 'Chakra Petch',
                 fontWeight: '700',
                 display: 'flex',
-                flexDirection: 'row',
-                marginLeft: '39px',
+                flexDirection: 'row'
               }}
             >
               No past events

@@ -348,7 +348,7 @@ const EventBox = ({
               {calendar_link !== '' && (
                 <a 
                   href={calendar_link}
-                  style={{ marginLeft: instagram_link === '' ? '40px' : '10px' }}>
+                  style={{ marginLeft: instagram_link === '' ? '0px' : '10px' }}>
                   <img
                     src={calendarIcon}
                     alt="Calendar Icon"
