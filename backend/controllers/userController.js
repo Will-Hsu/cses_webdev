@@ -187,13 +187,13 @@ export const userEventsUpdate = asyncHandler(async (req, res) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: 'User not found.' });
     }
 
     const event = await Event.findOne({ code: code }).exec();
 
     if (!event) {
-      return res.status(400).json({ message: 'Invalid Code' });
+      return res.status(400).json({ message: 'Invalid Code.' });
     }
 
     // Get the current time
@@ -202,7 +202,7 @@ export const userEventsUpdate = asyncHandler(async (req, res) => {
     // Check if the event has already started
     // hack for GBM
     if (code !== '996913' && currentTime < event.start_time) {
-      return res.status(400).json({ message: 'Event has not started' });
+        return res.status(400).json({ message: `Try again later! Event checkin will start in ${Math.ceil(hoursUntilEventStart)} hours!` });
     }
 
     // Calculate the time difference between the event start time and the current time in milliseconds
@@ -213,14 +213,14 @@ export const userEventsUpdate = asyncHandler(async (req, res) => {
     // Calculate the number of hours until the event starts (in hours)
     const hoursUntilEventStart = timeDifference / (1000 * 60 * 60);
 
-    // Check if the event is within 24 hours of its start time
+    // if 24 hours after the event already started
     if (hoursUntilEventStart > 24) {
-      return res.status(400).json({ message: 'Expired Code' });
+      return res.status(400).json({ message: 'Expired Code.' });
     }
 
     // Check if the event ID is already in the eventsAttended array
     if (user.eventsAttended.includes(event._id)) {
-      return res.status(400).json({ message: 'Event already attended' });
+      return res.status(400).json({ message: 'Event already attended.' });
     }
 
     // Determine points based on whether the event is major or minor
@@ -235,10 +235,10 @@ export const userEventsUpdate = asyncHandler(async (req, res) => {
     // Save the updated user
     await user.save();
 
-    return res.status(200).json({ message: 'Event added to eventsAttended' });
+    return res.status(200).json({ message: 'Successfuly checked into the event!' });
   } catch (error) {
     console.error('Error:', error);
-    return res.status(500).json({ message: 'Internal server error' });
+    return res.status(500).json({ message: `Internal server error... please contact CSES staff if this keeps happening!` });
   }
 });
 
