@@ -42,15 +42,19 @@ import Shambhavi from '../../images/meettheteamImages/shambhavi mittal.jpg';
 import Ganesh from '../../images/meettheteamImages/ganesh kumarappan.jpg';
 import Sardor from '../../images/meettheteamImages/sardor sobirov.jpg';
 import Shreya from '../../images/meettheteamImages/shreya gupta.jpg';
+import ShreyaN from '../../images/meettheteamImages/Shreya Nagunuri.png';
 import Ryan from '../../images/meettheteamImages/ryan rickey.jpg';
 //.import Saleha from '../../images/meettheteamImages/DSC_1386 - Saleha Ahmedi.jpg';
 import Viren from '../../images/meettheteamImages/viren nathan.jpg';
 import Kevin from '../../images/meettheteamImages/kevin kim.jpeg';
+import KevinW from '../../images/meettheteamImages/KevinWu.png';
 import Sofia from '../../images/meettheteamImages/sofia nguyen.png';
 import Maanasa from '../../images/meettheteamImages/maanasa prasad.png';
 import Ali from '../../images/meettheteamImages/ali alani.png';
 import Michael from '../../images/meettheteamImages/michael he.png';
-import Cole from '../../images/meettheteamImages/cole.png'
+import Cole from '../../images/meettheteamImages/cole.png';
+import Victor from '../../images/meettheteamImages/VictorKim.jpeg';
+import Sancho from '../../images/meettheteamImages/SanchoS.png';
 
 const categories = [
   {
@@ -82,15 +86,14 @@ const categories = [
       { name: 'Will Hsu', title: 'Engineering Manager', photo: Will },
       { name: 'Delvin Bajoua', title: 'Product Manager', photo: Delvin },
       { name: 'Shreya Gupta', title: 'Development Team Chair', photo: Shreya },
-      { name: 'Hogun Kim', title: 'Project Coordinator', photo: shape },
-      { name: 'Sadrac Santacruz Ibarra', title: 'Frontend Developer', photo: Sadrac },
-      { name: 'Kaung Min Khant', title: 'Frontend Developer', photo: Kaung },
+      { name: 'Sardor Sobirov', title: 'Frontend Developer', photo: Sardor },
       { name: 'Sithu Soe', title: 'Frontend Developer', photo: Sithu },
       { name: 'Joyce Lu', title: 'Frontend Developer', photo: Joyce },
-      { name: 'Eddie Ho', title: 'Backend Developer', photo: Eddie },
+      { name: 'Kevin Wu', title: 'Frontend Developer', photo: KevinW },
+      { name: 'Shreya Nagunuri', title: 'Backend Developer', photo: ShreyaN },
+      { name: 'Victor Kim', title: 'Backend Developer', photo: Victor },
       { name: 'Brian Liu', title: 'Backend Developer', photo: Brian },
       { name: 'Ganesh Kumarappan', title: 'Backend Developer', photo: Ganesh },
-      { name: 'Sardor Sobirov', title: 'Frontend Developer', photo: Sardor },
     ],
   },
   {
