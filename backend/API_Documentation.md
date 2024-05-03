@@ -239,37 +239,37 @@ Jump to: [userCreate](#usercreate), [getUserInfo](#getuserinfo), [userCheck](#us
 ```200``` - Successful update
 ```json
 {
-    "message": "Event added to eventsAttended"
+    "message": "Successfuly checked into the event!"
 }
 ```
 ```400``` - Error (Invalid code)
 ```json
 {
-    "message": "Invalid code"
+    "message": "Invalid code."
 }
 ```
 ```400``` - Error (Event has not started)
 ```json
 {
-    "message": "Event has not started"
+    "message": "Try again later! Event checkin will start in <hours until event> hours!"
 }
 ```
 ```400``` - Error (Expired code)
 ```json
 {
-    "message": "Expired code"
+    "message": "Expired code."
 }
 ```
 ```400``` - Error (Event already attended)
 ```json
 {
-    "message": "Event already attended"
+    "message": "Event already attended."
 }
 ```
 ```404``` - User not found
 ```json
 {
-    "message": "User not found"
+    "message": "User not found."
 }
 ```
 
