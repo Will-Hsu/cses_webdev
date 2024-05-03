@@ -5,7 +5,7 @@ import bg from '../../images/shape2.svg';
 import sponsor from '../../images/cseLogo.gif';
 import sponsor2 from '../../images/AS.png';
 import { opportunitiesStyles } from './styles';
-import members from '../../images/opportunitiespage/members.png';
+import members from '../../images/opportunitiespage/members.jpg';
 import sponsors from '../../images/opportunitiespage/sponsors.png';
 import { useNavigate } from 'react-router-dom';
 
