@@ -37,9 +37,9 @@ const Events = () => {
 
   const [upcomingEvents, setUpcomingEvents] = useState<EventData[]>([]);
   const [pastEvents, setPastEvents] = useState<EventData[]>([]);
-  const [selectedYear, setSelectedYear] = useState<number | null>(null);
+  const [selectedYear, setSelectedYear] = useState<number | null>(new Date().getFullYear()); // Default to current year
   const [selectedMonth] = useState<number | null>(null);
-  const [pastEventYears, setPastEventYears] = useState(new Set<number>());
+  const [pastEventYears, setPastEventYears] = useState<number[]>([]);
 
 
   const [displayedFutureEvents, setDisplayedFutureEvents] = useState(upcomingEvents);
@@ -115,7 +115,7 @@ const Events = () => {
     // Set media queries
     let upcomingEventsEndpoint = `${process.env.REACT_APP_BACKEND_URL}/api/v1/events?type=upcoming`;
     let pastEventsEndpoint = `${process.env.REACT_APP_BACKEND_URL}/api/v1/events?type=past`;
-
+  
     const fetchUpcomingEvents = async () => {
       try {
         const response = await fetch(upcomingEventsEndpoint);
@@ -127,24 +127,26 @@ const Events = () => {
         console.error('Error fetching upcoming events:', error);
       }
     };
-
+  
     const fetchPastEvents = async () => {
       try {
         const response = await fetch(pastEventsEndpoint);
         const data = await response.json();
         setTotalPagesPast(Math.ceil(data.length / 6));
         setPastEvents(data);
-
-        // Extract years from past events
-        const years = new Set<number>(data.map((event: EventData) => new Date(event.end_time).getFullYear()));
-        setPastEventYears(years);
-
+  
+        // Extract years from past events and sort in descending order
+        const years = Array.from(new Set(data.map((event: EventData) => new Date(event.end_time).getFullYear())))
+          .sort((a, b) => (b as number) - (a as number)); // Explicit type casting for 'a' and 'b'
+        setPastEventYears(years as number[]);
+        
+  
         paginate(data, 1, totalPagesPast, 'past');
       } catch (error) {
         console.error('Error fetching past events:', error);
       }
     };
-
+  
     async function fetchData() {
       try {
         await Promise.all([fetchUpcomingEvents(), fetchPastEvents()]);
@@ -154,9 +156,10 @@ const Events = () => {
         setIsLoading(false);
       }
     }
-
+  
     fetchData();
-  }, [selectedYear, selectedMonth, totalPagesUpcoming, totalPagesPast]);
+  }, [selectedYear, selectedMonth, totalPagesUpcoming, totalPagesPast, setTotalPagesUpcoming, setTotalPagesPast]);
+  
 
   const handleThisWeekClick = () => {
     if (isThisWeekClicked) {
@@ -466,7 +469,7 @@ const Events = () => {
             {/* <Button size="medium" text="2023" infocus={is2023Clicked} onClick={handle2023}></Button> */}
             
             {/*Buttons that handle general year */}
-            {Array.from(pastEventYears).sort().map(year => (
+            {Array.from(pastEventYears).sort().reverse().map(year => (
               <Button
                 key={year}
                 size="medium"
