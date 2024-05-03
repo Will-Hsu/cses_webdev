@@ -213,216 +213,91 @@ const MeetTheTeam = () => {
           alignItems: 'center',
         }}
       >
-        {isMiddleScreen && (
-          <Grid container item xs={12} justifyContent="center">
-            {currentCategory.members
-              .slice((currentPage - 1) * 6, currentPage * 6)
-              .map((member, index) => (
-                <Grid
-                  item
-                  xs={12}
-                  sm={3.5}
-                  md={3.1}
-                  key={index}
-                  sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+        <Grid container item xs={12} sm={9} md={9} lg={9} justifyContent="center">
+          {currentCategory.members
+            .slice((currentPage - 1) * 6, currentPage * 6)
+            .map((member, index) => (
+              <Grid
+                item
+                xs={6}
+                sm={4}
+                md={4}
+                lg={4}
+                key={index}
+                sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+              >
+                <div
+                  style={{
+                    width: verySmallScreen
+                      ? '120px'
+                      : isSmallScreen
+                      ? '120px'
+                      : isMiddleScreen
+                      ? '140px'
+                      : '190px',
+                    height: verySmallScreen
+                      ? '120px'
+                      : isSmallScreen
+                      ? '120px'
+                      : isMiddleScreen
+                      ? '140px'
+                      : '190px',
+                    overflow: 'hidden',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
                 >
-                  <div
+                  <img
+                    src={member.photo}
+                    key={member.photo}
+                    alt="img"
                     style={{
-                      width: '190px',
-                      height: '190px',
-                      overflow: 'hidden',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
                     }}
-                  >
-                    <img
-                      src={member.photo}
-                      alt="img"
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                      }}
-                    />
-                  </div>
-                  <h3
-                    style={{
-                      color: 'white',
-                      textAlign: 'center',
-                      fontFamily: 'Inter',
-                      fontWeight: '700',
-                      fontSize: '18px',
-                    }}
-                  >
-                    {member.name}
-                  </h3>
-                  <h5
-                    style={{
-                      color: 'white',
-                      textAlign: 'center',
-                      fontFamily: 'Inter',
-                      fontWeight: '500',
-                      fontSize: '14px',
-                      marginTop: '-2%',
-                    }}
-                  >
-                    {member.title}
-                  </h5>
-                </Grid>
-              ))}
-
-            {emptyMembers.map((member, index) => (
-              <Grid item xs={12} sm={3.5} md={3.1} key={index + currentCategory.members.length}>
-                {/* Empty placeholder, no visible content */}
+                  />
+                </div>
+                <h3
+                  style={{
+                    color: 'white',
+                    textAlign: 'center',
+                    fontFamily: 'Inter',
+                    fontWeight: '700',
+                    fontSize: '18px',
+                  }}
+                >
+                  {member.name}
+                </h3>
+                <h5
+                  style={{
+                    color: 'white',
+                    textAlign: 'center',
+                    fontFamily: 'Inter',
+                    fontWeight: '500',
+                    fontSize: '14px',
+                    marginTop: '-2%',
+                  }}
+                >
+                  {member.title}
+                </h5>
               </Grid>
             ))}
-          </Grid>
-        )}
-        {isSmallScreen && (
-          <Grid container item xs={12} justifyContent="center">
-            {currentCategory.members
-              .slice((currentPage - 1) * 6, currentPage * 6)
-              .map((member, index) => (
-                <Grid
-                  item
-                  xs={6}
-                  sm={3.5}
-                  md={0}
-                  lg={3.1}
-                  key={index}
-                  sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
-                >
-                  <div
-                    style={{
-                      width: verySmallScreen ? '120px' : '140px',
-                      height: verySmallScreen ? '120px' : '140px',
-                      overflow: 'hidden',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <img
-                      src={member.photo}
-                      key={member.photo}
-                      alt="img"
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                      }}
-                    />
-                  </div>
-                  <h3
-                    style={{
-                      color: 'white',
-                      textAlign: 'center',
-                      fontFamily: 'Inter',
-                      fontWeight: '700',
-                      fontSize: '16px',
-                    }}
-                  >
-                    {member.name}
-                  </h3>
-                  <h5
-                    style={{
-                      color: 'white',
-                      textAlign: 'center',
-                      fontFamily: 'Inter',
-                      fontWeight: '500',
-                      fontSize: '12px',
-                      marginTop: '-2%',
-                    }}
-                  >
-                    {member.title}
-                  </h5>
-                </Grid>
-              ))}
 
-            {emptyMembers.map((member, index) => (
-              <Grid item xs={12} sm={3.5} md={3.1} key={index + currentCategory.members.length}>
-                {/* Empty placeholder, no visible content */}
-              </Grid>
-            ))}
-          </Grid>
-        )}
-
-        {!isMiddleScreen && !isSmallScreen && (
-          <Grid container item xs={9} justifyContent="center">
-            {currentCategory.members
-              .slice((currentPage - 1) * 6, currentPage * 6)
-              .map((member, index) => (
-                <Grid
-                  item
-                  xs={12}
-                  sm={3.5}
-                  md={0}
-                  lg={3.1}
-                  key={index}
-                  sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
-                >
-                  <div
-                    style={{
-                      width: '200px',
-                      height: '200px',
-                      overflow: 'hidden',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <img
-                      src={member.photo}
-                      key={member.photo}
-                      alt="img"
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                      }}
-                    />
-                  </div>
-                  <h3
-                    style={{
-                      color: 'white',
-                      textAlign: 'center',
-                      fontFamily: 'Inter',
-                      fontWeight: '700',
-                      fontSize: '18px',
-                    }}
-                  >
-                    {member.name}
-                  </h3>
-                  <h5
-                    style={{
-                      color: 'white',
-                      textAlign: 'center',
-                      fontFamily: 'Inter',
-                      fontWeight: '500',
-                      fontSize: '14px',
-                      marginTop: '-2%',
-                    }}
-                  >
-                    {member.title}
-                  </h5>
-                </Grid>
-              ))}
-
-            {emptyMembers.map((member, index) => (
-              <Grid item xs={12} sm={3.5} md={3.1} key={index + currentCategory.members.length}>
-                {/* Empty placeholder, no visible content */}
-              </Grid>
-            ))}
-          </Grid>
-        )}
+          {emptyMembers.map((member, index) => (
+            <Grid item xs={6} sm={4} md={4} lg={4} key={index + currentCategory.members.length}>
+              {/* Empty placeholder, no visible content */}
+            </Grid>
+          ))}
+        </Grid>
 
         <Grid
           container
           item
           xs={12}
           sm={15}
-          md={12}
+          md={20}
           justifyContent="center"
           sx={{
             marginTop: {
@@ -442,7 +317,7 @@ const MeetTheTeam = () => {
             item
             xs={5}
             sm={20}
-            md={9}
+            md={15}
             justifyContent="space-between"
             sx={{ alignItems: 'center' }}
           >
