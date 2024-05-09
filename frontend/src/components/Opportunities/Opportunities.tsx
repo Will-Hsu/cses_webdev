@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Typography, Grid, Link, Box, useTheme } from '@mui/material';
+import { Container, Typography, Grid, Link, Box, useTheme, useMediaQuery } from '@mui/material';
 import MuiButton from '@mui/material/Button';
 import bg from '../../images/shape2.svg';
 import sponsor from '../../images/cseLogo.gif';
@@ -27,6 +27,7 @@ export const ImageWithBoxShadow = ({
 }: ImageWithBoxShadowProps) => {
   const theme = useTheme();
   const styles = opportunitiesStyles(theme);
+
   return (
     <a href={href} style={styles.link}>
       <img
@@ -172,8 +173,8 @@ const Opportunities = () => {
           Thank you to our current sponsors!
         </Typography>
 
-        <Grid container direction="column" alignItems="stretch">
-          <Grid item pl="10%" pr="10%">
+        <Grid container spacing={2} sx={{ justifyContent: 'center', alignItems: 'center' }}>
+          <Grid item xs={12} sm={10} md={5.5}>
             <ImageWithBoxShadow
               src={sponsor}
               alt="sponsor"
@@ -182,7 +183,7 @@ const Opportunities = () => {
               borderColor="black"
             />
           </Grid>
-          <Grid item pl="30%" pr="30%">
+          <Grid item xs={7} sm={5} md={3.5}>
             <ImageWithBoxShadow
               src={sponsor2}
               alt="sponsor2"
