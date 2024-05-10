@@ -179,78 +179,81 @@ const Home = () => {
             <Grid item xs={0} sm={0} md={0.5} lg={1} />
           </Grid>
 
+      <div>
+        {displayedFutureEvents.length !== 0 && (
           <div style={{ margin: '0 39px' }}>
+          <div
+            style={{
+              color: 'white',
+              fontSize: '40px',
+              fontFamily: 'Chakra Petch',
+              marginTop: '117px',
+              fontWeight: '700',
+            }}
+          >
+            <p style={{ marginBottom: '20px', fontSize: 'clamp(32px, 8vw, 65px)' }}>
+              UPCOMING EVENTS
+            </p>
+          </div>
+
+          {isMobile && (
             <div
               style={{
-                color: 'white',
-                fontSize: '40px',
-                fontFamily: 'Chakra Petch',
-                marginTop: '117px',
-                fontWeight: '700',
+                marginBottom: '25px',
+                overflowX: 'auto', // Enable horizontal scrolling
+                maxWidth: '100%', // Ensure the container doesn't exceed its parent's width
               }}
             >
-              <p style={{ marginBottom: '20px', fontSize: 'clamp(32px, 8vw, 65px)' }}>
-                UPCOMING EVENTS.
-              </p>
+          {displayedFutureEvents.map((eventData, id) => (
+            <div key={id}>
+              <MobileEventBox
+                  title={eventData.title}
+                  targetDate={new Date(eventData.end_time)}
+                  location={eventData.location}                    end_time={eventData.end_time}
+                  start_time={eventData.start_time}
+                  _id={eventData._id}
+                />                
             </div>
-
-            {isMobile && (
-              <div
-                style={{
-                  marginBottom: '25px',
-                  overflowX: 'auto', // Enable horizontal scrolling
-                  maxWidth: '100%', // Ensure the container doesn't exceed its parent's width
-                }}
-              >
-                {displayedFutureEvents.map((eventData, id) => (
-                  <div key={id}>
-                    <MobileEventBox
-                      title={eventData.title}
-                      targetDate={new Date(eventData.end_time)}
-                      location={eventData.location}
-                      end_time={eventData.end_time}
-                      start_time={eventData.start_time}
-                      _id={eventData._id}
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {!isMobile && (
-              <div
-                style={{
-                  display: 'flex',
-                  marginBottom: '25px',
-                  overflowX: 'auto', // Enable horizontal scrolling
-                  maxWidth: '100%', // Ensure the container doesn't exceed its parent's width
-                }}
-              >
-                {displayedFutureEvents.map((eventData, id) => (
-                  <div key={id} style={{ marginRight: '30px', marginTop: '30px' }}>
-                    <EventBox
-                      title={eventData.title}
-                      targetDate={new Date(eventData.end_time)}
-                      location={eventData.location}
-                      calendar_link={eventData.calendar_link}
-                      description={eventData.description}
-                      end_time={eventData.end_time}
-                      instagram_link={eventData.instagram_link}
-                      start_time={eventData.start_time}
-                      _id={eventData._id}
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
-            <div style={{ marginLeft: isMobile ? '-2%' : '-0.3%' }}> 
-              <Button
-                size="large"
-                text="See All Events ->"
-                onClick={() => navigate('/events')} 
-              ></Button>
-            </div>
+          ))}
           </div>
+        )}
+
+        {!isMobile && (
+          <div
+            style={{
+              display: 'flex',
+              marginBottom: '25px',
+              overflowX: 'auto', // Enable horizontal scrolling
+              maxWidth: '100%', // Ensure the container doesn't exceed its parent's width
+            }}
+          >
+          {displayedFutureEvents.map((eventData, id) => (
+            <div key={id} style={{ marginRight: '30px', marginTop: '30px' }}>
+              <EventBox
+                title={eventData.title}
+                targetDate={new Date(eventData.end_time)}
+                location={eventData.location}
+                calendar_link={eventData.calendar_link}
+                description={eventData.description}
+                end_time={eventData.end_time}
+                instagram_link={eventData.instagram_link}
+                start_time={eventData.start_time}
+                _id={eventData._id}
+              />
+            </div>
+          ))}
+        </div>
+      )}
+        <div style={{ marginLeft: isMobile ? '-2%' : '-0.3%' }}> 
+            <Button
+              size="large"
+              text="See All Events ->"
+              onClick={() => navigate('/events')} 
+              ></Button>
+          </div>
+        </div>
+      )}
+        </div>
         </Container>
       </Box>
     </div>
