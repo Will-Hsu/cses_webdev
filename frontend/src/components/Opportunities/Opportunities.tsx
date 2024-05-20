@@ -24,7 +24,7 @@ interface FadeInSectionProps {
 const fadeInStyle = {
   opacity: 0,
   transform: 'translateY(20px)',
-  transition: 'opacity 0.6s ease-out, transform 0.6s ease-out',
+  transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
 };
 
 const fadeInVisibleStyle = {
