@@ -3,10 +3,12 @@
     "@mailchimp/mailchimp_marketing": "^3.0.80",
     "@material-ui/core": "^4.12.4",
     "@mui/x-date-pickers": "^6.12.0",
+    "@react-spring/web": "^9.7.3",
     "dayjs": "^1.11.9",
     "material-ui-popup-state": "^5.0.9",
     "qrcode": "^1.5.3",
     "react-countup": "^6.5.0",
+    "react-intersection-observer": "^9.10.2",
     "react-scroll-trigger": "^0.6.14"
   }
 }
