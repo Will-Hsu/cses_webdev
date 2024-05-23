@@ -331,16 +331,16 @@ const Events = () => {
           </Grid>
         )}
         {/* Render EventBoxes for future events */}
-        <div style={{ ...eventsContainerStyle, marginTop: '20px' }}>
-          {(displayedFutureEvents.length === 0 && (
-            <Grid item
-            sx={{ color: 'white', fontSize: 20, fontFamily: 'Chakra Petch', fontWeight: '700' }}>
-              No upcoming events
-            </Grid>
-          )) ||
-            renderEventBoxes(displayedFutureEvents)}
-        </div>
-
+      {!isLoading && <div style={{ ...eventsContainerStyle, marginTop: '20px' }}>
+        {(displayedFutureEvents.length === 0 && (
+          <Grid item
+          sx={{ color: 'white', fontSize: 20, fontFamily: 'Chakra Petch', fontWeight: '700' }}>
+            No upcoming events
+          </Grid>
+        )) ||
+          renderEventBoxes(displayedFutureEvents)}
+      </div>
+      }
         {displayedFutureEvents.length > 0 && (
           <Grid item mt={2} ml={5} 
           sx={{ color: 'white', fontSize: 'clamp(15px, 3vw, 20px)', fontFamily: 'Chakra Petch', fontWeight: '700' }}>
