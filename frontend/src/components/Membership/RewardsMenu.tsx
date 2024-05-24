@@ -85,6 +85,8 @@ const RewardsMenu = (userData: RewardsProp) => {
         sx={{
           ...styles.eventsAttendedTitle,
           marginLeft: isMobile ? '16%' : '0',
+          marginTop: isMobile ? '16%' : '14px', // Adjusted marginTop to move the title upwards
+
         }}
       >
         REWARDS

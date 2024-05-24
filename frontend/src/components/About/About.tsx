@@ -8,6 +8,7 @@ import { aboutStyles } from './styles';
 import books from '../../images/aboutbooks.png';
 import lightBulb from '../../images/aboutlightbulb.png';
 import MeetTheTeam from './MeetTheTeam';
+//import Communities from './Communities';
 import about1 from '../../images/aboutpage/about_1.jpg';
 import about2 from '../../images/aboutpage/about_2.jpg';
 import about3 from '../../images/aboutpage/about_3.jpg';
@@ -317,7 +318,6 @@ const About = () => {
               </Grid>
             </Grid>
           )}
-
           <MeetTheTeam />
         </Container>
       </Box>
