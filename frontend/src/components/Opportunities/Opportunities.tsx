@@ -1,4 +1,5 @@
-import React, { ReactNode, useEffect, useRef, useState } from 'react';import { Container, Typography, Grid, Link, Box, useTheme, useMediaQuery } from '@mui/material';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
+import { Container, Typography, Grid, Link, Box, useTheme, useMediaQuery } from '@mui/material';
 import MuiButton from '@mui/material/Button';
 import bg from '../../images/shape2.svg';
 import sponsor from '../../images/cseLogo.gif';
@@ -112,8 +113,10 @@ const Opportunities = () => {
         <img src={bg} alt="bg" style={{ ...styles.bg2, position: 'absolute' }} />
       </Box>
       <Container maxWidth="xl" sx={styles.body}>
-        <Typography sx={styles.title}>OPPORTUNITIES</Typography>
         <Grid container spacing={2} sx={{ justifyContent: 'center', alignItems: 'center' }}>
+        <Grid item xs={12} sm={12} md={10.9}>
+            <Typography sx={styles.title} align="left">OPPORTUNITIES</Typography>
+          </Grid>
         <Grid item xs={12} sm={12} md={6}>
             <FadeInSection>
               <ImageWithBoxShadow src={members} alt="members" />
