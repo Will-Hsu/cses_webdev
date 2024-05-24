@@ -4,6 +4,7 @@ import RedeemLog from '../models/redeemLog.js';
 import Event from '../models/event.js';
 import { body, param, validationResult } from 'express-validator';
 import asyncHandler from 'express-async-handler';
+import sendEmail from '../gmail_api/gmail_api.js';
 
 export const getUsersCount = asyncHandler(async (_, res) => {
   try {
@@ -201,13 +202,11 @@ export const userEventsUpdate = asyncHandler(async (req, res) => {
     // Check if the event has already started
     // hack for GBM
     if (code !== '996913' && currentTime < event.start_time) {
-      return res
-        .status(400)
-        .json({
-          message: `Try again later! Event checkin will start in ${Math.ceil(
-            hoursUntilEventStart,
-          )} hours!`,
-        });
+      return res.status(400).json({
+        message: `Try again later! Event checkin will start in ${Math.ceil(
+          hoursUntilEventStart,
+        )} hours!`,
+      });
     }
 
     // Calculate the time difference between the event start time and the current time in milliseconds
@@ -240,14 +239,22 @@ export const userEventsUpdate = asyncHandler(async (req, res) => {
     // Save the updated user
     await user.save();
 
+    try {
+      sendEmail(
+        user.email,
+        'Check-in sucessful!',
+        `You successfuly checked into the "${event.title}" event!\nThis is your confirmation email in case something happens.\n\n❤️Thank you for coming!❤️`,
+      );
+    } catch (e) {
+      console.error(`Failed to send email to ${user.email}. ${e}`);
+    }
+
     return res.status(200).json({ message: 'Successfuly checked into the event!' });
   } catch (error) {
     console.error('Error:', error);
-    return res
-      .status(500)
-      .json({
-        message: 'Internal server error... please contact CSES staff if this keeps happening!',
-      });
+    return res.status(500).json({
+      message: 'Internal server error... please contact CSES staff if this keeps happening!',
+    });
   }
 });
 
