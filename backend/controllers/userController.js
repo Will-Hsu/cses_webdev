@@ -168,7 +168,7 @@ export const getUserRank = asyncHandler(async (req, res) => {
       .exec();
 
     // Get the index of the current user in the sorted list
-    const currentUserIndex = allUsers.findIndex(user => user.email === email);
+    const currentUserIndex = allUsers.findIndex((user) => user.email === email);
 
     res.status(200).json(currentUserIndex);
   } catch (error) {
@@ -176,7 +176,6 @@ export const getUserRank = asyncHandler(async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
-
 
 // POST request for creating new event entries for a user.
 export const userEventsUpdate = asyncHandler(async (req, res) => {
@@ -202,7 +201,13 @@ export const userEventsUpdate = asyncHandler(async (req, res) => {
     // Check if the event has already started
     // hack for GBM
     if (code !== '996913' && currentTime < event.start_time) {
-        return res.status(400).json({ message: `Try again later! Event checkin will start in ${Math.ceil(hoursUntilEventStart)} hours!` });
+      return res
+        .status(400)
+        .json({
+          message: `Try again later! Event checkin will start in ${Math.ceil(
+            hoursUntilEventStart,
+          )} hours!`,
+        });
     }
 
     // Calculate the time difference between the event start time and the current time in milliseconds
@@ -238,7 +243,11 @@ export const userEventsUpdate = asyncHandler(async (req, res) => {
     return res.status(200).json({ message: 'Successfuly checked into the event!' });
   } catch (error) {
     console.error('Error:', error);
-    return res.status(500).json({ message: `Internal server error... please contact CSES staff if this keeps happening!` });
+    return res
+      .status(500)
+      .json({
+        message: 'Internal server error... please contact CSES staff if this keeps happening!',
+      });
   }
 });
 
