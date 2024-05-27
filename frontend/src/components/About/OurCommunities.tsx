@@ -94,27 +94,6 @@ const Communities = () => {
               </p>
             </Box>
           </Grid>
-          <Grid item 
-            sx={{
-              ...styles.communityCard,
-              width: verySmallScreen ? '250px' : { xs: '350px', sm: '500px', md: '500px' },
-              height: verySmallScreen ? '84px' : { xs: '100px', sm: '160px', md: '160px' },
-              margin: verySmallScreen ? '10% 0% 0% 0%' : { xs: '10% 2% 2% 2%', sm: '5% 3%', md: '3% 2%' }
-            }}>
-            <img
-              src={webdev}
-              alt="WebDev"
-              style={{ ...styles.communityCardImg}}
-            />
-            <Box sx={{ height: 'auto', padding: verySmallScreen ? '2%' : '4%', alignSelf: 'center' }}>
-              <Box sx={{ ...styles.subheadingTop }} >
-                CSES WebDev
-              </Box>
-              <p style={{ color: 'black', fontSize: 'clamp(8px, 2vw, 16px)', marginTop: verySmallScreen ? '2px' : '6px'}}>
-                Gain hands-on experience in web design and development for real clients, from UCSD clubs to non-profits!
-              </p>
-            </Box>
-          </Grid>
         </Grid>
       </Grid>
     </Container>
