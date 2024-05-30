@@ -1,5 +1,5 @@
-import React from 'react';
-import { Container, Typography, Grid, Link, Box, useTheme } from '@mui/material';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
+import { Container, Typography, Grid, Link, Box, useTheme, useMediaQuery } from '@mui/material';
 import MuiButton from '@mui/material/Button';
 import bg from '../../images/shape2.svg';
 import sponsor from '../../images/cseLogo.gif';
@@ -18,6 +18,21 @@ interface ImageWithBoxShadowProps {
   href?: string;
 }
 
+interface FadeInSectionProps {
+  children: ReactNode;
+}
+
+const fadeInStyle = {
+  opacity: 0,
+  transform: 'translateY(20px)',
+  transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
+};
+
+const fadeInVisibleStyle = {
+  opacity: 1,
+  transform: 'translateY(0)',
+};
+
 export const ImageWithBoxShadow = ({
   src,
   alt,
@@ -27,6 +42,7 @@ export const ImageWithBoxShadow = ({
 }: ImageWithBoxShadowProps) => {
   const theme = useTheme();
   const styles = opportunitiesStyles(theme);
+
   return (
     <a href={href} style={styles.link}>
       <img
@@ -43,6 +59,48 @@ export const ImageWithBoxShadow = ({
   );
 };
 
+const FadeInSection = ({ children }: FadeInSectionProps) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const domRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (domRef.current) {
+      observer.observe(domRef.current);
+    }
+
+    return () => {
+      if (domRef.current) {
+        observer.unobserve(domRef.current);
+      }
+    };
+  }, []);
+
+  return (
+    <Box
+      ref={domRef}
+      sx={{
+        ...fadeInStyle,
+        ...(isVisible && fadeInVisibleStyle),
+      }}
+    >
+      {children}
+    </Box>
+  );
+};
+
+
 const Opportunities = () => {
   const theme = useTheme();
   const styles = opportunitiesStyles(theme);
@@ -55,12 +113,17 @@ const Opportunities = () => {
         <img src={bg} alt="bg" style={{ ...styles.bg2, position: 'absolute' }} />
       </Box>
       <Container maxWidth="xl" sx={styles.body}>
-        <Typography sx={styles.title}>OPPORTUNITIES</Typography>
         <Grid container spacing={2} sx={{ justifyContent: 'center', alignItems: 'center' }}>
-          <Grid item xs={12} sm={12} md={6}>
-            <ImageWithBoxShadow src={members} alt="members" />
+        <Grid item xs={12} sm={12} md={10.9}>
+            <Typography sx={styles.title} align="left">OPPORTUNITIES</Typography>
+          </Grid>
+        <Grid item xs={12} sm={12} md={6}>
+            <FadeInSection>
+              <ImageWithBoxShadow src={members} alt="members" />
+            </FadeInSection>
           </Grid>
           <Grid item xs={12} sm={12} md={6}>
+          <FadeInSection>
             <Typography sx={styles.subtitle}>
               For <span style={{ fontStyle: 'italic' }}>members</span>.
             </Typography>
@@ -117,11 +180,15 @@ const Opportunities = () => {
                 Become a Member
               </MuiButton>
             </Box>
+            </FadeInSection>
           </Grid>
           <Grid item xs={12} sm={12} md={6}>
-            <ImageWithBoxShadow src={sponsors} alt="sponsors" />
+            <FadeInSection>
+              <ImageWithBoxShadow src={sponsors} alt="sponsors" />
+            </FadeInSection>
           </Grid>
           <Grid item xs={12} sm={12} md={6}>
+          <FadeInSection>
             <Typography sx={styles.subtitle}>
               For <span style={{ fontStyle: 'italic' }}>sponsors</span>.
             </Typography>
@@ -166,14 +233,19 @@ const Opportunities = () => {
                 See Opportunities -&gt;
               </MuiButton>
             </Box>
+            </FadeInSection>
           </Grid>
         </Grid>
+        
         <Typography align="center" sx={{ ...styles.subtitle, margin: '60px 0% 50px 0%' }}>
+          <FadeInSection>
           Thank you to our current sponsors!
+          </FadeInSection>
         </Typography>
 
-        <Grid container direction="column" alignItems="stretch">
-          <Grid item pl="10%" pr="10%">
+        <Grid container spacing={2} sx={{ justifyContent: 'center', alignItems: 'center' }}>
+          <Grid item xs={12} sm={10} md={5.5}>
+          <FadeInSection>
             <ImageWithBoxShadow
               src={sponsor}
               alt="sponsor"
@@ -181,14 +253,17 @@ const Opportunities = () => {
               href="https://cse.ucsd.edu/"
               borderColor="black"
             />
+            </FadeInSection>
           </Grid>
-          <Grid item pl="30%" pr="30%">
-            <ImageWithBoxShadow
-              src={sponsor2}
-              alt="sponsor2"
-              boxColor="white"
-              href="https://as.ucsd.edu/"
-            />
+          <Grid item xs={7} sm={5} md={3.5}>
+          <FadeInSection>
+              <ImageWithBoxShadow
+                src={sponsor2}
+                alt="sponsor2"
+                boxColor="white"
+                href="https://as.ucsd.edu/"
+              />
+            </FadeInSection>
           </Grid>
         </Grid>
       </Container>
