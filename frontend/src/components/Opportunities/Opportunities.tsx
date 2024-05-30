@@ -175,7 +175,7 @@ const Opportunities = () => {
                     backgroundColor: 'rgba(255, 255, 255, 0.2)',
                   },
                 }}
-                onClick={() => navigate('/')}
+                onClick={() => navigate('/login')}
               >
                 Become a Member
               </MuiButton>
