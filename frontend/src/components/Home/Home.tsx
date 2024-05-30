@@ -105,15 +105,16 @@ const Home = () => {
               <SlideShow />
             </Grid>
           </Grid>
-          <Grid container spacing={0} sx={{ marginTop: '17%' }}>
+          <Grid container spacing={0} sx={{ marginTop: '17%', marginLeft:'0%'}}>
             <Grid item xs={0} sm={0} md={0.5} lg={1} />
             <Grid item xs={12} sm={4.5} md={5.3} lg={4.3}>
               <Box
                 sx={{
                   ...styles.subtitle,
                   display: 'flex',
-                  justifyContent: { xs: 'center', sm: 'right' },
+                  justifyContent: { xs: 'center', sm: 'left' },
                   minHeight: '50%',
+                  marginLeft: { xs: '0%', sm: '2%', md: '-8%' }
                 }}
               >
                 Join CSES today!
@@ -123,8 +124,8 @@ const Home = () => {
                   ...styles.button,
                   marginTop: { xs: '3%', sm: '0%' },
                   display: 'flex',
-                  justifyContent: { xs: 'center', sm: 'right' },
-                  marginLeft: '0%',
+                  justifyContent: { xs: 'center', sm: 'left' },
+                  marginLeft: { xs: '0%', sm: '2%', md: '-8%' }
                 }}
               >
                 <Button
@@ -178,82 +179,86 @@ const Home = () => {
             </Grid>
             <Grid item xs={0} sm={0} md={0.5} lg={1} />
           </Grid>
+          <Grid item xs={12} sm={5} md={5.5}>
+            <div>
+              {displayedFutureEvents.length !== 0 && (
+                <div style={{ margin: '0 39px' }}>
+                <div
+                  style={{
+                    color: 'white',
+                    fontSize: '40px',
+                    fontFamily: 'Chakra Petch',
+                    marginTop: '117px',
+                    fontWeight: '700',
+                    marginLeft: '40px'
+                  }}
+                >
+                  <p style={{ marginBottom: '20px', fontSize: 'clamp(32px, 8vw, 65px)' }}>
+                    UPCOMING EVENTS
+                  </p>
+                </div>
 
-      <div>
-        {displayedFutureEvents.length !== 0 && (
-          <div style={{ margin: '0 39px' }}>
-          <div
-            style={{
-              color: 'white',
-              fontSize: '40px',
-              fontFamily: 'Chakra Petch',
-              marginTop: '117px',
-              fontWeight: '700',
-            }}
-          >
-            <p style={{ marginBottom: '20px', fontSize: 'clamp(32px, 8vw, 65px)' }}>
-              UPCOMING EVENTS
-            </p>
-          </div>
+                {isMobile && (
+                  <div
+                    style={{
+                      marginBottom: '25px',
+                      overflowX: 'auto', // Enable horizontal scrolling
+                      maxWidth: '100%', // Ensure the container doesn't exceed its parent's width
+                    }}
+                  >
+                {displayedFutureEvents.map((eventData, id) => (
+                  <div key={id}>
+                    <MobileEventBox
+                        title={eventData.title}
+                        targetDate={new Date(eventData.end_time)}
+                        location={eventData.location}                    end_time={eventData.end_time}
+                        start_time={eventData.start_time}
+                        _id={eventData._id}
+                      />                
+                  </div>
+                ))}
+                </div>
+              )}
 
-          {isMobile && (
-            <div
-              style={{
-                marginBottom: '25px',
-                overflowX: 'auto', // Enable horizontal scrolling
-                maxWidth: '100%', // Ensure the container doesn't exceed its parent's width
-              }}
-            >
-          {displayedFutureEvents.map((eventData, id) => (
-            <div key={id}>
-              <MobileEventBox
-                  title={eventData.title}
-                  targetDate={new Date(eventData.end_time)}
-                  location={eventData.location}                    end_time={eventData.end_time}
-                  start_time={eventData.start_time}
-                  _id={eventData._id}
-                />                
+              {!isMobile && (
+                <div
+                  style={{
+                    display: 'flex',
+                    marginBottom: '25px',
+                    overflowX: 'auto', // Enable horizontal scrolling
+                    maxWidth: '100%', // Ensure the container doesn't exceed its parent's width
+                  }}
+                >
+                {displayedFutureEvents.map((eventData, id) => (
+                  <div key={id} style={{ marginRight: '30px', marginTop: '30px' }}>
+                    <EventBox
+                      title={eventData.title}
+                      targetDate={new Date(eventData.end_time)}
+                      location={eventData.location}
+                      calendar_link={eventData.calendar_link}
+                      description={eventData.description}
+                      end_time={eventData.end_time}
+                      instagram_link={eventData.instagram_link}
+                      start_time={eventData.start_time}
+                      _id={eventData._id}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+            <div > 
+            <Box sx={{ ...styles.button, marginLeft: { xs: '0%', sm: '2%', md: '3.0%' } }}>
+                <Button
+                  size="large"
+                  text="See All Events ->"
+                  onClick={() => navigate('/events')} 
+                  ></Button>
+            </Box>
+              </div>
             </div>
-          ))}
-          </div>
-        )}
-
-        {!isMobile && (
-          <div
-            style={{
-              display: 'flex',
-              marginBottom: '25px',
-              overflowX: 'auto', // Enable horizontal scrolling
-              maxWidth: '100%', // Ensure the container doesn't exceed its parent's width
-            }}
-          >
-          {displayedFutureEvents.map((eventData, id) => (
-            <div key={id} style={{ marginRight: '30px', marginTop: '30px' }}>
-              <EventBox
-                title={eventData.title}
-                targetDate={new Date(eventData.end_time)}
-                location={eventData.location}
-                calendar_link={eventData.calendar_link}
-                description={eventData.description}
-                end_time={eventData.end_time}
-                instagram_link={eventData.instagram_link}
-                start_time={eventData.start_time}
-                _id={eventData._id}
-              />
-            </div>
-          ))}
+          )}
         </div>
-      )}
-        <div style={{ marginLeft: isMobile ? '-2%' : '-0.3%' }}> 
-            <Button
-              size="large"
-              text="See All Events ->"
-              onClick={() => navigate('/events')} 
-              ></Button>
-          </div>
-        </div>
-      )}
-        </div>
+        </Grid>
         </Container>
       </Box>
     </div>
