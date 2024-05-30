@@ -5,6 +5,7 @@
     "@mui/x-date-pickers": "^6.12.0",
     "@react-spring/web": "^9.7.3",
     "dayjs": "^1.11.9",
+    "framer-motion": "^6.5.1",
     "material-ui-popup-state": "^5.0.9",
     "qrcode": "^1.5.3",
     "react-countup": "^6.5.0",
