@@ -11,6 +11,7 @@ import axios from 'axios';
 import useMediaQuery from '../../hooks/useMediaQuery';
 import MobileEventBox from '../Event/MobileEvent';
 import CountUp from 'react-countup';
+import { motion } from "framer-motion"
 
 interface EventData {
   calendar_link: string;
@@ -88,13 +89,32 @@ const Home = () => {
                     marginLeft: { xs: '0%', sm: '3%', md: '12%' },
                   }}
                 >
-                  Innovate.
+                  <motion.div
+      initial={{ x: -100, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ type: 'spring', stiffness: 50, delay: 0.2 }}
+    >
+      Innovate.
+    </motion.div>
+                  
                 </Box>
                 <Box sx={{ ...styles.title, marginLeft: { xs: '0%', sm: '3%', md: '12%' } }}>
-                  Build.
+                <motion.div
+      initial={{ x: -100, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ type: 'spring', stiffness: 50, delay: 0.8 }}
+    >
+      Build.
+    </motion.div>
                 </Box>
                 <Box sx={{ ...styles.title, marginLeft: { xs: '0%', sm: '3%', md: '12%' } }}>
-                  Connect.
+                <motion.div
+      initial={{ x: -100, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ type: 'spring', stiffness: 50, delay: 1.4 }}
+    >
+      Connect.
+    </motion.div>
                 </Box>
                 <Box sx={{ ...styles.button, marginLeft: { xs: '0%', sm: '2%', md: '12%' } }}>
                   <Button size="large" text="Learn About Us!" onClick={() => navigate('/about')} />
@@ -137,7 +157,7 @@ const Home = () => {
             <Grid item xs={11} sm={2.5} md={1.8} lg={1.8}>
               <Box sx={{ ...styles.statisticContainer }}>
                 <Box sx={styles.statisticWrapper}>
-                  <Box sx={styles.statisticTitle}><CountUp delay={0} end={totalUsers} duration={10} enableScrollSpy/>+</Box>
+                  <Box sx={styles.statisticTitle}><CountUp delay={6} end={totalUsers} duration={6} scrollSpyOnce={true}/>+</Box>
                   <Box sx={styles.statisticSubtitle}>Members & counting.</Box>
                 </Box>
               </Box>
@@ -145,7 +165,7 @@ const Home = () => {
             <Grid item xs={11} sm={2.5} md={1.8} lg={1.8}>
               <Box sx={styles.statisticContainer}>
                 <Box sx={styles.statisticWrapper}>
-                  <Box sx={styles.statisticTitle}><CountUp delay={0} end={totalEvents} duration={6} enableScrollSpy/>+</Box>
+                  <Box sx={styles.statisticTitle}><CountUp delay={0} end={totalEvents} duration={6}/>+</Box>
                   <Box sx={styles.statisticSubtitle}>Events & counting.</Box>
                 </Box>
               </Box>
