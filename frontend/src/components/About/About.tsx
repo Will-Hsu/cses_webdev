@@ -27,7 +27,7 @@ const About = () => {
           <img src={bgBtm} alt="bg2" style={{ ...styles.bg2, position: 'absolute' }} />
         </Box>
         <Container maxWidth="xl" sx={styles.body}>
-          <Box sx={{ backgroundColor: 'rgba(0,0,0,0.5)', maxWidth: '90%', margin: '0 auto' }}>
+          <Box sx={{ backgroundColor: 'rgba(0,0,0,0.5)', maxWidth: '90%', margin: '0 auto', mt:2 }}>
             <Grid container pt={4} pb={2} justifyContent="center" alignItems="center">
               <Grid item sm={5} pl={{ lg: '8%' }} pr={{ lg: '2%' }}>
                 <ImageWithBoxShadow src={about1} alt="img" />

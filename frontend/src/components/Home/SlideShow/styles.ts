@@ -8,7 +8,7 @@ export const slideShowStyles = () => ({
     display: 'inline-block',
     height: '100%',
     width: '100%',
-    clipPath: 'polygon(3% 9.5% , 98% 2.5%, 98% 97%, 3% 97%)',
+    clipPath: 'polygon(0.45% 9.5% , 98% 2.5%, 98% 97%, 0.45% 97%)',
     paddingTop: '86.6%',
     backgroundSize: 'cover',
     backgroundPosition: 'center center',
