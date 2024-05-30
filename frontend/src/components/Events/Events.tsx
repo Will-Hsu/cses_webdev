@@ -314,7 +314,7 @@ const Events = () => {
         )}
 
         {/* Buttons for filtering events */}
-        {displayedFutureEvents.length >= 0 && (
+        {displayedFutureEvents.length > 0 && (
           <Grid item container mb={3} ml={4} justifyContent="flex-start">
             <Button
               size="medium"
