@@ -62,7 +62,6 @@ const Events = () => {
     if (type === 'past' && selectedYear !== null) {
       // If a year filter is applied, use the filtered past events
       filteredEvents = pastEvents.filter(event => new Date(event.end_time).getFullYear() === selectedYear);
-
     }
 
     if (type === 'upcoming') {
@@ -135,8 +134,6 @@ const Events = () => {
         const years = Array.from(new Set(data.map((event: EventData) => new Date(event.end_time).getFullYear())))
           .sort((a, b) => (b as number) - (a as number)); // Explicit type casting for 'a' and 'b'
         setPastEventYears(years as number[]);
-        
-  
         paginate(data, 1, totalPagesPast, 'past');
       } catch (error) {
         console.error('Error fetching past events:', error);
@@ -156,7 +153,7 @@ const Events = () => {
     fetchData();
   }, [selectedYear, selectedMonth, totalPagesUpcoming, totalPagesPast, setTotalPagesUpcoming, setTotalPagesPast]);
   
-
+  
   const handleThisWeekClick = () => {
     if (isThisWeekClicked) {
       setDisplayedFutureEvents(upcomingEvents);
@@ -216,6 +213,9 @@ const Events = () => {
   
     if (selectedYear !== null) {
       const filteredPastEvents = filterEventsByYear(selectedYear, pastEvents);
+      if (filteredPastEvents.length === 0 && pastEventYears.length > 0) {
+        setSelectedYear((currentYear) => currentYear === null ? null : currentYear = currentYear - 1);
+      }
       setDisplayedPastEvents(filteredPastEvents);
       setFilteredTotalPagesPast(Math.ceil(filteredPastEvents.length / eventsPerPage));
       paginate(filteredPastEvents, 1, totalPagesPast, 'past');
@@ -314,7 +314,7 @@ const Events = () => {
         )}
 
         {/* Buttons for filtering events */}
-        {displayedFutureEvents.length >= 0 && (
+        {displayedFutureEvents.length > 0 && (
           <Grid item container mb={3} ml={4} justifyContent="flex-start">
             <Button
               size="medium"
