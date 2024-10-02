@@ -30,8 +30,8 @@ export const opportunitiesStyles = (theme: any) => ({
   test: {
     fontFamily: 'Inter, sans-serif',
     color: 'white',
-    fontSize: 'clamp(15px, 3vw, 16px)',
-    lineHeight: '19px',
+    fontSize: 'clamp(15px, 3vw, 20px)',
+    lineHeight: '23px',
     textAlign: 'left'
   },
   subtitle: {

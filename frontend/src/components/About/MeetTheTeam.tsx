@@ -86,19 +86,6 @@ const categories = [
     ],
   },
   {
-    id: 3,
-    name: 'CSES WebDev',
-    members: [
-      { name: 'Shruti Bhamidipati', title: 'President', photo: Shruti },
-      { name: 'Manan Patel', title: 'VP Finance', photo: Manan },
-      { name: 'Jheel Gandhi', title: 'VP Design', photo: Jheel },
-      { name: 'Sonia Fereidooni', title: 'VP Operations', photo: Sonia },
-      { name: 'Ryan Rickey', title: 'Software Team Lead', photo: Ryan },
-      { name: 'Jake Villaseno', title: 'UI/UX Designer', photo: Jake },
-      //{ name: 'Saleha Ahmedi', title: 'WebDev', photo: Saleha},
-    ],
-  },
-  {
     id: 4,
     name: 'CSES Open Source',
     members: [
