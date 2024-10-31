@@ -120,22 +120,6 @@ const RewardsMenu = (userData: RewardsProp) => {
             onMouseLeave={() => setIsHovered(false)}
           >
             <img src={smallPrize} alt="img" style={{ width: '70px', height: '70px' }} />
-            {isHovered && (
-              <div
-                className="info-box"
-                style={{
-                  backgroundColor: 'white',
-                  color: 'black',
-                  padding: '3px 20px',
-                  maxWidth: '40%',
-                  borderRadius: '15px',
-                  fontSize: '12px',
-                  position: 'absolute',
-                }}
-              >
-                <p> Small Prize </p>
-              </div>
-            )}
           </Box>
           <Box
             style={{

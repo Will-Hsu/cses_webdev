@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import connectDB from './database/connect-db.js';
 // import testDatabaseConnection from './database/db-test.js';
 import connectMailchimp from './mailchimp/connect-mailchimp.js';
-import { addContacts, getContacts } from './mailchimp/contacts.js';
+// import { addContacts, getContacts } from './mailchimp/contacts.js';
 
 // import routes
 import eventRoutes from './routes/event.js';
@@ -20,7 +20,20 @@ dotenv.config();
 
 app.use(bodyParser.json({ limit: '30mb', extended: true }));
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
-app.use(cors());
+const allowedOrigins = ['http://localhost:3000', 'https://csesucsd.com'];
+app.use(cors({
+  origin: (origin, callback) => {
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: 'GET,POST,PUT,DELETE,OPTIONS',
+  credentials: true
+}));
+
+// app.use(cors());
 
 const PORT = process.env.PORT || 5000;
 const baseApi = '/api/v1';
