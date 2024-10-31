@@ -5,82 +5,67 @@ import next from '../../images/next.png';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { buttonStyles } from '../Button/styles';
 import { aboutStyles } from './styles';
-import Nabil from '../../images/meettheteamImages/nabil.jpg';
-import Samvrit from '../../images/meettheteamImages/samvrit.jpeg';
-import Anuj from '../../images/meettheteamImages/anuj.jpg';
 import Sithu from '../../images/meettheteamImages/sithu.jpg';
 import Rahul from '../../images/meettheteamImages/rahul.png';
-import Ishika from '../../images/meettheteamImages/ishika.jpg';
 import Yashil from '../../images/meettheteamImages/yashil vora.jpg';
-import Cassandra from '../../images/meettheteamImages/cassandra.png';
-import Rachel from '../../images/meettheteamImages/rachel paner.jpeg';
-import Christopher from '../../images/meettheteamImages/christopher.png';
-import Ketan from '../../images/meettheteamImages/ketan.jpg';
-import Gloria from '../../images/meettheteamImages/gloria.jpg';
 import Mishka from '../../images/meettheteamImages/mishka.jpeg';
-import Delvin from '../../images/meettheteamImages/delvin.jpg';
-import Joyce from '../../images/meettheteamImages/joyce.jpg';
-import Will from '../../images/meettheteamImages/will.jpg';
 import Brian from '../../images/meettheteamImages/brian.jpg';
-import Shruti from '../../images/meettheteamImages/shruti.jpg';
-import Manan from '../../images/meettheteamImages/manan.jpg';
-import Jheel from '../../images/meettheteamImages/jheel.jpg';
-import Sonia from '../../images/meettheteamImages/sonia.jpg';
 import Jake from '../../images/meettheteamImages/jake villaseno.jpeg';
 import Jose from '../../images/meettheteamImages/josue martinez.jpeg';
 import Angelina from '../../images/meettheteamImages/angelina yee.jpg';
-import Shambhavi from '../../images/meettheteamImages/shambhavi mittal.jpg';
 import Ganesh from '../../images/meettheteamImages/ganesh kumarappan.jpg';
 import Sardor from '../../images/meettheteamImages/sardor sobirov.jpg';
 import Shreya from '../../images/meettheteamImages/shreya gupta.jpg';
 import ShreyaN from '../../images/meettheteamImages/Shreya Nagunuri.png';
-import Ryan from '../../images/meettheteamImages/ryan rickey.jpg';
-import Viren from '../../images/meettheteamImages/viren nathan.jpg';
 import Kevin from '../../images/meettheteamImages/kevin kim.jpeg';
 import KevinW from '../../images/meettheteamImages/KevinWu.png';
 import Sofia from '../../images/meettheteamImages/sofia nguyen.png';
 import Maanasa from '../../images/meettheteamImages/maanasa prasad.png';
-import Ali from '../../images/meettheteamImages/ali alani.png';
 import Michael from '../../images/meettheteamImages/michael he.png';
-import Cole from '../../images/meettheteamImages/cole.png';
-import Victor from '../../images/meettheteamImages/VictorKim.jpeg';
+import Pranav_Soma from '../../images/meettheteamImages/Pranav_Soma.jpeg';
+import Nikitha_Maderamitla from '../../images/meettheteamImages/Nikitha_Maderamitla.jpg';
+import Aryen_Singhal from '../../images/meettheteamImages/Aryen_Singhal.jpg';
+import Hillary_Chang from '../../images/meettheteamImages/Hillary_Chang.webp';
+import Aditya_Kakarla from '../../images/meettheteamImages/Aditya_Kakarla.jpg';
+import Chase_Peterson from '../../images/meettheteamImages/Chase_Peterson.jpg';
+import Tia_Irani from '../../images/meettheteamImages/Tia_Irani.jpeg';
+import Steven_Shi from '../../images/meettheteamImages/Steven_Shi.jpg';
+import Vinod_Vairavaraj from '../../images/meettheteamImages/Vinod_Vairavaraj.png';
+import Shree_Venkatesh from '../../images/meettheteamImages/Shree_Venkatesh.jpg';
+import Bhavik_Chandna from '../../images/meettheteamImages/Bhavik_Chandna.jpg';
+import Kevin_Sun from '../../images/meettheteamImages/Kevin_Sun.jpg';
+import Aryamun_Das from '../../images/meettheteamImages/Ryan_Das.jpeg';
+import Aditi_Bansal from '../../images/meettheteamImages/Aditi_Bansal.jpg';
+import Lucas_Hlaing from '../../images/meettheteamImages/Lucas_Hiaing.jpeg';
+import Varun_Parekh from '../../images/meettheteamImages/Varun_Parekh.jpg';
 
 const categories = [
   {
     id: 1,
     name: 'CSES Board',
     members: [
-      { name: 'Nabil Khoury', title: 'Co-President', photo: Nabil },
-      { name: 'Samvrit Srinath', title: 'Co-President', photo: Samvrit },
       { name: 'Rahul Mistry', title: 'VP Internal', photo: Rahul },
       { name: 'Michael He', title: 'VP External', photo: Michael },
       { name: 'Sithu Soe', title: 'VP Operations', photo: Sithu },
-      { name: 'Anuj Jain', title: 'VP Finance', photo: Anuj },
-      { name: 'Maanasa Prasad', title: 'Event Director', photo: Maanasa },
-      { name: 'Ishika Agrawal', title: 'Events Director', photo: Ishika },
-      { name: 'Christopher Tams', title: 'Marketing Director', photo: Christopher },
-      { name: 'Shambhavi Mittal', title: 'PR Director', photo: Shambhavi },
-      { name: 'Cassandra Ponce Maldonado', title: 'Events Chair', photo: Cassandra },
+      { name: 'Maanasa Prasad', title: 'VP Events', photo: Maanasa },
+      { name: 'Lucas Hlaing', title: 'Finance Director', photo: Lucas_Hlaing },
+      { name: 'Varun Parekh', title: 'Technical Workshop Director', photo: Varun_Parekh },
       { name: 'Angelina Yee', title: 'Marketing Chair', photo: Angelina },
-      { name: 'Rachel Paner', title: 'Design Chair', photo: Rachel },
-      { name: 'Jose Martinez', title: 'Outreach Chair - Alumni', photo: Jose },
-      { name: 'Ketan Jain', title: 'Outreach Chair - Student Organizations', photo: Ketan },
-      { name: 'Cole Carter', title: 'Outreach Chair - Sponsors/Corporates', photo: Cole },
+      { name: 'Jose Martinez', title: 'External Director - Alumni and Professor', photo: Jose },
+      { name: 'Hillary Chang', title: 'Corporate Connections Director', photo: Hillary_Chang },
     ],
   },
   {
     id: 2,
     name: 'CSES Dev',
     members: [
-      { name: 'Will Hsu', title: 'Engineering Manager', photo: Will },
-      { name: 'Delvin Bajoua', title: 'Product Manager', photo: Delvin },
-      { name: 'Shreya Gupta', title: 'Development Team Chair', photo: Shreya },
+      { name: 'Shreya Gupta', title: 'President', photo: Shreya },
+      { name: 'Steven Shi', title: 'VP Products', photo: Steven_Shi },
+      { name: 'Jake Villasenor', title: 'VP Design', photo: Jake },
       { name: 'Sardor Sobirov', title: 'Frontend Developer', photo: Sardor },
       { name: 'Sithu Soe', title: 'Frontend Developer', photo: Sithu },
-      { name: 'Joyce Lu', title: 'Frontend Developer', photo: Joyce },
       { name: 'Kevin Wu', title: 'Frontend Developer', photo: KevinW },
       { name: 'Shreya Nagunuri', title: 'Backend Developer', photo: ShreyaN },
-      { name: 'Victor Kim', title: 'Backend Developer', photo: Victor },
       { name: 'Brian Liu', title: 'Backend Developer', photo: Brian },
       { name: 'Ganesh Kumarappan', title: 'Backend Developer', photo: Ganesh },
     ],
@@ -91,17 +76,26 @@ const categories = [
     members: [
       { name: 'Yashil Vora', title: 'President', photo: Yashil },
       { name: 'Mishka Jethwani', title: 'VP Operations', photo: Mishka },
+      { name: 'Aryen Singhal', title: 'Engineering Manager', photo: Aryen_Singhal },
+      { name: 'Chase Peterson', title: 'Engineering Manager', photo: Chase_Peterson },
+      { name: 'Shree Venkatesh', title: 'Engineering Manager', photo: Shree_Venkatesh },
+      { name: 'Kevin Sun', title: 'Engineering Manager', photo: Kevin_Sun },
       { name: 'Kevin Kim', title: 'Lead Software Engineer', photo: Kevin },
       { name: 'Sofia Nguyen', title: 'UI/UX Designer', photo: Sofia },
-      { name: 'Song Hee Seo (Gloria)', title: 'Marketing Chair', photo: Gloria },
+      { name: 'Tia Irani', title: 'UI/UX Designer', photo: Tia_Irani },
+      { name: 'Aditi Bansal', title: 'UI/UX Designer', photo: Aditi_Bansal },
+      { name: 'Vinod Vairavaraj', title: 'UI/UX Designer', photo: Vinod_Vairavaraj },
     ],
   },
   {
-    id: 5,
-    name: 'CSES Innovate',
+    id: 6,
+    name: 'CSES E/Acc',
     members: [
-      { name: 'Viren Nathan', title: 'President', photo: Viren },
-      { name: 'Ali Alani', title: 'CTO', photo: Ali },
+      { name: 'Pranav Soma', title: 'President', photo: Pranav_Soma },
+      { name: 'Aryamun Das', title: 'Founder', photo: Aryamun_Das },
+      { name: 'Nikitha Maderamitla', title: 'Internal Director', photo: Nikitha_Maderamitla },
+      { name: 'Aditya Kakarla', title: 'External Director', photo: Aditya_Kakarla },
+      { name: 'Bhavik Chandna', title: 'Project Lead', photo: Bhavik_Chandna },
     ],
   },
 ];
