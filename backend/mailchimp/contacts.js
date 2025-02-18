@@ -6,7 +6,7 @@ const apikey = process.env.MAILCHIMP_API_KEY;
 
 mailchimp.setConfig({
   apiKey: apikey,
-  server: "us13",
+  server: 'us12',
 });
 
 // Audience ID: 968cfc7373
@@ -19,7 +19,7 @@ const addContacts = async () => {
         json: (data) => console.log(data)
       })
     });
-    console.log(data)
+    console.log(data);
     for (const email of data) {
       const response = await mailchimp.lists.addListMember('968cfc7373', {
         email_address: email,
@@ -36,6 +36,6 @@ const addContacts = async () => {
 const getContacts = async() => {
   const response = await mailchimp.lists.getListMembersInfo('968cfc7373');
   console.log(response);
-}
+};
 
 export { addContacts, getContacts };

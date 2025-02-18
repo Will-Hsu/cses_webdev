@@ -11,6 +11,7 @@ import Opportunities from './components/Opportunities/Opportunities';
 import Membership from './components/Membership/Membership';
 import Login from './components/Login/Login';
 import EditForm from './components/Login/EditProfile';
+import TemplateWebsite from './components/TemplateWebsite/TemplateWebsite';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/membership" element={<Membership />} />
           <Route path="/login" element={<Login />} />
           <Route path="/editprofile" element={<EditForm />} />
+          <Route path="/templatewebsite" element={<TemplateWebsite />} />
         </Routes>
         <Footer />
       </Container>

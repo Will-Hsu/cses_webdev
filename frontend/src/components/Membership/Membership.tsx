@@ -3,12 +3,12 @@ import Confetti from 'react-confetti';
 import {
   useMediaQuery,
   TextField,
-  // useTheme,
   Button,
   Collapse,
   IconButton,
   Alert,
   Container,
+  Typography,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { AuthContext } from '../../context/AuthContext';
@@ -22,7 +22,6 @@ import RewardsMenu from './RewardsMenu';
 import axios from 'axios';
 import { userInfoAPI, topMembersAPI, addEvent, userRank } from '../../api';
 import { membershipStyles } from './styles';
-// import { textAlign } from '@mui/system';
 
 interface Event {
   _id: string;
@@ -163,7 +162,7 @@ const Membership = () => {
         }}
       >
         {userData && (
-          <Container
+          <Container 
             style={{
               display: 'flex',
               alignItems: isiPad ? 'center' : 'flex-start',
@@ -171,46 +170,51 @@ const Membership = () => {
             }}
           >
             <div>
-              <div>
-                <h1 style={{ ...styles.eventsAttendedTitle, textAlign: 'center' }}>
-                  EVENT CHECK-IN
-                </h1>
-              </div>
-              <div>
-                <Collapse in={showSuccess} sx={styles.textfield}>
-                  <Alert severity="success" action={alertCloseBtn(setShowSuccess)}>
-                    Successfully checked in!
-                  </Alert>
-                </Collapse>
-
-                <Collapse in={showError} sx={styles.textfield}>
-                  <Alert severity="error" action={alertCloseBtn(setShowError)}>
-                    Invalid event code — <strong>please re-enter a code!</strong>
-                  </Alert>
-                </Collapse>
-
-                <TextField
+              <Container maxWidth="xl" sx={{...styles.rewardsBody }}>
+                <Typography
                   sx={{
-                    ...styles.textfield,
-                    width: '70%',
+                    ...styles.eventsAttendedTitle,
+                    textAlign: isiPad ? 'center' : 'left'
                   }}
-                  size="small"
-                  placeholder={'6 Digit Code'}
-                  value={verificationCode}
-                  inputProps={{ maxLength: 6 }}
-                  onChange={(e) => setVerificationCode(e.target.value)}
-                />
-                <Button
-                  sx={{
-                    ...styles.button,
-                    width: '20%',
-                    marginBottom: '100px',
-                  }}
-                  onClick={handleVerifyCodeClick}
                 >
-                  Verify
-                </Button>
-              </div>
+                  EVENT CHECK-IN
+                </Typography>
+                <div>
+                  <Collapse in={showSuccess} sx={styles.textfield}>
+                    <Alert severity="success" action={alertCloseBtn(setShowSuccess)}>
+                      Successfully checked in!
+                    </Alert>
+                  </Collapse>
+
+                  <Collapse in={showError} sx={styles.textfield}>
+                    <Alert severity="error" action={alertCloseBtn(setShowError)}>
+                      Invalid event code — <strong>please re-enter a code!</strong>
+                    </Alert>
+                  </Collapse>
+
+                  <TextField
+                    sx={{
+                      ...styles.textfield,
+                      width: '70%',
+                    }}
+                    size="small"
+                    placeholder={'6 Digit Code'}
+                    value={verificationCode}
+                    inputProps={{ maxLength: 6 }}
+                    onChange={(e) => setVerificationCode(e.target.value)}
+                  />
+                  <Button
+                    sx={{
+                      ...styles.button,
+                      width: '20%',
+                      marginBottom: '100px',
+                    }}
+                    onClick={handleVerifyCodeClick}
+                  >
+                    Verify
+                  </Button>
+                </div>
+              </Container>
             </div>
 
             <div>
