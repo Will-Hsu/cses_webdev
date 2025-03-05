@@ -6,7 +6,7 @@ const apikey = process.env.MAILCHIMP_API_KEY;
 
 mailchimp.setConfig({
   apiKey: apikey,
-  server: "us13",
+  server: "us12",
 });
 
 // Audience ID: 968cfc7373

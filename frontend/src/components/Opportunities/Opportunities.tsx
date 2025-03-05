@@ -1,5 +1,5 @@
-import React, { ReactNode, useEffect, useRef, useState } from 'react';
-import { Container, Typography, Grid, Link, Box, useTheme, useMediaQuery } from '@mui/material';
+import { ReactNode, useEffect, useRef, useState } from 'react';
+import { Container, Typography, Grid, Link, Box, useTheme } from '@mui/material';
 import MuiButton from '@mui/material/Button';
 import bg from '../../images/shape2.svg';
 import sponsor from '../../images/cseLogo.gif';
