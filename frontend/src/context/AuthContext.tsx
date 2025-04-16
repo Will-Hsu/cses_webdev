@@ -69,7 +69,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
                 setUser(userInfo.data);
                 setIsUcsdEmail(true);
                 // Check if user is admin
-                if (userInfo.data.email === 'cses@ucsd.edu') {
+                if (userInfo.data.email === 'cses@ucsd.edu' || 'ssenthilram@ucsd.edu' || 'h4gupta@ucsd.edu') {
                   setIsAdmin(true);
                 } else {
                   setIsAdmin(false);

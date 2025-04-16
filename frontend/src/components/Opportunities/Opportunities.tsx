@@ -1,5 +1,5 @@
-import React, { ReactNode, useEffect, useRef, useState } from 'react';
-import { Container, Typography, Grid, Link, Box, useTheme, useMediaQuery } from '@mui/material';
+import { ReactNode, useEffect, useRef, useState } from 'react';
+import { Container, Typography, Grid, Link, Box, useTheme } from '@mui/material';
 import MuiButton from '@mui/material/Button';
 import bg from '../../images/shape2.svg';
 import sponsor from '../../images/cseLogo.gif';
@@ -138,13 +138,13 @@ const Opportunities = () => {
               <Link href="https://discord.gg/vd9aFu4V" color="inherit">
                 Discord
               </Link>{' '}
-              for to learn about opportunities to get involved in the CSE Society and to stay
+              to learn about opportunities to get involved in the CSE Society and to stay
               updated on the events we will have! <br />
               <br />
               In the past, we have hosted successful career fairs with start-ups at UCSD, panels
               with alumni from Google and OpenAI, and hands-on workshops. We also have various
               leadership and project opportunities in all areas of tech, from web development
-              entrepreneurship. <br />
+              to entrepreneurship. <br />
               <br />
               Kickstart your career with CSES today!
               <br />
@@ -175,10 +175,11 @@ const Opportunities = () => {
                     backgroundColor: 'rgba(255, 255, 255, 0.2)',
                   },
                 }}
-                onClick={() => navigate('/')}
+                onClick={() => {window.location.href = "https://csesucsd.com/login";}}
               >
                 Become a Member
               </MuiButton>
+
             </Box>
             </FadeInSection>
           </Grid>
@@ -211,27 +212,6 @@ const Opportunities = () => {
                 padding: '8px, 16px, 8px, 16px',
               }}
             >
-              <MuiButton
-                size="large"
-                variant="outlined"
-                sx={{
-                  fontSize: '21px',
-                  fontFamily: 'Chakra Petch, sans-serif',
-                  fontWeight: '400',
-                  textTransform: 'none',
-                  borderColor: 'white',
-                  color: 'white',
-                  padding: 'auto',
-                  borderRadius: '10px',
-                  '&:hover': {
-                    borderColor: 'white',
-                    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                  },
-                }}
-                onClick={() => navigate('/membership')}
-              >
-                See Opportunities -&gt;
-              </MuiButton>
             </Box>
             </FadeInSection>
           </Grid>

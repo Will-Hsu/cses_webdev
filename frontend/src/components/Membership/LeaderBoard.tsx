@@ -1,4 +1,4 @@
-import { Container, Grid, Typography, useMediaQuery } from '@mui/material';
+import { Container, Typography, useMediaQuery } from '@mui/material';
 import alertLogo from '../../images/events-attended-alert.svg';
 import defaultPic from '../../images/profile.png';
 import { membershipStyles } from './styles';
