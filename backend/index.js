@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import connectDB from './database/connect-db.js';
 // import testDatabaseConnection from './database/db-test.js';
 import connectMailchimp from './mailchimp/connect-mailchimp.js';
-import { addContacts, getContacts } from './mailchimp/contacts.js';
+// import { addContacts, getContacts } from './mailchimp/contacts.js';
 
 // import routes
 import eventRoutes from './routes/event.js';
@@ -20,6 +20,7 @@ dotenv.config();
 
 app.use(bodyParser.json({ limit: '30mb', extended: true }));
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
+
 app.use(cors());
 
 const PORT = process.env.PORT || 5000;

@@ -177,6 +177,31 @@ export const getUserRank = asyncHandler(async (req, res) => {
   }
 });
 
+// Gets the points of the User right above current User (more points)
+// (i.e return 600 if B=600pts and A=500pts)
+export const getBeforeUserPoints = asyncHandler(async (req, res) => {
+  const { email } = req.params;
+  try {
+    // Find all users sorted by points
+    const allUsers = await User.find()
+      .sort({ points: -1 })
+      .select('name email profilePicture points')
+      .exec();
+    // Get the index of the current user in the sorted list
+    const currentUserIndex = allUsers.findIndex(user => user.email === email);
+    var beforeUserIndex = currentUserIndex - 1;
+    while(allUsers[currentUserIndex].points == allUsers[beforeUserIndex].points){
+      beforeUserIndex--;
+    }
+    const beforeUsersPoints = allUsers[beforeUserIndex].points;
+
+    res.status(200).json(beforeUsersPoints);
+  } catch (error) {
+    console.error('Error fetching user ranks: ', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 
 // POST request for creating new event entries for a user.
 export const userEventsUpdate = asyncHandler(async (req, res) => {
@@ -320,6 +345,7 @@ export default {
   userEventsUpdate,
   getTopMembers,
   getUserRank,
+  getBeforeUserPoints,
   redeemSmall,
   redeemMedium,
   redeemLarge,

@@ -103,6 +103,18 @@ export const userRank = (email) => {
   });
 };
 
+export const beforeUserPoints = (email) => {
+  return new Promise((resolve, reject) => {
+    API.get(`/users/${email}/beforeUserPoints`)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
 export const eventListAPI = () => {
   return new Promise((resolve, reject) => {
     API.get('/events')
