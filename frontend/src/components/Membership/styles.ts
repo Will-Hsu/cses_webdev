@@ -28,7 +28,7 @@ export const membershipStyles = (isMobile?: boolean) => ({
     fontWeight: 'bold',
     fontFamily: 'Chakra Petch',
     color: 'white',
-    fontSize: 'clamp(32px, 5vw, 60px)',
+    fontSize: 'clamp(32px, 5vw, 50px)',
     marginTop: '20px',
     marginBottom: '10px',
   },

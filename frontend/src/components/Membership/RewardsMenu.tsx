@@ -21,7 +21,6 @@ const RewardsMenu = (userData: RewardsProp) => {
   const largePrizePoints = 2500;
   const [confirmationOpen, setConfirmationOpen] = useState(false);
   const [selectedPrize, setSelectedPrize] = useState('');
-  const [isHovered, setIsHovered] = useState(false);
 
   const openConfirmationDialog = (prizeType: string) => {
     setSelectedPrize(prizeType);
@@ -82,7 +81,7 @@ const RewardsMenu = (userData: RewardsProp) => {
   };
 
   return (
-    <Container maxWidth="xl" sx={{...styles.rewardsBody, marginLeft: isiPad ? '0' : '10%', }}>
+    <Container maxWidth="xl" sx={{...styles.rewardsBody, marginLeft: isiPad ? '0' : '25%', }}>
       <Typography
         sx={{
           ...styles.eventsAttendedTitle,
@@ -95,6 +94,7 @@ const RewardsMenu = (userData: RewardsProp) => {
         style={{
           display: 'flex',
           flexDirection: isMobile ? 'column' : 'row',
+          marginLeft: isMobile || isiPad ? '0px' : '-40px'
         }}
       >
         <Button
@@ -115,27 +115,8 @@ const RewardsMenu = (userData: RewardsProp) => {
             }
           }}
         >
-          <Box
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-          >
+          <Box>
             <img src={smallPrize} alt="img" style={{ width: '70px', height: '70px' }} />
-            {isHovered && (
-              <div
-                className="info-box"
-                style={{
-                  backgroundColor: 'white',
-                  color: 'black',
-                  padding: '3px 20px',
-                  maxWidth: '40%',
-                  borderRadius: '15px',
-                  fontSize: '12px',
-                  position: 'absolute',
-                }}
-              >
-                <p> Small Prize </p>
-              </div>
-            )}
           </Box>
           <Box
             style={{

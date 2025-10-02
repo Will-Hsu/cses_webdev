@@ -2,7 +2,7 @@ import { Theme } from '@mui/material';
 export const footerStyles = (theme: Theme) => ({
   footer: {
     margin: 0,
-    backgroundColor: '#1F3A7E',
+    backgroundColor: '#203A7E',
     bottom: 0,
     padding: '40px 80px',
     [theme.breakpoints.down('sm')]: {

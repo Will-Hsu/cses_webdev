@@ -1,4 +1,4 @@
-import { Container, Grid, Typography, useMediaQuery } from '@mui/material';
+import { Container, Typography, useMediaQuery } from '@mui/material';
 import alertLogo from '../../images/events-attended-alert.svg';
 import defaultPic from '../../images/profile.png';
 import { membershipStyles } from './styles';
@@ -169,12 +169,14 @@ const LeaderBoard = ({
   myName,
   myProfilePicture,
   currentUserRank,
+  aboveUserPoints
 }: {
   rankings: Array<RankingProps>;
   myPoint: number;
   myName: string;
   myProfilePicture: string;
   currentUserRank: number;
+  aboveUserPoints: number;
 }) => {
   const styles = membershipStyles();
   const isDesktop = useMediaQuery('(min-width: 1375px)');
@@ -327,7 +329,8 @@ const LeaderBoard = ({
       <Typography sx={styles.eventsAttendedTitle}>LEADERBOARD</Typography>
 
       {myPoint < rankings[2].points && (
-        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '60px' }}>
+        <div>
+        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '0px' }}>
           <img
             src={alertLogo}
             alt="Events Attended Alert"
@@ -339,6 +342,19 @@ const LeaderBoard = ({
             <i>You are {rankings[2].points - myPoint} points behind THIRD PLACE!</i>
           </Typography>
         </div>
+        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '60px' }}>
+        <img
+          src={alertLogo}
+          alt="Events Attended Alert"
+          width="32"
+          height="32"
+          style={{ marginRight: '10px' }}
+        />
+        <Typography variant="subtitle1" sx={styles.eventsAttendText}>
+          <i>You are {aboveUserPoints - myPoint} points behind the next person!</i>
+        </Typography>
+      </div>
+      </div>
       )}
 
       {orderRankings(rankings)}

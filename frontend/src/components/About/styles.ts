@@ -1,3 +1,54 @@
+import { SxProps, Theme } from '@mui/material/styles';
+
+/* ---------- Gradient border tokens & helpers ---------- */
+
+export const GRADIENT = 'linear-gradient(90deg, #FACC15, #22D3EE, #A855F7)'; // yellow → teal → violet
+
+/** Generic mixin you can spread into any sx */
+export const makeGradientBorder = (
+  opts?: { radius?: number | string; thickness?: number | string }
+): SxProps<Theme> => {
+  const radius = 1;
+  const thickness = opts?.thickness ?? '3px';
+  return {
+    p: thickness,
+    borderRadius: radius,
+    background: GRADIENT,
+  };
+};
+
+/** For images: outer wrapper (shows the gradient) */
+export const gradientImgWrapper: SxProps<Theme> = {
+  display: 'inline-block',
+  ...makeGradientBorder({ radius: 0, thickness: '3px' }),
+};
+
+/** For images: the actual <img> (sits inside the wrapper) */
+export const gradientImg: SxProps<Theme> = {
+  display: 'block',
+  borderRadius: 0,
+  maxWidth: '100%',
+  height: 'auto',
+  backgroundColor: 'white',
+};
+
+/** Full-bleed section band with gradient border (e.g., “What is CSES?”) */
+export const fullBleedGradientSection: SxProps<Theme> = {
+  position: 'relative',
+  mx: 'calc(50% - 50vw)',
+  width: '100vw',
+  ...makeGradientBorder({ radius: 8, thickness: '3px' }),
+  '& > .section-surface': {
+    borderRadius: 0,
+    overflow: 'hidden',
+    position: 'relative',
+  },
+};
+
+export const aboutImageSize: SxProps<Theme> = {
+  width: { xs: 280, sm: 360, md: 420 },
+};
+
 export const aboutStyles = () => ({
   backgroundImage: { width: '100%' },
   bg1: {
@@ -16,7 +67,7 @@ export const aboutStyles = () => ({
     scale: '110%',
     opacity: '0.6',
   },
-  body: { width: {xs: '80%', sm: '100%'}, position: 'relative', top: '93px', marginBottom: '200px' },
+  body: { width: {xs: '100%', sm: '100%', md: '100%'}, position: 'relative', top: '93px', marginBottom: '240px', },
   root: {
     position: 'relative',
   },
@@ -66,6 +117,7 @@ export const aboutStyles = () => ({
     color: 'white',
     fontSize: 'clamp(20px, 8vw, 65px)',
     fontFamily: 'Chakra Petch',
+    textAlign: 'center',
     fontWeight: 700,
   },
   subheadingTop: {
@@ -208,5 +260,6 @@ export const aboutStyles = () => ({
     marginTop: { xs: '28%', sm: '20%', md: '12%' },
     fontWeight: 700,
   },
+
 });
 

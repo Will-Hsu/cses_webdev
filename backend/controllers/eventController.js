@@ -55,6 +55,7 @@ export const eventList = asyncHandler(async (req, res) => {
         instagram_link,
         code,
         qrCode,
+        event_type,
       } = event;
       return {
         _id,
@@ -68,6 +69,7 @@ export const eventList = asyncHandler(async (req, res) => {
         instagram_link,
         code,
         qrCode,
+        event_type,
       };
     });
 
@@ -134,6 +136,11 @@ export const eventCreate = [
 
       throw new Error('Instagram link must be a valid URL.');
     }),
+  body('event_type')
+    .optional()
+    .customSanitizer((val) => val.trim())
+    .isIn(['General', 'Dev', 'Open Source', 'Innovate'])
+    .withMessage('Event type must be one of: General, Dev, Open Source, Innovate'),
 
   asyncHandler(async (req, res) => {
     // Extract the validation errors from a request.
