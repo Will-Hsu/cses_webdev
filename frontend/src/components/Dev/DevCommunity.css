@@ -1,0 +1,652 @@
+.cses-container {
+  background-color: #001054;
+  color: white;
+  padding: 2rem;
+  font-family: sans-serif;
+  padding-top: 130px;
+}
+
+.intro h1 {
+  font-size: 4rem;
+  text-align: center;
+  max-width: 2000px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.intro {
+  text-align: center;
+}
+
+.intro-title {
+  font-size: 2.7rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.intro-text {
+  text-align: center;
+  font-size: 1.3rem;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 2rem auto 0;
+  padding: 0 1rem;
+}
+
+.dev-highlight {
+  color: #5DF0C4 
+}
+
+.gold-highlight {
+  color: #EBB111; 
+  font-weight: bold; 
+}
+
+.opportunities h2 {
+  font-size: 2.7rem; 
+  font-weight: bold;
+  text-align: center;
+}
+
+.opportunities {
+  text-align: center;
+  padding: 4rem 1rem;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 1.5rem;
+  justify-content: center; 
+  max-width: 600px;
+  margin: 2rem auto 0;
+}
+
+
+.card {
+  background-color: #0a1a68; 
+  border-radius: 8px;
+  color: white;
+  width: 250px; 
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.dev-opportunity-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 40px;
+  justify-items: center;
+  padding: 40px 0;
+}
+
+.dev-opportunity-card {
+  text-align: center;
+  max-width: 400px;
+  background-color: transparent;
+  color: white;
+}
+
+.dev-opportunity-card h3 {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  color: #5DF0C4; 
+}
+
+.opportunity-card img {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  margin-bottom: 0.5rem; 
+  object-fit: cover;
+}
+
+.opportunity-card p {
+  font-size: 1.1rem;
+  line-height: 1.4;
+  margin-top: 0; 
+}
+
+
+.project-tabs button,
+.team-tabs button {
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+.project-showcase {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.project-image {
+  background: #ddd;
+  width: 150px;
+  height: 150px;
+}
+
+.member-card {
+  background: transparent;
+  padding: 1rem;
+  width: 200px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar-placeholder {
+  background: #ccc;
+  height: 100px;
+  width: 100px;
+  margin: auto;
+  border-radius: 50%;
+}
+
+.cta-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem; 
+}
+
+.cta-button {
+  border-radius: 40px;
+  border: 2px solid transparent;
+  background-image: 
+    linear-gradient(#001054, #001054),
+    linear-gradient(to right, #FFCE00, #00F0FF);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  padding: 15px 30px;
+  color: white;
+  font-size: 24px;
+  text-transform: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.projects h2 {
+  text-align: center;
+  font-size: 44px
+}
+
+.project-tab {
+  padding: 10px 16px;
+  font-size: 16px;
+  background-color: #001054;
+  color: white;
+  border-radius: 20px;
+  border: 2px solid transparent;
+  background-image:
+    linear-gradient(#001054, #001054),
+    linear-gradient(to right, #FFCE00, #00F0FF);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.project-tab.active {
+  font-weight: bold;
+  transform: scale(1.05);
+}
+
+.project-showcase {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.project-image-border {
+  display: inline-block;
+  padding: 4px;
+  border-radius: 15px; 
+  background: linear-gradient(135deg, #FFD700, #00F0FF);
+  overflow: hidden;
+  margin: 2rem auto 0;
+}
+
+.project-image {
+  display: block;
+  width: 200px; 
+  height: 200px;
+  object-fit: cover; 
+  border-radius: 12px;
+  background-color: #001054;
+}
+
+.project-tags .tag {
+  display: inline-block;
+  margin: 0 0.3rem;
+  background-color: #0a1a68;
+  padding: 0.3rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+}
+
+.project-tabs-container {
+  display: inline-flex;
+  padding: 3px;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #FFCE00, #00F0FF);
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.project-tabs-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.project-tabs {
+    display: flex;
+    border-radius: 9px;
+    background-color: #0a0a4d; /* navy blue background matching page */
+    overflow: hidden;
+    justify-content: center;
+}
+
+.project-details {
+  max-width: 600px;
+  margin: 0.5rem auto 0; 
+  font-size: 1.1rem;
+  line-height: 1.5;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+
+.project-tabs button {
+  background-color: #0a0a4d; /* same as container bg */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  position: relative;
+  text-align: center;
+  user-select: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin: 0; /* Remove margins to let lines connect fully */
+}
+
+/* Separator line */
+.project-tabs button:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 0;           /* Start at top */
+  right: 0;
+  width: 2px;
+  height: 100%;     /* Full height */
+  background: linear-gradient(180deg, #FFCE00, #00F0FF);
+}
+
+/* Hover effect for inactive tabs */
+.project-tabs button:not(.active-tab):hover {
+  background-color: #13135d; 
+}
+
+.team h2 {
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.avatar-gradient {
+  display: inline-block;
+  padding: 3px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FFD700, #00F0FF);
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+}
+
+.avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  background-color: #001054;
+}
+
+.icon-overlay {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  background: #001054;
+  padding: 4px 10px;
+  border-radius: 20px;
+  z-index: 2;
+  box-shadow: 0 0 6px rgba(0, 240, 255, 0.3);
+}
+
+.icon-overlay a {
+  color: white;
+  font-size: 0.85rem;
+  transition: color 0.2s ease;
+}
+
+.icon-overlay a:hover {
+  color: #00F0FF;
+}
+
+.member-name {
+  font-weight: bold;
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+
+.member-role {
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+/* Square border with gradient */
+.avatar-square-border.clean {
+  width: 200px;
+  height: 200px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #FFD700, #00F0FF);
+  padding: 4px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Inside the square: member image */
+.avatar-square-border.clean .member-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+  display: block;
+  background-color: #001054;
+}
+
+/* Icon placement: bottom left & right */
+.corner-icons {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  right: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.corner-icons a {
+  color: white;
+  font-size: 1.3rem;
+  text-decoration: none;
+}
+
+.corner-icons a:hover {
+  color: #00F0FF;
+}
+
+/* Name and role formatting */
+.member-name.clean-name {
+  margin-top: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  color: white;
+  text-align: center;
+}
+
+.member-role.clean-role {
+  font-size: 0.9rem;
+  color: #ccc;
+  text-align: center;
+  margin-top: 0.2rem;
+}
+
+.team-carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: nowrap; /* Important to prevent wrapping */
+}
+
+.arrow-button {
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: white; /* Always white */
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: color 0.3s;
+}
+
+.arrow-button:hover {
+  color: #00d8ff;
+}
+
+.arrow-button:disabled {
+  color: white; /* Keep white even when disabled */
+  cursor: default;
+ 
+}
+
+
+.team-members-wrapper {
+  flex-shrink: 0;
+  overflow: hidden;
+  max-width: 950px; /* Adjust to fit 3 cards wide + spacing */
+}
+
+.team-members {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 1.2rem;
+  width: 100%;
+}
+
+
+
+@media (max-width: 768px) {
+    .cses-container {
+        margin-top:1 ;
+    }
+
+    .intro-title {
+        font-size: 1.8rem; 
+    }
+
+    .intro h1 {
+        font-size: 2.5rem; 
+        padding: 1rem 1rem;
+    }
+
+    .intro-text {
+        font-size: 1rem;
+        padding: 1rem;
+    }
+
+    .opportunities h2 {
+        font-size: 2rem; 
+    }
+
+    .opportunity-grid {
+        grid-template-columns: 1fr; 
+        gap: 2rem;
+    }
+
+    .opportunity-card img {
+        width: 150px;
+        height: 150px;
+    }
+
+.project-tabs-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.project-tabs-container {
+  width: max-content;
+  overflow-x: auto;
+}
+
+.project-tabs {
+  display: flex;
+  white-space: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.project-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.project-tabs button {
+  flex-shrink: 0;
+  font-size: 0.75rem;     /* ⬅️ Shrink font more */
+  padding: 6px 12px;      /* ⬅️ Slightly tighter padding */
+  white-space: nowrap;
+  overflow: visible;
+  text-overflow: unset;
+  min-width: unset;
+  max-width: none;
+  letter-spacing: -0.5px; /* ⬅️ Subtle letter compression */
+}
+
+.project-tabs-container,
+.team-tabs-container {
+  width: max-content;
+  overflow-x: auto;
+}
+
+.project-tabs,
+.team-tabs {
+  display: flex;
+  white-space: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.project-tabs::-webkit-scrollbar,
+.team-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.team-tabs .project-tab {
+  font-size: 0.75rem;
+  padding: 6px 12px;
+  letter-spacing: -0.5px;
+  flex-shrink: 0;
+}
+  .team-members-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 0 1rem;
+  }
+
+  .team-members {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);  /* ✅ 2 across */
+  grid-template-rows: auto;              /* ✅ 1 row total */
+  gap: 1rem;
+  width: 100%;
+  max-width: 100%;
+  transition: transform 0.5s ease-in-out;
+  justify-items: center;
+}
+
+
+  .member-card {
+    width: 100%;
+    max-width: 160px;
+    padding: 0.5rem;
+    text-align: center;
+  }
+
+  .avatar-square-border.clean {
+    width: 150px; 
+    height: 150px;
+  }
+
+   .member-image {
+    width: 140px;
+    height: 140px;
+  }
+
+  .member-name {
+    font-size: 0.95rem;
+    margin-top: 0.4rem;
+  }
+
+  .member-role {
+    font-size: 0.8rem;
+  }
+
+  .arrow-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.8rem;
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    z-index: 2;
+  }
+
+  .arrow-button.left {
+    left: -1.5rem;
+  }
+
+  .arrow-button.right {
+    right: -1.5rem;
+  }
+   .team-carousel {
+    position: relative; /* 🔧 Add this line */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: nowrap;
+  }
+
+  .arrow-button {
+    flex-shrink: 0; /* prevent shrinking */
+    font-size: 1.5rem; /* maybe smaller on mobile */
+  }
+
+  .team-members-wrapper {
+    overflow-x: hidden;
+    flex-grow: 1;
+  }
+
+  .team-members {
+    display: flex;
+    gap: 1rem;
+  }
+}

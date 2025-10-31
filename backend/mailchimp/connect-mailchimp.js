@@ -5,7 +5,7 @@ const apikey = process.env.MAILCHIMP_API_KEY;
 
 mailchimp.setConfig({
   apiKey: apikey,
-  server: "us13",
+  server: 'us12',
 });
 
 async function connectMailchimp() {
