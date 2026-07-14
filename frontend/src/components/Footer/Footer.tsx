@@ -1,129 +1,81 @@
 import React from 'react';
 import { Box, Typography, Link } from '@mui/material';
 import InstagramIcon from '../../images/instagram-icon.svg';
-import FacebookIcon from '../../images/facebook-icon.svg';
 import LinkedInIcon from '../../images/linkedin-icon.svg';
-import DiscordIcon from '../../images/discord-icon.svg';
 import csesLogo from '../../images/footer-logo.png';
 
-const links = [
-  { logo: InstagramIcon, link: 'https://www.instagram.com/cses_ucsd/' },
-  { logo: DiscordIcon, link: 'https://discord.gg/UkdACyy2h8' },
-  { logo: FacebookIcon, link: 'https://www.facebook.com/csesucsd' },
-  { logo: LinkedInIcon, link: 'https://www.linkedin.com/in/csesucsd/' },
+const socialLinks = [
+  { logo: InstagramIcon, link: 'https://www.instagram.com/cses_ucsd/', alt: 'Instagram' },
+  { logo: LinkedInIcon, link: 'https://www.linkedin.com/in/csesucsd/', alt: 'LinkedIn' },
 ];
 
 const Footer = () => {
   return (
     <Box
       sx={{
-        backgroundColor: '#1F3A7E',
-        padding: { xs: '0.5rem 2.5rem 1.25rem', md: '1.25rem 2.5rem 1.25rem' },
+        backgroundColor: '#1a1e2e',
+        padding: { xs: '2rem 1.5rem 1.5rem', md: '2.5rem 3rem 2rem' },
         color: 'white',
       }}
     >
-      {/* Desktop Layout */}
+      {/* Top row: logo left, social icons right */}
       <Box
         sx={{
-          display: { xs: 'none', md: 'flex' },
+          display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
+          mb: 3,
         }}
       >
-        {/* Logo */}
+        {/* CSES Logo */}
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Box
             component="img"
             src={csesLogo}
-            alt="logo"
+            alt="CSES Logo"
             sx={{
-              height: '3.75rem', // 60px equivalent
-              maxWidth: '100%',
-              mr: 1.25, // 10px
+              height: { xs: '40px', md: '55px' },
               objectFit: 'contain',
             }}
           />
         </Box>
-
-        {/* Center Contact Info */}
-        <Typography sx={{ fontSize: '1.125rem', fontStyle: 'italic' }}>
-          For all inquiries, contact{' '}
-          <Link href="mailto:cses@ucsd.edu" color="inherit">
-            cses@ucsd.edu
-          </Link>
-          .
-        </Typography>
 
         {/* Social Icons */}
         <Box sx={{ display: 'flex', gap: 2 }}>
-          {links.map(({ logo, link }, idx) => (
+          {socialLinks.map(({ logo, link, alt }) => (
             <Link
-              key={idx}
+              key={alt}
               href={link}
               target="_blank"
               rel="noopener noreferrer"
               sx={{
-                display: 'inline-block',
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
                 '& img': {
-                  width: '2rem', // 32px
-                  height: '2rem',
+                  width: { xs: '28px', md: '32px' },
+                  height: { xs: '28px', md: '32px' },
                   objectFit: 'contain',
+                  filter: 'brightness(0) invert(1)',
                 },
               }}
             >
-              <img src={logo} alt="social" />
+              <img src={logo} alt={alt} />
             </Link>
           ))}
         </Box>
       </Box>
 
-      {/* Mobile Layout */}
-      <Box
+      {/* Copyright */}
+      <Typography
         sx={{
-          display: { xs: 'flex', md: 'none' },
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          flexWrap: 'nowrap',
-          pt: 2,
+          textAlign: 'center',
+          fontSize: { xs: '0.75rem', md: '0.875rem' },
+          color: 'rgba(255, 255, 255, 0.7)',
         }}
       >
-        {/* Logo */}
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Box
-            component="img"
-            src={csesLogo}
-            alt="logo"
-            sx={{
-              height: '3.125rem', // 50px equivalent
-              maxWidth: '100%',
-              mr: 1.25, // 10px
-              objectFit: 'contain',
-            }}
-          />
-        </Box>
-
-        {/* Social Icons */}
-        <Box sx={{ display: 'flex', gap: 1 }}>
-          {links.map(({ logo, link }, idx) => (
-            <Link
-              key={idx}
-              href={link}
-              target="_blank"
-              rel="noopener noreferrer"
-              sx={{
-                display: 'inline-block',
-                '& img': {
-                  width: '1.75rem', // 28px
-                  height: '1.75rem',
-                  objectFit: 'contain',
-                },
-              }}
-            >
-              <img src={logo} alt="social" />
-            </Link>
-          ))}
-        </Box>
-      </Box>
+        &copy; 2026 UC San Diego Computer Science and Engineering Society. All rights reserved.
+      </Typography>
     </Box>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   AppBar,
   IconButton,
@@ -10,177 +10,124 @@ import {
   Box,
   Button,
   Toolbar,
-  Avatar,
 } from '@mui/material';
 import { Menu as MenuIcon, Close as CloseIcon } from '@mui/icons-material';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import csesLogo from '../../images/CSES-logo.png';
-import MuiButton from '../Button/Button';
-import { navBarStyles } from './styles';
-import { AuthContext } from '../../context/AuthContext';
-import ProfileDropdown from './ProfileDropdown';
-import { User } from '../../utils/types';
-import axios from 'axios';
+import csesLogo from '../../images/cses-logo-white.png';
+
+const navItems = [
+  { text: 'Home', link: '#' },
+  { text: 'Events', link: '#' },
+  { text: 'Communities', link: '#' },
+];
 
 const NavBar = () => {
-  const location = useLocation();
-  const styles = navBarStyles();
-  const navigate = useNavigate();
-
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [userData, setUserData] = useState<User | null>(null);
-
-  const { user, isLoggedIn } = useContext(AuthContext);
-
-  const navItems = [
-    { text: 'About', link: '/about' },
-    { text: 'Events', link: '/events' },
-    { text: 'Sponsors', link: '/sponsorships' },
-    { text: 'Initiatives', link: '/initiatives' },
-  ];
-
-  const clickItem = (link: string) => {
-    setIsDrawerOpen(false);
-    navigate(link);
-  };
-
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        if (isLoggedIn) {
-          const response = await axios.get(
-            `${process.env.REACT_APP_BACKEND_URL}/api/v1/users/${user.email}`,
-          );
-          setUserData(response.data);
-        }
-      } catch (error) {
-        console.log('Error fetching user data: ', error);
-      }
-    };
-
-    fetchUserData();
-  }, [isLoggedIn, user.email, navigate]);
 
   return (
     <div>
-      <AppBar sx={{ backgroundColor: '#030E5D' }} position="fixed" elevation={0}>
-        <Toolbar>
-          <Link to="/">
+      <AppBar
+        position="fixed"
+        elevation={0}
+        sx={{ backgroundColor: 'rgba(26, 26, 36, 0.6)', backdropFilter: 'blur(8px)' }}
+      >
+        <Toolbar sx={{ justifyContent: 'space-between' }}>
+          {/* Logo + text */}
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <img
               src={csesLogo}
-              alt="logo"
-              style={{ margin: 'clamp(20px, 4vw, 25px)', height: '55px' }}
+              alt="CSES logo"
+              style={{ height: '45px', margin: '12px 0' }}
             />
-          </Link>
+            <Typography
+              sx={{
+                color: 'white',
+                fontFamily: '"Space Mono", monospace',
+                fontSize: '1.1rem',
+                ml: 1.5,
+                display: { xs: 'none', sm: 'block' },
+              }}
+            >
+              at UC San Diego
+            </Typography>
+          </Box>
 
-          <div style={{ flexGrow: 1 }} />
-
-          <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+          {/* Desktop Nav */}
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 1 }}>
             {navItems.map(({ text, link }) => (
-              <Button key={text} component={Link} to={link} sx={styles.button}>
+              <Button
+                key={text}
+                href={link}
+                sx={{
+                  color: 'white',
+                  fontFamily: '"Space Mono", monospace',
+                  fontSize: '1rem',
+                  textTransform: 'none',
+                  '&:hover': { backgroundColor: 'rgba(255,255,255,0.1)' },
+                }}
+              >
                 {text}
               </Button>
             ))}
-
-            {/* Gradient Join Us Button */}
-            {/* {!isLoggedIn && location.pathname !== '/login' && (
-              <Box
-                onClick={() => navigate('/login')}
-                sx={{
-                  cursor: 'pointer',
-                  background: 'linear-gradient(to left, #725DEF, #63CDDB, #EBB211)',
-                  padding: '2px',
-                  borderRadius: '999px',
-                  display: 'inline-flex',
-                  marginLeft: '12px',
-                }}
-              >
-                <Box
-                  sx={{
-                    backgroundColor: '#030E5D',
-                    borderRadius: '999px',
-                    padding: '6px 24px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <Typography
-                    sx={{
-                      color: 'white',
-                      fontSize: '18px',
-                      fontWeight: 600,
-                      textAlign: 'center',
-                    }}
-                  >
-                    Join Us
-                  </Typography>
-                </Box>
-              </Box>
-            )} */}
+            <Button
+              href="#"
+              sx={{
+                backgroundColor: '#8B5CF6',
+                color: 'white',
+                fontFamily: '"Space Mono", monospace',
+                fontSize: '1rem',
+                textTransform: 'none',
+                borderRadius: '24px',
+                px: 3,
+                py: 0.75,
+                ml: 1,
+                '&:hover': {
+                  backgroundColor: '#7c4fe0',
+                },
+              }}
+            >
+              Contact Us
+            </Button>
           </Box>
 
-          {isLoggedIn && userData && (
-            <div style={{ display: 'flex', alignItems: 'center', marginLeft: '10px' }}>
-              <Link to="/membership">
-                <Avatar
-                  alt="User"
-                  src={userData.profilePicture}
-                  sx={{ width: 60, height: 60, marginLeft: '1%' }}
-                />
-              </Link>
-              <ProfileDropdown />
-            </div>
-          )}
-
+          {/* Mobile Menu Icon */}
           <Box sx={{ display: { xs: 'block', md: 'none' } }}>
-            <IconButton onClick={() => setIsDrawerOpen(!isDrawerOpen)} color="inherit">
-              {!isDrawerOpen && <MenuIcon sx={styles.menuicon} />}
+            <IconButton onClick={() => setIsDrawerOpen(true)} color="inherit">
+              <MenuIcon sx={{ fontSize: '2rem' }} />
             </IconButton>
           </Box>
         </Toolbar>
-        <Box
-          sx={{
-            height: '4px',
-            background: 'linear-gradient(to right, #725DEF, #63CDDB, #EBB211)',
-          }}
-        />
       </AppBar>
 
-
+      {/* Mobile Drawer */}
       <Drawer anchor="top" open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
-        <List sx={{ background: '#030E5D' }}>
+        <List sx={{ background: '#4a4a5c', minHeight: '100vh' }}>
           <ListItem
             button
             sx={{ justifyContent: 'flex-end' }}
             onClick={() => setIsDrawerOpen(false)}
           >
-            <CloseIcon sx={styles.closeicon} />
+            <CloseIcon sx={{ color: 'white', fontSize: '2rem' }} />
           </ListItem>
-
           {navItems.map(({ text, link }) => (
-            <ListItem button key={text} sx={styles.listitem} onClick={() => clickItem(link)}>
+            <ListItem button key={text} onClick={() => setIsDrawerOpen(false)}>
               <ListItemText
                 primary={
-                  <Typography align="center" sx={styles.button}>
+                  <Typography sx={{ color: 'white', textAlign: 'center', fontSize: '1.25rem', fontFamily: '"Space Mono", monospace' }}>
                     {text}
                   </Typography>
                 }
               />
             </ListItem>
           ))}
-
-          {/* {!isLoggedIn && location.pathname !== '/login' && (
-            <ListItem button key="Login" sx={styles.listitem} onClick={() => clickItem('/login')}>
-              <ListItemText
-                primary={
-                  <Typography align="center" sx={styles.button}>
-                    Join Us
-                  </Typography>
-                }
-              />
-            </ListItem>
-          )} */}
+          <ListItem button onClick={() => setIsDrawerOpen(false)}>
+            <ListItemText
+              primary={
+                <Typography sx={{ color: '#8B5CF6', textAlign: 'center', fontSize: '1.25rem', fontWeight: 600, fontFamily: '"Space Mono", monospace' }}>
+                  Contact Us
+                </Typography>
+              }
+            />
+          </ListItem>
         </List>
       </Drawer>
     </div>
