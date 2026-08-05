@@ -22,20 +22,9 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { useState, useEffect } from 'react';
 import { eventListAPI, eventCreateAPI, eventDeleteAPI, eventUpdateAPI } from '../../api';
+import { MongoEvent } from '../../utils/types';
 
-interface Event {
-  title: string;
-  start_time: string;
-  end_time: string;
-  location: string;
-  major_event: boolean;
-  description: string;
-  calendar_link: string;
-  instagram_link: string;
-  _id: string;
-  code: string;
-  qrCode: string;
-}
+type Event = MongoEvent;
 
 const style = {
   position: 'absolute' as 'absolute',
