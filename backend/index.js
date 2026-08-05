@@ -9,6 +9,7 @@ import connectMailchimp from './mailchimp/connect-mailchimp.js';
 
 // import routes
 import eventRoutes from './routes/event.js';
+import calendarRoutes from './routes/calendar.js';
 import subscriptionRoutes from './routes/emailSubscription.js';
 import userRoutes from './routes/user.js';
 
@@ -39,6 +40,7 @@ app.get('/', function (_, res) {
 });
 
 app.use(`${baseApi}`, eventRoutes);
+app.use(`${baseApi}/calendar`, calendarRoutes);
 app.use(`${baseApi}/subscribers`, subscriptionRoutes);
 app.use(`${baseApi}/users`, userRoutes);
 
