@@ -1,0 +1,102 @@
+.events-page {
+  min-height: 100vh;
+  background-color: #0a0e1a;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 140px;
+  padding-bottom: 64px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+@media (min-width: 900px) {
+  .events-page {
+    padding-top: 160px;
+  }
+}
+
+.events-heading {
+  font-family: 'Space Mono', monospace;
+  font-size: 2.5rem;
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+@media (min-width: 900px) {
+  .events-heading {
+    font-size: 3.5rem;
+  }
+}
+
+.events-filter-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.events-filter-button {
+  border: 2px solid #725DEF;
+  border-radius: 24px;
+  color: white;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.9rem;
+  text-transform: none;
+  padding: 8px 24px;
+}
+
+.events-filter-button:hover {
+  background-color: rgba(114, 93, 239, 0.1);
+}
+
+.events-filter-button.active {
+  background-color: #8B5CF6;
+}
+
+.events-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  max-width: 1000px;
+  margin-bottom: 96px;
+}
+
+.events-card {
+  box-sizing: border-box;
+  border: 2px solid #725DEF;
+  border-radius: 12px;
+  padding: 24px;
+  width: 260px;
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.events-card-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.events-card-body {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.events-empty-state {
+  font-family: 'Space Mono', monospace;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+  margin-bottom: 96px;
+}

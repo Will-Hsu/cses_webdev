@@ -1,0 +1,82 @@
+.communities-page {
+  min-height: 100vh;
+  background-color: #0a0e1a;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 140px;
+  padding-bottom: 64px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+@media (min-width: 900px) {
+  .communities-page {
+    padding-top: 160px;
+  }
+}
+
+.communities-heading {
+  font-family: 'Space Mono', monospace;
+  font-size: 2.5rem;
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+@media (min-width: 900px) {
+  .communities-heading {
+    font-size: 3.5rem;
+  }
+}
+
+.communities-subtext {
+  font-family: 'Space Mono', monospace;
+  font-size: 1rem;
+  text-align: center;
+  max-width: 600px;
+  line-height: 1.6;
+  margin-bottom: 48px;
+}
+
+@media (min-width: 900px) {
+  .communities-subtext {
+    font-size: 1.25rem;
+  }
+}
+
+.communities-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  justify-content: center;
+  max-width: 1000px;
+}
+
+.communities-card {
+  box-sizing: border-box;
+  border: 2px solid #725DEF;
+  border-radius: 12px;
+  padding: 32px;
+  width: 280px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.communities-card-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.communities-card-body {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.75);
+}

@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Typography, Link } from '@mui/material';
 import InstagramIcon from '../../images/instagram-icon.svg';
 import LinkedInIcon from '../../images/linkedin-icon.svg';
-import csesLogo from '../../images/footer-logo.png';
+import csesLogo from '../../images/cses-logo-white.png';
 
 const socialLinks = [
   { logo: InstagramIcon, link: 'https://www.instagram.com/cses_ucsd/', alt: 'Instagram' },
@@ -13,7 +13,8 @@ const Footer = () => {
   return (
     <Box
       sx={{
-        backgroundColor: '#1a1e2e',
+        backgroundColor: '#1A1A24',
+        borderTop: '1px solid rgba(139, 92, 246, 0.2)',
         padding: { xs: '2rem 1.5rem 1.5rem', md: '2.5rem 3rem 2rem' },
         color: 'white',
       }}
@@ -34,7 +35,7 @@ const Footer = () => {
             src={csesLogo}
             alt="CSES Logo"
             sx={{
-              height: { xs: '40px', md: '55px' },
+              height: { xs: '48px', md: '66px' },
               objectFit: 'contain',
             }}
           />
@@ -53,10 +54,9 @@ const Footer = () => {
                 alignItems: 'center',
                 justifyContent: 'center',
                 '& img': {
-                  width: { xs: '28px', md: '32px' },
-                  height: { xs: '28px', md: '32px' },
+                  width: { xs: '32px', md: '40px' },
+                  height: { xs: '32px', md: '40px' },
                   objectFit: 'contain',
-                  filter: 'brightness(0) invert(1)',
                 },
               }}
             >
@@ -69,9 +69,10 @@ const Footer = () => {
       {/* Copyright */}
       <Typography
         sx={{
+          fontFamily: '"Space Mono", monospace',
           textAlign: 'center',
           fontSize: { xs: '0.75rem', md: '0.875rem' },
-          color: 'rgba(255, 255, 255, 0.7)',
+          color: '#9CA3AF',
         }}
       >
         &copy; 2026 UC San Diego Computer Science and Engineering Society. All rights reserved.

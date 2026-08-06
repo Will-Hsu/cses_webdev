@@ -1,0 +1,148 @@
+.home-page {
+  min-height: 100vh;
+  background-color: #0a0e1a;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 140px;
+  padding-bottom: 64px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+@media (min-width: 900px) {
+  .home-page {
+    padding-top: 160px;
+  }
+}
+
+.home-hero-heading {
+  font-family: 'Space Mono', monospace;
+  font-size: 2.5rem;
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+@media (min-width: 900px) {
+  .home-hero-heading {
+    font-size: 4rem;
+  }
+}
+
+.home-hero-subtitle {
+  font-family: 'Space Mono', monospace;
+  font-size: 1rem;
+  text-align: center;
+  max-width: 600px;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+
+@media (min-width: 900px) {
+  .home-hero-subtitle {
+    font-size: 1.25rem;
+  }
+}
+
+.home-cta-wrapper {
+  border: 2px solid #725DEF;
+  border-radius: 8px;
+  margin-bottom: 80px;
+}
+
+.home-cta-button {
+  color: white;
+  font-family: 'Space Mono', monospace;
+  font-size: 1.25rem;
+  font-weight: 700;
+  padding: 12px 48px;
+  text-transform: none;
+}
+
+.home-cta-button:hover {
+  background-color: rgba(114, 93, 239, 0.1);
+}
+
+@media (min-width: 900px) {
+  .home-cta-button {
+    font-size: 1.5rem;
+  }
+}
+
+.home-section {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 80px;
+}
+
+.home-section-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 1.75rem;
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+@media (min-width: 900px) {
+  .home-section-title {
+    font-size: 2.5rem;
+  }
+}
+
+.home-card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 32px;
+}
+
+.home-card {
+  box-sizing: border-box;
+  border: 2px solid #725DEF;
+  border-radius: 12px;
+  padding: 24px;
+  width: 260px;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.home-card-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.home-card-body {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.home-secondary-button-wrapper {
+  border: 2px solid #8B5CF6;
+  border-radius: 24px;
+}
+
+.home-secondary-button {
+  color: white;
+  font-family: 'Space Mono', monospace;
+  font-size: 1rem;
+  text-transform: none;
+  padding: 8px 32px;
+}
+
+.home-secondary-button:hover {
+  background-color: rgba(139, 92, 246, 0.1);
+}

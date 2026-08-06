@@ -1,5 +1,9 @@
 import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
+import './JoinUs.css';
+import chainGraphic from '../../images/joinus/chain.png';
+import lightbulbGraphic from '../../images/joinus/lightbulb.png';
+import gearGraphic from '../../images/joinus/gear.png';
 import ASLogo from '../../images/sponsors/AS_Logo.png';
 import CSEDeptLogo from '../../images/sponsors/CSEDept_Logo.png';
 import BasementLogo from '../../images/sponsors/Basement_Logo.jpeg';
@@ -18,194 +22,105 @@ const stats = [
   { number: '12+', label: 'annual\nprojects' },
 ];
 
-const sponsors = [
-  { src: ASLogo, alt: 'Associated Students' },
-  { src: CSEDeptLogo, alt: 'CSE Department' },
-  { src: BSLLogo, alt: 'Big Strategy Lab' },
-  { src: RobloxLogo, alt: 'Roblox' },
-  { src: PersonaLogo, alt: 'Persona' },
-  { src: LovableLogo, alt: 'Lovable' },
-  { src: EyePopAILogo, alt: 'EyePop AI' },
-  { src: IGELogo, alt: 'IGE' },
-  { src: LinuxLogo, alt: 'Linux Foundation' },
-  { src: OSPOLogo, alt: 'OSPO' },
-  { src: BasementLogo, alt: 'Basement' },
+// Matches the design's staggered 3-2-3(-3) sponsor grid.
+const sponsorRows = [
+  [
+    { src: ASLogo, alt: 'Associated Students' },
+    { src: CSEDeptLogo, alt: 'CSE Department' },
+    { src: BSLLogo, alt: 'Big Strategy Lab' },
+  ],
+  [
+    { src: RobloxLogo, alt: 'Roblox' },
+    { src: PersonaLogo, alt: 'Persona' },
+  ],
+  [
+    { src: LovableLogo, alt: 'Lovable' },
+    { src: EyePopAILogo, alt: 'EyePop AI' },
+    { src: IGELogo, alt: 'IGE' },
+  ],
+  [
+    { src: LinuxLogo, alt: 'Linux Foundation' },
+    { src: OSPOLogo, alt: 'OSPO' },
+    { src: BasementLogo, alt: 'Basement' },
+  ],
 ];
 
 const JoinUs = () => {
   return (
-    <Box
-      sx={{
-        minHeight: '100vh',
-        backgroundColor: '#0a0e1a',
-        color: 'white',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        pt: { xs: '140px', md: '160px' },
-        pb: 8,
-        px: 3,
-      }}
-    >
-      {/* Heading */}
-      <Typography
-        sx={{
-          fontFamily: '"Space Mono", monospace',
-          fontSize: { xs: '2.5rem', md: '3.5rem' },
-          fontWeight: 400,
-          mb: 3,
-        }}
-      >
-        Join us.
-      </Typography>
+    <Box className="join-us-page">
+      <Box className="join-us-canvas">
+        <Box
+          component="img"
+          src={chainGraphic}
+          alt=""
+          className="join-us-decor join-us-decor-chain"
+        />
+        <Box
+          component="img"
+          src={lightbulbGraphic}
+          alt=""
+          className="join-us-decor join-us-decor-lightbulb"
+        />
+        <Box
+          component="img"
+          src={gearGraphic}
+          alt=""
+          className="join-us-decor join-us-decor-gear"
+        />
 
-      {/* Subtext */}
-      <Typography
-        sx={{
-          fontFamily: '"Space Mono", monospace',
-          fontSize: { xs: '1rem', md: '1.25rem' },
-          textAlign: 'center',
-          maxWidth: '500px',
-          mb: 5,
-          lineHeight: 1.6,
-        }}
-      >
-        Interested in joining our initiative? Apply below!
-      </Typography>
+        {/* Heading */}
+        <Typography className="join-us-heading">Join us.</Typography>
 
-      {/* Apply Button */}
-      <Box
-        sx={{
-          border: '2px solid #725DEF',
-          borderRadius: '8px',
-          mb: 6,
-        }}
-      >
-        <Button
-          href="#"
-          sx={{
-            color: 'white',
-            fontFamily: '"Space Mono", monospace',
-            fontSize: { xs: '1.25rem', md: '1.5rem' },
-            fontWeight: 700,
-            px: 6,
-            py: 1.5,
-            textTransform: 'none',
-            '&:hover': {
-              backgroundColor: 'rgba(114, 93, 239, 0.1)',
-            },
-          }}
-        >
+        {/* Subtext */}
+        <Typography className="join-us-subtext">
+          Interested in joining our initiative? Apply below!
+        </Typography>
+
+        {/* Apply Button */}
+        <Button href="#" className="join-us-apply-button">
           Apply
         </Button>
-      </Box>
 
-      {/* Organization tagline */}
-      <Typography
-        sx={{
-          fontFamily: '"Space Mono", monospace',
-          fontSize: { xs: '1rem', md: '1.25rem' },
-          textAlign: 'center',
-          mb: 4,
-        }}
-      >
-        We are UCSD's largest computing organization
-      </Typography>
+        {/* Organization tagline */}
+        <Typography className="join-us-tagline">
+          We are UCSD's largest computing organization
+        </Typography>
 
-      {/* Stats */}
-      <Box
-        sx={{
-          display: 'flex',
-          gap: { xs: 2, md: 4 },
-          mb: 8,
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-        }}
-      >
-        {stats.map((stat) => (
-          <Box
-            key={stat.label}
-            sx={{
-              border: '2px solid #725DEF',
-              borderRadius: '12px',
-              px: { xs: 4, md: 6 },
-              py: { xs: 3, md: 4 },
-              textAlign: 'center',
-              minWidth: { xs: '140px', md: '180px' },
-            }}
-          >
-            <Typography
-              sx={{
-                fontFamily: '"Space Mono", monospace',
-                fontSize: { xs: '2rem', md: '2.5rem' },
-                fontWeight: 700,
-                mb: 1,
-              }}
-            >
-              {stat.number}
-            </Typography>
-            <Typography
-              sx={{
-                fontFamily: '"Space Mono", monospace',
-                fontSize: { xs: '0.9rem', md: '1.1rem' },
-                whiteSpace: 'pre-line',
-              }}
-            >
-              {stat.label}
-            </Typography>
-          </Box>
-        ))}
-      </Box>
+        {/* Stats */}
+        <Box className="join-us-stats">
+          {stats.map((stat, i) => (
+            <Box key={stat.label} className={`join-us-stat-box join-us-stat-box--${i}`}>
+              <Typography className="join-us-stat-number">{stat.number}</Typography>
+              <Typography className="join-us-stat-label">{stat.label}</Typography>
+            </Box>
+          ))}
+        </Box>
 
-      {/* Partners Section */}
-      <Typography
-        sx={{
-          fontFamily: '"Space Mono", monospace',
-          fontSize: { xs: '1.5rem', md: '2.5rem' },
-          fontWeight: 400,
-          textAlign: 'center',
-          mb: 6,
-        }}
-      >
-        Thank You to Our Current Partners
-      </Typography>
+        {/* Partners Section */}
+        <Typography className="join-us-partners-heading">
+          Thank You to Our Current Partners
+        </Typography>
 
-      {/* Sponsor Logos Grid */}
-      <Box
-        sx={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-          gap: 3,
-          maxWidth: '800px',
-        }}
-      >
-        {sponsors.map((sponsor) => (
-          <Box
-            key={sponsor.alt}
-            sx={{
-              width: { xs: '120px', md: '180px' },
-              height: { xs: '90px', md: '120px' },
-              backgroundColor: '#d9d9d9',
-              borderRadius: '8px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              overflow: 'hidden',
-            }}
-          >
-            <Box
-              component="img"
-              src={sponsor.src}
-              alt={sponsor.alt}
-              sx={{
-                maxWidth: '85%',
-                maxHeight: '85%',
-                objectFit: 'contain',
-              }}
-            />
-          </Box>
-        ))}
+        {/* Sponsor Logos Grid (staggered 3-2-3-3 rows, matching design) */}
+        <Box className="join-us-sponsor-rows">
+          {sponsorRows.map((row, rowIndex) => (
+            <Box key={rowIndex} className={`join-us-sponsor-row join-us-sponsor-row--${rowIndex}`}>
+              {row.map((sponsor, boxIndex) => (
+                <Box
+                  key={sponsor.alt}
+                  className={`join-us-sponsor-box join-us-sponsor-box--${boxIndex}`}
+                >
+                  <Box
+                    component="img"
+                    src={sponsor.src}
+                    alt={sponsor.alt}
+                    className="join-us-sponsor-img"
+                  />
+                </Box>
+              ))}
+            </Box>
+          ))}
+        </Box>
       </Box>
     </Box>
   );
