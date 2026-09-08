@@ -32,6 +32,9 @@ export interface Community {
   copySide: Side;
   logoSide: Side;
   graphicSide: Side;
+  // How far below the copy the logo sits, in px at md and up. The design
+  // staggers the two rather than aligning them on one line.
+  logoOffset: number;
   projects: Project[];
 }
 
@@ -47,6 +50,7 @@ export const COMMUNITIES: Community[] = [
       'Contribute to meaningful open-source projects and learn collaborative development practices. Work with Git workflows, code review, and team collaboration in a supportive environment.',
     copySide: 'left',
     logoSide: 'right',
+    logoOffset: 170,
     graphicSide: 'right',
     projects: [
       {
@@ -82,6 +86,7 @@ export const COMMUNITIES: Community[] = [
       'Turn your ideas into reality through hackathons, prototyping, and entrepreneurial ventures. Learn design thinking, rapid prototyping, and how to bring innovative solutions to life.',
     copySide: 'right',
     logoSide: 'left',
+    logoOffset: 120,
     graphicSide: 'left',
     projects: [
       {
@@ -122,6 +127,7 @@ export const COMMUNITIES: Community[] = [
       'Build industry-ready skills through workshops, projects, and professional development. Get career guidance, connect with mentors, and prepare for success in the tech industry.',
     copySide: 'left',
     logoSide: 'right',
+    logoOffset: 140,
     graphicSide: 'right',
     projects: [
       {

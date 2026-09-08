@@ -66,6 +66,8 @@ const CommunityPage = ({ community: communityKey }: CommunityPageProps) => {
                   xs: 'center',
                   md: community.logoSide === 'left' ? 'flex-start' : 'flex-end',
                 },
+                // Staggered down from the copy on desktop; stacked flush on mobile.
+                mt: { xs: 0, md: `${community.logoOffset}px` },
               }}
             >
               <Box

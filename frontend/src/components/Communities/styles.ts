@@ -78,7 +78,9 @@ export const communityStyles = () => ({
     position: 'relative' as const,
     zIndex: 1,
     display: 'flex',
-    alignItems: 'center',
+    // Top-aligned so each column can be offset independently; centring here
+    // was what forced the copy and logo onto a single line.
+    alignItems: 'flex-start',
     gap: { xs: 5, md: 8 },
     flexDirection: { xs: 'column', md: 'row' },
   },
