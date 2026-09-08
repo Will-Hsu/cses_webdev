@@ -20,7 +20,9 @@ export const communityStyles = () => ({
     minWidth: { xs: '160%', md: '70%' },
     objectFit: 'contain' as const,
     objectPosition: 'top center',
-    opacity: 0.28,
+    // The artwork carries its own top-to-bottom fade, so this only needs to
+    // knock it back against the dark page rather than do the fading itself.
+    opacity: 0.55,
     pointerEvents: 'none' as const,
     userSelect: 'none' as const,
     zIndex: 0,

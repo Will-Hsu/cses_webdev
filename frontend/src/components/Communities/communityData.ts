@@ -2,8 +2,8 @@ import { colors } from '../../theme';
 import OpenSourceLogo from '../../images/ourCommunitiesImages/OpenSourceLogo.png';
 import InnovateLogo from '../../images/ourCommunitiesImages/InnovateLogo.png';
 import DevLogo from '../../images/ourCommunitiesImages/DevLogo.png';
-// Shared with the Join Us page, which is where these graphics landed first.
-import chainGraphic from '../../images/joinus/chain.png';
+import openSourceBackdrop from '../../images/communities/opensource-backdrop.svg';
+// Placeholders until the Innovate and Dev backdrops are exported from Figma.
 import lightbulbGraphic from '../../images/joinus/lightbulb.png';
 import gearGraphic from '../../images/joinus/gear.png';
 
@@ -43,7 +43,7 @@ export const COMMUNITIES: Community[] = [
     path: '/opensourcecommunity',
     accent: colors.lightBlue,
     logo: OpenSourceLogo,
-    graphic: chainGraphic,
+    graphic: openSourceBackdrop,
     description:
       'Contribute to meaningful open-source projects and learn collaborative development practices. Work with Git workflows, code review, and team collaboration in a supportive environment.',
     copySide: 'left',
