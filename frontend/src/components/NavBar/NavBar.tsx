@@ -11,16 +11,24 @@ import {
   Button,
   Toolbar,
   Avatar,
+  Menu,
+  MenuItem,
 } from '@mui/material';
-import { Menu as MenuIcon, Close as CloseIcon } from '@mui/icons-material';
+import { Menu as MenuIcon, Close as CloseIcon, ExpandMore } from '@mui/icons-material';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import csesLogo from '../../images/CSES-logo.png';
-import MuiButton from '../Button/Button';
+import csesLogo from '../../images/logo.png';
 import { navBarStyles } from './styles';
 import { AuthContext } from '../../context/AuthContext';
 import ProfileDropdown from './ProfileDropdown';
 import { User } from '../../utils/types';
 import axios from 'axios';
+
+const COMMUNITY_ITEMS = [
+  { text: 'Open-Source', link: '/opensourcecommunity' },
+  { text: 'Innovate', link: '/innovatecommunity' },
+  { text: 'Dev', link: '/devcommunity' },
+];
+
 
 const NavBar = () => {
   const location = useLocation();
@@ -29,15 +37,16 @@ const NavBar = () => {
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [userData, setUserData] = useState<User | null>(null);
+  const [communitiesAnchor, setCommunitiesAnchor] = useState<null | HTMLElement>(null);
 
   const { user, isLoggedIn } = useContext(AuthContext);
 
   const navItems = [
-    { text: 'About', link: '/about' },
+    { text: 'Home', link: '/' },
     { text: 'Events', link: '/events' },
-    { text: 'Sponsors', link: '/sponsorships' },
-    { text: 'Initiatives', link: '/initiatives' },
   ];
+
+  const isCommunityRoute = COMMUNITY_ITEMS.some(({ link }) => location.pathname === link);
 
   const clickItem = (link: string) => {
     setIsDrawerOpen(false);
@@ -63,61 +72,66 @@ const NavBar = () => {
 
   return (
     <div>
-      <AppBar sx={{ backgroundColor: '#030E5D' }} position="fixed" elevation={0}>
+      <AppBar sx={styles.appBar} position="fixed" elevation={0}>
         <Toolbar>
-          <Link to="/">
+          <Link to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
             <img
               src={csesLogo}
-              alt="logo"
-              style={{ margin: 'clamp(20px, 4vw, 25px)', height: '55px' }}
+              alt="CSE Society"
+              style={{ margin: 'clamp(20px, 4vw, 25px)', height: '44px' }}
             />
+            <Typography sx={styles.logoText}>at UC San Diego</Typography>
           </Link>
 
           <div style={{ flexGrow: 1 }} />
 
           <Box sx={{ display: { xs: 'none', md: 'block' } }}>
             {navItems.map(({ text, link }) => (
-              <Button key={text} component={Link} to={link} sx={styles.button}>
+              <Button
+                key={text}
+                component={Link}
+                to={link}
+                sx={{
+                  ...styles.button,
+                  ...(location.pathname === link ? styles.buttonActive : {}),
+                }}
+              >
                 {text}
               </Button>
             ))}
 
-            {/* Gradient Join Us Button */}
-            {/* {!isLoggedIn && location.pathname !== '/login' && (
-              <Box
-                onClick={() => navigate('/login')}
-                sx={{
-                  cursor: 'pointer',
-                  background: 'linear-gradient(to left, #725DEF, #63CDDB, #EBB211)',
-                  padding: '2px',
-                  borderRadius: '999px',
-                  display: 'inline-flex',
-                  marginLeft: '12px',
-                }}
-              >
-                <Box
-                  sx={{
-                    backgroundColor: '#030E5D',
-                    borderRadius: '999px',
-                    padding: '6px 24px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
+            <Button
+              endIcon={<ExpandMore />}
+              onClick={(e) => setCommunitiesAnchor(e.currentTarget)}
+              sx={{
+                ...styles.button,
+                ...(isCommunityRoute ? styles.buttonActive : {}),
+              }}
+            >
+              Communities
+            </Button>
+            <Menu
+              anchorEl={communitiesAnchor}
+              open={Boolean(communitiesAnchor)}
+              onClose={() => setCommunitiesAnchor(null)}
+              sx={styles.menu}
+            >
+              {COMMUNITY_ITEMS.map(({ text, link }) => (
+                <MenuItem
+                  key={text}
+                  sx={styles.menuItem}
+                  onClick={() => {
+                    setCommunitiesAnchor(null);
+                    navigate(link);
                   }}
                 >
-                  <Typography
-                    sx={{
-                      color: 'white',
-                      fontSize: '18px',
-                      fontWeight: 600,
-                      textAlign: 'center',
-                    }}
-                  >
-                    Join Us
-                  </Typography>
-                </Box>
-              </Box>
-            )} */}
+                  {text}
+                </MenuItem>
+              ))}
+            </Menu>
+
+            {/* TODO: point this at the Join us page once that branch is merged. */}
+            <Button sx={styles.button}>Join us</Button>
           </Box>
 
           {isLoggedIn && userData && (
@@ -139,17 +153,10 @@ const NavBar = () => {
             </IconButton>
           </Box>
         </Toolbar>
-        <Box
-          sx={{
-            height: '4px',
-            background: 'linear-gradient(to right, #725DEF, #63CDDB, #EBB211)',
-          }}
-        />
       </AppBar>
 
-
       <Drawer anchor="top" open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
-        <List sx={{ background: '#030E5D' }}>
+        <List sx={styles.drawerList}>
           <ListItem
             button
             sx={{ justifyContent: 'flex-end' }}
@@ -170,17 +177,32 @@ const NavBar = () => {
             </ListItem>
           ))}
 
-          {/* {!isLoggedIn && location.pathname !== '/login' && (
-            <ListItem button key="Login" sx={styles.listitem} onClick={() => clickItem('/login')}>
+          {COMMUNITY_ITEMS.map(({ text, link }) => (
+            <ListItem button key={text} sx={styles.listitem} onClick={() => clickItem(link)}>
               <ListItemText
                 primary={
                   <Typography align="center" sx={styles.button}>
-                    Join Us
+                    {text}
                   </Typography>
                 }
               />
             </ListItem>
-          )} */}
+          ))}
+
+          <ListItem
+            button
+            key="Join us"
+            sx={styles.listitem}
+            onClick={() => setIsDrawerOpen(false)}
+          >
+            <ListItemText
+              primary={
+                <Typography align="center" sx={styles.button}>
+                  Join us
+                </Typography>
+              }
+            />
+          </ListItem>
         </List>
       </Drawer>
     </div>
