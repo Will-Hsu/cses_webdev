@@ -14,9 +14,7 @@ import EditForm from './components/Login/EditProfile';
 import Initiatives from './components/Initiatives/Initiatives';
 import OpenSource from './components/OpenSource/OpenSource';
 import Sponsorships from './components/Sponsorships/Sponsorships'; // added my mal and line 34
-import OpenSourceCommunity from './components/OpenSourceCommunity/OpenSourceCommunity';
-import DevCommunity from './components/Dev/DevCommunity'
-import InovateCommunity from './components/Inovate/InovateCommunity'
+import CommunityPage from './components/Communities/CommunityPage';
 import JoinUs from './components/JoinUs/JoinUs';
 
 function App() {
@@ -36,9 +34,9 @@ function App() {
           <Route path="/initiatives" element={<Initiatives />} />
           <Route path="/opensource" element={<OpenSource />} />
           <Route path="/sponsorships" element={<Sponsorships />} /> 
-          <Route path="/opensourcecommunity" element={<OpenSourceCommunity />} /> 
-          <Route path="/devcommunity" element={<DevCommunity />} />
-          <Route path="/innovatecommunity" element={<InovateCommunity />} />
+          <Route path="/opensourcecommunity" element={<CommunityPage community="open-source" />} />
+          <Route path="/devcommunity" element={<CommunityPage community="dev" />} />
+          <Route path="/innovatecommunity" element={<CommunityPage community="innovate" />} />
           <Route path="/join-us" element={<JoinUs />} />
         </Routes>
         <Footer />
