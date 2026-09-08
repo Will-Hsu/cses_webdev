@@ -3,9 +3,8 @@ import OpenSourceLogo from '../../images/ourCommunitiesImages/OpenSourceLogo.png
 import InnovateLogo from '../../images/ourCommunitiesImages/InnovateLogo.png';
 import DevLogo from '../../images/ourCommunitiesImages/DevLogo.png';
 import openSourceBackdrop from '../../images/communities/opensource-backdrop.svg';
-// Placeholders until the Innovate and Dev backdrops are exported from Figma.
-import lightbulbGraphic from '../../images/joinus/lightbulb.png';
-import gearGraphic from '../../images/joinus/gear.png';
+import innovateBackdrop from '../../images/communities/innovate-backdrop.svg';
+import devBackdrop from '../../images/communities/dev-backdrop.svg';
 
 export type ProjectStatus = 'Active' | 'Pending';
 
@@ -78,7 +77,7 @@ export const COMMUNITIES: Community[] = [
     path: '/innovatecommunity',
     accent: colors.purple,
     logo: InnovateLogo,
-    graphic: lightbulbGraphic,
+    graphic: innovateBackdrop,
     description:
       'Turn your ideas into reality through hackathons, prototyping, and entrepreneurial ventures. Learn design thinking, rapid prototyping, and how to bring innovative solutions to life.',
     copySide: 'right',
@@ -118,7 +117,7 @@ export const COMMUNITIES: Community[] = [
     path: '/devcommunity',
     accent: colors.mint,
     logo: DevLogo,
-    graphic: gearGraphic,
+    graphic: devBackdrop,
     description:
       'Build industry-ready skills through workshops, projects, and professional development. Get career guidance, connect with mentors, and prepare for success in the tech industry.',
     copySide: 'left',
