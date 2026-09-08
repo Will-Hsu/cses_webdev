@@ -1,17 +1,39 @@
 import asyncHandler from 'express-async-handler';
 
-// One Google Calendar per community; each event's category comes from the
-// calendar it lives on. Calendars with no configured ID are skipped.
-const CALENDAR_CATEGORIES = [
-  { category: 'General', envKey: 'GOOGLE_CALENDAR_ID_GENERAL' },
-  { category: 'Open-Source', envKey: 'GOOGLE_CALENDAR_ID_OPEN_SOURCE' },
-  { category: 'Innovate', envKey: 'GOOGLE_CALENDAR_ID_INNOVATE' },
-  { category: 'Dev', envKey: 'GOOGLE_CALENDAR_ID_DEV' },
-];
+// All events live on one public CSES calendar.
+const DEFAULT_CALENDAR_ID = 'csesucsd@gmail.com';
+
+// Upcoming events to request. One calendar now carries every community's
+// events, so this is the budget across all four tabs, not per tab.
+const MAX_RESULTS = 50;
 
 // In-memory cache so we don't burn Google API quota on every page load.
 const CACHE_TTL_MS = 5 * 60 * 1000;
 let cache = { data: null, fetchedAt: 0 };
+
+// Organizers prefix each event title with its community, e.g.
+// "CSES Opensource Workshop". Matching is deliberately loose about spelling
+// and separators so a stray hyphen or capital doesn't silently drop an event
+// into General. Anything with no recognized prefix falls under General.
+const DEFAULT_CATEGORY = 'General';
+const CATEGORY_PREFIXES = [
+  { category: 'Open-Source', pattern: /^\s*CSES[\s_-]+open[\s_-]?source\b[\s:_–—-]*/i },
+  { category: 'Innovate', pattern: /^\s*CSES[\s_-]+innovate\b[\s:_–—-]*/i },
+  { category: 'Dev', pattern: /^\s*CSES[\s_-]+dev\b[\s:_–—-]*/i },
+  { category: 'General', pattern: /^\s*CSES[\s_-]+general\b[\s:_–—-]*/i },
+];
+
+// The prefix is routing information, not part of the event name, so it is
+// stripped from what we display.
+const extractCategory = (summary) => {
+  for (const { category, pattern } of CATEGORY_PREFIXES) {
+    if (pattern.test(summary)) {
+      return { category, title: summary.replace(pattern, '').trim() || summary.trim() };
+    }
+  }
+
+  return { category: DEFAULT_CATEGORY, title: summary };
+};
 
 // Organizers tag an event's type ("Social", "Career", ...) either with a
 // "Type: X" line anywhere in the description or with a "[X]" prefix on the
@@ -41,7 +63,7 @@ const extractType = (summary, description) => {
   return { type: '', title: summary, description };
 };
 
-const fetchCalendar = async (apiKey, calendarId, category) => {
+const fetchCalendar = async (apiKey, calendarId) => {
   const url = new URL(
     `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(calendarId)}/events`,
   );
@@ -50,13 +72,13 @@ const fetchCalendar = async (apiKey, calendarId, category) => {
     timeMin: new Date().toISOString(),
     singleEvents: 'true',
     orderBy: 'startTime',
-    maxResults: '25',
+    maxResults: String(MAX_RESULTS),
   }).toString();
 
   const response = await fetch(url);
   if (!response.ok) {
     const body = await response.text();
-    console.error(`Google Calendar API error for "${category}" (${response.status}): ${body}`);
+    console.error(`Google Calendar API error for "${calendarId}" (${response.status}): ${body}`);
     return [];
   }
 
@@ -64,10 +86,10 @@ const fetchCalendar = async (apiKey, calendarId, category) => {
   return items
     .filter((item) => item.status !== 'cancelled')
     .map((item) => {
-      const { type, title, description } = extractType(
-        item.summary ?? 'Untitled event',
-        item.description ?? '',
-      );
+      // Category prefix comes first in the title, so strip it before looking
+      // for a "[Type]" prefix on what remains.
+      const { category, title: untagged } = extractCategory(item.summary ?? 'Untitled event');
+      const { type, title, description } = extractType(untagged, item.description ?? '');
 
       return {
         id: item.id,
@@ -84,7 +106,7 @@ const fetchCalendar = async (apiKey, calendarId, category) => {
     });
 };
 
-// Display list of upcoming events from the CSES Google Calendars.
+// Display list of upcoming events from the CSES Google Calendar.
 export const calendarEventList = asyncHandler(async (req, res) => {
   // Read env inside the handler: dotenv.config() runs after module imports.
   const apiKey = process.env.GOOGLE_CALENDAR_API_KEY;
@@ -94,27 +116,14 @@ export const calendarEventList = asyncHandler(async (req, res) => {
     return res.json([]);
   }
 
-  const calendars = CALENDAR_CATEGORIES.filter(({ envKey }) => process.env[envKey]).map(
-    ({ category, envKey }) => ({ category, calendarId: process.env[envKey] }),
-  );
-
-  // Fallback: a single calendar (all events shown as General) when no
-  // per-community calendars are configured.
-  if (calendars.length === 0) {
-    calendars.push({
-      category: 'General',
-      calendarId: process.env.GOOGLE_CALENDAR_ID || 'cses@ucsd.edu',
-    });
-  }
-
   if (cache.data && Date.now() - cache.fetchedAt < CACHE_TTL_MS) {
     return res.json(cache.data);
   }
 
-  const results = await Promise.all(
-    calendars.map(({ category, calendarId }) => fetchCalendar(apiKey, calendarId, category)),
+  const calendarId = process.env.GOOGLE_CALENDAR_ID || DEFAULT_CALENDAR_ID;
+  const events = (await fetchCalendar(apiKey, calendarId)).sort(
+    (a, b) => new Date(a.start) - new Date(b.start),
   );
-  const events = results.flat().sort((a, b) => new Date(a.start) - new Date(b.start));
 
   cache = { data: events, fetchedAt: Date.now() };
   res.json(events);

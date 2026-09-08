@@ -21,25 +21,38 @@
 
 ## Google Calendar sync (Events page)
 
-The Events page displays upcoming events from the CSES Google Calendar (`cses@ucsd.edu`) via
+The Events page displays upcoming events from the CSES Google Calendar (`csesucsd@gmail.com`) via
 `GET /api/v1/calendar/events`. Backend setup (see `backend/.env.example`):
 
 1. Requires Node 18+ (the backend uses the built-in `fetch`).
 2. In [Google Cloud Console](https://console.cloud.google.com/), create/select a project, enable the
    **Google Calendar API**, and create an **API key**. Restrict the key to the Calendar API.
-3. In each calendar's settings (as `cses@ucsd.edu`), enable **"Make available to public"** under
+3. In the calendar's settings (as `csesucsd@gmail.com`), enable **"Make available to public"** under
    Access permissions and set the dropdown to **"See all event details"** (free/busy mode strips
    titles and locations). The API returns 404 for private calendars even with a valid key.
 4. Add to `backend/.env`:
    - `GOOGLE_CALENDAR_API_KEY=<your key>`
-   - One calendar ID per community tab: `GOOGLE_CALENDAR_ID_GENERAL`, `GOOGLE_CALENDAR_ID_OPEN_SOURCE`,
-     `GOOGLE_CALENDAR_ID_INNOVATE`, `GOOGLE_CALENDAR_ID_DEV`. Events are categorized by which
-     calendar they're on. Each ID is under that calendar's Settings > "Integrate calendar".
-   - If none of those are set, `GOOGLE_CALENDAR_ID` (default `cses@ucsd.edu`) is used as a single
-     calendar whose events all show under the General tab.
+   - `GOOGLE_CALENDAR_ID` (default `csesucsd@gmail.com`), found under the calendar's
+     Settings > "Integrate calendar".
 
 When `GOOGLE_CALENDAR_API_KEY` is unset the endpoint logs a warning and returns `[]`, and the
 Events page shows its empty state. Responses are cached in memory for 5 minutes.
+
+### Sorting an event into a community tab
+
+Every event lives on the one calendar; its tab comes from a prefix on the event **title**:
+
+| Title prefix | Tab |
+| --- | --- |
+| `CSES General ...` | General |
+| `CSES Opensource ...` | Open-Source |
+| `CSES Innovate ...` | Innovate |
+| `CSES Dev ...` | Dev |
+
+The prefix is stripped before display, so `CSES Opensource Git Workshop` shows as
+**Git Workshop** under Open-Source. Matching ignores case and tolerates spelling and separator
+variants (`Open-Source`, `open source`, `CSES DEV: ...`). A title with no recognized prefix falls
+under **General** with its title left untouched.
 
 ### Labelling an event's type
 
