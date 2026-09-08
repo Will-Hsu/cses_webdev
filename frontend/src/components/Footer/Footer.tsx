@@ -1,81 +1,83 @@
 import React from 'react';
 import { Box, Typography, Link } from '@mui/material';
 import InstagramIcon from '../../images/instagram-icon.svg';
+import DiscordIcon from '../../images/discord-icon.svg';
+import FacebookIcon from '../../images/facebook-icon.svg';
 import LinkedInIcon from '../../images/linkedin-icon.svg';
-import csesLogo from '../../images/cses-logo-white.png';
+import csesLogo from '../../images/logo.png';
+import { colors, fonts } from '../../theme';
 
-const socialLinks = [
-  { logo: InstagramIcon, link: 'https://www.instagram.com/cses_ucsd/', alt: 'Instagram' },
-  { logo: LinkedInIcon, link: 'https://www.linkedin.com/in/csesucsd/', alt: 'LinkedIn' },
+const links = [
+  { logo: InstagramIcon, link: 'https://www.instagram.com/cses_ucsd/', label: 'Instagram' },
+  { logo: DiscordIcon, link: 'https://discord.gg/UkdACyy2h8', label: 'Discord' },
+  { logo: FacebookIcon, link: 'https://www.facebook.com/csesucsd', label: 'Facebook' },
+  { logo: LinkedInIcon, link: 'https://www.linkedin.com/in/csesucsd/', label: 'LinkedIn' },
 ];
+
+const COPYRIGHT = '© 2026 UC San Diego Computer Science and Engineering Society. All rights reserved.';
 
 const Footer = () => {
   return (
     <Box
       sx={{
-        backgroundColor: '#1A1A24',
-        borderTop: '1px solid rgba(139, 92, 246, 0.2)',
-        padding: { xs: '2rem 1.5rem 1.5rem', md: '2.5rem 3rem 2rem' },
+        backgroundColor: colors.background,
+        borderTop: `1px solid ${colors.border}`,
+        padding: { xs: '1rem 2.5rem 1.5rem', md: '1.25rem 2.5rem 1.5rem' },
         color: 'white',
       }}
     >
-      {/* Top row: logo left, social icons right */}
       <Box
         sx={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          mb: 3,
         }}
       >
-        {/* CSES Logo */}
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Box
-            component="img"
-            src={csesLogo}
-            alt="CSES Logo"
-            sx={{
-              height: { xs: '48px', md: '66px' },
-              objectFit: 'contain',
-            }}
-          />
-        </Box>
+        {/* Logo */}
+        <Box
+          component="img"
+          src={csesLogo}
+          alt="CSES logo"
+          sx={{
+            height: { xs: '2.5rem', md: '3rem' },
+            maxWidth: '100%',
+            objectFit: 'contain',
+          }}
+        />
 
         {/* Social Icons */}
-        <Box sx={{ display: 'flex', gap: 2 }}>
-          {socialLinks.map(({ logo, link, alt }) => (
+        <Box sx={{ display: 'flex', gap: { xs: 1, md: 2 } }}>
+          {links.map(({ logo, link, label }) => (
             <Link
-              key={alt}
+              key={label}
               href={link}
               target="_blank"
               rel="noopener noreferrer"
               sx={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
+                display: 'inline-block',
                 '& img': {
-                  width: { xs: '32px', md: '40px' },
-                  height: { xs: '32px', md: '40px' },
+                  width: { xs: '1.75rem', md: '2rem' },
+                  height: { xs: '1.75rem', md: '2rem' },
                   objectFit: 'contain',
                 },
               }}
             >
-              <img src={logo} alt={alt} />
+              <img src={logo} alt={label} />
             </Link>
           ))}
         </Box>
       </Box>
 
-      {/* Copyright */}
       <Typography
         sx={{
-          fontFamily: '"Space Mono", monospace',
+          fontFamily: fonts.body,
+          fontSize: '0.8rem',
+          color: colors.textSecondary,
           textAlign: 'center',
-          fontSize: { xs: '0.75rem', md: '0.875rem' },
-          color: '#9CA3AF',
+          mt: 2,
         }}
       >
-        &copy; 2026 UC San Diego Computer Science and Engineering Society. All rights reserved.
+        {COPYRIGHT}
       </Typography>
     </Box>
   );

@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   AppBar,
   IconButton,
@@ -11,167 +10,203 @@ import {
   Box,
   Button,
   Toolbar,
+  Avatar,
+  Menu,
+  MenuItem,
 } from '@mui/material';
-import { Menu as MenuIcon, Close as CloseIcon } from '@mui/icons-material';
-import csesLogo from '../../images/cses-logo-white.png';
+import { Menu as MenuIcon, Close as CloseIcon, ExpandMore } from '@mui/icons-material';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import csesLogo from '../../images/logo.png';
+import { navBarStyles } from './styles';
+import { AuthContext } from '../../context/AuthContext';
+import ProfileDropdown from './ProfileDropdown';
+import { User } from '../../utils/types';
+import axios from 'axios';
+
+const COMMUNITY_ITEMS = [
+  { text: 'Open-Source', link: '/opensourcecommunity' },
+  { text: 'Innovate', link: '/innovatecommunity' },
+  { text: 'Dev', link: '/devcommunity' },
+];
+
 
 const NavBar = () => {
+  const location = useLocation();
+  const styles = navBarStyles();
+  const navigate = useNavigate();
+
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [userData, setUserData] = useState<User | null>(null);
+  const [communitiesAnchor, setCommunitiesAnchor] = useState<null | HTMLElement>(null);
+
+  const { user, isLoggedIn } = useContext(AuthContext);
+
+  const navItems = [
+    { text: 'Home', link: '/' },
+    { text: 'Events', link: '/events' },
+  ];
+
+  const isCommunityRoute = COMMUNITY_ITEMS.some(({ link }) => location.pathname === link);
+
+  const clickItem = (link: string) => {
+    setIsDrawerOpen(false);
+    navigate(link);
+  };
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        if (isLoggedIn) {
+          const response = await axios.get(
+            `${process.env.REACT_APP_BACKEND_URL}/api/v1/users/${user.email}`,
+          );
+          setUserData(response.data);
+        }
+      } catch (error) {
+        console.log('Error fetching user data: ', error);
+      }
+    };
+
+    fetchUserData();
+  }, [isLoggedIn, user.email, navigate]);
 
   return (
     <div>
-      <AppBar
-        position="fixed"
-        elevation={0}
-        sx={{
-          backgroundColor: 'rgba(26, 26, 36, 0.6)',
-          backdropFilter: 'blur(8px)',
-          borderBottom: '2px solid rgba(139, 92, 246, 0.2)',
-        }}
-      >
-        <Toolbar
-          disableGutters
-          sx={{
-            height: { xs: 70, md: 105 },
-            minHeight: { xs: 70, md: 105 },
-            maxWidth: 1109,
-            mx: 'auto',
-            width: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            px: { xs: 2, md: '28px' },
-          }}
-        >
-          {/* Logo + text */}
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+      <AppBar sx={styles.appBar} position="fixed" elevation={0}>
+        <Toolbar>
+          <Link to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
             <img
               src={csesLogo}
-              alt="CSES logo"
-              style={{ height: '45px' }}
+              alt="CSE Society"
+              style={{ margin: 'clamp(20px, 4vw, 25px)', height: '44px' }}
             />
-            <Typography
-              sx={{
-                color: 'white',
-                fontFamily: '"Space Mono", monospace',
-                fontSize: '1.1rem',
-                ml: '27px',
-                display: { xs: 'none', sm: 'block' },
-              }}
-            >
-              at UC San Diego
-            </Typography>
-          </Box>
+            <Typography sx={styles.logoText}>at UC San Diego</Typography>
+          </Link>
 
-          {/* Desktop Nav */}
-          <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>
-            {/* Home/Events/Communities are placeholders for now (owned by
-                another dev) — visible but intentionally not linked. */}
+          <div style={{ flexGrow: 1 }} />
+
+          <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+            {navItems.map(({ text, link }) => (
+              <Button
+                key={text}
+                component={Link}
+                to={link}
+                sx={{
+                  ...styles.button,
+                  ...(location.pathname === link ? styles.buttonActive : {}),
+                }}
+              >
+                {text}
+              </Button>
+            ))}
+
             <Button
-              disableRipple
+              endIcon={<ExpandMore />}
+              onClick={(e) => setCommunitiesAnchor(e.currentTarget)}
               sx={{
-                color: 'white',
-                fontFamily: '"Space Mono", monospace',
-                fontSize: '1rem',
-                textTransform: 'none',
-                mr: '37px',
-                cursor: 'default',
-                '&:hover': { backgroundColor: 'transparent' },
-              }}
-            >
-              Home
-            </Button>
-            <Button
-              disableRipple
-              sx={{
-                color: 'white',
-                fontFamily: '"Space Mono", monospace',
-                fontSize: '1rem',
-                textTransform: 'none',
-                mr: '30px',
-                cursor: 'default',
-                '&:hover': { backgroundColor: 'transparent' },
-              }}
-            >
-              Events
-            </Button>
-            <Button
-              disableRipple
-              sx={{
-                color: 'white',
-                fontFamily: '"Space Mono", monospace',
-                fontSize: '1rem',
-                textTransform: 'none',
-                mr: '19px',
-                cursor: 'default',
-                '&:hover': { backgroundColor: 'transparent' },
+                ...styles.button,
+                ...(isCommunityRoute ? styles.buttonActive : {}),
               }}
             >
               Communities
             </Button>
+            <Menu
+              anchorEl={communitiesAnchor}
+              open={Boolean(communitiesAnchor)}
+              onClose={() => setCommunitiesAnchor(null)}
+              sx={styles.menu}
+            >
+              {COMMUNITY_ITEMS.map(({ text, link }) => (
+                <MenuItem
+                  key={text}
+                  sx={styles.menuItem}
+                  onClick={() => {
+                    setCommunitiesAnchor(null);
+                    navigate(link);
+                  }}
+                >
+                  {text}
+                </MenuItem>
+              ))}
+            </Menu>
+
             <Button
-              component={RouterLink}
+              component={Link}
               to="/join-us"
               sx={{
-                backgroundColor: '#8B5CF6',
-                color: 'white',
-                fontFamily: '"Space Mono", monospace',
-                fontSize: '1rem',
-                textTransform: 'none',
-                borderRadius: '10px',
-                width: '136px',
-                height: '40px',
-                '&:hover': {
-                  backgroundColor: '#7c4fe0',
-                },
+                ...styles.button,
+                ...(location.pathname === '/join-us' ? styles.buttonActive : {}),
               }}
             >
-              Join Us
+              Join us
             </Button>
           </Box>
 
-          {/* Mobile Menu Icon */}
+          {isLoggedIn && userData && (
+            <div style={{ display: 'flex', alignItems: 'center', marginLeft: '10px' }}>
+              <Link to="/membership">
+                <Avatar
+                  alt="User"
+                  src={userData.profilePicture}
+                  sx={{ width: 60, height: 60, marginLeft: '1%' }}
+                />
+              </Link>
+              <ProfileDropdown />
+            </div>
+          )}
+
           <Box sx={{ display: { xs: 'block', md: 'none' } }}>
-            <IconButton onClick={() => setIsDrawerOpen(true)} color="inherit">
-              <MenuIcon sx={{ fontSize: '2rem' }} />
+            <IconButton onClick={() => setIsDrawerOpen(!isDrawerOpen)} color="inherit">
+              {!isDrawerOpen && <MenuIcon sx={styles.menuicon} />}
             </IconButton>
           </Box>
         </Toolbar>
       </AppBar>
 
-      {/* Mobile Drawer */}
       <Drawer anchor="top" open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
-        <List sx={{ background: '#4a4a5c', minHeight: '100vh' }}>
+        <List sx={styles.drawerList}>
           <ListItem
             button
             sx={{ justifyContent: 'flex-end' }}
             onClick={() => setIsDrawerOpen(false)}
           >
-            <CloseIcon sx={{ color: 'white', fontSize: '2rem' }} />
+            <CloseIcon sx={styles.closeicon} />
           </ListItem>
-          {/* Home/Events/Communities are placeholders for now (owned by
-              another dev) — visible but intentionally not linked. */}
-          {['Home', 'Events', 'Communities'].map((text) => (
-            <ListItem key={text}>
+
+          {navItems.map(({ text, link }) => (
+            <ListItem button key={text} sx={styles.listitem} onClick={() => clickItem(link)}>
               <ListItemText
                 primary={
-                  <Typography sx={{ color: 'white', textAlign: 'center', fontSize: '1.25rem', fontFamily: '"Space Mono", monospace' }}>
+                  <Typography align="center" sx={styles.button}>
                     {text}
                   </Typography>
                 }
               />
             </ListItem>
           ))}
+
+          {COMMUNITY_ITEMS.map(({ text, link }) => (
+            <ListItem button key={text} sx={styles.listitem} onClick={() => clickItem(link)}>
+              <ListItemText
+                primary={
+                  <Typography align="center" sx={styles.button}>
+                    {text}
+                  </Typography>
+                }
+              />
+            </ListItem>
+          ))}
+
           <ListItem
             button
-            component={RouterLink}
-            to="/join-us"
-            onClick={() => setIsDrawerOpen(false)}
+            key="Join us"
+            sx={styles.listitem}
+            onClick={() => clickItem('/join-us')}
           >
             <ListItemText
               primary={
-                <Typography sx={{ color: '#8B5CF6', textAlign: 'center', fontSize: '1.25rem', fontWeight: 600, fontFamily: '"Space Mono", monospace' }}>
-                  Join Us
+                <Typography align="center" sx={styles.button}>
+                  Join us
                 </Typography>
               }
             />
