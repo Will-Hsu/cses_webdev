@@ -20,11 +20,20 @@ const timeFormatter = new Intl.DateTimeFormat('en-US', {
   minute: '2-digit',
 });
 
+// All-day events carry a date-only string ("2026-10-16") that already is the
+// calendar day, with no instant attached. Pinning both the parse and the format
+// to UTC keeps it from being shifted into the previous day for anyone east of
+// Pacific, which converting into TIME_ZONE would do.
+const allDayFormatter = new Intl.DateTimeFormat('en-US', {
+  timeZone: 'UTC',
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric',
+});
+
 const formatDate = (event: CalendarEvent) => {
-  // All-day events use date-only strings (e.g. "2026-04-28"); parse as local
-  // midnight rather than UTC so the displayed day doesn't shift.
-  const date = event.allDay ? new Date(`${event.start}T00:00:00`) : new Date(event.start);
-  return dateFormatter.format(date);
+  if (event.allDay) return allDayFormatter.format(new Date(`${event.start}T00:00:00Z`));
+  return dateFormatter.format(new Date(event.start));
 };
 
 const formatTimeRange = (event: CalendarEvent) => {
