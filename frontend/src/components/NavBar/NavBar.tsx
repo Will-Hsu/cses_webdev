@@ -130,8 +130,16 @@ const NavBar = () => {
               ))}
             </Menu>
 
-            {/* TODO: point this at the Join us page once that branch is merged. */}
-            <Button sx={styles.button}>Join us</Button>
+            <Button
+              component={Link}
+              to="/join-us"
+              sx={{
+                ...styles.button,
+                ...(location.pathname === '/join-us' ? styles.buttonActive : {}),
+              }}
+            >
+              Join us
+            </Button>
           </Box>
 
           {isLoggedIn && userData && (
@@ -193,7 +201,7 @@ const NavBar = () => {
             button
             key="Join us"
             sx={styles.listitem}
-            onClick={() => setIsDrawerOpen(false)}
+            onClick={() => clickItem('/join-us')}
           >
             <ListItemText
               primary={

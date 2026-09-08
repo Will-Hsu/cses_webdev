@@ -17,6 +17,7 @@ import Sponsorships from './components/Sponsorships/Sponsorships'; // added my m
 import OpenSourceCommunity from './components/OpenSourceCommunity/OpenSourceCommunity';
 import DevCommunity from './components/Dev/DevCommunity'
 import InovateCommunity from './components/Inovate/InovateCommunity'
+import JoinUs from './components/JoinUs/JoinUs';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path="/opensourcecommunity" element={<OpenSourceCommunity />} /> 
           <Route path="/devcommunity" element={<DevCommunity />} />
           <Route path="/innovatecommunity" element={<InovateCommunity />} />
+          <Route path="/join-us" element={<JoinUs />} />
         </Routes>
         <Footer />
       </Container>
