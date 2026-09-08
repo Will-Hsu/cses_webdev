@@ -1,12 +1,16 @@
 import React from 'react';
 import { Box, Typography, Link } from '@mui/material';
 import InstagramIcon from '../../images/instagram-icon.svg';
+import DiscordIcon from '../../images/discord-icon.svg';
+import FacebookIcon from '../../images/facebook-icon.svg';
 import LinkedInIcon from '../../images/linkedin-icon.svg';
 import csesLogo from '../../images/logo.png';
 import { colors, fonts } from '../../theme';
 
 const links = [
   { logo: InstagramIcon, link: 'https://www.instagram.com/cses_ucsd/', label: 'Instagram' },
+  { logo: DiscordIcon, link: 'https://discord.gg/UkdACyy2h8', label: 'Discord' },
+  { logo: FacebookIcon, link: 'https://www.facebook.com/csesucsd', label: 'Facebook' },
   { logo: LinkedInIcon, link: 'https://www.linkedin.com/in/csesucsd/', label: 'LinkedIn' },
 ];
 
