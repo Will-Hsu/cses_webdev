@@ -1,6 +1,5 @@
-import React from 'react';
-import { Box, Typography, Button } from '@mui/material';
-import './JoinUs.css';
+import { Box, Button, Container, Grid, useMediaQuery } from '@mui/material';
+import { joinUsStyles } from './styles';
 import chainGraphic from '../../images/joinus/chain.png';
 import lightbulbGraphic from '../../images/joinus/lightbulb.png';
 import gearGraphic from '../../images/joinus/gear.png';
@@ -16,112 +15,115 @@ import OSPOLogo from '../../images/sponsors/OSPO_Logo.png';
 import PersonaLogo from '../../images/sponsors/Persona_Logo.png';
 import RobloxLogo from '../../images/sponsors/Roblox_Logo.png';
 
-const stats = [
+const APPLY_URL = '#';
+
+const STATS = [
   { number: '455+', label: 'members' },
-  { number: '18+', label: 'annual\nevents' },
-  { number: '12+', label: 'annual\nprojects' },
+  { number: '18+', label: 'annual events' },
+  { number: '12+', label: 'annual projects' },
 ];
 
-// Matches the design's staggered 3-2-3(-3) sponsor grid.
-const sponsorRows = [
-  [
-    { src: ASLogo, alt: 'Associated Students' },
-    { src: CSEDeptLogo, alt: 'CSE Department' },
-    { src: BSLLogo, alt: 'Big Strategy Lab' },
-  ],
-  [
-    { src: RobloxLogo, alt: 'Roblox' },
-    { src: PersonaLogo, alt: 'Persona' },
-  ],
-  [
-    { src: LovableLogo, alt: 'Lovable' },
-    { src: EyePopAILogo, alt: 'EyePop AI' },
-    { src: IGELogo, alt: 'IGE' },
-  ],
-  [
-    { src: LinuxLogo, alt: 'Linux Foundation' },
-    { src: OSPOLogo, alt: 'OSPO' },
-    { src: BasementLogo, alt: 'Basement' },
-  ],
+// Flat list: the grid reflows it per breakpoint, so adding or removing a
+// sponsor needs no layout changes.
+const SPONSORS = [
+  { logo: ASLogo, name: 'Associated Students' },
+  { logo: CSEDeptLogo, name: 'CSE Department' },
+  { logo: BSLLogo, name: 'Big Strategy Lab' },
+  { logo: RobloxLogo, name: 'Roblox' },
+  { logo: PersonaLogo, name: 'Persona' },
+  { logo: LovableLogo, name: 'Lovable' },
+  { logo: EyePopAILogo, name: 'EyePop AI' },
+  { logo: IGELogo, name: 'IGE' },
+  { logo: LinuxLogo, name: 'Linux Foundation' },
+  { logo: OSPOLogo, name: 'OSPO' },
+  { logo: BasementLogo, name: 'Basement' },
+];
+
+// The design staggers the tiles: rows alternate three, two, three, two, with
+// the short rows inset between the full ones. Deriving the rows from the list
+// keeps that shape for any number of sponsors.
+const ROW_PATTERN = [3, 2];
+
+const chunkIntoRows = <T,>(items: T[]): T[][] => {
+  const rows: T[][] = [];
+  let index = 0;
+  while (index < items.length) {
+    const size = ROW_PATTERN[rows.length % ROW_PATTERN.length];
+    rows.push(items.slice(index, index + size));
+    index += size;
+  }
+  return rows;
+};
+
+const DECOR = [
+  { src: chainGraphic, key: 'chain', position: 'decorChain' as const },
+  { src: lightbulbGraphic, key: 'lightbulb', position: 'decorLightbulb' as const },
+  { src: gearGraphic, key: 'gear', position: 'decorGear' as const },
 ];
 
 const JoinUs = () => {
+  const styles = joinUsStyles();
+  // Below sm the stagger has no room to read; fall back to an even 2-up grid.
+  const isStaggered = useMediaQuery('(min-width:600px)');
+  const sponsorRows = isStaggered ? chunkIntoRows(SPONSORS) : [SPONSORS];
+  const tilesPerRow = isStaggered ? ROW_PATTERN[0] : 2;
+
   return (
-    <Box className="join-us-page">
-      <Box className="join-us-canvas">
+    <Box sx={styles.pageWrapper}>
+      {DECOR.map(({ src, key, position }) => (
         <Box
+          key={key}
           component="img"
-          src={chainGraphic}
+          src={src}
           alt=""
-          className="join-us-decor join-us-decor-chain"
+          aria-hidden="true"
+          sx={{ ...styles.decor, ...styles[position] }}
         />
-        <Box
-          component="img"
-          src={lightbulbGraphic}
-          alt=""
-          className="join-us-decor join-us-decor-lightbulb"
-        />
-        <Box
-          component="img"
-          src={gearGraphic}
-          alt=""
-          className="join-us-decor join-us-decor-gear"
-        />
+      ))}
 
-        {/* Heading */}
-        <Typography className="join-us-heading">Join us.</Typography>
-
-        {/* Subtext */}
-        <Typography className="join-us-subtext">
-          Interested in joining our initiative? Apply below!
-        </Typography>
-
-        {/* Apply Button */}
-        <Button href="#" className="join-us-apply-button">
+      <Container maxWidth="lg" sx={styles.container}>
+        <Box component="h1" sx={{ ...styles.heading, m: 0 }}>
+          Join us.
+        </Box>
+        <Box sx={styles.subtext}>Interested in joining our initiative? Apply below!</Box>
+        <Button href={APPLY_URL} sx={styles.applyButton}>
           Apply
         </Button>
 
-        {/* Organization tagline */}
-        <Typography className="join-us-tagline">
-          We are UCSD's largest computing organization
-        </Typography>
+        <Box sx={styles.tagline}>We are UCSD&apos;s largest computing organization</Box>
 
-        {/* Stats */}
-        <Box className="join-us-stats">
-          {stats.map((stat, i) => (
-            <Box key={stat.label} className={`join-us-stat-box join-us-stat-box--${i}`}>
-              <Typography className="join-us-stat-number">{stat.number}</Typography>
-              <Typography className="join-us-stat-label">{stat.label}</Typography>
-            </Box>
+        <Grid container spacing={3} justifyContent="center" sx={styles.statsGrid}>
+          {STATS.map((stat) => (
+            <Grid item xs={12} sm={4} key={stat.label}>
+              <Box sx={styles.statBox}>
+                <Box sx={styles.statNumber}>{stat.number}</Box>
+                <Box sx={styles.statLabel}>{stat.label}</Box>
+              </Box>
+            </Grid>
           ))}
+        </Grid>
+
+        <Box component="h2" sx={{ ...styles.partnersHeading, m: 0 }}>
+          Thank You to Our Current Partners
         </Box>
 
-        {/* Partners Section */}
-        <Typography className="join-us-partners-heading">
-          Thank You to Our Current Partners
-        </Typography>
-
-        {/* Sponsor Logos Grid (staggered 3-2-3-3 rows, matching design) */}
-        <Box className="join-us-sponsor-rows">
+        <Box sx={styles.sponsorRows}>
           {sponsorRows.map((row, rowIndex) => (
-            <Box key={rowIndex} className={`join-us-sponsor-row join-us-sponsor-row--${rowIndex}`}>
-              {row.map((sponsor, boxIndex) => (
-                <Box
-                  key={sponsor.alt}
-                  className={`join-us-sponsor-box join-us-sponsor-box--${boxIndex}`}
-                >
+            <Box key={rowIndex} sx={styles.sponsorRow}>
+              {row.map((sponsor) => (
+                <Box key={sponsor.name} sx={styles.sponsorTile(tilesPerRow)}>
                   <Box
                     component="img"
-                    src={sponsor.src}
-                    alt={sponsor.alt}
-                    className="join-us-sponsor-img"
+                    src={sponsor.logo}
+                    alt={sponsor.name}
+                    sx={styles.sponsorImg}
                   />
                 </Box>
               ))}
             </Box>
           ))}
         </Box>
-      </Box>
+      </Container>
     </Box>
   );
 };
