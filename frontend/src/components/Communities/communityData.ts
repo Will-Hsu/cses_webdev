@@ -18,16 +18,21 @@ export interface Project {
   members?: number;
 }
 
+export type Side = 'left' | 'right';
+
 export interface Community {
   key: string;
   name: string;
   path: string;
   accent: string;
   logo: string;
+  // Full-page backdrop for this community, drawn behind all content.
   graphic: string;
   description: string;
-  // The design alternates which side the copy sits on down the set.
-  reversed: boolean;
+  // Each page orients its copy, logo, and backdrop differently.
+  copySide: Side;
+  logoSide: Side;
+  graphicSide: Side;
   projects: Project[];
 }
 
@@ -41,7 +46,9 @@ export const COMMUNITIES: Community[] = [
     graphic: chainGraphic,
     description:
       'Contribute to meaningful open-source projects and learn collaborative development practices. Work with Git workflows, code review, and team collaboration in a supportive environment.',
-    reversed: false,
+    copySide: 'left',
+    logoSide: 'right',
+    graphicSide: 'right',
     projects: [
       {
         name: 'TritonScript',
@@ -74,7 +81,9 @@ export const COMMUNITIES: Community[] = [
     graphic: lightbulbGraphic,
     description:
       'Turn your ideas into reality through hackathons, prototyping, and entrepreneurial ventures. Learn design thinking, rapid prototyping, and how to bring innovative solutions to life.',
-    reversed: true,
+    copySide: 'right',
+    logoSide: 'left',
+    graphicSide: 'left',
     projects: [
       {
         name: 'ORCA',
@@ -112,7 +121,9 @@ export const COMMUNITIES: Community[] = [
     graphic: gearGraphic,
     description:
       'Build industry-ready skills through workshops, projects, and professional development. Get career guidance, connect with mentors, and prepare for success in the tech industry.',
-    reversed: false,
+    copySide: 'left',
+    logoSide: 'right',
+    graphicSide: 'right',
     projects: [
       {
         name: 'WebClicker++',

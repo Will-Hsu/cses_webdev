@@ -2,13 +2,32 @@ import { colors, fonts, radii } from '../../theme';
 
 export const communityStyles = () => ({
   pageWrapper: {
+    position: 'relative' as const,
     backgroundColor: colors.background,
     minHeight: '100vh',
-    overflowX: 'hidden' as const,
+    // Clips the oversized backdrop rather than letting it scroll the page.
+    overflow: 'hidden' as const,
     pt: { xs: 14, md: 18 },
     pb: { xs: 8, md: 12 },
   },
+  // Full-page backdrop: one oversized community graphic behind all content,
+  // dropped back far enough to stay legible under the copy.
+  backdrop: {
+    position: 'absolute' as const,
+    top: 0,
+    height: '100%',
+    width: 'auto',
+    minWidth: { xs: '160%', md: '70%' },
+    objectFit: 'contain' as const,
+    objectPosition: 'top center',
+    opacity: 0.28,
+    pointerEvents: 'none' as const,
+    userSelect: 'none' as const,
+    zIndex: 0,
+  },
   container: {
+    position: 'relative' as const,
+    zIndex: 1,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -52,18 +71,6 @@ export const communityStyles = () => ({
     width: '100%',
     maxWidth: '1100px',
     mt: { xs: 6, md: 9 },
-  },
-  // Sits behind the copy, bleeding off the edge like the design.
-  graphic: {
-    display: { xs: 'none', md: 'block' },
-    position: 'absolute' as const,
-    top: '50%',
-    transform: 'translateY(-50%)',
-    width: 'clamp(280px, 34vw, 460px)',
-    opacity: 0.9,
-    pointerEvents: 'none' as const,
-    zIndex: 0,
-    userSelect: 'none' as const,
   },
   showcaseInner: {
     position: 'relative' as const,

@@ -15,6 +15,14 @@ const CommunityPage = ({ community: communityKey }: CommunityPageProps) => {
 
   return (
     <Box sx={styles.pageWrapper}>
+      <Box
+        component="img"
+        src={community.graphic}
+        alt=""
+        aria-hidden="true"
+        sx={{ ...styles.backdrop, [community.graphicSide]: 0 }}
+      />
+
       <Container maxWidth="xl" sx={styles.container}>
         <Box component="h1" sx={{ ...styles.pageTitle, m: 0 }}>
           Our Communities
@@ -34,23 +42,13 @@ const CommunityPage = ({ community: communityKey }: CommunityPageProps) => {
 
         <Box sx={styles.showcase}>
           <Box
-            component="img"
-            src={community.graphic}
-            alt=""
-            aria-hidden="true"
-            sx={{
-              ...styles.graphic,
-              // Anchor the artwork opposite the copy.
-              ...(community.reversed ? { left: '-8%' } : { right: '-8%' }),
-            }}
-          />
-
-          <Box
             sx={{
               ...styles.showcaseInner,
+              // Copy on the left means the logo column follows it, and vice
+              // versa; each page in the design orients this differently.
               flexDirection: {
                 xs: 'column',
-                md: community.reversed ? 'row-reverse' : 'row',
+                md: community.copySide === 'left' ? 'row' : 'row-reverse',
               },
             }}
           >
@@ -61,7 +59,15 @@ const CommunityPage = ({ community: communityKey }: CommunityPageProps) => {
               <Box sx={styles.communityDescription}>{community.description}</Box>
             </Box>
 
-            <Box sx={styles.logoColumn}>
+            <Box
+              sx={{
+                ...styles.logoColumn,
+                justifyContent: {
+                  xs: 'center',
+                  md: community.logoSide === 'left' ? 'flex-start' : 'flex-end',
+                },
+              }}
+            >
               <Box
                 component="img"
                 src={community.logo}
