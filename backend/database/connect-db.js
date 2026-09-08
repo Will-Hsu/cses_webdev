@@ -6,6 +6,10 @@ const uri = process.env.CONNECTION_URL;
 
 // Connect to database
 const connectDB = async () => {
+  if (!uri) {
+    console.warn('CONNECTION_URL is not set; skipping MongoDB connection (event/user routes will fail)');
+    return;
+  }
   try {
     await mongoose.connect(uri, {
       useNewUrlParser: true,

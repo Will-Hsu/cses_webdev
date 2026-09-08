@@ -1,88 +1,62 @@
-import React from "react";
-import { Typography, Box } from "@mui/material";
+import { Box } from '@mui/material';
+import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
+import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
+import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+import { CalendarEvent } from '../../utils/types';
+import { eventCardStyles } from './styles';
 
-type EventCardProps = {
-  title: string;
-  startDate: string;
-  endDate: string;
-  location: string;
-  calendar_link: string;
-  description: string;
-  instagram_link: string;
-  _id: string;
+const TIME_ZONE = 'America/Los_Angeles';
+
+const dateFormatter = new Intl.DateTimeFormat('en-US', {
+  timeZone: TIME_ZONE,
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric',
+});
+
+const timeFormatter = new Intl.DateTimeFormat('en-US', {
+  timeZone: TIME_ZONE,
+  hour: 'numeric',
+  minute: '2-digit',
+});
+
+const formatDate = (event: CalendarEvent) => {
+  // All-day events use date-only strings (e.g. "2026-04-28"); parse as local
+  // midnight rather than UTC so the displayed day doesn't shift.
+  const date = event.allDay ? new Date(`${event.start}T00:00:00`) : new Date(event.start);
+  return dateFormatter.format(date);
 };
 
-const EventCard = ({
-  title,
-  startDate,
-  endDate,
-  location,
-  calendar_link,
-  description,
-  instagram_link,
-  _id,
-}: EventCardProps) => {
-  const start = new Date(startDate);
-  const end = new Date(endDate);
+const formatTimeRange = (event: CalendarEvent) => {
+  if (event.allDay) return 'All day';
+  return `${timeFormatter.format(new Date(event.start))} - ${timeFormatter.format(
+    new Date(event.end),
+  )}`;
+};
 
-  const formattedDate = start.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
-
-  const formattedTime = `${start.toLocaleTimeString("en-US", {
-    hour: "numeric",
-    minute: "2-digit",
-  })} - ${end.toLocaleTimeString("en-US", {
-    hour: "numeric",
-    minute: "2-digit",
-  })}`;
+const EventCard = ({ event }: { event: CalendarEvent }) => {
+  const styles = eventCardStyles();
 
   return (
-    <Box
-      sx={{
-        display: "inline-block",
-        borderRadius: 6,
-        p: "4px",
-        background: "linear-gradient(45deg, orange, cyan, purple, blue)",
-      }}
-    >
-      <Box
-        sx={{
-          minHeight: "20rem",
-          width: "16rem",
-          borderRadius: 6,
-          bgcolor: "white",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          boxShadow: 3,
-          p: 2,
-        }}
-      >
-        <Typography
-          variant="subtitle1"
-          fontWeight="bold"
-          fontSize={20}
-          align="center"
-          sx={{
-            mb: 1,
-            overflowWrap: "break-word",
-            wordBreak: "break-word",
-            fontSize: "25px"
-          }}
-        >
-          {title}
-        </Typography>
-        <Box sx={{ textAlign: "center" }}>
-          <Typography variant="body2" color="text.secondary" sx={{ fontSize: "18px" }}>
-            {formattedDate} | {formattedTime}
-          </Typography>
-          <Typography variant="body2" color="text.secondary" sx={{ fontSize: "18px" }}>
-            {location}
-          </Typography>
+    <Box sx={styles.card}>
+      <Box sx={styles.title}>{event.title}</Box>
+      <Box sx={styles.category}>{event.type || event.category}</Box>
+
+      <Box sx={styles.detailsWrapper}>
+        <Box sx={styles.detailRow}>
+          <CalendarTodayOutlinedIcon sx={styles.detailIcon} />
+          <Box sx={styles.detailText}>{formatDate(event)}</Box>
         </Box>
+        <Box sx={styles.detailRow}>
+          <AccessTimeOutlinedIcon sx={styles.detailIcon} />
+          <Box sx={styles.detailText}>{formatTimeRange(event)}</Box>
+        </Box>
+        {event.location && (
+          <Box sx={styles.detailRow}>
+            <LocationOnOutlinedIcon sx={styles.detailIcon} />
+            <Box sx={styles.detailText}>{event.location}</Box>
+          </Box>
+        )}
       </Box>
     </Box>
   );

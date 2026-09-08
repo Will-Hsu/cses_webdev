@@ -9,8 +9,16 @@ mailchimp.setConfig({
 });
 
 async function connectMailchimp() {
-  const response = await mailchimp.ping.get();
-  console.log(response.health_status); // if successful, returns "Everything's Chimpy!"
+  if (!apikey) {
+    console.warn('MAILCHIMP_API_KEY is not set; skipping Mailchimp connection (subscriber routes will fail)');
+    return;
+  }
+  try {
+    const response = await mailchimp.ping.get();
+    console.log(response.health_status); // if successful, returns "Everything's Chimpy!"
+  } catch (error) {
+    console.error('Mailchimp connection error:', error);
+  }
 }
 
 export default connectMailchimp;

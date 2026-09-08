@@ -127,6 +127,18 @@ export const eventListAPI = () => {
   });
 };
 
+export const calendarEventsAPI = () => {
+  return new Promise((resolve, reject) => {
+    API.get('/calendar/events')
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
 export const eventCreateAPI = (newEvent) => {
   return new Promise((resolve, reject) => {
     API.post('/event/create', newEvent)
