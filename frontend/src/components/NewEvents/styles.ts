@@ -66,14 +66,18 @@ export const eventCardStyles = () => ({
     backgroundColor: colors.surface,
     border: `1px solid ${colors.border}`,
     borderRadius: radii.card,
+    // Without a global border-box reset, width 100% plus padding and border
+    // made the card wider than its column and overflowed the page on mobile.
+    boxSizing: 'border-box' as const,
     p: { xs: 2.5, md: 3 },
     width: '100%',
   },
   title: {
     fontFamily: fonts.body,
     fontWeight: 600,
-    fontSize: { xs: '1.1rem', md: '1.25rem' },
+    fontSize: { xs: '1.05rem', md: '1.25rem' },
     color: colors.textPrimary,
+    overflowWrap: 'anywhere' as const,
   },
   category: {
     fontFamily: fonts.body,
@@ -89,17 +93,23 @@ export const eventCardStyles = () => ({
   },
   detailRow: {
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     gap: 1.2,
     color: colors.textSecondary,
+    minWidth: 0,
   },
   detailIcon: {
     fontSize: '1.1rem',
     color: colors.textSecondary,
+    flexShrink: 0,
+    // Keeps the icon optically centred on the first line once text wraps.
+    mt: '2px',
   },
   detailText: {
     fontFamily: fonts.body,
-    fontSize: '0.95rem',
+    fontSize: { xs: '0.85rem', md: '0.95rem' },
     color: colors.textSecondary,
+    minWidth: 0,
+    overflowWrap: 'anywhere' as const,
   },
 });
