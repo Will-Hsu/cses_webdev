@@ -37,7 +37,7 @@ const COMMUNITIES = [
 ];
 
 const TEAM_TABS = ['General', 'Open-Source', 'Innovate', 'Dev'];
-const MEMBERS_PER_PAGE = { xs: 1, sm: 2, md: 4 };
+const MEMBERS_PER_PAGE = { xs: 2, sm: 4, md: 8 };
 
 const Home = () => {
   const navigate = useNavigate();

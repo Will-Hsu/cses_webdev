@@ -29,7 +29,6 @@ const COMMUNITY_ITEMS = [
   { text: 'Dev', link: '/devcommunity' },
 ];
 
-const CONTACT_EMAIL = 'mailto:cses@ucsd.edu';
 
 const NavBar = () => {
   const location = useLocation();
@@ -131,9 +130,8 @@ const NavBar = () => {
               ))}
             </Menu>
 
-            <Button href={CONTACT_EMAIL} sx={styles.button}>
-              Contact Us
-            </Button>
+            {/* TODO: point this at the Join us page once that branch is merged. */}
+            <Button sx={styles.button}>Join us</Button>
           </Box>
 
           {isLoggedIn && userData && (
@@ -193,16 +191,14 @@ const NavBar = () => {
 
           <ListItem
             button
-            key="Contact Us"
+            key="Join us"
             sx={styles.listitem}
-            component="a"
-            href={CONTACT_EMAIL}
             onClick={() => setIsDrawerOpen(false)}
           >
             <ListItemText
               primary={
                 <Typography align="center" sx={styles.button}>
-                  Contact Us
+                  Join us
                 </Typography>
               }
             />

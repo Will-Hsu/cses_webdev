@@ -131,7 +131,11 @@ export const homeStyles = () => ({
     backgroundColor: colors.surface,
     border: `1px solid ${accent}55`,
     borderRadius: radii.card,
-    p: 3,
+    // Without a global CssBaseline reset, width: '100%' is content-box: the
+    // padding and border would add ~50px and overlap the neighbouring column.
+    boxSizing: 'border-box' as const,
+    px: 3,
+    py: 4,
     mt: 3,
     width: '100%',
     minHeight: '96px',
@@ -160,6 +164,9 @@ export const homeStyles = () => ({
     backgroundColor: colors.surface,
     border: `1px solid ${colors.border}`,
     borderRadius: radii.card,
+    // Same content-box trap as communityCard: without border-box, height 100%
+    // plus padding and border overflows the grid cell and collides with the dots.
+    boxSizing: 'border-box' as const,
     p: 2.5,
     display: 'flex',
     flexDirection: 'column',
@@ -189,7 +196,7 @@ export const homeStyles = () => ({
   dotsWrapper: {
     display: 'flex',
     gap: 1.2,
-    mt: 4,
+    mt: 6,
   },
   dot: {
     width: '10px',
